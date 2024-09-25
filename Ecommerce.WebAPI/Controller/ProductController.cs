@@ -54,7 +54,7 @@ public class ProductController : ControllerBase
       return CreatedAtAction(nameof(GetProductById), new { id = createdProduct.Id }, createdProduct);
     }
 
-    [HttpPut("UpdateProduct{id}")]
+    [HttpPut("UpdateProduct/{id}")]
     public async Task<IActionResult> UpdateProduct(Guid id, [FromBody] ProductDto productDto)
     {
         if (!ModelState.IsValid)

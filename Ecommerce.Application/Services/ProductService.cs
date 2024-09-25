@@ -36,7 +36,6 @@ public class ProductService : IProductService
         await _productRepository.AddProductAsync(product);
         return new ProductDto
         {
-            Id = product.Id,
             Name = product.Name,
             Price = product.Price
         };
@@ -56,7 +55,6 @@ public class ProductService : IProductService
         await _productRepository.UpdateProductAsync(product);
         return new ProductDto
         {
-            Id = product.Id,
             Name = product.Name,
             Price = product.Price
         };
