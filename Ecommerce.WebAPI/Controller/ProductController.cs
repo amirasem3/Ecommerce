@@ -43,19 +43,19 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost("AddProduct")]
-    public async Task<IActionResult> AddProduct([FromBody] AddProductDto productDto)
+    public async Task<IActionResult> AddProduct([FromBody] AddUpdateProductDto updateProductDto)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
         
-      var createdProduct =  await _productService.AddProductAsync(productDto);
+      var createdProduct =  await _productService.AddProductAsync(updateProductDto);
       return CreatedAtAction(nameof(GetProductById), new { id = createdProduct.Id }, createdProduct);
     }
 
-    [HttpPut("UpdateProduct/{id}")]
-    public async Task<IActionResult> UpdateProduct(Guid id, [FromBody] ProductDto productDto)
+    [HttpPut("UpdateProduct")]
+    public async Task<IActionResult> UpdateProduct([FromQuery]Guid id, [FromQuery] AddUpdateProductDto productDto)
     {
         if (!ModelState.IsValid)
         {
@@ -66,6 +66,7 @@ public class ProductController : ControllerBase
         return Ok(updatedProduct);
 
     }
+    
 
     [HttpDelete("DeleteProduct/{id}")]
     public async Task<IActionResult> DeleteProductByIdAsync(Guid id)
@@ -76,7 +77,7 @@ public class ProductController : ControllerBase
             return NotFound();
         }
 
-        return Ok($"The book with Id {id} successfully deleted");
+        return Ok($"The product with Id {id} successfully deleted");
     }
     
     

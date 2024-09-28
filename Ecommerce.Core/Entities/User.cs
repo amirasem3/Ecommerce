@@ -1,11 +1,20 @@
-﻿namespace Ecommerce.Core.Entities;
+﻿using System.Text.Json.Serialization;
+using Ecommerce.Core.Entities.RelationEntities;
+
+namespace Ecommerce.Core.Entities;
 
 public class User
 {
     public Guid Id { get; set; }
-    public String FirstName { get; set; }
-    public String LastName { get; set; }
-    public String Username { get; set; }
-    public String Email { get; set; }
-    public String PhoneNumber { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Username { get; set; }
+    public string PasswordHash { get; set; }
+    public string Email { get; set; }
+    public string PhoneNumber { get; set; }
+    
+    //N-N Relation with Role
+    [JsonIgnore]
+    public ICollection<UserRole> UserRoles { get; set; }
+    
 }

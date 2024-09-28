@@ -14,4 +14,6 @@ public interface IUserRepository
     Task DeleteUserByIdAsync(Guid id);
     Task UpdateUserAsync(User newUser);
 
+    Task<User> GetUserWithRolesAsync(Guid userId);
+
 }

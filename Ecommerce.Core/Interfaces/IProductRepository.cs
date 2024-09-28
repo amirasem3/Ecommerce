@@ -10,4 +10,5 @@ public interface IProductRepository
     Task<Product> AddProductAsync(Product product);
     Task DeleteProductByIdAsync(Guid id);
     Task UpdateProductAsync(Product newProduct);
+    
 }

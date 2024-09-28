@@ -1,4 +1,5 @@
 ﻿using Ecommerce.Core.Entities;
+using Ecommerce.Core.Entities.RelationEntities;
 using Microsoft.EntityFrameworkCore;
 namespace Ecommerce.Infrastructure.Persistence;
 public class EcommerceDbContext : DbContext
@@ -11,33 +12,34 @@ public class EcommerceDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
     
-    // protected override void OnModelCreating(ModelBuilder modelBuilder)
-    // {
-    //     modelBuilder.Entity<Product>(entity =>
-    //     {
-    //         entity.Property(e => e.Id).HasMaxLength(24).IsRequired();
-    //         entity.Property(e => e.Price).HasColumnType("decimal(18,2)");
-    //     });
-    //     modelBuilder.Entity<User>().HasIndex(user => user.Username).IsUnique();
-    //     
-    //     // modelBuilder.Entity<Library>()
-    //     //     .HasKey(ub => new { ub.UserId, ub.BookId });
-    //     //
-    //     // modelBuilder.Entity<Library>()
-    //     //     .HasOne(ub => ub.User)
-    //     //     .WithMany(u => u.UserBooks)
-    //     //     .HasForeignKey(ub => ub.UserId);
-    //     //
-    //     // modelBuilder.Entity<Library>()
-    //     //     .HasOne(ub => ub.Book)
-    //     //     .WithMany(b => b.UserBooks)
-    //     //     .HasForeignKey(ub => ub.BookId);
-    //     //
-    //     // modelBuilder.Entity<User>()
-    //     //     .HasOne(u => u.Role)
-    //     //     .WithMany(r => r.Users)
-    //     //     .HasForeignKey(u => u.RoleId)
-    //     //     .OnDelete(DeleteBehavior.Restrict);
-    //
-    // }
+    //Relation DB sets
+    public DbSet<UserRole> UserRoles { get; set; }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<Product>(entity =>
+        {
+            entity.Property(e => e.Id).HasMaxLength(24).IsRequired();
+            entity.Property(e => e.Price).HasColumnType("decimal(18,2)");
+        });
+        modelBuilder.Entity<User>().HasIndex(user => user.Username).IsUnique();
+
+        modelBuilder.Entity<Role>().HasIndex(role => role.Name).IsUnique();
+        
+        //User-Role Relation(N-N)
+        modelBuilder.Entity<UserRole>()
+            .HasKey(ur => new { ur.UserId, ur.RoleId });
+        modelBuilder.Entity<UserRole>()
+            .HasOne(ur => ur.User)
+            .WithMany(r => r.UserRoles)
+            .HasForeignKey(ur => ur.UserId);
+
+        modelBuilder.Entity<UserRole>()
+            .HasOne(ur => ur.Role)
+            .WithMany(r => r.UserRoles)
+            .HasForeignKey(ur => ur.RoleId);    
+        
+
+    }
 }

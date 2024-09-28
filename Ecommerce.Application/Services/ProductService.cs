@@ -20,28 +20,44 @@ public class ProductService : IProductService
         var product = await _productRepository.GetProductByIdAsync(id);
         return new ProductDto
         {
+            Id = product.Id,
             Name = product.Name,
-            Price = product.Price
+            Price = product.Price,
+            Status = product.Status,
+            Inventory = product.Inventory,
+            DOP = product.DOP,
+            DOE = product.DOE
+            
         };
     }
 
-    public async Task<ProductDto> AddProductAsync(AddProductDto productDto)
+    public async Task<ProductDto> AddProductAsync(AddUpdateProductDto updateProductDto)
     {
         var product = new Product
         {
             Id = Guid.NewGuid(),
-            Name = productDto.Name,
-            Price = productDto.Price
+            Name = updateProductDto.Name,
+            Price = updateProductDto.Price,
+            Status = updateProductDto.DOE > updateProductDto.DOP,
+            Inventory = updateProductDto.Inventory,
+            DOP = updateProductDto.DOP,
+            DOE = updateProductDto.DOE
         };
         await _productRepository.AddProductAsync(product);
         return new ProductDto
         {
+            Id = product.Id,
             Name = product.Name,
-            Price = product.Price
+            Price = product.Price,
+            Status = product.Status,
+            Inventory = product.Inventory,
+            DOP = product.DOP,
+            DOE = product.DOE
+            
         };
     }
 
-    public async Task<ProductDto> UpdateProductAsync(Guid id, ProductDto productDto)
+    public async Task<ProductDto> UpdateProductAsync(Guid id, AddUpdateProductDto updateProductDto)
     {
         var product = await _productRepository.GetProductByIdAsync(id);
         if (product == null)
@@ -49,14 +65,23 @@ public class ProductService : IProductService
             return null;
         }
 
-        product.Name = productDto.Name;
-        product.Price = productDto.Price;
-
+        product.Name = updateProductDto.Name;
+        product.Price = updateProductDto.Price;
+        product.Status = updateProductDto.Status;
+        product.Inventory = updateProductDto.Inventory;
+        product.DOE = updateProductDto.DOE;
+        product.DOP = updateProductDto.DOP;
+        
         await _productRepository.UpdateProductAsync(product);
         return new ProductDto
         {
+            Id = product.Id,
             Name = product.Name,
-            Price = product.Price
+            Price = product.Price,
+            Status = product.Status,
+            Inventory = product.Inventory,
+            DOP = product.DOP,
+            DOE = product.DOE
         };
     }
 
@@ -79,7 +104,11 @@ public class ProductService : IProductService
         {
             Id = product.Id,
             Name = product.Name,
-            Price = product.Price
+            Price = product.Price,
+            Status = product.Status,
+            Inventory = product.Inventory,
+            DOP = product.DOP,
+            DOE = product.DOE
 
         });
     }
@@ -92,7 +121,12 @@ public class ProductService : IProductService
         {
             Id = product.Id,
             Name = product.Name,
-            Price = product.Price
+            Price = product.Price,
+            Status = product.Status,
+            Inventory = product.Inventory,
+            DOP = product.DOP,
+            DOE = product.DOE
         });
     }
+    
 }
