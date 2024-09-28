@@ -24,6 +24,8 @@ public class EcommerceDbContext : DbContext
             entity.Property(e => e.Price).HasColumnType("decimal(18,2)");
         });
         modelBuilder.Entity<User>().HasIndex(user => user.Username).IsUnique();
+        modelBuilder.Entity<User>().HasIndex(user => user.Email).IsUnique();
+        modelBuilder.Entity<User>().HasIndex(user => user.PhoneNumber).IsUnique();
 
         modelBuilder.Entity<Role>().HasIndex(role => role.Name).IsUnique();
         
