@@ -1,4 +1,6 @@
-﻿namespace Ecommerce.Core.Entities;
+﻿using Ecommerce.Core.Entities.RelationEntities;
+
+namespace Ecommerce.Core.Entities;
 
 public class Product
 {
@@ -14,6 +16,9 @@ public class Product
     
     public bool Status { get; set; }
 
+    
+    //Relation N-N with Product
+    public ICollection<ManufacturerProduct> Manufacturers { get; set; }
     public Product()
     {
         Id = GenerateUniqueId();

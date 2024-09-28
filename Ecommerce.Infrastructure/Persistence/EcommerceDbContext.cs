@@ -12,8 +12,11 @@ public class EcommerceDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
     
+    public DbSet<Manufacturer> Manufacturers { get; set; }
+    
     //Relation DB sets
     public DbSet<UserRole> UserRoles { get; set; }
+    public DbSet<ManufacturerProduct> ManufacturerProducts { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -42,6 +45,18 @@ public class EcommerceDbContext : DbContext
             .WithMany(r => r.UserRoles)
             .HasForeignKey(ur => ur.RoleId);    
         
+        //Manufacturer-Product Relations(N-N)
+        modelBuilder.Entity<ManufacturerProduct>()
+            .HasKey(mp => new { mp.ManufacturerId, mp.ProductId });
+        modelBuilder.Entity<ManufacturerProduct>()
+            .HasOne(mp => mp.Manufacturer)
+            .WithMany(m => m.Products)
+            .HasForeignKey(mp => mp.ManufacturerId);
+
+        modelBuilder.Entity<ManufacturerProduct>()
+            .HasOne(mp => mp.Product)
+            .WithMany(p => p.Manufacturers)
+            .HasForeignKey(mp => mp.ProductId);
 
     }
 }
