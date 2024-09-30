@@ -36,6 +36,8 @@ public class ManufacturerController : ControllerBase
         return NotFound($"There is no user with Id {manufacturerId}.");
     }
 
+    
+
     // [HttpGet("GetUserByUsername/{username}")]
     // public async Task<IActionResult> GetUserByUsername(string username)
     // {
