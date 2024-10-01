@@ -259,9 +259,19 @@ public class ManufacturerController : ControllerBase
     public async Task<IActionResult> DeleteManufacturer(Guid id)
     {
         var manufacturer = await _manufacturerService.GetManufacturerByIdAsync(id);
+        var manufacturer2 = await _manufacturerService.GetManufactureProductAsync(id);
+        
         if (manufacturer == null)
         {
             return NotFound($"There is no manufacturer with ID {id}");
+        }
+
+        if (manufacturer2.ManufacturerProducts.Count!=0)
+        {
+            return NotFound(
+                "There are products that relate to this manufacturer. You cannot remove this manufacturer " +
+                "before all of its products.");
+
         }
 
         await _manufacturerService.DeleteManufacturerAsync(id);

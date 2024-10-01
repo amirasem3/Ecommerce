@@ -26,12 +26,17 @@ public class EcommerceDbContext : DbContext
             entity.Property(e => e.Id).HasMaxLength(24).IsRequired();
             entity.Property(e => e.Price).HasColumnType("decimal(18,2)");
         });
+        //User's Attribute Constraints
         modelBuilder.Entity<User>().HasIndex(user => user.Username).IsUnique();
         modelBuilder.Entity<User>().HasIndex(user => user.Email).IsUnique();
         modelBuilder.Entity<User>().HasIndex(user => user.PhoneNumber).IsUnique();
-
+        //Role Attribute Constraints
         modelBuilder.Entity<Role>().HasIndex(role => role.Name).IsUnique();
         
+        //Manufacturer Attribute Constraints
+        modelBuilder.Entity<Manufacturer>().HasIndex(man => man.PhoneNumber).IsUnique();
+        modelBuilder.Entity<Manufacturer>().HasIndex(man => man.Address).IsUnique();
+        modelBuilder.Entity<Manufacturer>().HasIndex(man => man.Email).IsUnique();
         //User-Role Relation(N-N)
         modelBuilder.Entity<UserRole>()
             .HasKey(ur => new { ur.UserId, ur.RoleId });

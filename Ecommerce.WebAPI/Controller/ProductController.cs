@@ -48,14 +48,66 @@ public class ProductController : ControllerBase
     public async Task<IActionResult> GetAllProducts()
     {
         var products = await _productService.GetAllProductAsync();
-        return Ok(products);
+        var result = new List<object>();
+        foreach (var product in products)
+        {
+            var manufacturers = new List<object>();
+            var prod = await _productService.GetProductManufacturersAsync(product.Id);
+            foreach (var manProduct in prod.ManufacturerProducts)
+            {
+                manufacturers.Add(new
+                {
+                    manProduct.Manufacturer.Id,
+                    manProduct.Manufacturer.Name
+                });
+            }
+            
+            result.Add(new
+            {
+                product.Id,
+                product.Name,
+                product.Inventory,
+                product.Price,
+                product.Status,
+                product.DOP,
+                product.DOE,
+                Manufacturers = manufacturers
+            });
+        }
+        return Ok(result);
     }
 
     [HttpGet("SearchProducts")]
     public async Task<IActionResult> SearchProducts([FromQuery] String name)
     {
         var products = await _productService.GetAllProductsByNameAsync(name);
-        return Ok(products);
+        var result = new List<object>();
+        foreach (var product in products)
+        {
+            var manufacturers = new List<object>();
+            var prod = await _productService.GetProductManufacturersAsync(product.Id);
+            foreach (var manProduct in prod.ManufacturerProducts)
+            {
+                manufacturers.Add(new
+                {
+                    manProduct.Manufacturer.Id,
+                    manProduct.Manufacturer.Name
+                });
+            }
+            
+            result.Add(new
+            {
+                product.Id,
+                product.Name,
+                product.Inventory,
+                product.Price,
+                product.Status,
+                product.DOP,
+                product.DOE,
+                Manufacturers = manufacturers
+            });
+        }
+        return Ok(result);
     }
 
     [HttpPost("AddProduct")]
