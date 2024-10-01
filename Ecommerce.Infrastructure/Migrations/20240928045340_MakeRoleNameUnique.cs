@@ -1,0 +1,55 @@
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
+
+namespace Ecommerce.Infrastructure.Migrations
+{
+    /// <inheritdoc />
+    public partial class MakeRoleNameUnique : Migration
+    {
+        /// <inheritdoc />
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.AddColumn<string>(
+                name: "Password",
+                table: "Users",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Name",
+                table: "Roles",
+                type: "nvarchar(450)",
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Roles_Name",
+                table: "Roles",
+                column: "Name",
+                unique: true);
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropIndex(
+                name: "IX_Roles_Name",
+                table: "Roles");
+
+            migrationBuilder.DropColumn(
+                name: "Password",
+                table: "Users");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Name",
+                table: "Roles",
+                type: "nvarchar(max)",
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(450)");
+        }
+    }
+}
