@@ -1,4 +1,6 @@
-﻿namespace Ecommerce.Application.DTOs.Manufacturer;
+﻿using Ecommerce.Core.Entities.RelationEntities;
+
+namespace Ecommerce.Application.DTOs.Manufacturer;
 
 public class ManufacturerDto
 {
@@ -12,5 +14,7 @@ public class ManufacturerDto
     public int Rate { get; set; }
     public DateTime EsatablishDate { get; set; }
     public bool Status { get; set; }
+    
+    public ICollection<ManufacturerProduct> ManufacturerProducts { get; set; }
 
 }

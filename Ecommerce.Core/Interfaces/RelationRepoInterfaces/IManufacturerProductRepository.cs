@@ -6,5 +6,7 @@ public interface IManufacturerProductRepository
 {
     public Task AddManufacturerProductAsync(ManufacturerProduct manufacturerProduct);
 
+    public Task<bool> DeleteManufacturerProductAsync(Guid  manufacturerId, Guid productId);
+
     public Task<bool> ManufacturerHaveTheProductAsync(Guid manufacturerId, Guid productId);
 }

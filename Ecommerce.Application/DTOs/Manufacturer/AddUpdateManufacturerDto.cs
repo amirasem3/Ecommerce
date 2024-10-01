@@ -1,4 +1,6 @@
-﻿namespace Ecommerce.Application.DTOs.Manufacturer;
+﻿using Ecommerce.Core.Entities.RelationEntities;
+
+namespace Ecommerce.Application.DTOs.Manufacturer;
 
 public class AddUpdateManufacturerDto
 {
@@ -11,4 +13,5 @@ public class AddUpdateManufacturerDto
     public int Rate { get; set; }
     public DateTime EsatablishDate { get; set; }
     public bool Status { get; set; }
+    
 }

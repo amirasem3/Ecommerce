@@ -15,7 +15,7 @@ public interface IUserServices
     Task<UserDto> GetUserByPhoneNumberAsync(string phoneNumber);
 
     Task<UserDto> AddUserAsync(RegisterUserDto registerUserDto);
-    Task<UserDto> UpdateProductAsync(Guid id, UpdateUserDto updateUserDto);
+    Task<UserDto> UpdateUserAsync(Guid id, UpdateUserDto updateUserDto);
     Task<UserDto> GetUserRoleAsync(Guid userId);
     Task<bool> DeleteUserAsync(Guid id);
     Task<IEnumerable<UserDto>> GetAllUsersAsync();

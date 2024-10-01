@@ -12,6 +12,10 @@ public interface IProductService
     Task<IEnumerable<ProductDto>> GetAllProductAsync();
     Task<IEnumerable<ProductDto>> GetAllProductsByNameAsync(String name);
     
+    public Task<ProductDto> GetProductManufacturersAsync(Guid productId);
+    
+    
+    
 
 
 }

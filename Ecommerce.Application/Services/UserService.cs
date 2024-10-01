@@ -119,7 +119,7 @@ public class UserService : IUserServices
 
     }
 
-    public async Task<UserDto> UpdateProductAsync(Guid id, UpdateUserDto updateUserDto)
+    public async Task<UserDto> UpdateUserAsync(Guid id, UpdateUserDto updateUserDto)
     {
         var targetUser = await _userRepository.GetUserByIdAsync(id);
 

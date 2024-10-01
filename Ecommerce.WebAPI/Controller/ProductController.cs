@@ -20,12 +20,28 @@ public class ProductController : ControllerBase
     public async Task<IActionResult> GetProductById(Guid id)
     {
         var product = await _productService.GetProductByIdAsync(id);
+        var product2 = await _productService.GetProductManufacturersAsync(id);
+        var result = new
+        {
+            product.Id,
+            product.Name,
+            product.Inventory,
+            product.Price,
+            product.Status,
+            product.DOP,
+            product.DOE,
+            Manufacturers = product2.ManufacturerProducts.Select(mp=> new
+            {
+                mp.Manufacturer.Id,
+                mp.Manufacturer.Name
+            })
+        };
         if (product == null)
         {
             return NotFound($"The Product With Id {id} does not exist!");
         }
 
-        return Ok(product);
+        return Ok(result);
     }
 
     [HttpGet("AllProducts")]
@@ -55,7 +71,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpPut("UpdateProduct")]
-    public async Task<IActionResult> UpdateProduct([FromQuery]Guid id, [FromQuery] AddUpdateProductDto productDto)
+    public async Task<IActionResult> UpdateProduct([FromQuery]Guid id, [FromBody] AddUpdateProductDto productDto)
     {
         if (!ModelState.IsValid)
         {

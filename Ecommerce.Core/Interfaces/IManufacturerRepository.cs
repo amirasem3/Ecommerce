@@ -5,9 +5,9 @@ namespace Ecommerce.Core.Interfaces;
 public interface IManufacturerRepository
 {
     public Task<Manufacturer> GetManufacturerByIdAsync(Guid id);
-    public Task<Manufacturer> SearchManufacturerByAddressAsync(string address);
-    public Task<Manufacturer> SearchManufacturerByEmailAsync(string email);
-    public Task<Manufacturer> SearchManufacturerByPhoneNumberAsync(string phoneNumber);
+    public Task<IEnumerable<Manufacturer>> SearchManufacturerByAddressAsync(string address);
+    public Task<IEnumerable<Manufacturer>> SearchManufacturerByEmailAsync(string email);
+    public Task<IEnumerable<Manufacturer>> SearchManufacturerByPhoneNumberAsync(string phoneNumber);
     public Task<IEnumerable<Manufacturer>> GetAllManufacturersAsync();
     public Task<IEnumerable<Manufacturer>> GetManufacturersByOwnerAsync(string ownerName);
     public Task AddManufacturerAsync(Manufacturer addManufacturer);

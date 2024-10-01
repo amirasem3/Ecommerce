@@ -18,20 +18,20 @@ public class ManufacturerRepository : IManufacturerRepository
         return await _context.Manufacturers.FindAsync(id);
     }
 
-    public async Task<Manufacturer> SearchManufacturerByAddressAsync(string address)
+    public async Task<IEnumerable<Manufacturer>> SearchManufacturerByAddressAsync(string address)
     {
-        return await _context.Manufacturers.FirstOrDefaultAsync(m => m.Address == address);
+        return await _context.Manufacturers.Where(m => m.Address.Contains(address)).ToListAsync();
 
     }
 
-    public async Task<Manufacturer> SearchManufacturerByEmailAsync(string email)
+    public async Task<IEnumerable<Manufacturer>> SearchManufacturerByEmailAsync(string email)
     {
-        return await _context.Manufacturers.FirstOrDefaultAsync(m => m.Email == email);
+        return await _context.Manufacturers.Where(m => m.Email.Contains(email)).ToListAsync();
     }
 
-    public async Task<Manufacturer> SearchManufacturerByPhoneNumberAsync(string phoneNumber)
+    public async Task<IEnumerable<Manufacturer>> SearchManufacturerByPhoneNumberAsync(string phoneNumber)
     {
-        return await _context.Manufacturers.FirstOrDefaultAsync(m => m.PhoneNumber == phoneNumber);
+        return await _context.Manufacturers.Where(m => m.PhoneNumber.Contains(phoneNumber)).ToListAsync();
     }
 
     public async Task<IEnumerable<Manufacturer>> GetAllManufacturersAsync()
@@ -62,6 +62,7 @@ public class ManufacturerRepository : IManufacturerRepository
         if (deleted!=null)
         {
             _context.Manufacturers.Remove(deleted);
+           await _context.SaveChangesAsync();
 
             return true;
         }
@@ -74,7 +75,7 @@ public class ManufacturerRepository : IManufacturerRepository
     {
         return (await _context.Manufacturers
             .Include(p => p.Products)
-            .ThenInclude(mp => mp.ProductId)
+            .ThenInclude(mp => mp.Product)
             .FirstOrDefaultAsync(m => m.Id == manufacturerId))!;
     }
 }

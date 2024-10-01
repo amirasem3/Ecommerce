@@ -21,6 +21,26 @@ public class ManufacturerProductRepository : IManufacturerProductRepository
         await _context.SaveChangesAsync();
     }
 
+    public async Task<bool> DeleteManufacturerProductAsync(Guid manufacturerId, Guid productId)
+    {
+        var result = await ManufacturerHaveTheProductAsync(manufacturerId, productId);
+        if (result)
+        {
+            Console.WriteLine("Here in If in DeleteManufactureProduct in ManufacturerProductRepository");
+            var manufacturerProduct = new ManufacturerProduct
+            {
+                ManufacturerId = manufacturerId,
+                ProductId = productId
+            };
+            _context.ManufacturerProducts.Remove(manufacturerProduct);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        return false;
+
+    }
+
     public async Task<bool> ManufacturerHaveTheProductAsync(Guid manufacturerId, Guid productId)
     {
         return await _context.ManufacturerProducts.AnyAsync(mp => mp.ManufacturerId == manufacturerId && mp.ProductId == productId);

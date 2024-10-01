@@ -1,4 +1,6 @@
-﻿namespace Ecommerce.Application.DTOs;
+﻿using Ecommerce.Core.Entities.RelationEntities;
+
+namespace Ecommerce.Application.DTOs;
 
 public class ProductDto
 {
@@ -13,5 +15,7 @@ public class ProductDto
     public DateTime DOE { get; set; }
     
     public bool Status { get; set; }
+
+    public ICollection<ManufacturerProduct> ManufacturerProducts { get; set; }
     
 }

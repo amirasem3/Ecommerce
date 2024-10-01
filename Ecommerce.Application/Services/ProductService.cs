@@ -26,7 +26,8 @@ public class ProductService : IProductService
             Status = product.Status,
             Inventory = product.Inventory,
             DOP = product.DOP,
-            DOE = product.DOE
+            DOE = product.DOE,
+            ManufacturerProducts = product.Manufacturers
             
         };
     }
@@ -41,7 +42,8 @@ public class ProductService : IProductService
             Status = updateProductDto.DOE > updateProductDto.DOP,
             Inventory = updateProductDto.Inventory,
             DOP = updateProductDto.DOP,
-            DOE = updateProductDto.DOE
+            DOE = updateProductDto.DOE,
+            Manufacturers = []
         };
         await _productRepository.AddProductAsync(product);
         return new ProductDto
@@ -52,8 +54,8 @@ public class ProductService : IProductService
             Status = product.Status,
             Inventory = product.Inventory,
             DOP = product.DOP,
-            DOE = product.DOE
-            
+            DOE = product.DOE,
+            ManufacturerProducts = product.Manufacturers
         };
     }
 
@@ -81,7 +83,8 @@ public class ProductService : IProductService
             Status = product.Status,
             Inventory = product.Inventory,
             DOP = product.DOP,
-            DOE = product.DOE
+            DOE = product.DOE,
+            ManufacturerProducts = product.Manufacturers
         };
     }
 
@@ -125,8 +128,23 @@ public class ProductService : IProductService
             Status = product.Status,
             Inventory = product.Inventory,
             DOP = product.DOP,
-            DOE = product.DOE
+            DOE = product.DOE,
         });
     }
-    
+
+    public async Task<ProductDto> GetProductManufacturersAsync(Guid productId)
+    {
+        var product = await _productRepository.GetProductManufacturersAsync(productId);
+        return new ProductDto
+        {
+            Id = product.Id,
+            Name = product.Name,
+            Price = product.Price,
+            Status = product.Status,
+            Inventory = product.Inventory,
+            DOP = product.DOP,
+            DOE = product.DOE,
+            ManufacturerProducts = product.Manufacturers
+        };
+    }
 }

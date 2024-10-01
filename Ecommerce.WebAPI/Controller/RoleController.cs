@@ -53,7 +53,7 @@ public class RoleController : ControllerBase
         return CreatedAtAction(nameof(GetRoleById), new { id = createdRole.Id }, createdRole);
     }
     [HttpPut("UpdateRole")]
-    public async Task<IActionResult> UpdateRole([FromQuery]Guid id, [FromQuery] AddUpdateRoleDto roleDto)
+    public async Task<IActionResult> UpdateRole([FromQuery]Guid id, [FromBody] AddUpdateRoleDto roleDto)
     {
         if (!ModelState.IsValid)
         {

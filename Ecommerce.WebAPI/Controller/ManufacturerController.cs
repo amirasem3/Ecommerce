@@ -1,7 +1,10 @@
-﻿using Ecommerce.Application.Interfaces;
+﻿using Ecommerce.Application.DTOs;
+using Ecommerce.Application.DTOs.Manufacturer;
+using Ecommerce.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcommerceSolution.Controller;
+
 [ApiController]
 [Route("api/[controller]")]
 public class ManufacturerController : ControllerBase
@@ -12,11 +15,13 @@ public class ManufacturerController : ControllerBase
     {
         _manufacturerService = manufacturerService;
     }
-    [HttpGet("GetManufacturerById/{manufacturerId}")]
-    public async Task<IActionResult> GetManufacturerById(Guid manufacturerId)
+
+    [HttpGet("GetManufacturerById/{id}")]
+    [ActionName(nameof(GetManufacturerById))]
+    public async Task<IActionResult> GetManufacturerById(Guid id)
     {
-        var manufacturer = await _manufacturerService.GetManufacturerByIdAsync(manufacturerId);
-        var manufacturer2 = await _manufacturerService.GetManufactureProductAsync(manufacturerId);
+        var manufacturer = await _manufacturerService.GetManufacturerByIdAsync(id);
+        var manufacturer2 = await _manufacturerService.GetManufactureProductAsync(id);
         var result = new
         {
             manufacturer.Id,
@@ -27,246 +32,252 @@ public class ManufacturerController : ControllerBase
             manufacturer.Address,
             manufacturer.Rate,
             manufacturer.Status,
+            manufacturer.ManufacturerCountry,
+            Products  = manufacturer2.ManufacturerProducts.Select(mp => new
+            {
+                mp.Product.Id,
+                mp.Product.Name
+            })
         };
         if (manufacturer != null)
         {
             return Ok(result);
         }
 
-        return NotFound($"There is no user with Id {manufacturerId}.");
+        return NotFound($"There is no user with Id {id}.");
     }
 
-    
+    [HttpGet("GetAllManufacturers")]
+    public async Task<IActionResult> GetAllManufacturers()
+    {
+        var manufacturers = await _manufacturerService.GetAllManufacturers();
+        var result = new List<object>();
+        foreach (var manufacturer in manufacturers)
+        {
+            var products = new List<object>();
+            var man = await _manufacturerService.GetManufactureProductAsync(manufacturer.Id);
+            foreach (var manProduct in man.ManufacturerProducts)
+            {
+                products.Add(new
+                {
+                    manProduct.Product.Id,
+                    manProduct.Product.Name,
+                });
+            }
+            
+            result.Add(new
+            {
+                manufacturer.Id,
+                manufacturer.Name,
+                manufacturer.OwnerName,
+                manufacturer.Email,
+                manufacturer.PhoneNumber,
+                manufacturer.Address,
+                manufacturer.Rate,
+                manufacturer.Status,
+                manufacturer.ManufacturerCountry,
+                Products = products
+            });
+        }
+        return Ok(result);
+    }
 
-    // [HttpGet("GetUserByUsername/{username}")]
-    // public async Task<IActionResult> GetUserByUsername(string username)
-    // {
-    //     var user = await _manufacturerService.GetUserByUsernameAsync(username);
-    //     var user2 = await _manufacturerService.GetUserRoleAsync(user.Id);
-    //     var result = new
-    //     {
-    //         user.Id,
-    //         user.FirstName,
-    //         user.LastName,
-    //         user.Email,
-    //         user.PhoneNumber,
-    //         user.Username,
-    //         Roles = user2.UserRoles.Select(ur => new
-    //         {
-    //             ur.Role.Id,
-    //             ur.Role.Name
-    //         })
-    //     };
-    //     if (user!=null)
-    //     {
-    //         return Ok(result);
-    //     }
-    //
-    //     return NotFound($"There is no user with username {username}");
-    // }
-    //
-    // [HttpGet("GetUserByEmail/{email}")]
-    // public async Task<IActionResult> GetUserByEmail(string email)
-    // {
-    //     var user = await _manufacturerService.GetUserByEmailAsync(email);
-    //     var user2 = await _manufacturerService.GetUserRoleAsync(user.Id);
-    //     var result = new
-    //     {
-    //         user.Id,
-    //         user.FirstName,
-    //         user.LastName,
-    //         user.Email,
-    //         user.PhoneNumber,
-    //         user.Username,
-    //         Roles = user2.UserRoles.Select(ur => new
-    //         {
-    //             ur.Role.Id,
-    //             ur.Role.Name
-    //         })
-    //     };
-    //     if (user != null)
-    //     {
-    //         return Ok(result);
-    //     }
-    //
-    //     return NotFound($"There is no user with Email {email}");
-    // }
-    //
-    // [HttpGet("GetUserByPhoneNumber/{phoneNumber}")]
-    // public async Task<IActionResult> GetUserByPhoneNumber(string phoneNumber)
-    // {
-    //     var user = await _manufacturerService.GetUserByPhoneNumberAsync(phoneNumber);
-    //     var user2 = await _manufacturerService.GetUserRoleAsync(user.Id);
-    //     var result = new
-    //     {
-    //         user.Id,
-    //         user.FirstName,
-    //         user.LastName,
-    //         user.Email,
-    //         user.PhoneNumber,
-    //         user.Username,
-    //         Roles = user2.UserRoles.Select(ur => new
-    //         {
-    //             ur.Role.Id,
-    //             ur.Role.Name
-    //         })
-    //     };
-    //     if (user != null)
-    //     {
-    //         return Ok(result);
-    //         
-    //     }
-    //
-    //     return NotFound($"There is no user with phone number {phoneNumber}");
-    // }
-    //
-    // [HttpGet("GetAllUsers")]
-    // public async Task<IActionResult> GetAllUsers()
-    // {
-    //     var users = await _manufacturerService.GetAllUsersAsync();
-    //     var result = new List<object>(); 
-    //     foreach (var user in users)
-    //     {
-    //         var roles = new List<object>();
-    //       var  user2 = await _manufacturerService.GetUserRoleAsync(user.Id);
-    //
-    //         foreach (var userRole in user2.UserRoles)
-    //         {
-    //             roles.Add(new
-    //             {
-    //                 userRole.Role.Id,
-    //                 userRole.Role.Name
-    //             });
-    //         }
-    //
-    //         result.Add(new
-    //         {
-    //             user.Id,
-    //             user.FirstName,
-    //             user.LastName,
-    //             user.Username,
-    //             user.Email,
-    //             user.PhoneNumber,
-    //             Roles = roles 
-    //         });
-    //     }
-    //     
-    //     
-    //
-    //     return Ok(result);
-    // }
-    //
-    // [HttpGet("SearchUserName")]
-    // public async Task<IActionResult> SearchUserByName([FromQuery]string name)
-    // {
-    //     var users = await _manufacturerService.GetAllUsersByNameAsync(name);
-    //     var result = new List<object>(); 
-    //     foreach (var user in users)
-    //     {
-    //         var roles = new List<object>();
-    //         var  user2 = await _manufacturerService.GetUserRoleAsync(user.Id);
-    //
-    //         foreach (var userRole in user2.UserRoles)
-    //         {
-    //             roles.Add(new
-    //             {
-    //                 userRole.Role.Id,
-    //                 userRole.Role.Name
-    //             });
-    //         }
-    //
-    //         result.Add(new
-    //         {
-    //             user.Id,
-    //             user.FirstName,
-    //             user.LastName,
-    //             user.Username,
-    //             user.Email,
-    //             user.PhoneNumber,
-    //             Roles = roles 
-    //         });
-    //     }
-    //
-    //     return Ok(result);
-    //
-    // }
-    //
-    // [HttpGet("GetUserRole")]
-    // public async Task<IActionResult> GetUserRole([FromQuery] Guid manufacturerId)
-    // {
-    //     var user = await _manufacturerService.GetUserRoleAsync(manufacturerId);
-    //     if (user!= null)
-    //     {
-    //         var result = new
-    //         {
-    //             user.Id,
-    //             user.Username,
-    //             Roles = user.UserRoles.Select(ur => new
-    //             {
-    //                 ur.Role.Id,
-    //                 ur.Role.Name
-    //             })
-    //         };
-    //         return Ok(result);
-    //     }
-    //
-    //     return NotFound($"There is no rule for user with ID {manufacturerId}");
-    // }
-    //
-    //
-    // [HttpPost("SignUp")]
-    // public async Task<IActionResult> AddUser([FromBody] RegisterUserDto userDto)
-    // {
-    //     var user = await _manufacturerService.AddUserAsync(userDto);
-    //
-    //     return Ok(user);
-    // }
-    //
-    // [HttpPost("AssignUserRole")]
-    // public async Task<IActionResult> AssignRoleToUser([FromQuery]Guid manufacturerId, [FromQuery]Guid roleId)
-    // {
-    //     await _manufacturerService.AssignRoleToUserAsync(manufacturerId, roleId);
-    //     return Ok(_manufacturerService.GetManufacturerByIdAsync(manufacturerId));
-    // }
-    //
-    // [HttpPost("Login")]
-    // public async Task<IActionResult> LoginUser([FromBody] LoginUserDto loginRequestDto)
-    // {
-    //     var user = await _manufacturerService.AuthenticateUserAsync(loginRequestDto.Username, loginRequestDto.Password);
-    //     if (user == null)
-    //     {
-    //         return NotFound();
-    //     }
-    //
-    //     return Ok(user);
-    //         
-    // }
-    //
-    // [HttpPut("UpdateUser")]
-    // public async Task<IActionResult> UpdateUser([FromQuery] Guid manufacturerId, [FromQuery] UpdateUserDto updateUserDto)
-    // {
-    //     var targetUser = await _manufacturerService.GetManufacturerByIdAsync(manufacturerId);
-    //     if (targetUser!=null)
-    //     {
-    //         var user = await _manufacturerService.UpdateProductAsync(manufacturerId, updateUserDto);
-    //         return Ok(user);
-    //     }
-    //
-    //     return NotFound($"There is no user with ID {manufacturerId}");
-    //
-    // }
-    //
-    //
-    //
-    // [HttpDelete("DeleteUser/{manufacturerId}")]
-    // public async Task<IActionResult> DeleteUser(Guid manufacturerId)
-    // {
-    //     var deleted = await _manufacturerService.DeleteUserAsync(manufacturerId);
-    //     if (deleted)
-    //     {
-    //         return Ok($"The user with Id ({manufacturerId}) is successfully deleted.");
-    //     }
-    //
-    //     return NotFound($"There is no user with ID {manufacturerId}.");
-    // } 
+
+    [HttpGet("GetManufacturerByAddress")]
+    public async Task<IActionResult> SearchManufacturerAddresses([FromQuery] string address)
+    {
+        var manufacturers = await _manufacturerService.SearchManufacturerByAddressAsync(address);
+        var result = new List<object>();
+        foreach (var manufacturer in manufacturers)
+        {
+            var products = new List<object>();
+            var man = await _manufacturerService.GetManufactureProductAsync(manufacturer.Id);
+            foreach (var manProduct in man.ManufacturerProducts)
+            {
+                products.Add(new
+                {
+                    manProduct.Product.Id,
+                    manProduct.Product.Name,
+                });
+            }
+            
+            result.Add(new
+            {
+                manufacturer.Id,
+                manufacturer.Name,
+                manufacturer.OwnerName,
+                manufacturer.Email,
+                manufacturer.PhoneNumber,
+                manufacturer.Address,
+                manufacturer.Rate,
+                manufacturer.Status,
+                 manufacturer.ManufacturerCountry,
+                Products = products
+            });
+        }
+        return Ok(result);
+    }
+
+    [HttpGet("GetManufacturerByEmail")]
+    public async Task<IActionResult> SearchManufacturerEmails([FromQuery] string email)
+    {
+        var manufacturers = await _manufacturerService.SearchManufacturerByEmailAsync(email);
+
+        var result = new List<object>();
+        foreach (var manufacturer in manufacturers)
+        {
+            var products = new List<object>();
+            var man = await _manufacturerService.GetManufactureProductAsync(manufacturer.Id);
+            foreach (var manProduct in man.ManufacturerProducts)
+            {
+                products.Add(new
+                {
+                    manProduct.Product.Id,
+                    manProduct.Product.Name,
+                });
+            }
+            
+            result.Add(new
+            {
+                manufacturer.Id,
+                manufacturer.Name,
+                manufacturer.OwnerName,
+                manufacturer.Email,
+                manufacturer.PhoneNumber,
+                manufacturer.Address,
+                manufacturer.Rate,
+                manufacturer.Status,
+                manufacturer.ManufacturerCountry,
+                Products = products
+            });
+        }
+        return Ok(result);
+    }
+
+    [HttpGet("GetManufacturerByPhoneNumber")]
+    public async Task<IActionResult> SearchManufacturerPhoneNumbers([FromQuery] string phoneNumber)
+    {
+        var manufacturers = await _manufacturerService.SearchManufacturerByPhoneNumberAsync(phoneNumber);
+        var result = new List<object>();
+        foreach (var manufacturer in manufacturers)
+        {
+            var products = new List<object>();
+            var man = await _manufacturerService.GetManufactureProductAsync(manufacturer.Id);
+            foreach (var manProduct in man.ManufacturerProducts)
+            {
+                products.Add(new
+                {
+                    manProduct.Product.Id,
+                    manProduct.Product.Name,
+                });
+            }
+            
+            result.Add(new
+            {
+                manufacturer.Id,
+                manufacturer.Name,
+                manufacturer.OwnerName,
+                manufacturer.Email,
+                manufacturer.PhoneNumber,
+                manufacturer.Address,
+                manufacturer.Rate,
+                manufacturer.Status,
+                manufacturer.ManufacturerCountry,
+                Products = products
+            });
+        }
+        return Ok(result);
+    }
+
+    [HttpGet("GetManufacturerByOwner")]
+    public async Task<IActionResult> SearchManufacturerOwners(string owner)
+    {
+        var manufacturers = await _manufacturerService.GetManufacturersByOwnerAsync(owner);
+        var result = new List<object>();
+        foreach (var manufacturer in manufacturers)
+        {
+            var products = new List<object>();
+            var man = await _manufacturerService.GetManufactureProductAsync(manufacturer.Id);
+            foreach (var manProduct in man.ManufacturerProducts)
+            {
+                products.Add(new
+                {
+                    manProduct.Product.Id,
+                    manProduct.Product.Name,
+                });
+            }
+            
+            result.Add(new
+            {
+                manufacturer.Id,
+                manufacturer.Name,
+                manufacturer.OwnerName,
+                manufacturer.Email,
+                manufacturer.PhoneNumber,
+                manufacturer.Address,
+                manufacturer.Rate,
+                manufacturer.Status,
+                manufacturer.ManufacturerCountry,
+                Products = products
+            });
+        }
+        return Ok(result);
+    }
+
+    [HttpPost("AddManufacturer")]
+    public async Task<IActionResult> AddManufacturer([FromBody] AddUpdateManufacturerDto newManufacturer)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        var manufacturer = await _manufacturerService.AddManufacturerAsync(newManufacturer);
+        
+        return CreatedAtAction(nameof(GetManufacturerById), new { id = manufacturer.Id }, manufacturer);
+    }
+
+    [HttpPost("AssignManufacturerProduct")]
+    public async Task<IActionResult> AssignManufacturerProduct([FromQuery] Guid manufacturerId, [FromQuery] Guid productId)
+    {
+        await _manufacturerService.AssignManufacturerProductsAsync(manufacturerId, productId);
+        return Ok(_manufacturerService.GetManufacturerByIdAsync(manufacturerId));
+    }
+
+    [HttpPut("UpdateManufacturer/{id}")]
+    public async Task<IActionResult> UpdateManufacturer(Guid id, AddUpdateManufacturerDto manufacturerDto)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var updatedManufacturer = await _manufacturerService.UpdateManufacturerAsync(id,manufacturerDto);
+        return Ok(updatedManufacturer);
+    }
+
+    [HttpDelete("DeleteManufacturer/{id}")]
+    public async Task<IActionResult> DeleteManufacturer(Guid id)
+    {
+        var manufacturer = await _manufacturerService.GetManufacturerByIdAsync(id);
+        if (manufacturer == null)
+        {
+            return NotFound($"There is no manufacturer with ID {id}");
+        }
+
+        await _manufacturerService.DeleteManufacturerAsync(id);
+        return Ok($"Manufacture with ID {id} has successfully deleted!");
+    }
+
+    [HttpDelete("DeleteManufactureProduct")]
+    public async Task<IActionResult> DeleteManufactureProducts([FromQuery] Guid manufacturerId, [FromQuery] Guid productId)
+    {
+        var result = await _manufacturerService.DeleteManufacturerProductAsync(manufacturerId, productId);
+
+        if (result)
+        {
+            return Ok($"The product with ID {productId} has successfully deleted from manufacturer with ID {manufacturerId}.");
+        }
+
+        return NotFound("Invalid manifacturerId or productId");
+    }
 }

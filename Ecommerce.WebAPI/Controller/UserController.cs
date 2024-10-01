@@ -250,12 +250,12 @@ public class UserController : ControllerBase
     }
 
     [HttpPut("UpdateUser")]
-    public async Task<IActionResult> UpdateUser([FromQuery] Guid userId, [FromQuery] UpdateUserDto updateUserDto)
+    public async Task<IActionResult> UpdateUser([FromQuery] Guid userId, [FromBody] UpdateUserDto updateUserDto)
     {
         var targetUser = await _userServices.GetUserByIdAsync(userId);
         if (targetUser!=null)
         {
-            var user = await _userServices.UpdateProductAsync(userId, updateUserDto);
+            var user = await _userServices.UpdateUserAsync(userId, updateUserDto);
             return Ok(user);
         }
 

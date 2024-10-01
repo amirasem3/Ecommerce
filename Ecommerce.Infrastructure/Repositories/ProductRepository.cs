@@ -53,7 +53,12 @@ public class ProductRepository : IProductRepository
         _context.Products.Update(newProduct);
         await _context.SaveChangesAsync();
     }
-    
-    
-    
+
+    public async Task<Product> GetProductManufacturersAsync(Guid productId)
+    {
+        return (await _context.Products
+            .Include(p => p.Manufacturers)
+            .ThenInclude(mp => mp.Manufacturer)
+            .FirstOrDefaultAsync(p => p.Id == productId))!;
+    }
 }
