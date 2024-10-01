@@ -16,6 +16,5 @@ public class UpdateUserDto
     
     public string RoleName { get; set; }
     
-    public ICollection<UserRole> UserRoles { get; set; }
     
 }

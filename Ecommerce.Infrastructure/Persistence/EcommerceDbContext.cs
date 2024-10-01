@@ -53,10 +53,13 @@ public class EcommerceDbContext : DbContext
         modelBuilder.Entity<Role>()
             .HasMany(e => e.Users)
             .WithOne(e => e.Role)
+            .HasForeignKey(e => e.RoleId)
+            .IsRequired()
             .OnDelete(DeleteBehavior.NoAction);
         modelBuilder.Entity<User>()
             .HasOne(e => e.Role)
             .WithMany(e => e.Users)
+            .HasForeignKey(e => e.RoleId)
             .OnDelete(DeleteBehavior.NoAction);
         //Manufacturer-Product Relations(N-N)
         modelBuilder.Entity<ManufacturerProduct>()

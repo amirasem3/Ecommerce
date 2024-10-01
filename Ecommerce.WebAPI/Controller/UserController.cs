@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using Ecommerce.Application.DTOs.User;
+﻿using Ecommerce.Application.DTOs.User;
 using Ecommerce.Application.Interfaces;
-using Ecommerce.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcommerceSolution.Controller;
@@ -22,7 +20,7 @@ public class UserController : ControllerBase
     public async Task<IActionResult> GetUserById(Guid userId)
     {
         var user = await _userServices.GetUserByIdAsync(userId);
-        var user2 = await _userServices.GetUserRoleAsync(userId);
+        // var user2 = await _userServices.GetUserRoleAsync(userId);
         var result = new
         {
             user.Id,
@@ -31,11 +29,8 @@ public class UserController : ControllerBase
             user.Email,
             user.PhoneNumber,
             user.Username,
-            Roles = user2.UserRoles.Select(ur => new
-            {
-                ur.Role.Id,
-                ur.Role.Name
-            })
+            user.RoleName,
+            user.RoleId
         };
         if (user != null)
         {
@@ -49,7 +44,7 @@ public class UserController : ControllerBase
     public async Task<IActionResult> GetUserByUsername(string username)
     {
         var user = await _userServices.GetUserByUsernameAsync(username);
-        var user2 = await _userServices.GetUserRoleAsync(user.Id);
+        // var user2 = await _userServices.GetUserRoleAsync(user.RoleId);
         var result = new
         {
             user.Id,
@@ -58,11 +53,8 @@ public class UserController : ControllerBase
             user.Email,
             user.PhoneNumber,
             user.Username,
-            Roles = user2.UserRoles.Select(ur => new
-            {
-                ur.Role.Id,
-                ur.Role.Name
-            })
+            user.RoleName,
+            user.RoleId
         };
         if (user!=null)
         {
@@ -76,7 +68,7 @@ public class UserController : ControllerBase
     public async Task<IActionResult> GetUserByEmail(string email)
     {
         var user = await _userServices.GetUserByEmailAsync(email);
-        var user2 = await _userServices.GetUserRoleAsync(user.Id);
+        // var user2 = await _userServices.GetUserRoleAsync(user.Id);
         var result = new
         {
             user.Id,
@@ -85,11 +77,8 @@ public class UserController : ControllerBase
             user.Email,
             user.PhoneNumber,
             user.Username,
-            Roles = user2.UserRoles.Select(ur => new
-            {
-                ur.Role.Id,
-                ur.Role.Name
-            })
+         user.RoleName,
+         user.RoleId,
         };
         if (user != null)
         {
@@ -103,7 +92,7 @@ public class UserController : ControllerBase
     public async Task<IActionResult> GetUserByPhoneNumber(string phoneNumber)
     {
         var user = await _userServices.GetUserByPhoneNumberAsync(phoneNumber);
-        var user2 = await _userServices.GetUserRoleAsync(user.Id);
+        // var user2 = await _userServices.GetUserRoleAsync(user.Id);
         var result = new
         {
             user.Id,
@@ -112,11 +101,8 @@ public class UserController : ControllerBase
             user.Email,
             user.PhoneNumber,
             user.Username,
-            Roles = user2.UserRoles.Select(ur => new
-            {
-                ur.Role.Id,
-                ur.Role.Name
-            })
+           user.RoleId,
+           user.RoleName
         };
         if (user != null)
         {
@@ -139,16 +125,9 @@ public class UserController : ControllerBase
         foreach (var user in users)
         {
             var roles = new List<object>();
-          var  user2 = await _userServices.GetUserRoleAsync(user.Id);
+          // var  user2 = await _userServices.GetUserRoleAsync(user.Id);
 
-            foreach (var userRole in user2.UserRoles)
-            {
-                roles.Add(new
-                {
-                    userRole.Role.Id,
-                    userRole.Role.Name
-                });
-            }
+          
 
             result.Add(new
             {
@@ -158,7 +137,8 @@ public class UserController : ControllerBase
                 user.Username,
                 user.Email,
                 user.PhoneNumber,
-                Roles = roles 
+                user.RoleId,
+                user.RoleName
             });
         }
         
@@ -175,16 +155,8 @@ public class UserController : ControllerBase
         foreach (var user in users)
         {
             var roles = new List<object>();
-            var  user2 = await _userServices.GetUserRoleAsync(user.Id);
-
-            foreach (var userRole in user2.UserRoles)
-            {
-                roles.Add(new
-                {
-                    userRole.Role.Id,
-                    userRole.Role.Name
-                });
-            }
+            // var  user2 = await _userServices.GetUserRoleAsync(user.Id);
+            
 
             result.Add(new
             {
@@ -194,7 +166,8 @@ public class UserController : ControllerBase
                 user.Username,
                 user.Email,
                 user.PhoneNumber,
-                Roles = roles 
+                user.RoleId,
+                user.RoleName
             });
         }
 
@@ -205,18 +178,15 @@ public class UserController : ControllerBase
     [HttpGet("GetUserRole")]
     public async Task<IActionResult> GetUserRole([FromQuery] Guid userId)
     {
-        var user = await _userServices.GetUserRoleAsync(userId);
+        var user = await _userServices.GetUserByIdAsync(userId);
         if (user!= null)
         {
             var result = new
             {
                 user.Id,
                 user.Username,
-                Roles = user.UserRoles.Select(ur => new
-                {
-                    ur.Role.Id,
-                    ur.Role.Name
-                })
+              user.RoleId,
+              user.RoleName
             };
             return Ok(result);
         }

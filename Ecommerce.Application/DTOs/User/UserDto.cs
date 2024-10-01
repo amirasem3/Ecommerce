@@ -16,7 +16,8 @@ public class UserDto
     
     public string RoleName { get; set; }
     
-    public Role Role { get; set; }
+    
+    public Guid RoleId { get; set; }
     
     public ICollection<UserRole> UserRoles { get; set; }
     

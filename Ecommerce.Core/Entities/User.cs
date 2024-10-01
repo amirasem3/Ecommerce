@@ -17,4 +17,5 @@ public class User
     [JsonIgnore]
     public ICollection<UserRole> UserRoles { get; set; }
     public Role Role { get; set; }
+    public Guid RoleId { get; set; }
 }
