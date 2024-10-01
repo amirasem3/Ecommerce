@@ -37,19 +37,27 @@ public class EcommerceDbContext : DbContext
         modelBuilder.Entity<Manufacturer>().HasIndex(man => man.PhoneNumber).IsUnique();
         modelBuilder.Entity<Manufacturer>().HasIndex(man => man.Address).IsUnique();
         modelBuilder.Entity<Manufacturer>().HasIndex(man => man.Email).IsUnique();
-        //User-Role Relation(N-N)
+        //Role-User Relationship (one-to-many)
         modelBuilder.Entity<UserRole>()
             .HasKey(ur => new { ur.UserId, ur.RoleId });
         modelBuilder.Entity<UserRole>()
             .HasOne(ur => ur.User)
             .WithMany(r => r.UserRoles)
             .HasForeignKey(ur => ur.UserId);
-
+        
         modelBuilder.Entity<UserRole>()
             .HasOne(ur => ur.Role)
             .WithMany(r => r.UserRoles)
-            .HasForeignKey(ur => ur.RoleId);    
-        
+            .HasForeignKey(ur => ur.RoleId);
+
+        modelBuilder.Entity<Role>()
+            .HasMany(e => e.Users)
+            .WithOne(e => e.Role)
+            .OnDelete(DeleteBehavior.NoAction);
+        modelBuilder.Entity<User>()
+            .HasOne(e => e.Role)
+            .WithMany(e => e.Users)
+            .OnDelete(DeleteBehavior.NoAction);
         //Manufacturer-Product Relations(N-N)
         modelBuilder.Entity<ManufacturerProduct>()
             .HasKey(mp => new { mp.ManufacturerId, mp.ProductId });

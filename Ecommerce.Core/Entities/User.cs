@@ -16,5 +16,5 @@ public class User
     //N-N Relation with Role
     [JsonIgnore]
     public ICollection<UserRole> UserRoles { get; set; }
-    
+    public Role Role { get; set; }
 }

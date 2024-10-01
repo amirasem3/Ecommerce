@@ -6,8 +6,10 @@ public interface IRoleRepository
 {
     Task<Role> GetRoleByIdAsync(Guid id);
     Task<IEnumerable<Role>> GetAllRulesAsync();
-    Task<IEnumerable<Role>> GetRolesByName(String name);
+    Task<Role> GetRoleByName(string name);
     Task AddRoleAsync(Role role);
     Task DeleteRoleByIdAsync(Guid id);
     Task UpdateRoleAsync(Role newRole);
+
+    Task<ICollection<User>> GetARoleUsers(Guid roleId);
 }

@@ -10,5 +10,7 @@ public class RegisterUserDto
     
     public string Password { get; set; }
     
+    public string RoleName { get; set; }
+    
 
 }

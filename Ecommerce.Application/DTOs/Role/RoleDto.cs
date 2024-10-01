@@ -9,5 +9,6 @@ public class RoleDto
     
     public ICollection<UserRole> UserRoles { get; set; }
     
+    public ICollection<Core.Entities.User> Users { get; set; }
     
 }

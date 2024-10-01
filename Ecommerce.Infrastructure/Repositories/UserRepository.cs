@@ -69,11 +69,15 @@ public class UserRepository : IUserRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<User> GetUserWithRolesAsync(Guid userId)
+    public async Task<Role> GetUserRole(Guid userId)
     {
-        return (await _context.Users
-            .Include(u => u.UserRoles)
-            .ThenInclude(ur => ur.Role)
-            .FirstOrDefaultAsync(u => u.Id == userId))!;
+        var user = await _context.Users.FindAsync(userId);
+        // return (await _context.Users
+        //     .Include(u => u.UserRoles)
+        //     .ThenInclude(ur => ur.Role)
+        //     .FirstOrDefaultAsync(u => u.Id == userId))!;
+        var role = user.Role;
+
+        return await _context.Roles.FindAsync(role.Id);
     }
 }

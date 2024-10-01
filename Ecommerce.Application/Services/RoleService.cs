@@ -22,7 +22,8 @@ public class RoleService : IRoleServices
         {
            Name = role.Name,
            Id = role.Id,
-           UserRoles = role.UserRoles
+           UserRoles = role.UserRoles,
+           Users = role.Users
         };
 
 
@@ -34,6 +35,7 @@ public class RoleService : IRoleServices
         {
             Id = Guid.NewGuid(),
             Name = roleDto.Name,
+            Users = {  }
         };
         await _roleRepository.AddRoleAsync(role);
 
@@ -41,7 +43,8 @@ public class RoleService : IRoleServices
         {
             Name = role.Name,
             Id = role.Id,
-            UserRoles = role.UserRoles
+            UserRoles = role.UserRoles,
+            Users = role.Users
         };
 
     }
@@ -60,6 +63,7 @@ public class RoleService : IRoleServices
             Name = targetRole.Name,
             UserRoles = targetRole.UserRoles,
             Id = targetRole.Id,
+            Users = targetRole.Users
         };
     }
 
@@ -82,19 +86,35 @@ public class RoleService : IRoleServices
         {
             Id = role.Id,
             Name = role.Name,
-            UserRoles = role.UserRoles
+            UserRoles = role.UserRoles,
+            Users = role.Users
         });
     }
 
-    public async Task<IEnumerable<RoleDto>> GetAllRolesByNameAsync(string name)
+    public async Task<RoleDto> GetRoleUsers(Guid roleId)
     {
-        var roleByName = await _roleRepository.GetRolesByName(name);
-
-        return roleByName.Select(role => new RoleDto
+        var users = await _roleRepository.GetARoleUsers(roleId);
+        var role = await _roleRepository.GetRoleByIdAsync(roleId);
+        return new RoleDto
         {
             Id = role.Id,
             Name = role.Name,
             UserRoles = role.UserRoles,
-        });
+            Users = role.Users
+            
+        };
+    }
+
+    public async Task<RoleDto> GetRoleByNameAsync(string name)
+    {
+        var role = await _roleRepository.GetRoleByName(name);
+
+        return new RoleDto
+        {
+            Id = role.Id,
+            Name = role.Name,
+            UserRoles = role.UserRoles,
+            Users = role.Users
+        };
     }
 }

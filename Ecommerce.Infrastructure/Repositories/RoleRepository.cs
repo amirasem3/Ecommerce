@@ -23,14 +23,14 @@ public class RoleRepository : IRoleRepository
         return await _context.Roles.ToListAsync();
     }
 
-    public async Task<IEnumerable<Role>> GetRolesByName(string name)
+    public async Task<Role> GetRoleByName(string name)
     {
         if (name == " ")
         {
-            return await GetAllRulesAsync();
+            return null;
         }
 
-        return await _context.Roles.Where(role => role.Name.Contains(name)).ToListAsync();
+        return   await _context.Roles.FirstOrDefaultAsync(role => role.Name == name);
     }
 
     public async Task AddRoleAsync(Role role)
@@ -50,5 +50,16 @@ public class RoleRepository : IRoleRepository
     {
         _context.Roles.Update(newRole);
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<ICollection<User>> GetARoleUsers(Guid roleId)
+    {
+        var role = await _context.Roles.FindAsync(roleId);
+        return role.Users;
+        
+        // return (await _context.Roles
+        //     .Include(u => u.UserRoles)
+        //     .ThenInclude(ur => ur.User)
+        //     .FirstOrDefaultAsync(r => r.Id == roleId))!;
     }
 }

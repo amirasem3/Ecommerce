@@ -131,7 +131,11 @@ public class UserController : ControllerBase
     public async Task<IActionResult> GetAllUsers()
     {
         var users = await _userServices.GetAllUsersAsync();
-        var result = new List<object>(); 
+        var result = new List<object>();
+        if (users == null)
+        {
+            return NotFound();
+        }
         foreach (var user in users)
         {
             var roles = new List<object>();

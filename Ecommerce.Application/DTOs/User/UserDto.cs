@@ -1,4 +1,5 @@
-﻿using Ecommerce.Core.Entities.RelationEntities;
+﻿using Ecommerce.Core.Entities;
+using Ecommerce.Core.Entities.RelationEntities;
 
 namespace Ecommerce.Application.DTOs;
 
@@ -12,6 +13,10 @@ public class UserDto
     public string PhoneNumber { get; set; }   
     
     public string PasswordHash { get; set; }
+    
+    public string RoleName { get; set; }
+    
+    public Role Role { get; set; }
     
     public ICollection<UserRole> UserRoles { get; set; }
     
