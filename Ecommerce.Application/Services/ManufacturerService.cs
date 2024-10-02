@@ -1,9 +1,11 @@
 ﻿using Ecommerce.Application.DTOs.Manufacturer;
+using Ecommerce.Application.DTOs.User;
 using Ecommerce.Application.Interfaces;
 using Ecommerce.Core.Entities;
 using Ecommerce.Core.Entities.RelationEntities;
 using Ecommerce.Core.Interfaces;
 using Ecommerce.Core.Interfaces.RelationRepoInterfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace Ecommerce.Application.Services;
 
@@ -13,11 +15,17 @@ public class ManufacturerService : IManufacturerService
     private readonly IManufacturerRepository _manufacturerRepository;
     private readonly IProductRepository _productRepository;
     private readonly IManufacturerProductRepository _manufacturerProductRepository;
-    public ManufacturerService(IManufacturerRepository manufacturerRepository, IProductRepository productRepository, IManufacturerProductRepository manufacturerProductRepository)
+    private readonly IUserServices _userServices;
+    private readonly IPasswordHasher<User> _passwordHasher;
+    public ManufacturerService(IManufacturerRepository manufacturerRepository, IProductRepository productRepository,
+        IManufacturerProductRepository manufacturerProductRepository, IUserServices userServices,
+        IPasswordHasher<User> passwordHasher)
     {
         _manufacturerRepository = manufacturerRepository;
         _productRepository = productRepository;
         _manufacturerProductRepository = manufacturerProductRepository;
+        _userServices = userServices;
+        _passwordHasher = passwordHasher;
     }
      
     public async Task<ManufacturerDto> GetManufacturerByIdAsync(Guid id)
@@ -150,7 +158,19 @@ public class ManufacturerService : IManufacturerService
             Status = manufacturerDto.Status,
             Products = []
         };
+        
         await _manufacturerRepository.AddManufacturerAsync(manufacturer);
+        var manufacturerUser = new RegisterUserDto
+        {
+            FirstName = manufacturer.Name,
+            LastName = manufacturer.OwnerName,
+            Email = manufacturer.Email,
+            Username = manufacturer.Email,
+            RoleName = "Manufacturer",
+            PhoneNumber = manufacturer.PhoneNumber,
+            Password = manufacturer.PhoneNumber
+        };
+        await _userServices.AddUserAsync(manufacturerUser);
         return new ManufacturerDto
         {
             Id = manufacturer.Id,
