@@ -19,6 +19,5 @@ public class UserDto
     
     public Guid RoleId { get; set; }
     
-    public ICollection<UserRole> UserRoles { get; set; }
     
 }

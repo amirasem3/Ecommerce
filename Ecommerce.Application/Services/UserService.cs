@@ -13,16 +13,18 @@ public class UserService : IUserServices
 {
     private readonly IUserRepository _userRepository;
     private readonly IRoleRepository _roleRepository;
-    private readonly IUserRoleRepository _userRoleRepository;
     private readonly IPasswordHasher<User> _passwordHasher;
+    private IEnumerable<User> _users = new List<User>();
+    private IEnumerable<Role> _roles = new List<Role>();
+    private int counter = 0;
 
-    public UserService(IUserRepository userRepository, IRoleRepository roleRepository, IUserRoleRepository userRoleRepository, IPasswordHasher<User> passwordHasher)
+    public  UserService(IUserRepository userRepository, IRoleRepository roleRepository,  IPasswordHasher<User> passwordHasher)
     {
         _userRepository = userRepository;
         _roleRepository = roleRepository;
-        _userRoleRepository = userRoleRepository;
         _passwordHasher = passwordHasher;
     }
+    
 
 
     public async Task<UserDto> GetUserByIdAsync(Guid id)
@@ -40,7 +42,6 @@ public class UserService : IUserServices
             Username = user.Username,
             Email = user.Email,
             PhoneNumber = user.PhoneNumber,
-            UserRoles = user.UserRoles, 
             RoleId = user.RoleId,
             RoleName = role.Name
             
@@ -61,7 +62,6 @@ public class UserService : IUserServices
           Username = user.Username,
           Email = user.Email,
           PhoneNumber = user.PhoneNumber,
-          UserRoles = user.UserRoles,
           RoleId = user.RoleId,
           RoleName = role.Name
         };
@@ -80,7 +80,6 @@ public class UserService : IUserServices
             Username = user.Username,
             Email = user.Email,
             PhoneNumber = user.PhoneNumber,
-            UserRoles = user.UserRoles,
             RoleId = user.RoleId,
             RoleName = role.Name
         };
@@ -99,9 +98,8 @@ public class UserService : IUserServices
             Username = user.Username,
             Email = user.Email,
             PhoneNumber = user.PhoneNumber,
-            UserRoles = user.UserRoles,
             RoleId = user.RoleId,
-            RoleName = role.Name
+            RoleName = role.Name,
         };
     }
 
@@ -162,7 +160,6 @@ public class UserService : IUserServices
             Email = targetUser.Email,
             PhoneNumber = targetUser.PhoneNumber,
             Username = targetUser.Username,
-            UserRoles = targetUser.UserRoles,
             RoleName = targetRole.Name,
             RoleId =targetRole.Id
         };
@@ -185,27 +182,29 @@ public class UserService : IUserServices
 
     public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
     {
+        
         var users = await _userRepository.GetAllUsersAsync();
-        return users.Select(user => new UserDto{
-                Id = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                Username = user.Username,
-                PhoneNumber = user.PhoneNumber,
-                UserRoles = user.UserRoles,
-                RoleId = user.RoleId,
-            });
+        var roles = await _roleRepository.GetAllRulesAsync();
+        return users.Select(user => new UserDto
+        {
+            Id = user.Id,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Email = user.Email,
+            Username = user.Username,
+            PhoneNumber = user.PhoneNumber,
+            RoleId = user.RoleId,
+            RoleName = roles.FirstOrDefault(role => role.Id == user.RoleId)!.Name
+        });
 
-        
 
-        
 
     }
 
     public async Task<IEnumerable<UserDto>> GetAllUsersByNameAsync(string name)
     {
         var users = await _userRepository.GetUsersByNameAsync(name);
+        var roles = await _roleRepository.GetAllRulesAsync();
 
         return users.Select(user => new UserDto
         {
@@ -215,64 +214,35 @@ public class UserService : IUserServices
             Email = user.Email,
             Username = user.Username,
             PhoneNumber = user.PhoneNumber,
-            UserRoles = user.UserRoles,
-            RoleName = user.Role.Name,
             RoleId = user.RoleId,
+            RoleName = roles.FirstOrDefault(role => role.Id == user.RoleId)!.Name
         });
     }
 
-    public async Task AssignRoleToUserAsync(Guid userId, Guid roleId)
+    public async Task<IEnumerable<UserDto>> GetUserByRoleAsync(string roleName)
     {
-        var user = await _userRepository.GetUserByIdAsync(userId);
-        var role = await _roleRepository.GetRoleByIdAsync(roleId);
-        if (user == null)
-        {
-            throw new ArgumentException("User not found.");
-        }
+        var users = await _userRepository.GetUserByRoleAsync(roleName);
+        var roles = await _roleRepository.GetAllRulesAsync();
 
-        if (role == null)
-        {
-            throw new ArgumentException("Role not found.");
-        }
-
-        user.Role = role;
-        user.RoleId = role.Id;
-        await _userRepository.UpdateUserAsync(user);
-        // var exists = await _userRoleRepository.UserHaveTheRoleAsync(roleId, userId);
-        // // Check if the user already has this role
-        // if (!exists)
-        // {
-        //     var userRole = new UserRole
-        //     {
-        //         UserId = userId,
-        //         RoleId = roleId
-        //     };
-        //
-        //     await _userRoleRepository.AddUserRoleAsync(userRole);
-        //
-        // }
-    }
-
-    public async Task<UserDto> GetUserRoleAsync(Guid userId)
-    {
-        var user = await _userRepository.GetUserByIdAsync(userId);
-        return new UserDto
+        return users.Select(user => new UserDto
         {
             Id = user.Id,
+            Username = user.Username,
+            PasswordHash = user.PasswordHash,
             FirstName = user.FirstName,
             LastName = user.LastName,
             Email = user.Email,
-            Username = user.Username,
             PhoneNumber = user.PhoneNumber,
             RoleId = user.RoleId,
-        };
+            RoleName = roles.FirstOrDefault(role => role.Id == user.RoleId)!.Name
+        });
     }
-    
+
+
     public async Task<UserDto> AuthenticateUserAsync(string username, string password)
     {
         var user = await _userRepository.GetUserByUsernameAsync(username);
-        var user2 = await _userRepository.GetUserRole(user.Id);
-
+        var role = await _roleRepository.GetRoleByIdAsync(user.RoleId);
         if (user == null)
         {
             return null;
@@ -293,9 +263,8 @@ public class UserService : IUserServices
             LastName = user.LastName,
             Email = user.Email,
             PhoneNumber = user.PhoneNumber,
-            RoleName = user2.Name,
-            UserRoles = user2.UserRoles,
-            RoleId = user.RoleId
+            RoleId = user.RoleId,
+            RoleName = role.Name
            
         };
     }

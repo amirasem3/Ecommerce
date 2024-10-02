@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "os9z4ZVAQZfpcqVRmZ31NaYfqtbsZeFGvPDu7KBLsA/q2krU94OTLaxNTX5X2idUok5cSkRRrc0CaJdcFlM+QQ==",
+  "dgSpecHash": "Uo7tvjMbtqtthuNIGNy02zRXIxpRgK1eWEjr8Xl5XmuxfVbnd9oAMPkS/jJiBjos/qODdSjWeFbaNvvR+Tp+cQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Core\\Ecommerce.Core.csproj",
   "expectedPackageFiles": [
@@ -68,6 +68,8 @@
     "C:\\Users\\AH.Yousefi\\.nuget\\packages\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
     "C:\\Users\\AH.Yousefi\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\AH.Yousefi\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\AH.Yousefi\\.nuget\\packages\\npgsql\\8.0.4\\npgsql.8.0.4.nupkg.sha512",
+    "C:\\Users\\AH.Yousefi\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\8.0.8\\npgsql.entityframeworkcore.postgresql.8.0.8.nupkg.sha512",
     "C:\\Users\\AH.Yousefi\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\AH.Yousefi\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
     "C:\\Users\\AH.Yousefi\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",

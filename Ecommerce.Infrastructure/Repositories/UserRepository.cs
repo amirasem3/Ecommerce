@@ -17,22 +17,23 @@ public class UserRepository : IUserRepository
 
     public async Task<User> GetUserByIdAsync(Guid id)
     {
-        return await _context.Users.FindAsync(id);
+        
+        return (await _context.Users.FindAsync(id))!;
     }
 
     public async Task<User> GetUserByUsernameAsync(string username)
     {
-        return await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+        return (await _context.Users.FirstOrDefaultAsync(u => u.Username == username))!;
     }
 
     public async Task<User> GetUserByEmailAsync(string email)
     {
-        return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        return (await _context.Users.FirstOrDefaultAsync(u => u.Email == email))!;
     }
 
     public async Task<User> GetUserByPhoneNumberAsync(string phoneNumber)
     {
-        return await _context.Users.FirstOrDefaultAsync(u => u.PhoneNumber == phoneNumber);
+        return (await _context.Users.FirstOrDefaultAsync(u => u.PhoneNumber == phoneNumber))!;
     }
 
     public async Task<IEnumerable<User>> GetAllUsersAsync()
@@ -63,21 +64,15 @@ public class UserRepository : IUserRepository
         await _context.SaveChangesAsync();
     }
 
+    public async Task<IEnumerable<User>> GetUserByRoleAsync(string roleName)
+    {
+        var role = await _context.Roles.FirstOrDefaultAsync(role => role.Name == roleName);
+        return await _context.Users.Where(user => user.RoleId == role!.Id).ToListAsync();
+    }
+
     public async Task UpdateUserAsync(User newUser)
     {
         _context.Users.Update(newUser);
         await _context.SaveChangesAsync();
-    }
-
-    public async Task<Role> GetUserRole(Guid userId)
-    {
-        var user = await _context.Users.FindAsync(userId);
-        // return (await _context.Users
-        //     .Include(u => u.UserRoles)
-        //     .ThenInclude(ur => ur.Role)
-        //     .FirstOrDefaultAsync(u => u.Id == userId))!;
-        var role = user.Role;
-
-        return await _context.Roles.FindAsync(role.Id);
     }
 }

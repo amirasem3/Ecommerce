@@ -10,6 +10,5 @@ public interface IRoleRepository
     Task AddRoleAsync(Role role);
     Task DeleteRoleByIdAsync(Guid id);
     Task UpdateRoleAsync(Role newRole);
-
-    Task<ICollection<User>> GetARoleUsers(Guid roleId);
+    
 }

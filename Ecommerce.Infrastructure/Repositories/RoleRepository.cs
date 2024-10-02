@@ -15,7 +15,7 @@ public class RoleRepository : IRoleRepository
     }
     public async Task<Role> GetRoleByIdAsync(Guid id)
     {
-        return await _context.Roles.FindAsync(id);
+        return (await _context.Roles.FindAsync(id))!;
     }
 
     public async Task<IEnumerable<Role>> GetAllRulesAsync()
@@ -27,10 +27,10 @@ public class RoleRepository : IRoleRepository
     {
         if (name == " ")
         {
-            return null;
+            return null!;
         }
 
-        return   await _context.Roles.FirstOrDefaultAsync(role => role.Name == name);
+        return   (await _context.Roles.FirstOrDefaultAsync(role => role.Name == name))!;
     }
 
     public async Task AddRoleAsync(Role role)
@@ -42,7 +42,7 @@ public class RoleRepository : IRoleRepository
     public async Task DeleteRoleByIdAsync(Guid id)
     {
         var role = await _context.Roles.FindAsync(id);
-        _context.Roles.Remove(role);
+        _context.Roles.Remove(role!);
         await _context.SaveChangesAsync();
     }
 
@@ -51,15 +51,5 @@ public class RoleRepository : IRoleRepository
         _context.Roles.Update(newRole);
         await _context.SaveChangesAsync();
     }
-
-    public async Task<ICollection<User>> GetARoleUsers(Guid roleId)
-    {
-        var role = await _context.Roles.FindAsync(roleId);
-        return role.Users;
-        
-        // return (await _context.Roles
-        //     .Include(u => u.UserRoles)
-        //     .ThenInclude(ur => ur.User)
-        //     .FirstOrDefaultAsync(r => r.Id == roleId))!;
-    }
+    
 }

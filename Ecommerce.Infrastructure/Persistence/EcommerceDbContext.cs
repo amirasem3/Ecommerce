@@ -14,8 +14,7 @@ public class EcommerceDbContext : DbContext
     
     public DbSet<Manufacturer> Manufacturers { get; set; }
     
-    //Relation DB sets
-    public DbSet<UserRole> UserRoles { get; set; }
+    //Relation DB set
     public DbSet<ManufacturerProduct> ManufacturerProducts { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -23,7 +22,8 @@ public class EcommerceDbContext : DbContext
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.Property(e => e.Id).HasMaxLength(24).IsRequired();
+            entity.HasKey(s => s.Id);
+            entity.Property(e => e.Id).HasColumnType("uuid").HasMaxLength(24).IsRequired();
             entity.Property(e => e.Price).HasColumnType("decimal(18,2)");
         });
         //User's Attribute Constraints
@@ -40,27 +40,8 @@ public class EcommerceDbContext : DbContext
         //Role-User Relationship (one-to-many)
         modelBuilder.Entity<UserRole>()
             .HasKey(ur => new { ur.UserId, ur.RoleId });
-        modelBuilder.Entity<UserRole>()
-            .HasOne(ur => ur.User)
-            .WithMany(r => r.UserRoles)
-            .HasForeignKey(ur => ur.UserId);
         
-        modelBuilder.Entity<UserRole>()
-            .HasOne(ur => ur.Role)
-            .WithMany(r => r.UserRoles)
-            .HasForeignKey(ur => ur.RoleId);
-
-        modelBuilder.Entity<Role>()
-            .HasMany(e => e.Users)
-            .WithOne(e => e.Role)
-            .HasForeignKey(e => e.RoleId)
-            .IsRequired()
-            .OnDelete(DeleteBehavior.NoAction);
-        modelBuilder.Entity<User>()
-            .HasOne(e => e.Role)
-            .WithMany(e => e.Users)
-            .HasForeignKey(e => e.RoleId)
-            .OnDelete(DeleteBehavior.NoAction);
+        
         //Manufacturer-Product Relations(N-N)
         modelBuilder.Entity<ManufacturerProduct>()
             .HasKey(mp => new { mp.ManufacturerId, mp.ProductId });
