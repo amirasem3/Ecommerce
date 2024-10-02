@@ -12,6 +12,8 @@ public class EcommerceDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
     
+    public DbSet<Category> Categories { get; set; }
+    
     public DbSet<Manufacturer> Manufacturers { get; set; }
     
     //Relation DB set
@@ -40,6 +42,7 @@ public class EcommerceDbContext : DbContext
         //Role-User Relationship (one-to-many)
         modelBuilder.Entity<UserRole>()
             .HasKey(ur => new { ur.UserId, ur.RoleId });
+        //Category-Category (one-to-many recursive relationship)
         
         
         //Manufacturer-Product Relations(N-N)
