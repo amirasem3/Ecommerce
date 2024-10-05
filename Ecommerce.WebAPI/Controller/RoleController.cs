@@ -20,12 +20,13 @@ public class RoleController : ControllerBase
     public async Task<IActionResult> GetRoleById(Guid id)
     {
         var role = await _roleServices.GetRoleByIdAsync(id);
-        if (role == null)
+        
+        if (role != null)
         {
-            return NotFound($"The Product With Id {id} does not exist!");
+            return Ok(role);
         }
 
-        return Ok(role);
+        return NotFound($"There is no role with Id {id}.");
     }
     
     [HttpGet("AllRoles")]
@@ -38,7 +39,7 @@ public class RoleController : ControllerBase
     [HttpGet("SearchRoles")]
     public async Task<IActionResult> SearchRoles([FromQuery] String name)
     {
-        var roles = await _roleServices.GetAllRolesByNameAsync(name);
+        var roles = await _roleServices.GetRoleByNameAsync(name);
         return Ok(roles);
     }
     [HttpPost("AddRole")]

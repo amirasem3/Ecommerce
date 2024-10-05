@@ -1,11 +1,13 @@
-﻿using Ecommerce.Core.Entities.RelationEntities;
+﻿using System.ComponentModel.DataAnnotations;
+using Ecommerce.Core.Entities.RelationEntities;
+using Ecommerce.Core.Interfaces.RelationRepoInterfaces;
 
 namespace Ecommerce.Core.Entities;
 
 public class Product
 {
     public Guid Id { get; set; }
-    public String Name { get; set; }
+    public string Name { get; set; }
     public decimal Price { get; set; }
     
     public decimal Inventory { get; set; }
@@ -19,13 +21,7 @@ public class Product
     
     //Relation N-N with Product
     public ICollection<ManufacturerProduct> Manufacturers { get; set; }
-    public Product()
-    {
-        Id = GenerateUniqueId();
-    }
     
-    private Guid GenerateUniqueId()
-    {
-        return Guid.NewGuid();
-    }
+    //Relation N-N with Invoice
+    public ICollection<ProductInvoice> Invoices { get; set; }
 }

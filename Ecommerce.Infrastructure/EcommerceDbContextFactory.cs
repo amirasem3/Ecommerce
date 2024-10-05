@@ -23,11 +23,11 @@ namespace Ecommerce.Infrastructure.Persistence
                 .Build();
 
             // Get connection string
-            var connectionString = configuration.GetConnectionString("EcommerceDB");
+            var connectionString = configuration.GetConnectionString("EcommerceDB_Post");
 
             // Create DbContextOptions
             var optionsBuilder = new DbContextOptionsBuilder<EcommerceDbContext>();
-            optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseNpgsql(connectionString);
 
             return new EcommerceDbContext(optionsBuilder.Options);
         }

@@ -1,4 +1,5 @@
-﻿using Ecommerce.Core.Entities.RelationEntities;
+﻿using Ecommerce.Core.Entities;
+using Ecommerce.Core.Entities.RelationEntities;
 
 namespace Ecommerce.Application.DTOs;
 
@@ -13,6 +14,10 @@ public class UserDto
     
     public string PasswordHash { get; set; }
     
-    public ICollection<UserRole> UserRoles { get; set; }
+    public string RoleName { get; set; }
+    
+    
+    public Guid RoleId { get; set; }
+    
     
 }

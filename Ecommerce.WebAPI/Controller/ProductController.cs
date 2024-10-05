@@ -30,7 +30,7 @@ public class ProductController : ControllerBase
             product.Status,
             product.DOP,
             product.DOE,
-            Manufacturers = product2.ManufacturerProducts.Select(mp=> new
+            Manufacturers = product2.ManufacturerProducts.Select(mp => new
             {
                 mp.Manufacturer.Id,
                 mp.Manufacturer.Name
@@ -61,6 +61,40 @@ public class ProductController : ControllerBase
                     manProduct.Manufacturer.Name
                 });
             }
+
+            result.Add(new
+            {
+                product.Id,
+                product.Name,
+                product.Inventory,
+                product.Price,
+                product.Status,
+                product.DOP,
+                product.DOE,
+                Manufacturers = manufacturers
+            });
+        }
+
+        return Ok(result);
+    }
+
+    [HttpGet("FilterProductByPrice")]
+    public async Task<IActionResult> FilterProductByPrice([FromQuery] decimal startPrice, [FromQuery] decimal endPrice)
+    {
+        var products = await _productService.FilterProductByPriceAsync(startPrice, endPrice);
+        var result = new List<object>();
+        foreach (var product in products)
+        {
+            var manufacturers = new List<object>();
+            var prod = await _productService.GetProductManufacturersAsync(product.Id);
+            foreach (var manProduct in prod.ManufacturerProducts)
+            {
+                manufacturers.Add(new
+                {
+                    manProduct.Manufacturer.Id,
+                    manProduct.Manufacturer.Name
+                });
+            }
             
             result.Add(new
             {
@@ -77,7 +111,7 @@ public class ProductController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("SearchProducts")]
+[HttpGet("SearchProducts")]
     public async Task<IActionResult> SearchProducts([FromQuery] String name)
     {
         var products = await _productService.GetAllProductsByNameAsync(name);

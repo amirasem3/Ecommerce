@@ -1,4 +1,5 @@
 C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\bin\Debug\net8.0\Ecommerce.Core.deps.json
+C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\bin\Debug\net8.0\Ecommerce.Core.runtimeconfig.json
 C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\bin\Debug\net8.0\Ecommerce.Core.dll
 C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\bin\Debug\net8.0\Ecommerce.Core.pdb
 C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\obj\Debug\net8.0\Ecommerce.Core.csproj.AssemblyReference.cache
@@ -10,6 +11,5 @@ C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\obj\Debug\net
 C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\obj\Debug\net8.0\Ecommerce.Core.dll
 C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\obj\Debug\net8.0\refint\Ecommerce.Core.dll
 C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\obj\Debug\net8.0\Ecommerce.Core.pdb
-C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\obj\Debug\net8.0\ref\Ecommerce.Core.dll
-C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\bin\Debug\net8.0\Ecommerce.Core.runtimeconfig.json
 C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\obj\Debug\net8.0\Ecommerce.Core.genruntimeconfig.cache
+C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\obj\Debug\net8.0\ref\Ecommerce.Core.dll

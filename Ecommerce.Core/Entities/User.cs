@@ -12,9 +12,5 @@ public class User
     public string PasswordHash { get; set; }
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
-    
-    //N-N Relation with Role
-    [JsonIgnore]
-    public ICollection<UserRole> UserRoles { get; set; }
-    
+    public Guid RoleId { get; set; }
 }

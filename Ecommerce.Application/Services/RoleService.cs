@@ -22,7 +22,6 @@ public class RoleService : IRoleServices
         {
            Name = role.Name,
            Id = role.Id,
-           UserRoles = role.UserRoles
         };
 
 
@@ -41,7 +40,6 @@ public class RoleService : IRoleServices
         {
             Name = role.Name,
             Id = role.Id,
-            UserRoles = role.UserRoles
         };
 
     }
@@ -58,7 +56,6 @@ public class RoleService : IRoleServices
         return new RoleDto
         {
             Name = targetRole.Name,
-            UserRoles = targetRole.UserRoles,
             Id = targetRole.Id,
         };
     }
@@ -82,19 +79,17 @@ public class RoleService : IRoleServices
         {
             Id = role.Id,
             Name = role.Name,
-            UserRoles = role.UserRoles
         });
     }
 
-    public async Task<IEnumerable<RoleDto>> GetAllRolesByNameAsync(string name)
+    public async Task<RoleDto> GetRoleByNameAsync(string name)
     {
-        var roleByName = await _roleRepository.GetRolesByName(name);
+        var role = await _roleRepository.GetRoleByName(name);
 
-        return roleByName.Select(role => new RoleDto
+        return new RoleDto
         {
             Id = role.Id,
             Name = role.Name,
-            UserRoles = role.UserRoles,
-        });
+        };
     }
 }
