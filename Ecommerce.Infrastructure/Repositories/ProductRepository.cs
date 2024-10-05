@@ -54,11 +54,24 @@ public class ProductRepository : IProductRepository
         await _context.SaveChangesAsync();
     }
 
+    public async Task<IEnumerable<Product>> FilterProductsByPrice(decimal startPrice, decimal endPrice)
+    {
+        return await _context.Products.Where(p => p.Price >= startPrice && p.Price <= endPrice).ToListAsync();
+    }
+
     public async Task<Product> GetProductManufacturersAsync(Guid productId)
     {
         return (await _context.Products
             .Include(p => p.Manufacturers)
             .ThenInclude(mp => mp.Manufacturer)
+            .FirstOrDefaultAsync(p => p.Id == productId))!;
+    }
+
+    public async Task<Product> GetProductInvoicesAsync(Guid productId)
+    {
+        return (await _context.Products
+            .Include(p => p.Invoices)
+            .ThenInclude(pi => pi.Invoice)
             .FirstOrDefaultAsync(p => p.Id == productId))!;
     }
 }

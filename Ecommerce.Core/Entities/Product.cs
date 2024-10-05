@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Ecommerce.Core.Entities.RelationEntities;
+using Ecommerce.Core.Interfaces.RelationRepoInterfaces;
 
 namespace Ecommerce.Core.Entities;
 
@@ -20,4 +21,7 @@ public class Product
     
     //Relation N-N with Product
     public ICollection<ManufacturerProduct> Manufacturers { get; set; }
+    
+    //Relation N-N with Invoice
+    public ICollection<ProductInvoice> Invoices { get; set; }
 }

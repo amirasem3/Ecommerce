@@ -132,9 +132,40 @@ public class ProductService : IProductService
         });
     }
 
+    public async Task<IEnumerable<ProductDto>> FilterProductByPriceAsync(decimal startPrice, decimal endPrice)
+    {
+        var products = await _productRepository.FilterProductsByPrice(startPrice, endPrice);
+        return products.Select(product => new ProductDto
+        {
+            Id = product.Id,
+            Name = product.Name,
+            Price = product.Price,
+            Status = product.Status,
+            Inventory = product.Inventory,
+            DOP = product.DOP,
+            DOE = product.DOE,
+        });
+    }
+
     public async Task<ProductDto> GetProductManufacturersAsync(Guid productId)
     {
         var product = await _productRepository.GetProductManufacturersAsync(productId);
+        return new ProductDto
+        {
+            Id = product.Id,
+            Name = product.Name,
+            Price = product.Price,
+            Status = product.Status,
+            Inventory = product.Inventory,
+            DOP = product.DOP,
+            DOE = product.DOE,
+            ManufacturerProducts = product.Manufacturers
+        };
+    }
+
+    public async Task<ProductDto> GetProductInvoicesAsync(Guid productId)
+    {
+        var product = await _productRepository.GetProductInvoicesAsync(productId);
         return new ProductDto
         {
             Id = product.Id,

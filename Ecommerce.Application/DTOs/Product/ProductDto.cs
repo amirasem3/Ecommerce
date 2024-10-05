@@ -1,4 +1,5 @@
 ﻿using Ecommerce.Core.Entities.RelationEntities;
+using Ecommerce.Core.Interfaces.RelationRepoInterfaces;
 
 namespace Ecommerce.Application.DTOs;
 
@@ -17,5 +18,7 @@ public class ProductDto
     public bool Status { get; set; }
 
     public ICollection<ManufacturerProduct> ManufacturerProducts { get; set; }
+    
+    public ICollection<ProductInvoice> ProductInvoices { get; set; }
     
 }

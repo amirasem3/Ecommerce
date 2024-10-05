@@ -41,6 +41,9 @@ builder.Services.AddScoped<IManufacturerService, ManufacturerService>();
 builder.Services.AddScoped<IManufacturerProductRepository, ManufacturerProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryServices>();
+builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+builder.Services.AddScoped<IInvoiceServices, InvoiceServices>();
+builder.Services.AddScoped<IInvoiceProductRepository, InvoiceProductRepository>();
 
 var app = builder.Build();
 

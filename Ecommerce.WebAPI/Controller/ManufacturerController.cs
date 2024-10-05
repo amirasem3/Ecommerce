@@ -44,7 +44,7 @@ public class ManufacturerController : ControllerBase
             return Ok(result);
         }
 
-        return NotFound($"There is no user with Id {id}.");
+        return NotFound($"There is no Manufacturer with Id {id}.");
     }
 
     [HttpGet("GetAllManufacturers")]
@@ -289,6 +289,6 @@ public class ManufacturerController : ControllerBase
             return Ok($"The product with ID {productId} has successfully deleted from manufacturer with ID {manufacturerId}.");
         }
 
-        return NotFound("Invalid manifacturerId or productId");
+        return NotFound("Invalid Manifacturer Id or productId");
     }
 }

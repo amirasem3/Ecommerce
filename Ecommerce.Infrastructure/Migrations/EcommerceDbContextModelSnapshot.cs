@@ -45,7 +45,53 @@ namespace Ecommerce.Infrastructure.Migrations
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Ecommerce.Core.Entities.Invoice", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("IdentificationCode")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("IssueDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("IssuerName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("OwnerFamilyName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("OwnerName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("PaymentStatus")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("numeric");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdentificationCode")
+                        .IsUnique();
+
+                    b.ToTable("Invoices");
                 });
 
             modelBuilder.Entity("Ecommerce.Core.Entities.Manufacturer", b =>
@@ -63,7 +109,7 @@ namespace Ecommerce.Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("EsatablishDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("ManufacturerCountry")
                         .IsRequired()
@@ -109,10 +155,10 @@ namespace Ecommerce.Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("DOE")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DOP")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<decimal>("Inventory")
                         .HasColumnType("numeric");
@@ -227,6 +273,24 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Ecommerce.Core.Interfaces.RelationRepoInterfaces.ProductInvoice", b =>
+                {
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("InvoiceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ProductId", "InvoiceId");
+
+                    b.HasIndex("InvoiceId");
+
+                    b.ToTable("ProductInvoices");
+                });
+
             modelBuilder.Entity("Ecommerce.Core.Entities.Category", b =>
                 {
                     b.HasOne("Ecommerce.Core.Entities.Category", null)
@@ -272,9 +336,33 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Ecommerce.Core.Interfaces.RelationRepoInterfaces.ProductInvoice", b =>
+                {
+                    b.HasOne("Ecommerce.Core.Entities.Invoice", "Invoice")
+                        .WithMany("Products")
+                        .HasForeignKey("InvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ecommerce.Core.Entities.Product", "Product")
+                        .WithMany("Invoices")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Invoice");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Ecommerce.Core.Entities.Category", b =>
                 {
                     b.Navigation("SubCategories");
+                });
+
+            modelBuilder.Entity("Ecommerce.Core.Entities.Invoice", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Ecommerce.Core.Entities.Manufacturer", b =>
@@ -284,6 +372,8 @@ namespace Ecommerce.Infrastructure.Migrations
 
             modelBuilder.Entity("Ecommerce.Core.Entities.Product", b =>
                 {
+                    b.Navigation("Invoices");
+
                     b.Navigation("Manufacturers");
                 });
 #pragma warning restore 612, 618
