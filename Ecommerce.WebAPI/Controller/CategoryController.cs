@@ -68,6 +68,7 @@ public class CategoryController : ControllerBase
                 cat.Id,
                 cat.CategoryName,
                 cat.ParentCategoryId,
+                cat.ParentCategoryName,
                 cat.Type,
                 SubCategories = categories,
             });
@@ -144,16 +145,28 @@ public class CategoryController : ControllerBase
     }
 
     [HttpPost("AddNewCategory")]
-    public async Task<IActionResult> AddNewCategory([FromBody] AddCategoryDto newCategory)
+    public async Task<IActionResult> AddNewCategory([FromBody] AddUpdateCategoryDto newUpdateCategory)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        var createdCategory =  await _categoryService.AddCategoryAsync(newCategory);
+        var createdCategory =  await _categoryService.AddCategoryAsync(newUpdateCategory);
         return CreatedAtAction(nameof(GetCategoryById), new { id = createdCategory.Id }, createdCategory);
     }
 
+
+    [HttpPut("UpdateCategory/{id:guid}")]
+    public async Task<IActionResult> UpdateCategory([FromRoute] Guid id,[FromBody] AddUpdateCategoryDto updateCategoryDto)
+    {
+        var updateResult = await _categoryService.UpdateCategoryAsync(id, updateCategoryDto);
+        if (updateResult != null)
+        {
+            return Ok(updateResult);
+        }
+
+        return NotFound($"There is no category with ID {id}");
+    }
 
     [HttpDelete("DeleteCategory/{id}")]
     public async Task<IActionResult> DeleteCategoryById(Guid id)

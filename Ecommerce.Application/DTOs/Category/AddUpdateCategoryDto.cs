@@ -1,6 +1,6 @@
 ﻿namespace Ecommerce.Application.DTOs;
 
-public class AddCategoryDto
+public class AddUpdateCategoryDto
 {
     public string CategoryName { get; set; }
     public string ParentCategoryName { get; set; }

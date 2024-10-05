@@ -73,6 +73,7 @@ public class ManufacturerController : ControllerBase
                 manufacturer.Email,
                 manufacturer.PhoneNumber,
                 manufacturer.Address,
+                manufacturer.EsatablishDate,
                 manufacturer.Rate,
                 manufacturer.Status,
                 manufacturer.ManufacturerCountry,

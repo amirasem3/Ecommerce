@@ -18,5 +18,6 @@ public interface ICategoryRepository
     public Task<IEnumerable<Category>> GetAllCategories();
 
     public Task<bool> DeleteCategoryById(Guid id);
+    
 
 }

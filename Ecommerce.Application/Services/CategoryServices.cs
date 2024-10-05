@@ -16,15 +16,15 @@ public class CategoryServices : ICategoryService
         _categoryRepository = categoryRepository;
     }
 
-    public async Task<CategoryDto> AddCategoryAsync(AddCategoryDto categoryDto)
+    public async Task<CategoryDto> AddCategoryAsync(AddUpdateCategoryDto updateCategoryDto)
     {
-        if (categoryDto.ParentCategoryName == " ")
+        if (updateCategoryDto.ParentCategoryName == " ")
         {
             var categoryParent = new Category
             {
                 Id = Guid.NewGuid(),
-                Name = categoryDto.CategoryName,
-                Type = categoryDto.Type,
+                Name = updateCategoryDto.CategoryName,
+                Type = updateCategoryDto.Type,
                 SubCategories = []
             };
             await _categoryRepository.AddNewCategory(categoryParent);
@@ -38,13 +38,13 @@ public class CategoryServices : ICategoryService
             };
         }
 
-        var parentCategory = await _categoryRepository.GetCategoryByName(categoryDto.ParentCategoryName);
+        var parentCategory = await _categoryRepository.GetCategoryByName(updateCategoryDto.ParentCategoryName);
         var childCategory = new Category
         {
             Id = Guid.NewGuid(),
-            Name = categoryDto.CategoryName,
+            Name = updateCategoryDto.CategoryName,
             ParentCategoryId = parentCategory.Id,
-            Type = categoryDto.Type,
+            Type = updateCategoryDto.Type,
         };
         await _categoryRepository.AddNewCategory(childCategory);
         return new CategoryDto
@@ -117,6 +117,38 @@ public class CategoryServices : ICategoryService
             ParentCategoryId = cat.ParentCategoryId,
             Type = cat.Type,
             SubCategories = cat.SubCategories
+        };
+    }
+
+    public async Task<CategoryDto> UpdateCategoryAsync(Guid id, AddUpdateCategoryDto updateCategoryDto)
+    {
+        var targetCategory = await _categoryRepository.GetCategoryById(id);
+        targetCategory.Name = updateCategoryDto.CategoryName;
+        targetCategory.Type = updateCategoryDto.Type;
+       
+        if (updateCategoryDto.ParentCategoryName == " ")
+        {
+            await _categoryRepository.UpdateCategory(targetCategory);
+            return new CategoryDto
+            {
+                Id = targetCategory.Id,
+                ParentCategoryId =new Guid("00000000-0000-0000-0000-000000000000"),
+                ParentCategoryName = "This is a parent",
+                Type = targetCategory.Type,
+                CategoryName = targetCategory.Name
+            };
+        }
+        var newParentCat = await _categoryRepository.GetCategoryByName(updateCategoryDto.ParentCategoryName);
+        targetCategory.ParentCategoryId = newParentCat.Id;
+       
+        await _categoryRepository.UpdateCategory(targetCategory);
+        return new CategoryDto
+        {
+            Id = targetCategory.Id,
+            ParentCategoryId = targetCategory.ParentCategoryId,
+            ParentCategoryName = newParentCat.Name,
+            Type = targetCategory.Type,
+            CategoryName = targetCategory.Name
         };
     }
 
