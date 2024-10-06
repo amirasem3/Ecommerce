@@ -46,6 +46,7 @@ public class RoleController : ControllerBase
         var roles = await _roleServices.GetRoleByNameAsync(name);
         return Ok(roles);
     }
+    [AllowAnonymous]
     [HttpPost("AddRole")]
     public async Task<IActionResult> AddRole([FromBody] AddUpdateRoleDto updateRoleDto)
     {

@@ -56,9 +56,21 @@
               "target": "Package",
               "version": "[8.0.8, )"
             },
+            "NetTopologySuite.Core": {
+              "target": "Package",
+              "version": "[1.15.3, )"
+            },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[8.0.8, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "Npgsql.NetTopologySuite": {
+              "target": "Package",
+              "version": "[8.0.4, )"
             }
           },
           "imports": [
@@ -155,9 +167,21 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
+            "NetTopologySuite.Core": {
+              "target": "Package",
+              "version": "[1.15.3, )"
+            },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[8.0.8, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "Npgsql.NetTopologySuite": {
+              "target": "Package",
+              "version": "[8.0.4, )"
             }
           },
           "imports": [

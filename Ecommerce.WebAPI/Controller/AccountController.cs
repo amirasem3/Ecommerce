@@ -22,7 +22,7 @@ public class AccountController : ControllerBase
     {
         _userService = userService;
     }
-    [HttpPost("LoginApi")]
+    [HttpPost("ApiSignin")]
     public async Task<IActionResult> Login( [FromQuery]LoginUserDto loginModel)
     {
         var user = await _userService.AuthenticateUserAsync(loginModel.Username, loginModel.Password);
@@ -78,7 +78,6 @@ public class AccountController : ControllerBase
         return Ok(new
         {
             token=tokenString,
-            user
         });
         
 

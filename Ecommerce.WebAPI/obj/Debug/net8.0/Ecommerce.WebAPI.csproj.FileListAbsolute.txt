@@ -145,3 +145,9 @@ C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.WebAPI\bin\Debug\n
 C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.WebAPI\bin\Debug\net8.0\Npgsql.dll
 C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.WebAPI\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.WebAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.WebAPI\bin\Debug\net8.0\GeoAPI.dll
+C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.WebAPI\bin\Debug\net8.0\NetTopologySuite.dll
+C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.WebAPI\bin\Debug\net8.0\NetTopologySuite.IO.PostGis.dll
+C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.WebAPI\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite.dll
+C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.WebAPI\bin\Debug\net8.0\Npgsql.NetTopologySuite.dll
+C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.WebAPI\obj\Debug\net8.0\EFCoreNpgsqlNetTopologySuite.cs

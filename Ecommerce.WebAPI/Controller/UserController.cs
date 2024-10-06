@@ -203,6 +203,7 @@ public class UserController : ControllerBase
         return Ok(users);
     }
 
+    [AllowAnonymous]
     [HttpPost("SignUp")]
     public async Task<IActionResult> AddUser([FromBody] RegisterUserDto userDto)
     {

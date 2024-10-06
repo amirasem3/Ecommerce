@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-
+using NetTopologySuite;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -43,7 +43,9 @@ builder.Services.AddAuthentication(options =>
 {
 });
 builder.Services.AddDbContext<EcommerceDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("EcommerceDB_Post")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("EcommerceDB_Post"),
+        npgsqlOptions => npgsqlOptions.UseNetTopologySuite())
+);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp",
@@ -99,7 +101,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseMiddleware<CustomUnauthorizedResponseMiddleware>();
+// app.UseMiddleware<CustomUnauthorizedResponseMiddleware>();
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseCors("AllowReactApp");

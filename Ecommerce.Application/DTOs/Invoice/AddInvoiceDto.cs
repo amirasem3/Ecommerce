@@ -1,4 +1,6 @@
-﻿namespace Ecommerce.Application.DTOs;
+﻿using Ecommerce.Core.Entities;
+
+namespace Ecommerce.Application.DTOs;
 
 public class AddInvoiceDto
 {
@@ -12,10 +14,8 @@ public class AddInvoiceDto
     
     public DateTime IssueDate { get; set; }
     
-    public DateTime PaymentDate { get; set; }
 
     public decimal TotalPrice { get; set; }
-
-    public string PaymentStatus { get; set; } = "Pending";
+    
 
 }

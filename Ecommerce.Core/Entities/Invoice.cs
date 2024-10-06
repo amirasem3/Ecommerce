@@ -1,9 +1,9 @@
 ﻿using Azure.Core.Pipeline;
 using Ecommerce.Core.Interfaces.RelationRepoInterfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.Core.Entities;
-
-public enum PayStat
+public enum PaymentStatus
 {
     Pending,
     Payed,
@@ -22,13 +22,13 @@ public class Invoice
     public string IssuerName { get; set; }
     
     public DateTime IssueDate { get; set; }
-    
-    public DateTime PaymentDate { get; set; }
+
+    public DateTime? PaymentDate { get; set; }
 
     public decimal TotalPrice { get; set; }
 
     //Payment Status: Payed, Pending, Cencelled
-    public string PaymentStatus { get; set; }
+    public PaymentStatus PaymentStatus { get; set; }
     
     public ICollection<ProductInvoice> Products { get; set; }
 }

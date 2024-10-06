@@ -22,8 +22,8 @@ public class CustomUnauthorizedResponseMiddleware
             var response = new
             {
                 type = "https://tools.ietf.org/html/rfc9110#section-15.5.2",
-                title = "Unauthorized",
-                status = 401,
+                title = context.Response,
+                status = context.Response.StatusCode,
                 traceId = context.TraceIdentifier,
             };
 

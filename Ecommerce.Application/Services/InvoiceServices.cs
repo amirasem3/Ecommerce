@@ -185,9 +185,9 @@ public class InvoiceServices : IInvoiceServices
             IssuerName = addInvoiceDto.IssuerName,
             OwnerName = addInvoiceDto.OwnerName,
             OwnerFamilyName = addInvoiceDto.OwnerFamilyName,
-            PaymentDate = addInvoiceDto.PaymentDate,
+            PaymentDate = null,
             TotalPrice = addInvoiceDto.TotalPrice,
-            PaymentStatus = addInvoiceDto.PaymentStatus,
+            PaymentStatus = PaymentStatus.Pending,
             Products = []
         };
         await _invoiceRepository.AddInvoiceAsync(invoice);
@@ -267,7 +267,7 @@ public class InvoiceServices : IInvoiceServices
     {
         var invoice = await _invoiceRepository.GetInvoiceProductAsync(id);
         var totalPrice = await CalculateTotalPriceAsync(id);
-        if (price > totalPrice || price < totalPrice || invoice.PaymentStatus == "Payed")
+        if (price > totalPrice || price < totalPrice || invoice.PaymentStatus == PaymentStatus.Payed)
         {
             return false;
         }
@@ -279,8 +279,8 @@ public class InvoiceServices : IInvoiceServices
             await _productRepository.UpdateProductAsync(newProduct);
         }
 
-        invoice.PaymentStatus = "Payed";
-        invoice.PaymentDate = DateTime.Today;
+        invoice.PaymentStatus =PaymentStatus.Payed;
+        invoice.PaymentDate = DateTime.Now;
         await _invoiceRepository.UpdateInvoiceAsync(invoice);
         return true;
     }
@@ -340,8 +340,6 @@ public class InvoiceServices : IInvoiceServices
         // Check if the user already has this role
         if (!exists)
         {
-            invoice.PaymentStatus = "Pending";
-            await _invoiceRepository.UpdateInvoiceAsync(invoice);
             var invoiceProduct = new ProductInvoice
             {
                 InvoiceId = invoiceId,
