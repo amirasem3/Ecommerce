@@ -274,7 +274,7 @@ public class InvoiceController : ControllerBase
     [HttpGet("PaymentDataFilter/{paymentDate}")]
     public async Task<IActionResult> PaymentDateFilter(DateTime paymentDate)
     {
-        var Invoices = await _invoiceServices.GetInvoicesByPaymentDate(paymentDate);
+        var Invoices = await _invoiceServices.GetInvoicesByPaymentDateAsync(paymentDate);
         var result = new List<object>();
         foreach (var invoice in Invoices)
         {

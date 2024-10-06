@@ -15,6 +15,6 @@ public interface ICategoryService
     public Task<CategoryDto> GetCategoryByIdAsync(Guid id);
 
     public Task<CategoryDto> UpdateCategoryAsync(Guid id, AddUpdateCategoryDto updateCategoryDto);
-    public Task<bool> DeleteCategoryById(Guid id);
+    public Task<bool> DeleteCategoryByIdAsync(Guid id);
 
 }

@@ -14,10 +14,12 @@ namespace EcommerceSolution.Controller;
 public class ProductController : ControllerBase
 {
     private readonly IProductService _productService;
+    private readonly IInvoiceServices _invoiceServices;
 
-    public ProductController(IProductService productService)
+    public ProductController(IProductService productService, IInvoiceServices invoiceServices)
     {
         _productService = productService;
+        _invoiceServices = invoiceServices;
     }
 
     [HttpGet("GetProductById/{id}")]
@@ -144,6 +146,21 @@ public class ProductController : ControllerBase
                 product.DOE,
                 Manufacturers = manufacturers
             });
+        }
+        return Ok(result);
+    }
+
+    [HttpGet("GetProductInvoices/{productId}")]
+    public async Task<IActionResult> GetProductInvoices(Guid productId)
+    {
+        var productInvoices = await _productService.GetProductInvoicesAsync(productId);
+        var result = new List<object>();
+        foreach (var pi in productInvoices.ProductInvoices)
+        {
+            var invoices = new List<object>();
+            var prod = await _productService.GetProductInvoicesAsync(pi.ProductId);
+            var invoice = await _invoiceServices.GetInvoiceByIdAsync(pi.InvoiceId);
+            result.Add(invoice);
         }
         return Ok(result);
     }

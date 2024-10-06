@@ -140,7 +140,7 @@ public class InvoiceServices : IInvoiceServices
         });
     }
 
-    public async Task<IEnumerable<InvoiceDto>> GetInvoicesByPaymentDate(DateTime paymentDate)
+    public async Task<IEnumerable<InvoiceDto>> GetInvoicesByPaymentDateAsync(DateTime paymentDate)
     {
         var invoices = await _invoiceRepository.SearchInvoicesByPaymentDate(paymentDate);
         return invoices.Select(invoice => new InvoiceDto

@@ -179,7 +179,7 @@ public class CategoryController : ControllerBase
         var category = await _categoryService.GetCategoryByIdAsync(id);
         if (!category.Type)
         {
-            await _categoryService.DeleteCategoryById(id);
+            await _categoryService.DeleteCategoryByIdAsync(id);
             return Ok($"Category {category} has successfully deleted.");
         }
 
@@ -189,7 +189,7 @@ public class CategoryController : ControllerBase
             return NotFound("This is a parent category that has children, You cannot delete it before its children.");
         }
 
-        await _categoryService.DeleteCategoryById(id);
+        await _categoryService.DeleteCategoryByIdAsync(id);
         return Ok($"Category {category} has successfully deleted.");
     }
     

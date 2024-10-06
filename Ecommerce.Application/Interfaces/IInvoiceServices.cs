@@ -18,7 +18,7 @@ public interface IInvoiceServices
 
     public Task<IEnumerable<InvoiceDto>> GetInvoiceByIssueDateAsync(DateTime issueDate);
 
-    public Task<IEnumerable<InvoiceDto>> GetInvoicesByPaymentDate(DateTime paymentDate);
+    public Task<IEnumerable<InvoiceDto>> GetInvoicesByPaymentDateAsync(DateTime paymentDate);
 
     public Task<IEnumerable<InvoiceDto>> GetAllInvoicesAsync();
 
@@ -31,8 +31,6 @@ public interface IInvoiceServices
     public Task<bool> DeleteInvoiceProductAsync(Guid invoiceId, Guid productId);
 
     public Task<bool> PayAsync(Guid id, decimal price);
-
-    public Task<decimal> CalculateTotalPriceAsync(Guid invoiceId);
 
     public Task<InvoiceDto> GetInvoiceProductAsync(Guid id);
 

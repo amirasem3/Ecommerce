@@ -8,7 +8,7 @@ public interface IManufacturerService
     public Task<IEnumerable<ManufacturerDto>> SearchManufacturerByAddressAsync(string address);
     public Task<IEnumerable<ManufacturerDto>> SearchManufacturerByEmailAsync(string email);
     public Task<IEnumerable<ManufacturerDto>> SearchManufacturerByPhoneNumberAsync(string phoneNumber);
-    public Task<IEnumerable<ManufacturerDto>> GetAllManufacturers();
+    public Task<IEnumerable<ManufacturerDto>> GetAllManufacturersAsync();
     public Task<IEnumerable<ManufacturerDto>> GetManufacturersByOwnerAsync(string ownerName);
     public Task<ManufacturerDto> AddManufacturerAsync(AddUpdateManufacturerDto manufacturerDto);
     public Task<ManufacturerDto> UpdateManufacturerAsync(Guid id,AddUpdateManufacturerDto addUpdateManufacturerDto);

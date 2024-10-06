@@ -54,7 +54,7 @@ public class ManufacturerController : ControllerBase
     [HttpGet("GetAllManufacturers")]
     public async Task<IActionResult> GetAllManufacturers()
     {
-        var manufacturers = await _manufacturerService.GetAllManufacturers();
+        var manufacturers = await _manufacturerService.GetAllManufacturersAsync();
         var result = new List<object>();
         foreach (var manufacturer in manufacturers)
         {

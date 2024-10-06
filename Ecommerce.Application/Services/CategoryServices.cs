@@ -152,7 +152,7 @@ public class CategoryServices : ICategoryService
         };
     }
 
-    public async Task<bool> DeleteCategoryById(Guid id)
+    public async Task<bool> DeleteCategoryByIdAsync(Guid id)
     {
         var category = await _categoryRepository.GetCategoryById(id);
         if (!category.Type)
