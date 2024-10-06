@@ -16,3 +16,4 @@ C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Infrastructure\obj
 C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Infrastructure\obj\Debug\net8.0\Ecommerce.Infrastructure.pdb
 C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Infrastructure\obj\Debug\net8.0\Ecommerce.Infrastructure.genruntimeconfig.cache
 C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Infrastructure\obj\Debug\net8.0\ref\Ecommerce.Infrastructure.dll
+C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Infrastructure\obj\Debug\net8.0\EFCoreNpgsqlNetTopologySuite.cs

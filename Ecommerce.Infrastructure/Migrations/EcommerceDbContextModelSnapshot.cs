@@ -20,6 +20,8 @@ namespace Ecommerce.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "payment_status", new[] { "pending", "payed", "cancelled" });
+            NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "postgis");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Ecommerce.Core.Entities.Category", b =>
@@ -76,12 +78,12 @@ namespace Ecommerce.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("PaymentDate")
+                    b.Property<DateTime?>("PaymentDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("PaymentStatus")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("payment_status");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("numeric");
@@ -193,21 +195,6 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.ToTable("ManufacturerProducts");
                 });
 
-            modelBuilder.Entity("Ecommerce.Core.Entities.RelationEntities.UserRole", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("UserRole");
-                });
-
             modelBuilder.Entity("Ecommerce.Core.Entities.Role", b =>
                 {
                     b.Property<Guid>("Id")
@@ -315,25 +302,6 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Navigation("Manufacturer");
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Ecommerce.Core.Entities.RelationEntities.UserRole", b =>
-                {
-                    b.HasOne("Ecommerce.Core.Entities.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Ecommerce.Core.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Role");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Ecommerce.Core.Interfaces.RelationRepoInterfaces.ProductInvoice", b =>

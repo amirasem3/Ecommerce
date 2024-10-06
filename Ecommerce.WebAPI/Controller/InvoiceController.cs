@@ -1,5 +1,6 @@
 ﻿using Ecommerce.Application.DTOs;
 using Ecommerce.Application.Interfaces;
+using Ecommerce.Core.Entities;
 using Ecommerce.Core.Interfaces.RelationRepoInterfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -33,8 +34,8 @@ public class InvoiceController : ControllerBase
             invoice.OwnerFamilyName,
             invoice.IssuerName,
             invoice.IssueDate,
-            invoice.PaymentDate,
-            invoice.PaymentStatus,
+            payment_date = invoice.PaymentDate!=null ? invoice.PaymentDate.ToString() : "Not Payed",
+            payment_status = invoice.PaymentStatus.ToString("G"),
             invoice.TotalPrice,
             Products = invoiceProduct.ProductInvoices.Select(pi => new
             {
@@ -66,7 +67,7 @@ public class InvoiceController : ControllerBase
             invoice.IssuerName,
             invoice.IssueDate,
             invoice.PaymentDate,
-            invoice.PaymentStatus,
+            payment_status = invoice.PaymentStatus.ToString("G"),
             invoice.TotalPrice,
             Products = invoiceProduct.ProductInvoices.Select(pi => new
             {
@@ -113,7 +114,7 @@ public class InvoiceController : ControllerBase
                 invoice.IssuerName,
                 invoice.IssueDate,
                 invoice.PaymentDate,
-                invoice.PaymentStatus,
+                payment_status = invoice.PaymentStatus.ToString("G"),
                 invoice.TotalPrice,
                 Products = products
             });
@@ -152,7 +153,7 @@ public class InvoiceController : ControllerBase
                 invoice.IssuerName,
                 invoice.IssueDate,
                 invoice.PaymentDate,
-                invoice.PaymentStatus,
+                payment_status = invoice.PaymentStatus.ToString("G"),
                 invoice.TotalPrice,
                 Products = products
             });
@@ -189,7 +190,7 @@ public class InvoiceController : ControllerBase
                 invoice.IssuerName,
                 invoice.IssueDate,
                 invoice.PaymentDate,
-                invoice.PaymentStatus,
+                payment_status = invoice.PaymentStatus.ToString("G"),
                 invoice.TotalPrice,
                 Products = products
             });
@@ -226,7 +227,7 @@ public class InvoiceController : ControllerBase
                 invoice.IssuerName,
                 invoice.IssueDate,
                 invoice.PaymentDate,
-                invoice.PaymentStatus,
+                payment_status = invoice.PaymentStatus.ToString("G"),
                 invoice.TotalPrice,
                 Products = products
             });
@@ -263,7 +264,7 @@ public class InvoiceController : ControllerBase
                 invoice.IssuerName,
                 invoice.IssueDate,
                 invoice.PaymentDate,
-                invoice.PaymentStatus,
+                payment_status = invoice.PaymentStatus.ToString("G"),
                 invoice.TotalPrice,
                 Products = products
             });
@@ -300,7 +301,7 @@ public class InvoiceController : ControllerBase
                 invoice.IssuerName,
                 invoice.IssueDate,
                 invoice.PaymentDate,
-                invoice.PaymentStatus,
+                payment_status = invoice.PaymentStatus.ToString("G"),
                 invoice.TotalPrice,
                 Products = products
             });
@@ -337,7 +338,7 @@ public class InvoiceController : ControllerBase
                 invoice.IssuerName,
                 invoice.IssueDate,
                 invoice.PaymentDate,
-                invoice.PaymentStatus,
+                payment_status = invoice.PaymentStatus.ToString("G"),
                 invoice.TotalPrice,
                 Products = products
             });
@@ -381,7 +382,7 @@ public class InvoiceController : ControllerBase
         var invoice = await _invoiceServices.GetInvoiceByIdAsync(invoiceId);
         
 
-        if (invoice.PaymentStatus =="Payed")
+        if (invoice.PaymentStatus ==PaymentStatus.Payed)
         {
             return NotFound("Payment unsuccessful: The invoice payed Before");
         }
@@ -402,7 +403,7 @@ public class InvoiceController : ControllerBase
     public async Task<IActionResult> DeleteInvoice(Guid id)
     {
         var invoice = await _invoiceServices.GetInvoiceByIdAsync(id);
-        if (invoice.PaymentStatus == "Pending" || invoice.PaymentStatus == "Payed")
+        if (invoice.PaymentStatus == PaymentStatus.Pending || invoice.PaymentStatus == PaymentStatus.Payed)
         {
             await _invoiceServices.DeleteInvoiceAsync(id);
             return Ok($"The invoice with ID {invoice} successfully Deleted!");

@@ -40,7 +40,9 @@ public class InvoiceRepository:IInvoiceRepository
 
     public async Task<IEnumerable<Invoice>> SearchInvoicesByPaymentStatus(string paymentStatus)
     {
-        return await _context.Invoices.Where(i => i.PaymentStatus == paymentStatus).ToListAsync();
+        var payStat = (PaymentStatus)Enum.Parse(typeof(PaymentStatus), paymentStatus);
+
+        return await _context.Invoices.Where(i => i.PaymentStatus == (PaymentStatus)payStat).ToListAsync();
     }
 
     public async Task<IEnumerable<Invoice>> SearchInvoicesByIssueDate(DateTime issueDate)

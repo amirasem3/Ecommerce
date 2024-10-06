@@ -1,4 +1,5 @@
-﻿using Ecommerce.Core.Interfaces.RelationRepoInterfaces;
+﻿using Ecommerce.Core.Entities;
+using Ecommerce.Core.Interfaces.RelationRepoInterfaces;
 
 namespace Ecommerce.Application.DTOs;
 
@@ -16,12 +17,12 @@ public class InvoiceDto
     
     public DateTime IssueDate { get; set; }
     
-    public DateTime PaymentDate { get; set; }
+    public DateTime? PaymentDate { get; set; }
 
     public decimal TotalPrice { get; set; }
 
     //Payment Status: Payed, Pending, Cencelled
-    public string PaymentStatus { get; set; }
+    public PaymentStatus PaymentStatus { get; set; }
     
     public ICollection<ProductInvoice> ProductInvoices { get; set; }
 }

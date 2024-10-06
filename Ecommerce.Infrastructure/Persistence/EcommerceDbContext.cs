@@ -56,11 +56,12 @@ public class EcommerceDbContext : DbContext
         //Invoice Attributes Constraints
         modelBuilder.Entity<Invoice>()
             .HasIndex(i => i.IdentificationCode).IsUnique();
-        
-        
-        //Role-User Relationship (one-to-many)
-        modelBuilder.Entity<UserRole>()
-            .HasKey(ur => new { ur.UserId, ur.RoleId });
+
+        modelBuilder.HasPostgresEnum<PaymentStatus>(name:"payment_status");
+        modelBuilder.Entity<Invoice>()
+            .Property(e => e.PaymentStatus)
+            .HasConversion<string>()
+            .HasColumnType("payment_status");
         
         
         //Manufacturer-Product Relations(Many-to-Many)
