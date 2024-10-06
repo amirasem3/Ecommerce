@@ -78,8 +78,7 @@ public class AccountController : ControllerBase
         return Ok(new
         {
             token=tokenString,
-            user,
-            // Cookie = Request.Cookies[".AspNetCore.Cookies"] //if you want to return a cookie
+            user
         });
         
 

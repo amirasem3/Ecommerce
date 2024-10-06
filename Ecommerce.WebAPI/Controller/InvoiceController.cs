@@ -345,7 +345,7 @@ public class InvoiceController : ControllerBase
         return Ok(result);
     }
     [HttpPost("IssueNewInvoice")]
-    public async Task<IActionResult> IssueNewInvoice([FromBody] AddUpdateInvoiceDto newInvoice)
+    public async Task<IActionResult> IssueNewInvoice([FromBody] AddInvoiceDto newInvoice)
     {
         if (!ModelState.IsValid)
         {

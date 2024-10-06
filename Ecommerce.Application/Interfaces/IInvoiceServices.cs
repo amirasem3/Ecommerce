@@ -22,7 +22,7 @@ public interface IInvoiceServices
 
     public Task<IEnumerable<InvoiceDto>> GetAllInvoicesAsync();
 
-    public Task<InvoiceDto> AddInvoiceAsync(AddUpdateInvoiceDto addInvoiceDto);
+    public Task<InvoiceDto> AddInvoiceAsync(AddInvoiceDto addInvoiceDto);
 
     public Task<InvoiceDto> UpdateInvoiceAsync(Guid id,UpdateInvoiceDto updateInvoiceDto);
 
