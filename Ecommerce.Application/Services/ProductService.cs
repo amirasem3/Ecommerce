@@ -175,7 +175,8 @@ public class ProductService : IProductService
             Inventory = product.Inventory,
             DOP = product.DOP,
             DOE = product.DOE,
-            ManufacturerProducts = product.Manufacturers
+            ManufacturerProducts = product.Manufacturers,
+            ProductInvoices =product.Invoices
         };
     }
 }

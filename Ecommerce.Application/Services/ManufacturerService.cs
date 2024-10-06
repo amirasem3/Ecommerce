@@ -104,7 +104,7 @@ public class ManufacturerService : IManufacturerService
         });
     }
 
-    public async Task<IEnumerable<ManufacturerDto>> GetAllManufacturers()
+    public async Task<IEnumerable<ManufacturerDto>> GetAllManufacturersAsync()
     {
         var manufacturers = await _manufacturerRepository.GetAllManufacturersAsync();
 
