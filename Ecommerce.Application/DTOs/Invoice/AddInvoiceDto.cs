@@ -1,6 +1,6 @@
 ﻿namespace Ecommerce.Application.DTOs;
 
-public class AddUpdateInvoiceDto
+public class AddInvoiceDto
 {
     public string OwnerName { get; set; }
     

@@ -175,7 +175,7 @@ public class InvoiceServices : IInvoiceServices
     }
 
 
-    public async Task<InvoiceDto> AddInvoiceAsync(AddUpdateInvoiceDto addInvoiceDto)
+    public async Task<InvoiceDto> AddInvoiceAsync(AddInvoiceDto addInvoiceDto)
     {
         var invoice = new Invoice
         {
