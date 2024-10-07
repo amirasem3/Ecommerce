@@ -14,6 +14,11 @@ public class CustomUnauthorizedResponseMiddleware
 
     public async Task InvokeAsync(HttpContext context)
     {
+        if (!context.Response.HasStarted)
+        {
+            context.Response.ContentType = "application/json";
+            // Add your custom unauthorized handling logic here
+        }
         await _next(context);
 
         if (context.Response.StatusCode == StatusCodes.Status401Unauthorized || context.Response.StatusCode == StatusCodes.Status404NotFound)
@@ -22,12 +27,12 @@ public class CustomUnauthorizedResponseMiddleware
             var response = new
             {
                 type = "https://tools.ietf.org/html/rfc9110#section-15.5.2",
-                title = context.Response,
+                title = "unatuhorized",
                 status = context.Response.StatusCode,
                 traceId = context.TraceIdentifier,
             };
-
-            context.Response.ContentType = "application/json";
+            
+            
             var responseJson = JsonSerializer.Serialize(response);
             await context.Response.WriteAsync(responseJson);
         }
