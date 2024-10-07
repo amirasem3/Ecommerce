@@ -88,7 +88,7 @@ builder.Services.AddScoped<IInvoiceProductRepository, InvoiceProductRepository>(
 
 var app = builder.Build();
 
-
+// app.UseMiddleware<CustomUnauthorizedResponseMiddleware>();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
@@ -101,8 +101,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-// app.UseMiddleware<CustomUnauthorizedResponseMiddleware>();
+
 app.UseHttpsRedirection();
+app.UseDeveloperExceptionPage();
 app.UseRouting();
 app.UseCors("AllowReactApp");
 app.UseAuthentication();
