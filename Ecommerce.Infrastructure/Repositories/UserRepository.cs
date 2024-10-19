@@ -64,6 +64,12 @@ public class UserRepository : IUserRepository
         await _context.SaveChangesAsync();
     }
 
+    public async Task<bool> IsUserExist(string identifier)
+    {
+        return await _context.Users.AnyAsync(user => user.Username == identifier || user.Email == identifier);
+        
+    }
+
     public async Task<IEnumerable<User>> GetUserByRoleAsync(string roleName)
     {
         var role = await _context.Roles.FirstOrDefaultAsync(role => role.Name == roleName);

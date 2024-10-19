@@ -25,12 +25,12 @@ public class InvoiceRepository:IInvoiceRepository
 
     public async Task<IEnumerable<Invoice>> SearchInvoicesByOwnerName(string name)
     {
-        return await _context.Invoices.Where(i => i.OwnerName.Contains(name)).ToListAsync();
+        return await _context.Invoices.Where(i => i.OwnerFirstName.Contains(name)).ToListAsync();
     }
 
     public async Task<IEnumerable<Invoice>> SearchInvoicesByOwnerFamilyName(string familyName)
     {
-        return await _context.Invoices.Where(i => i.OwnerFamilyName.Contains(familyName)).ToListAsync();
+        return await _context.Invoices.Where(i => i.OwnerLastName.Contains(familyName)).ToListAsync();
     }
 
     public async Task<IEnumerable<Invoice>> SearchInvoicesByIssuerName(string issuerName)
