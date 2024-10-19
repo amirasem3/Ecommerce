@@ -1,4 +1,5 @@
-﻿using Ecommerce.Core.Entities;
+﻿using System.Data;
+using Ecommerce.Core.Entities;
 using Ecommerce.Core.Entities.RelationEntities;
 using Ecommerce.Core.Interfaces.RelationRepoInterfaces;
 using Microsoft.EntityFrameworkCore;
@@ -31,31 +32,69 @@ public class EcommerceDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<Product>(entity =>
+        
+        //Product Model Rules
+        // modelBuilder.Entity<Product>(entity =>
+        // {
+        //     entity.HasKey(p => p.Id);
+        //     entity.Property(p => p.Id).HasColumnType("uuid").HasMaxLength(24).IsRequired();
+        //     entity.Property(p => p.Price).HasColumnType("decimal(15,2)");
+        //     entity.Property(p => p.Inventory).HasColumnType("decimal(15,2)");
+        //     entity.Property(p => p.Name).HasMaxLength(50);
+        // });
+        
+        //Manufacturer Model Rules
+        modelBuilder.Entity<Manufacturer>(entity =>
         {
-            entity.HasKey(s => s.Id);
-            entity.Property(e => e.Id).HasColumnType("uuid").HasMaxLength(24).IsRequired();
-            entity.Property(e => e.Price).HasColumnType("decimal(18,2)");
+            entity.HasIndex(m => m.PhoneNumber).IsUnique();
+            entity.HasIndex(m => m.Address).IsUnique();
+            entity.HasIndex(m => m.Email).IsUnique();
+            entity.Property(m => m.Name).HasMaxLength(20).IsRequired();
+            entity.Property(m => m.OwnerName).HasMaxLength(50).IsRequired();
+            entity.Property(m => m.ManufacturerCountry).HasMaxLength(60).IsRequired();
+            entity.Property(m => m.Email).HasMaxLength(60).IsRequired();
+            entity.Property(m => m.Address).HasMaxLength(100).IsRequired();
+            entity.Property(m => m.PhoneNumber).HasMaxLength(20).IsRequired();
+
         });
-        //User's Attribute Constraints
-        modelBuilder.Entity<User>().HasIndex(user => user.Username).IsUnique();
-        modelBuilder.Entity<User>().HasIndex(user => user.Email).IsUnique();
-        modelBuilder.Entity<User>().HasIndex(user => user.PhoneNumber).IsUnique();
-        //Role Attribute Constraints
-        modelBuilder.Entity<Role>().HasIndex(role => role.Name).IsUnique();
-        
-        //Manufacturer Attribute Constraints
-        modelBuilder.Entity<Manufacturer>().HasIndex(man => man.PhoneNumber).IsUnique();
-        modelBuilder.Entity<Manufacturer>().HasIndex(man => man.Address).IsUnique();
-        modelBuilder.Entity<Manufacturer>().HasIndex(man => man.Email).IsUnique();
-        
-        //Category Attributes Constraints
-        modelBuilder.Entity<Category>()
-            .HasIndex(c => c.Name).IsUnique();
-        
+
+        //User Model Rules
+        // modelBuilder.Entity<User>(entity =>
+        // {
+        //     entity.HasIndex(u => u.Username).IsUnique();
+        //     entity.HasIndex(u => u.Email).IsUnique();
+        //     entity.HasIndex(u => u.PhoneNumber).IsUnique();
+        //     entity.Property(u => u.FirstName).HasMaxLength(50).IsRequired();
+        //     entity.Property(u => u.LastName).HasMaxLength(50).IsRequired();
+        //     entity.Property(u => u.Username).HasMaxLength(30).IsRequired();
+        //     entity.Property(u => u.PasswordHash).HasMaxLength(90).IsRequired();
+        //     entity.Property(u => u.Email).HasMaxLength(60).IsRequired();
+        //     entity.Property(u => u.PhoneNumber).HasMaxLength(20).IsRequired();
+        // });
+
+        //Role Model Rules
+        // modelBuilder.Entity<Role>(entity =>
+        // {
+        //     entity.HasIndex(r => r.Name).IsUnique();
+        //     entity.Property(r => r.Name).HasMaxLength(40).IsRequired();
+        // });
+
+        //Category Model Rules
+        // modelBuilder.Entity<Category>(entity =>
+        // {
+        //     entity.HasIndex(c => c.Name).IsUnique();
+        //     entity.Property(c => c.Name).HasMaxLength(20).IsRequired();
+        //     entity.Property(c => c.Type).IsRequired();
+        //     entity.Property(c => c.ParentCategoryId).HasMaxLength(40).IsRequired();
+        // });
+
+        // modelBuilder.Entity<Invoice>(entity =>
+        // {
+        //     entity.HasIndex(i => i.IdentificationCode).IsUnique();
+        // });
         //Invoice Attributes Constraints
-        modelBuilder.Entity<Invoice>()
-            .HasIndex(i => i.IdentificationCode).IsUnique();
+        // modelBuilder.Entity<Invoice>()
+        //     .HasIndex(i => i.IdentificationCode).IsUnique();
 
         modelBuilder.HasPostgresEnum<PaymentStatus>(name:"payment_status");
         modelBuilder.Entity<Invoice>()
@@ -91,6 +130,16 @@ public class EcommerceDbContext : DbContext
             .WithMany(i => i.Products)
             .HasForeignKey(pi => pi.InvoiceId);
         
+        
+        //2nd try manufacturer and product many-to-many by convention
+        modelBuilder.Entity<Manufacturer>()
+            .HasMany(e => e.Products2)
+            .WithMany(e => e.Manufacturers2);
+
+        modelBuilder.Entity<Product>()
+            .HasMany(e => e.Manufacturers2)
+            .WithMany(e => e.Products2);
+
 
     }
 }

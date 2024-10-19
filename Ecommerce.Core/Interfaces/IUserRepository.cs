@@ -13,6 +13,8 @@ public interface IUserRepository
     Task AddUserAsync(User user);
     Task DeleteUserByIdAsync(Guid id);
 
+    Task<bool> IsUserExist(string identifier);
+
     Task<IEnumerable<User>> GetUserByRoleAsync(string roleName);
     Task UpdateUserAsync(User newUser);
     
