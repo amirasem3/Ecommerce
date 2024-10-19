@@ -39,7 +39,7 @@ public class ManufacturerService : IManufacturerService
             Email = manufacturer.Email,
             OwnerName = manufacturer.OwnerName,
             Address = manufacturer.Address,
-            EsatablishDate = manufacturer.EsatablishDate,
+            EsatablishDate = manufacturer.EstablishDate,
             Rate = manufacturer.Rate,
             Status = manufacturer.Status,
             ManufacturerCountry = manufacturer.ManufacturerCountry,
@@ -57,7 +57,7 @@ public class ManufacturerService : IManufacturerService
                 Name = manufacturer.Name,
                 OwnerName = manufacturer.OwnerName,
                 Address = manufacturer.Address,
-                EsatablishDate = manufacturer.EsatablishDate,
+                EsatablishDate = manufacturer.EstablishDate,
                 Rate = manufacturer.Rate,
                 Status = manufacturer.Status,
                 Email = manufacturer.Email,
@@ -76,7 +76,7 @@ public class ManufacturerService : IManufacturerService
             Name = manufacturer.Name,
             OwnerName = manufacturer.OwnerName,
             Address = manufacturer.Address,
-            EsatablishDate = manufacturer.EsatablishDate,
+            EsatablishDate = manufacturer.EstablishDate,
             Rate = manufacturer.Rate,
             Status = manufacturer.Status,
             ManufacturerCountry = manufacturer.ManufacturerCountry,
@@ -96,7 +96,7 @@ public class ManufacturerService : IManufacturerService
             OwnerName = manufacturer.OwnerName,
             Address = manufacturer.Address,
             Email = manufacturer.Email,
-            EsatablishDate = manufacturer.EsatablishDate,
+            EsatablishDate = manufacturer.EstablishDate,
             Rate = manufacturer.Rate,
             Status = manufacturer.Status,
             PhoneNumber = manufacturer.PhoneNumber,
@@ -115,7 +115,7 @@ public class ManufacturerService : IManufacturerService
             OwnerName = manufacturer.OwnerName,
             Email = manufacturer.Email,
             Address = manufacturer.Address,
-            EsatablishDate = manufacturer.EsatablishDate,
+            EsatablishDate = manufacturer.EstablishDate,
             Rate = manufacturer.Rate,
             Status = manufacturer.Status,
             PhoneNumber = manufacturer.PhoneNumber,
@@ -134,7 +134,7 @@ public class ManufacturerService : IManufacturerService
             OwnerName = manufacturer.OwnerName,
             Email = manufacturer.Email,
             Address = manufacturer.Address,
-            EsatablishDate = manufacturer.EsatablishDate,
+            EsatablishDate = manufacturer.EstablishDate,
             Rate = manufacturer.Rate,
             Status = manufacturer.Status,
             PhoneNumber = manufacturer.PhoneNumber,
@@ -154,7 +154,7 @@ public class ManufacturerService : IManufacturerService
             Address = manufacturerDto.Address,
             PhoneNumber = manufacturerDto.PhoneNumber,
             Rate = manufacturerDto.Rate,
-            EsatablishDate = manufacturerDto.EsatablishDate,
+            EstablishDate = manufacturerDto.EsatablishDate,
             Status = manufacturerDto.Status,
             Products = []
         };
@@ -194,7 +194,7 @@ public class ManufacturerService : IManufacturerService
             manufacturer.Name = addUpdateManufacturerDto.Name;
             manufacturer.OwnerName = addUpdateManufacturerDto.OwnerName;
             manufacturer.Address = addUpdateManufacturerDto.Address;
-            manufacturer.EsatablishDate = addUpdateManufacturerDto.EsatablishDate;
+            manufacturer.EstablishDate = addUpdateManufacturerDto.EsatablishDate;
             manufacturer.Rate = addUpdateManufacturerDto.Rate;
             manufacturer.Status = addUpdateManufacturerDto.Status;
             manufacturer.PhoneNumber = addUpdateManufacturerDto.PhoneNumber;
@@ -207,7 +207,7 @@ public class ManufacturerService : IManufacturerService
                 Name = manufacturer.Name,
                 OwnerName = manufacturer.OwnerName,
                 Address = manufacturer.Address,
-                EsatablishDate = manufacturer.EsatablishDate,
+                EsatablishDate = manufacturer.EstablishDate,
                 ManufacturerCountry = manufacturer.ManufacturerCountry,
                 Email = manufacturer.Email,
                 Rate = manufacturer.Rate,
@@ -245,7 +245,7 @@ public class ManufacturerService : IManufacturerService
             Email = manufacturer.Email,
             Address = manufacturer.Address,
             PhoneNumber = manufacturer.PhoneNumber,
-            EsatablishDate = manufacturer.EsatablishDate,
+            EsatablishDate = manufacturer.EstablishDate,
             Status = manufacturer.Status,
             ManufacturerCountry = manufacturer.ManufacturerCountry,
             Rate = manufacturer.Rate,

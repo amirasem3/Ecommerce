@@ -8,13 +8,13 @@ namespace Ecommerce.Application.Services;
 
 public class ProductService : IProductService
 {
-
     private readonly IProductRepository _productRepository;
 
     public ProductService(IProductRepository productRepository)
     {
         _productRepository = productRepository;
     }
+
     public async Task<ProductDto> GetProductByIdAsync(Guid id)
     {
         var product = await _productRepository.GetProductByIdAsync(id);
@@ -23,12 +23,11 @@ public class ProductService : IProductService
             Id = product.Id,
             Name = product.Name,
             Price = product.Price,
-            Status = product.Status,
             Inventory = product.Inventory,
-            DOP = product.DOP,
-            DOE = product.DOE,
+            Status = product.Status,
+            DOP = product.Dop,
+            DOE = product.Doe,
             ManufacturerProducts = product.Manufacturers
-            
         };
     }
 
@@ -39,10 +38,10 @@ public class ProductService : IProductService
             Id = Guid.NewGuid(),
             Name = updateProductDto.Name,
             Price = updateProductDto.Price,
-            Status = updateProductDto.DOE > updateProductDto.DOP,
             Inventory = updateProductDto.Inventory,
-            DOP = updateProductDto.DOP,
-            DOE = updateProductDto.DOE,
+            Dop = updateProductDto.Dop,
+            Doe = updateProductDto.Doe,
+            Status = updateProductDto.Doe > updateProductDto.Dop && updateProductDto.Inventory > 0,
             Manufacturers = []
         };
         await _productRepository.AddProductAsync(product);
@@ -53,8 +52,8 @@ public class ProductService : IProductService
             Price = product.Price,
             Status = product.Status,
             Inventory = product.Inventory,
-            DOP = product.DOP,
-            DOE = product.DOE,
+            DOP = product.Dop,
+            DOE = product.Doe,
             ManufacturerProducts = product.Manufacturers
         };
     }
@@ -71,9 +70,9 @@ public class ProductService : IProductService
         product.Price = updateProductDto.Price;
         product.Status = updateProductDto.Status;
         product.Inventory = updateProductDto.Inventory;
-        product.DOE = updateProductDto.DOE;
-        product.DOP = updateProductDto.DOP;
-        
+        product.Doe = updateProductDto.Doe;
+        product.Dop = updateProductDto.Dop;
+
         await _productRepository.UpdateProductAsync(product);
         return new ProductDto
         {
@@ -82,8 +81,8 @@ public class ProductService : IProductService
             Price = product.Price,
             Status = product.Status,
             Inventory = product.Inventory,
-            DOP = product.DOP,
-            DOE = product.DOE,
+            DOP = product.Dop,
+            DOE = product.Doe,
             ManufacturerProducts = product.Manufacturers
         };
     }
@@ -91,7 +90,7 @@ public class ProductService : IProductService
     public async Task<bool> DeleteProductByIdAsync(Guid id)
     {
         var product = await _productRepository.GetProductByIdAsync(id);
-        if (product!=null)
+        if (product != null)
         {
             await _productRepository.DeleteProductByIdAsync(id);
             return true;
@@ -110,9 +109,8 @@ public class ProductService : IProductService
             Price = product.Price,
             Status = product.Status,
             Inventory = product.Inventory,
-            DOP = product.DOP,
-            DOE = product.DOE
-
+            DOP = product.Dop,
+            DOE = product.Doe
         });
     }
 
@@ -127,8 +125,8 @@ public class ProductService : IProductService
             Price = product.Price,
             Status = product.Status,
             Inventory = product.Inventory,
-            DOP = product.DOP,
-            DOE = product.DOE,
+            DOP = product.Dop,
+            DOE = product.Doe,
         });
     }
 
@@ -142,8 +140,8 @@ public class ProductService : IProductService
             Price = product.Price,
             Status = product.Status,
             Inventory = product.Inventory,
-            DOP = product.DOP,
-            DOE = product.DOE,
+            DOP = product.Dop,
+            DOE = product.Doe,
         });
     }
 
@@ -157,8 +155,8 @@ public class ProductService : IProductService
             Price = product.Price,
             Status = product.Status,
             Inventory = product.Inventory,
-            DOP = product.DOP,
-            DOE = product.DOE,
+            DOP = product.Dop,
+            DOE = product.Doe,
             ManufacturerProducts = product.Manufacturers
         };
     }
@@ -173,10 +171,10 @@ public class ProductService : IProductService
             Price = product.Price,
             Status = product.Status,
             Inventory = product.Inventory,
-            DOP = product.DOP,
-            DOE = product.DOE,
+            DOP = product.Dop,
+            DOE = product.Doe,
             ManufacturerProducts = product.Manufacturers,
-            ProductInvoices =product.Invoices
+            ProductInvoices = product.Invoices
         };
     }
 }

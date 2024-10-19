@@ -1,4 +1,5 @@
-﻿using Ecommerce.Application.DTOs;
+﻿using System.ComponentModel.DataAnnotations;
+using Ecommerce.Application.DTOs;
 using Ecommerce.Application.Interfaces;
 using Ecommerce.Core.Entities;
 using Ecommerce.Core.Interfaces;
@@ -27,19 +28,21 @@ public class RoleService : IRoleServices
 
     }
 
-    public async Task<RoleDto> AddRoleAsync(AddUpdateRoleDto roleDto)
+    public async Task<RoleDto> AddRoleAsync(AddUpdateRoleDto newRole)
     {
+       
         var role = new Role
         {
-            Id = Guid.NewGuid(),
-            Name = roleDto.Name,
+            Name = newRole.Name,
+            Id = Guid.NewGuid()
         };
+        // ValidateRole(role);
         await _roleRepository.AddRoleAsync(role);
 
         return new RoleDto
         {
-            Name = role.Name,
             Id = role.Id,
+            Name = role.Name
         };
 
     }
@@ -86,10 +89,27 @@ public class RoleService : IRoleServices
     {
         var role = await _roleRepository.GetRoleByName(name);
 
+        if (role == null)
+        {
+            return null;
+        }
+
         return new RoleDto
         {
             Id = role.Id,
-            Name = role.Name,
+            Name = role.Name!,
         };
+    }
+    
+    private void ValidateRole(Role role)
+    {
+        var validationResults = new List<ValidationResult>();
+        var validationContext = new ValidationContext(role);
+
+        if (!Validator.TryValidateObject(role, validationContext, validationResults, true))
+        {
+            var validationErrors = validationResults.Select(r => r.ErrorMessage).ToArray();
+            throw new ValidationException(string.Join(", ", validationErrors));
+        }
     }
 }

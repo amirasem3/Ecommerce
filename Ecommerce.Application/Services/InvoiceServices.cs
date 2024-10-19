@@ -27,9 +27,9 @@ public class InvoiceServices : IInvoiceServices
         return new InvoiceDto
         {
             Id = invoice.Id,
-            OwnerName = invoice.OwnerName,
+            OwnerName = invoice.OwnerFirstName,
             IdentificationCode = invoice.IdentificationCode,
-            OwnerFamilyName = invoice.OwnerFamilyName,
+            OwnerFamilyName = invoice.OwnerLastName,
             IssuerName = invoice.IssuerName,
             IssueDate = invoice.IssueDate,
             PaymentDate = invoice.PaymentDate,
@@ -41,12 +41,16 @@ public class InvoiceServices : IInvoiceServices
     public async Task<InvoiceDto> GetInvoiceByIdentificationCodeAsync(string identificationCode)
     {
         var invoice = await _invoiceRepository.GetInvoiceByIdentificationCode(identificationCode);
+        if (invoice == null)
+        {
+            return null;
+        }
         return new InvoiceDto
         {
             Id = invoice.Id,
-            OwnerName = invoice.OwnerName,
+            OwnerName = invoice.OwnerFirstName,
             IdentificationCode = invoice.IdentificationCode,
-            OwnerFamilyName = invoice.OwnerFamilyName,
+            OwnerFamilyName = invoice.OwnerLastName,
             IssuerName = invoice.IssuerName,
             IssueDate = invoice.IssueDate,
             PaymentDate = invoice.PaymentDate,
@@ -61,9 +65,9 @@ public class InvoiceServices : IInvoiceServices
         return invoices.Select(invoice => new InvoiceDto
         {
             Id = invoice.Id,
-            OwnerName = invoice.OwnerName,
+            OwnerName = invoice.OwnerFirstName,
             IdentificationCode = invoice.IdentificationCode,
-            OwnerFamilyName = invoice.OwnerFamilyName,
+            OwnerFamilyName = invoice.OwnerLastName,
             IssuerName = invoice.IssuerName,
             IssueDate = invoice.IssueDate,
             PaymentDate = invoice.PaymentDate,
@@ -78,9 +82,9 @@ public class InvoiceServices : IInvoiceServices
         return invoices.Select(invoice => new InvoiceDto
         {
             Id = invoice.Id,
-            OwnerName = invoice.OwnerName,
+            OwnerName = invoice.OwnerFirstName,
             IdentificationCode = invoice.IdentificationCode,
-            OwnerFamilyName = invoice.OwnerFamilyName,
+            OwnerFamilyName = invoice.OwnerLastName,
             IssuerName = invoice.IssuerName,
             IssueDate = invoice.IssueDate,
             PaymentDate = invoice.PaymentDate,
@@ -95,9 +99,9 @@ public class InvoiceServices : IInvoiceServices
         return invoices.Select(invoice => new InvoiceDto
         {
             Id = invoice.Id,
-            OwnerName = invoice.OwnerName,
+            OwnerName = invoice.OwnerFirstName,
             IdentificationCode = invoice.IdentificationCode,
-            OwnerFamilyName = invoice.OwnerFamilyName,
+            OwnerFamilyName = invoice.OwnerLastName,
             IssuerName = invoice.IssuerName,
             IssueDate = invoice.IssueDate,
             PaymentDate = invoice.PaymentDate,
@@ -112,9 +116,9 @@ public class InvoiceServices : IInvoiceServices
         return invoices.Select(invoice => new InvoiceDto
         {
             Id = invoice.Id,
-            OwnerName = invoice.OwnerName,
+            OwnerName = invoice.OwnerFirstName,
             IdentificationCode = invoice.IdentificationCode,
-            OwnerFamilyName = invoice.OwnerFamilyName,
+            OwnerFamilyName = invoice.OwnerLastName,
             IssuerName = invoice.IssuerName,
             IssueDate = invoice.IssueDate,
             PaymentDate = invoice.PaymentDate,
@@ -129,9 +133,9 @@ public class InvoiceServices : IInvoiceServices
         return invoices.Select(invoice => new InvoiceDto
         {
             Id = invoice.Id,
-            OwnerName = invoice.OwnerName,
+            OwnerName = invoice.OwnerFirstName,
             IdentificationCode = invoice.IdentificationCode,
-            OwnerFamilyName = invoice.OwnerFamilyName,
+            OwnerFamilyName = invoice.OwnerLastName,
             IssuerName = invoice.IssuerName,
             IssueDate = invoice.IssueDate,
             PaymentDate = invoice.PaymentDate,
@@ -146,9 +150,9 @@ public class InvoiceServices : IInvoiceServices
         return invoices.Select(invoice => new InvoiceDto
         {
             Id = invoice.Id,
-            OwnerName = invoice.OwnerName,
+            OwnerName = invoice.OwnerFirstName,
             IdentificationCode = invoice.IdentificationCode,
-            OwnerFamilyName = invoice.OwnerFamilyName,
+            OwnerFamilyName = invoice.OwnerLastName,
             IssuerName = invoice.IssuerName,
             IssueDate = invoice.IssueDate,
             PaymentDate = invoice.PaymentDate,
@@ -160,18 +164,26 @@ public class InvoiceServices : IInvoiceServices
     public async Task<IEnumerable<InvoiceDto>> GetAllInvoicesAsync()
     {
         var invoices = await _invoiceRepository.GetAllInvoices();
-        return invoices.Select(invoice => new InvoiceDto
+        var result = new List<InvoiceDto>();
+        foreach (var invoice in invoices)
         {
-            Id = invoice.Id,
-            OwnerName = invoice.OwnerName,
-            IdentificationCode = invoice.IdentificationCode,
-            OwnerFamilyName = invoice.OwnerFamilyName,
-            IssuerName = invoice.IssuerName,
-            IssueDate = invoice.IssueDate,
-            PaymentDate = invoice.PaymentDate,
-            PaymentStatus = invoice.PaymentStatus,
-            TotalPrice = invoice.TotalPrice
-        });
+            var product = await _invoiceRepository.GetInvoiceProductAsync(invoice.Id);
+            result.Add(new InvoiceDto
+            {
+                Id = product.Id,
+                OwnerName = product.OwnerFirstName,
+                IdentificationCode = product.IdentificationCode,
+                OwnerFamilyName = product.OwnerLastName,
+                IssuerName = product.IssuerName,
+                IssueDate = product.IssueDate,
+                PaymentDate = product.PaymentDate,
+                PaymentStatus = product.PaymentStatus,
+                TotalPrice = product.TotalPrice,
+                ProductInvoices = product.Products
+            });
+        }
+
+        return result;
     }
 
 
@@ -183,8 +195,8 @@ public class InvoiceServices : IInvoiceServices
             IdentificationCode = addInvoiceDto.IdentificationCode,
             IssueDate = addInvoiceDto.IssueDate,
             IssuerName = addInvoiceDto.IssuerName,
-            OwnerName = addInvoiceDto.OwnerName,
-            OwnerFamilyName = addInvoiceDto.OwnerFamilyName,
+            OwnerFirstName = addInvoiceDto.OwnerName,
+            OwnerLastName = addInvoiceDto.OwnerFamilyName,
             PaymentDate = null,
             TotalPrice = addInvoiceDto.TotalPrice,
             PaymentStatus = PaymentStatus.Pending,
@@ -195,9 +207,9 @@ public class InvoiceServices : IInvoiceServices
         return new InvoiceDto
         {
             Id = invoice.Id,
-            OwnerName = invoice.OwnerName,
+            OwnerName = invoice.OwnerFirstName,
             IdentificationCode = invoice.IdentificationCode,
-            OwnerFamilyName = invoice.OwnerFamilyName,
+            OwnerFamilyName = invoice.OwnerLastName,
             IssuerName = invoice.IssuerName,
             IssueDate = invoice.IssueDate,
             PaymentDate = invoice.PaymentDate,
@@ -210,8 +222,8 @@ public class InvoiceServices : IInvoiceServices
     public async Task<InvoiceDto> UpdateInvoiceAsync(Guid id, UpdateInvoiceDto updateInvoiceDto)
     {
         var invoice = await _invoiceRepository.GetInvoiceById(id);
-        invoice.OwnerName = updateInvoiceDto.OwnerName;
-        invoice.OwnerFamilyName = updateInvoiceDto.OwnerFamilyName;
+        invoice.OwnerFirstName = updateInvoiceDto.OwnerName;
+        invoice.OwnerLastName = updateInvoiceDto.OwnerFamilyName;
         invoice.IssuerName = invoice.IssuerName;
         invoice.IssueDate = invoice.IssueDate;
         invoice.PaymentStatus = invoice.PaymentStatus;
@@ -222,9 +234,9 @@ public class InvoiceServices : IInvoiceServices
         return new InvoiceDto()
         {
             Id = invoice.Id,
-            OwnerName = invoice.OwnerName,
+            OwnerName = invoice.OwnerFirstName,
             IdentificationCode = invoice.IdentificationCode,
-            OwnerFamilyName = invoice.OwnerFamilyName,
+            OwnerFamilyName = invoice.OwnerLastName,
             IssuerName = invoice.IssuerName,
             IssueDate = invoice.IssueDate,
             PaymentDate = invoice.PaymentDate,
@@ -305,9 +317,9 @@ public class InvoiceServices : IInvoiceServices
         return new InvoiceDto()
         {
             Id = invoice.Id,
-            OwnerName = invoice.OwnerName,
+            OwnerName = invoice.OwnerFirstName,
             IdentificationCode = invoice.IdentificationCode,
-            OwnerFamilyName = invoice.OwnerFamilyName,
+            OwnerFamilyName = invoice.OwnerLastName,
             IssuerName = invoice.IssuerName,
             IssueDate = invoice.IssueDate,
             PaymentDate = invoice.PaymentDate,

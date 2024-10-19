@@ -25,6 +25,7 @@ public class UserService : IUserServices
         _passwordHasher = passwordHasher;
     }
     
+    
 
 
     public async Task<UserDto> GetUserByIdAsync(Guid id)
@@ -52,6 +53,10 @@ public class UserService : IUserServices
     public async Task<UserDto> GetUserByUsernameAsync(string username)
     {
         var user = await _userRepository.GetUserByUsernameAsync(username);
+        if (user==null)
+        {
+            return null;
+        }
         var role = await _roleRepository.GetRoleByIdAsync(user.RoleId);
         
         return new UserDto
@@ -70,6 +75,10 @@ public class UserService : IUserServices
     public async Task<UserDto> GetUserByEmailAsync(string email)
     {
         var user = await _userRepository.GetUserByEmailAsync(email);
+        if (user==null)
+        {
+            return null;
+        }
         var role = await _roleRepository.GetRoleByIdAsync(user.RoleId);
 
         return new UserDto
@@ -88,6 +97,10 @@ public class UserService : IUserServices
     public async Task<UserDto> GetUserByPhoneNumberAsync(string phoneNumber)
     {
         var user = await _userRepository.GetUserByPhoneNumberAsync(phoneNumber);
+        if (user == null)
+        {
+            return null;
+        }
         var role = await _roleRepository.GetRoleByIdAsync(user.RoleId);
 
         return new UserDto
@@ -135,6 +148,7 @@ public class UserService : IUserServices
         };
 
     }
+    
 
     public async Task<UserDto> UpdateUserAsync(Guid id, UpdateUserDto updateUserDto)
     {
@@ -242,11 +256,12 @@ public class UserService : IUserServices
     public async Task<UserDto> AuthenticateUserAsync(string username, string password)
     {
         var user = await _userRepository.GetUserByUsernameAsync(username);
-        var role = await _roleRepository.GetRoleByIdAsync(user.RoleId);
         if (user == null)
         {
             return null;
         }
+        var role = await _roleRepository.GetRoleByIdAsync(user.RoleId);
+        
 
         var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password);
         if (result == PasswordVerificationResult.Failed)
@@ -267,5 +282,10 @@ public class UserService : IUserServices
             RoleName = role.Name
            
         };
+    }
+
+    public async Task<bool> IsUserExistAsync(string identifier)
+    {
+        return await _userRepository.IsUserExist(identifier);
     }
 }

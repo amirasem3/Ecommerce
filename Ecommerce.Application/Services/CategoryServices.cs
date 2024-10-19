@@ -123,6 +123,10 @@ public class CategoryServices : ICategoryService
     public async Task<CategoryDto> UpdateCategoryAsync(Guid id, AddUpdateCategoryDto updateCategoryDto)
     {
         var targetCategory = await _categoryRepository.GetCategoryById(id);
+        if (targetCategory == null)
+        {
+            return null;
+        }
         targetCategory.Name = updateCategoryDto.CategoryName;
         targetCategory.Type = updateCategoryDto.Type;
        
