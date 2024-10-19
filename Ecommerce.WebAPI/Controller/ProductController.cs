@@ -1,4 +1,5 @@
-﻿using Ecommerce.Application.DTOs;
+﻿using Ecommerce.Application.Binder.Product;
+using Ecommerce.Application.DTOs;
 using Ecommerce.Application.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -166,11 +167,15 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost("AddProduct")]
-    public async Task<IActionResult> AddProduct([FromBody] AddUpdateProductDto updateProductDto)
+    public async Task<IActionResult> AddProduct([ModelBinder(typeof(ProductModelBinder))] AddUpdateProductDto updateProductDto)
     {
         if (!ModelState.IsValid)
         {
-            return BadRequest(ModelState);
+            
+            var errors = ModelState.Values.SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage).ToList();
+            
+            return BadRequest(new { Errors = errors });
         }
         
       var createdProduct =  await _productService.AddProductAsync(updateProductDto);
@@ -178,13 +183,16 @@ public class ProductController : ControllerBase
     }
 
     [HttpPut("UpdateProduct")]
-    public async Task<IActionResult> UpdateProduct([FromQuery]Guid id, [FromBody] AddUpdateProductDto productDto)
+    public async Task<IActionResult> UpdateProduct([FromQuery]Guid id, [ModelBinder(typeof(ProductModelBinder))] AddUpdateProductDto productDto)
     {
         if (!ModelState.IsValid)
         {
-            return BadRequest(ModelState);
+            
+            var errors = ModelState.Values.SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage).ToList();
+            
+            return BadRequest(new { Errors = errors });
         }
-
         var updatedProduct = await _productService.UpdateProductAsync(id, productDto);
         return Ok(updatedProduct);
 

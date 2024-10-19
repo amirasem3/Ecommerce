@@ -1,4 +1,5 @@
-﻿using Ecommerce.Application.DTOs;
+﻿using Ecommerce.Application.Binder.Invoice;
+using Ecommerce.Application.DTOs;
 using Ecommerce.Application.Interfaces;
 using Ecommerce.Core.Entities;
 using Ecommerce.Core.Interfaces.RelationRepoInterfaces;
@@ -345,12 +346,53 @@ public class InvoiceController : ControllerBase
         }
         return Ok(result);
     }
+    [HttpGet("GetAllInvoicesTest")]
+    public async Task<IActionResult> GetAllInvoicesTest()
+    {
+        var Invoices = await _invoiceServices.GetAllInvoicesAsync();
+        return Ok(Invoices);
+        var result = new List<object>();
+        foreach (var invoice in Invoices)
+        {
+            var products = new List<object>();
+            var inv = await _invoiceServices.GetInvoiceProductAsync(invoice.Id);
+            foreach (var invProducts in inv.ProductInvoices)
+            {
+                products.Add(new
+                {
+                    invProducts.Product.Id,
+                    invProducts.Product.Name,
+                    invProducts.Product.Price,
+                    invProducts.Count
+                });
+            }
+            
+            result.Add(new
+            {
+                invoice.Id,
+                invoice.OwnerName,
+                invoice.IdentificationCode,
+                invoice.OwnerFamilyName,
+                invoice.IssuerName,
+                invoice.IssueDate,
+                invoice.PaymentDate,
+                payment_status = invoice.PaymentStatus.ToString("G"),
+                invoice.TotalPrice,
+                Products = products
+            });
+        }
+        return Ok(result);
+    }
     [HttpPost("IssueNewInvoice")]
-    public async Task<IActionResult> IssueNewInvoice([FromBody] AddInvoiceDto newInvoice)
+    public async Task<IActionResult> IssueNewInvoice([ModelBinder(typeof(InvoiceModelBinder))] AddInvoiceDto newInvoice)
     {
         if (!ModelState.IsValid)
         {
-            return BadRequest(ModelState);
+            
+            var errors = ModelState.Values.SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage).ToList();
+            
+            return BadRequest(new { Errors = errors });
         }
         var invoice = await _invoiceServices.AddInvoiceAsync(newInvoice);
         return CreatedAtAction(nameof(GetInvoiceById), new { id = invoice.Id }, invoice);
@@ -364,11 +406,15 @@ public class InvoiceController : ControllerBase
     }
 
     [HttpPut("UpdateInvoice/{id}")]
-    public async Task<IActionResult> UpdateInvoice(Guid id, [FromBody] UpdateInvoiceDto updateInvoiceDto)
+    public async Task<IActionResult> UpdateInvoice(Guid id, [ModelBinder(typeof(InvoiceModelBinder))] UpdateInvoiceDto updateInvoiceDto)
     {
         if (!ModelState.IsValid)
         {
-            return BadRequest(ModelState);
+            
+            var errors = ModelState.Values.SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage).ToList();
+            
+            return BadRequest(new { Errors = errors });
         }
 
         var updatedInvoice = await _invoiceServices.UpdateInvoiceAsync(id, updateInvoiceDto);

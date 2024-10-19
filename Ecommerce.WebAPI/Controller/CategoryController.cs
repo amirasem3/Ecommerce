@@ -1,4 +1,5 @@
-﻿using Ecommerce.Application.DTOs;
+﻿using Ecommerce.Application.Binder.Category;
+using Ecommerce.Application.DTOs;
 using Ecommerce.Application.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -150,11 +151,14 @@ public class CategoryController : ControllerBase
     }
 
     [HttpPost("AddNewCategory")]
-    public async Task<IActionResult> AddNewCategory([FromBody] AddUpdateCategoryDto newUpdateCategory)
+    public async Task<IActionResult> AddNewCategory([ModelBinder(typeof(CategoryModelBinder))] AddUpdateCategoryDto newUpdateCategory)
     {
         if (!ModelState.IsValid)
         {
-            return BadRequest(ModelState);
+            var errors = ModelState.Values.SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage).ToList();
+            
+            return BadRequest(new { Errors = errors });
         }
         var createdCategory =  await _categoryService.AddCategoryAsync(newUpdateCategory);
         return CreatedAtAction(nameof(GetCategoryById), new { id = createdCategory.Id }, createdCategory);
@@ -162,8 +166,15 @@ public class CategoryController : ControllerBase
 
 
     [HttpPut("UpdateCategory/{id:guid}")]
-    public async Task<IActionResult> UpdateCategory([FromRoute] Guid id,[FromBody] AddUpdateCategoryDto updateCategoryDto)
+    public async Task<IActionResult> UpdateCategory([FromRoute] Guid id,[ModelBinder(typeof(CategoryModelBinder))] AddUpdateCategoryDto updateCategoryDto)
     {
+        if (!ModelState.IsValid)
+        {
+            var errors = ModelState.Values.SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage).ToList();
+            
+            return BadRequest(new { Errors = errors });
+        }
         var updateResult = await _categoryService.UpdateCategoryAsync(id, updateCategoryDto);
         if (updateResult != null)
         {

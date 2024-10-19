@@ -1,4 +1,5 @@
-﻿using Ecommerce.Application.DTOs;
+﻿using Ecommerce.Application.Binder;
+using Ecommerce.Application.DTOs;
 using Ecommerce.Application.DTOs.Manufacturer;
 using Ecommerce.Application.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -229,14 +230,17 @@ public class ManufacturerController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPost("AddManufacturer")]
-    public async Task<IActionResult> AddManufacturer([FromBody] AddUpdateManufacturerDto newManufacturer)
+    [HttpPost("facturer")]
+    public async Task<IActionResult> AddManufacturer([ModelBinder(typeof(ManufacturerModelBinder))] AddUpdateManufacturerDto newManufacturer)
     {
         if (!ModelState.IsValid)
         {
-            return BadRequest(ModelState);
-        }
-        var manufacturer = await _manufacturerService.AddManufacturerAsync(newManufacturer);
+            
+            var errors = ModelState.Values.SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage).ToList();
+            
+            return BadRequest(new { Errors = errors });
+        }   var manufacturer = await _manufacturerService.AddManufacturerAsync(newManufacturer);
         
         return CreatedAtAction(nameof(GetManufacturerById), new { id = manufacturer.Id }, manufacturer);
     }
@@ -249,11 +253,15 @@ public class ManufacturerController : ControllerBase
     }
 
     [HttpPut("UpdateManufacturer/{id}")]
-    public async Task<IActionResult> UpdateManufacturer(Guid id, AddUpdateManufacturerDto manufacturerDto)
+    public async Task<IActionResult> UpdateManufacturer(Guid id, [ModelBinder(typeof(ManufacturerModelBinder))]AddUpdateManufacturerDto manufacturerDto)
     {
         if (!ModelState.IsValid)
         {
-            return BadRequest(ModelState);
+            
+            var errors = ModelState.Values.SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage).ToList();
+            
+            return BadRequest(new { Errors = errors });
         }
 
         var updatedManufacturer = await _manufacturerService.UpdateManufacturerAsync(id,manufacturerDto);

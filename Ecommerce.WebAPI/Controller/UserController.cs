@@ -1,4 +1,5 @@
-﻿using Ecommerce.Application.DTOs.User;
+﻿using Ecommerce.Application.Binder.User;
+using Ecommerce.Application.DTOs.User;
 using Ecommerce.Application.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -205,16 +206,33 @@ public class UserController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost("SignUp")]
-    public async Task<IActionResult> AddUser([FromBody] RegisterUserDto userDto)
+    public async Task<IActionResult> AddUser([ModelBinder(typeof(UserModelBinder))] RegisterUserDto userDto)
     {
+        
+        if (!ModelState.IsValid)
+        {
+            
+            var errors = ModelState.Values.SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage).ToList();
+            
+            return BadRequest(new { Errors = errors });
+        }
         var user = await _userServices.AddUserAsync(userDto);
 
         return Ok(user);
     }
 
     [HttpPost("Login")]
-    public async Task<IActionResult> LoginUser([FromBody] LoginUserDto loginRequestDto)
+    public async Task<IActionResult> LoginUser([ModelBinder(typeof(UserModelBinder))] LoginUserDto loginRequestDto)
     {
+        if (!ModelState.IsValid)
+        {
+            
+            var errors = ModelState.Values.SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage).ToList();
+            
+            return BadRequest(new { Errors = errors });
+        }
         var user = await _userServices.AuthenticateUserAsync(loginRequestDto.Username, loginRequestDto.Password);
         if (user == null)
         {
@@ -225,8 +243,16 @@ public class UserController : ControllerBase
     }
 
     [HttpPut("UpdateUser")]
-    public async Task<IActionResult> UpdateUser([FromQuery] Guid userId, [FromBody] UpdateUserDto updateUserDto)
+    public async Task<IActionResult> UpdateUser([FromQuery] Guid userId, [ModelBinder(typeof(UserModelBinder))] UpdateUserDto updateUserDto)
     {
+        if (!ModelState.IsValid)
+        {
+            
+            var errors = ModelState.Values.SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage).ToList();
+            
+            return BadRequest(new { Errors = errors });
+        }
         var targetUser = await _userServices.GetUserByIdAsync(userId);
         if (targetUser != null)
         {
