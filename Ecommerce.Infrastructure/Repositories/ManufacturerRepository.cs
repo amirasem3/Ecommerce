@@ -15,33 +15,50 @@ public class ManufacturerRepository : IManufacturerRepository
     }
     public async Task<Manufacturer> GetManufacturerByIdAsync(Guid id)
     {
-        return await _context.Manufacturers.FindAsync(id);
+        return (await _context.Manufacturers.Include(m => m.Products2)
+            .FirstOrDefaultAsync(m => m.Id == id))!;
     }
-
-    public async Task<IEnumerable<Manufacturer>> SearchManufacturerByAddressAsync(string address)
-    {
-        return await _context.Manufacturers.Where(m => m.Address.Contains(address)).ToListAsync();
-
-    }
-
-    public async Task<IEnumerable<Manufacturer>> SearchManufacturerByEmailAsync(string email)
-    {
-        return await _context.Manufacturers.Where(m => m.Email.Contains(email)).ToListAsync();
-    }
-
-    public async Task<IEnumerable<Manufacturer>> SearchManufacturerByPhoneNumberAsync(string phoneNumber)
-    {
-        return await _context.Manufacturers.Where(m => m.PhoneNumber.Contains(phoneNumber)).ToListAsync();
-    }
-
+    
     public async Task<IEnumerable<Manufacturer>> GetAllManufacturersAsync()
     {
-        return await _context.Manufacturers.ToListAsync();
+        return await _context.Manufacturers.Include(m => m.Products2).ToListAsync();
     }
+
+    public async Task AddManufacturerProduct(Manufacturer manufacturer, Product product)
+    {
+        manufacturer.Products2.Add(product);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<Manufacturer> GetManufacturerByAddressAsync(string address)
+    {
+        return (await _context.Manufacturers
+            .Include(m => m.Products2)
+            .FirstOrDefaultAsync(m => m.Address == address))!;
+
+    }
+
+    public async Task<Manufacturer> GetManufacturerByEmailAsync(string email)
+    {
+        return (await _context.Manufacturers
+            .Include(m=>m.Products2)
+            .FirstOrDefaultAsync(m => m.Email == email))!;
+    }
+
+    public async Task<Manufacturer> GetManufacturerByPhoneNumberAsync(string phoneNumber)
+    {
+        return (await _context.Manufacturers
+            .Include(m => m.Products2)
+            .FirstOrDefaultAsync(m => m.PhoneNumber==phoneNumber))!;
+    }
+
+   
 
     public async Task<IEnumerable<Manufacturer>> GetManufacturersByOwnerAsync(string ownerName)
     {
-        return await _context.Manufacturers.Where(u => u.OwnerName == ownerName).ToListAsync();
+        return await _context.Manufacturers
+            .Include(m => m.Products2)
+            .Where(u => u.OwnerName == ownerName).ToListAsync();
     }
 
     public async Task AddManufacturerAsync(Manufacturer addManufacturer)
@@ -71,11 +88,17 @@ public class ManufacturerRepository : IManufacturerRepository
 
     }
 
-    public async Task<Manufacturer> GetManufactureProductAsync(Guid manufacturerId)
+    public async Task DeleteManufacturerProductAsync(Manufacturer manufacturer, Product product)
     {
-        return (await _context.Manufacturers
-            .Include(p => p.Products)
-            .ThenInclude(mp => mp.Product)
-            .FirstOrDefaultAsync(m => m.Id == manufacturerId))!;
+        manufacturer.Products2.Remove(product);
+        await _context.SaveChangesAsync();
     }
+
+    // public async Task<Manufacturer> GetManufactureProductAsync(Guid manufacturerId)
+    // {
+    //     return (await _context.Manufacturers
+    //         .Include(p => p.Products)
+    //         .ThenInclude(mp => mp.Product)
+    //         .FirstOrDefaultAsync(m => m.Id == manufacturerId))!;
+    // }
 }

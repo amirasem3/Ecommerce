@@ -25,11 +25,6 @@ public class RoleRepository : IRoleRepository
 
     public async Task<Role> GetRoleByName(string name)
     {
-        if (name == " ")
-        {
-            return null!;
-        }
-
         return   (await _context.Roles.FirstOrDefaultAsync(role => role.Name == name))!;
     }
 

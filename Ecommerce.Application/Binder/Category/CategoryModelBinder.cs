@@ -1,7 +1,10 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text.Json;
+using System.Text.RegularExpressions;
 using Ecommerce.Application.DTOs;
 using Ecommerce.Application.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Ecommerce.Application.Binder.Category;
 
@@ -18,53 +21,98 @@ public class CategoryModelBinder : IModelBinder
         var categoryNameValue = bindingContext.ValueProvider.GetValue("categoryName").FirstValue;
         var parentCategoryNameValue = bindingContext.ValueProvider.GetValue("parentCategoryName").FirstValue;
         var typeValue = bindingContext.ValueProvider.GetValue("type").FirstValue;
+        
+        bindingContext.HttpContext.Request.EnableBuffering();
+        var requestBody = await new StreamReader(bindingContext.HttpContext.Request.Body).ReadToEndAsync();
+        bindingContext.HttpContext.Request.Body.Position = 0;
 
+    
+        AddUpdateCategoryDto? categoryModel;
+        try
+        {
+            categoryModel = JsonSerializer.Deserialize<AddUpdateCategoryDto>(requestBody, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+        }
+        catch (JsonException)
+        {
+            bindingContext.ModelState.AddModelError("Category", "Invalid JSON format.");
+            return;
+        }
+
+        if (categoryModel == null)
+        {
+            bindingContext.ModelState.AddModelError("Category", "Invalid category data.");
+            return;
+        }
         
         //Category name
-        if (string.IsNullOrWhiteSpace(categoryNameValue))
+        if (string.IsNullOrWhiteSpace(categoryModel.Name))
         {
-            bindingContext.ModelState.AddModelError("categoryName", "Category name is required!");
+            bindingContext.ModelState.AddModelError("Category", "Category name is required!");
             return;
         }
 
-        if (categoryNameValue.Length > 40)
+        if (categoryModel.Name.Length > 40)
         {
-            bindingContext.ModelState.AddModelError("categoryName", "Category name cannot exceed 40 characters!");
+            bindingContext.ModelState.AddModelError("Category", "Category name cannot exceed 40 characters!");
             return;
         }
 
-        if (!Regex.Match(categoryNameValue, @"^[a-zA-Z0-9''-'\s]+$", RegexOptions.IgnoreCase).Success)
+        if (!Regex.Match(categoryModel.Name, @"^[a-zA-Z0-9''-'\s]+$", RegexOptions.IgnoreCase).Success)
         {
-            bindingContext.ModelState.AddModelError("categoryName",  "Invalid characters in category name!");
+            bindingContext.ModelState.AddModelError("Category",  "Invalid characters in category name!");
             return;
+        }
+
+        try
+        {
+            await _categoryServices.GetCategoryByNameAsync(categoryModel.Name);
+            bindingContext.ModelState.AddModelError("Category", "This category is already exists!");
+        }
+        catch (Exception e)
+        {
+            if (e.Message!= CategoryServices.CategoryException && e.Message!=CategoryServices.ParentCategoryException)
+            {
+                bindingContext.ModelState.AddModelError("Category","An unexpected error occurred while checking the name uniqueness.");
+            }
         }
 
         //Parent category name
-        if (string.IsNullOrEmpty(parentCategoryNameValue))
+        if (string.IsNullOrEmpty(categoryModel.ParentName))
         {
-            bindingContext.ModelState.AddModelError("parentCategoryName", "Parent category name is required!");
-            bindingContext.ModelState.AddModelError("parentCategoryName", "HINT: For parent category put a whitespace");
+            bindingContext.ModelState.AddModelError("Category", "Parent category name is required!");
+            bindingContext.ModelState.AddModelError("Category", "HINT: For parent category put a whitespace");
             return;
         }
-        if (!Regex.Match(parentCategoryNameValue, @"^[a-zA-Z0-9''-'\s]+$", RegexOptions.IgnoreCase).Success)
+        if (!Regex.Match(categoryModel.ParentName, @"^[a-zA-Z0-9''-'\s]+$", RegexOptions.IgnoreCase).Success)
         {
-            bindingContext.ModelState.AddModelError("parentCategoryName",  "Invalid characters in category parent name!");
-            return;
-        }
-
-        if (!bool.TryParse(typeValue, out bool type))
-        {
-            bindingContext.ModelState.AddModelError("type", "Enter a valid type value!");
+            bindingContext.ModelState.AddModelError("Category",  "Invalid characters in category parent name!");
             return;
         }
 
-        var category = new AddUpdateCategoryDto()
+        if (categoryModel.Type.GetType() != typeof(bool))
         {
-            CategoryName = categoryNameValue,
-            ParentCategoryName = parentCategoryNameValue,
-            Type = type
-        };
+            bindingContext.ModelState.AddModelError("Category", "Enter a valid type value!");
+            return;
+        }
+
+        var objectValidator =
+            (IObjectModelValidator)bindingContext.HttpContext.RequestServices.GetService(
+                typeof(IObjectModelValidator))!;
         
-        bindingContext.Result = ModelBindingResult.Success(category);
+        objectValidator!.Validate(
+            actionContext: bindingContext.ActionContext,
+            validationState: null,
+            prefix: null!,
+            model: categoryModel);
+
+        if (!bindingContext.ModelState.IsValid)
+        {
+            return;
+        }
+        
+        bindingContext.Result = ModelBindingResult.Success(categoryModel);
     }
 }

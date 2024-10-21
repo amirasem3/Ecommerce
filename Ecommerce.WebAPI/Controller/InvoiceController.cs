@@ -1,16 +1,15 @@
-﻿using Ecommerce.Application.Binder.Invoice;
-using Ecommerce.Application.DTOs;
+﻿using Ecommerce.Application.DTOs;
+using Ecommerce.Application.DTOs.Invoice;
 using Ecommerce.Application.Interfaces;
-using Ecommerce.Core.Entities;
-using Ecommerce.Core.Interfaces.RelationRepoInterfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcommerceSolution.Controller;
-[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
 
+[Authorize(AuthenticationSchemes =
+    JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
 [ApiController]
 [Route("api/[controller]")]
 public class InvoiceController : ControllerBase
@@ -25,448 +24,209 @@ public class InvoiceController : ControllerBase
     [HttpGet("GetInvoiceById/{id}")]
     public async Task<IActionResult> GetInvoiceById(Guid id)
     {
-        var invoice = await _invoiceServices.GetInvoiceByIdAsync(id);
-        var invoiceProduct = await _invoiceServices.GetInvoiceProductAsync(id);
-        var result = new
+        try
         {
-            invoice.Id,
-            invoice.OwnerName,
-            invoice.IdentificationCode,
-            invoice.OwnerFamilyName,
-            invoice.IssuerName,
-            invoice.IssueDate,
-            payment_date = invoice.PaymentDate!=null ? invoice.PaymentDate.ToString() : "Not Payed",
-            payment_status = invoice.PaymentStatus.ToString("G"),
-            invoice.TotalPrice,
-            Products = invoiceProduct.ProductInvoices.Select(pi => new
-            {
-                pi.ProductId,
-                pi.Product.Name,
-                pi.Product.Price,
-                pi.Count
-            })
-        };
-        if (invoice != null)
-        {
-            return Ok(result);
+            var invoice = await _invoiceServices.GetInvoiceByIdAsync(id);
+            return Ok(invoice);
         }
-
-        return NotFound($"There is no invoice with Id {id}");
+        catch (NullReferenceException e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("GetInvoiceByIDNumber")]
     public async Task<IActionResult> GetInvoiceByIdNumber([FromQuery] string idNumber)
     {
-        var invoice = await _invoiceServices.GetInvoiceByIdentificationCodeAsync(idNumber);
-        var invoiceProduct = await _invoiceServices.GetInvoiceProductAsync(invoice.Id);
-        var result = new
+        try
         {
-            invoice.Id,
-            invoice.OwnerName,
-            invoice.IdentificationCode,
-            invoice.OwnerFamilyName,
-            invoice.IssuerName,
-            invoice.IssueDate,
-            invoice.PaymentDate,
-            payment_status = invoice.PaymentStatus.ToString("G"),
-            invoice.TotalPrice,
-            Products = invoiceProduct.ProductInvoices.Select(pi => new
-            {
-                pi.ProductId,
-                pi.Product.Name,
-                pi.Product.Price,
-                pi.Count
-            })
-        };
-        if (invoice != null)
-        {
-            return Ok(result);
+            var invoice = await _invoiceServices.GetInvoiceByIdentificationCodeAsync(idNumber);
+            return Ok(invoice);
         }
-
-        return NotFound($"There is no invoice with Id {invoice.Id}");
+        catch (NullReferenceException e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("SearchInvoiceByOwnerName/{ownerName}")]
     public async Task<IActionResult> SearchInvoicesByOwnerName(string ownerName)
     {
-        var Invoices = await _invoiceServices.GetInvoicesByOwnerNameAsync(ownerName);
-        var result = new List<object>();
-        foreach (var invoice in Invoices)
+        try
         {
-            var products = new List<object>();
-            var inv = await _invoiceServices.GetInvoiceProductAsync(invoice.Id);
-            foreach (var invProducts in inv.ProductInvoices)
-            {
-                products.Add(new
-                {
-                    invProducts.Product.Id,
-                    invProducts.Product.Name,
-                    invProducts.Product.Price,
-                    invProducts.Count
-                });
-            }
-
-            result.Add(new
-            {
-                invoice.Id,
-                invoice.OwnerName,
-                invoice.IdentificationCode,
-                invoice.OwnerFamilyName,
-                invoice.IssuerName,
-                invoice.IssueDate,
-                invoice.PaymentDate,
-                payment_status = invoice.PaymentStatus.ToString("G"),
-                invoice.TotalPrice,
-                Products = products
-            });
+            var invoices = await _invoiceServices.GetInvoicesByOwnerNameAsync(ownerName);
+            return Ok(invoices);
         }
-
-        return Ok(result);
-
+        catch (NullReferenceException e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("SearchInvoiceByOwnerLastName/{lastname}")]
     public async Task<IActionResult> SearchInvoicesByOwnerLastname(string lastname)
     {
-        var Invoices = await _invoiceServices.GetInvoicesByOwnerFamilyNameAsync(lastname);
-        var result = new List<object>();
-        foreach (var invoice in Invoices)
+        try
         {
-            var products = new List<object>();
-            var inv = await _invoiceServices.GetInvoiceProductAsync(invoice.Id);
-            foreach (var invProducts in inv.ProductInvoices)
-            {
-                products.Add(new
-                {
-                    invProducts.Product.Id,
-                    invProducts.Product.Name,
-                    invProducts.Product.Price,
-                    invProducts.Count
-                });
-            }
-            
-            result.Add(new
-            {
-                invoice.Id,
-                invoice.OwnerName,
-                invoice.IdentificationCode,
-                invoice.OwnerFamilyName,
-                invoice.IssuerName,
-                invoice.IssueDate,
-                invoice.PaymentDate,
-                payment_status = invoice.PaymentStatus.ToString("G"),
-                invoice.TotalPrice,
-                Products = products
-            });
+            var invoices = await _invoiceServices.GetInvoicesByOwnerFamilyNameAsync(lastname);
+            return Ok(invoices);
         }
-        return Ok(result);
+        catch (NullReferenceException e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("SearchInvoicesByIssuerName/{issuerName}")]
     public async Task<IActionResult> SearchInvoicesByIssuerName(string issuerName)
     {
-        var Invoices = await _invoiceServices.GetInvoicesByIssuerNameAsync(issuerName);
-        var result = new List<object>();
-        foreach (var invoice in Invoices)
+        try
         {
-            var products = new List<object>();
-            var inv = await _invoiceServices.GetInvoiceProductAsync(invoice.Id);
-            foreach (var invProducts in inv.ProductInvoices)
-            {
-                products.Add(new
-                {
-                    invProducts.Product.Id,
-                    invProducts.Product.Name,
-                    invProducts.Product.Price,
-                    invProducts.Count
-                });
-            }
-            
-            result.Add(new
-            {
-                invoice.Id,
-                invoice.OwnerName,
-                invoice.IdentificationCode,
-                invoice.OwnerFamilyName,
-                invoice.IssuerName,
-                invoice.IssueDate,
-                invoice.PaymentDate,
-                payment_status = invoice.PaymentStatus.ToString("G"),
-                invoice.TotalPrice,
-                Products = products
-            });
+            var invoices = await _invoiceServices.GetInvoicesByIssuerNameAsync(issuerName);
+            return Ok(invoices);
         }
-        return Ok(result);
+        catch (NullReferenceException e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("PaymentStatusFilter/{paymentStatus}")]
     public async Task<IActionResult> PaymentStatusFiler(string paymentStatus)
     {
-        var Invoices = await _invoiceServices.GetInvoicesByPaymentStatusAsync(paymentStatus);
-        var result = new List<object>();
-        foreach (var invoice in Invoices)
+        try
         {
-            var products = new List<object>();
-            var inv = await _invoiceServices.GetInvoiceProductAsync(invoice.Id);
-            foreach (var invProducts in inv.ProductInvoices)
-            {
-                products.Add(new
-                {
-                    invProducts.Product.Id,
-                    invProducts.Product.Name,
-                    invProducts.Product.Price,
-                    invProducts.Count
-                });
-            }
-            
-            result.Add(new
-            {
-                invoice.Id,
-                invoice.OwnerName,
-                invoice.IdentificationCode,
-                invoice.OwnerFamilyName,
-                invoice.IssuerName,
-                invoice.IssueDate,
-                invoice.PaymentDate,
-                payment_status = invoice.PaymentStatus.ToString("G"),
-                invoice.TotalPrice,
-                Products = products
-            });
+            var invoices = await _invoiceServices.GetInvoicesByPaymentStatusAsync(paymentStatus);
+            return Ok(invoices);
         }
-        return Ok(result);
+        catch (NullReferenceException e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("IssueDateFilter/{issueDate}")]
     public async Task<IActionResult> IssueDateFilter(DateTime issueDate)
     {
-        var Invoices = await _invoiceServices.GetInvoiceByIssueDateAsync(issueDate);
-        var result = new List<object>();
-        foreach (var invoice in Invoices)
+        try
         {
-            var products = new List<object>();
-            var inv = await _invoiceServices.GetInvoiceProductAsync(invoice.Id);
-            foreach (var invProducts in inv.ProductInvoices)
-            {
-                products.Add(new
-                {
-                    invProducts.Product.Id,
-                    invProducts.Product.Name,
-                    invProducts.Product.Price,
-                    invProducts.Count
-                });
-            }
-            
-            result.Add(new
-            {
-                invoice.Id,
-                invoice.OwnerName,
-                invoice.IdentificationCode,
-                invoice.OwnerFamilyName,
-                invoice.IssuerName,
-                invoice.IssueDate,
-                invoice.PaymentDate,
-                payment_status = invoice.PaymentStatus.ToString("G"),
-                invoice.TotalPrice,
-                Products = products
-            });
+            var invoices = await _invoiceServices.GetInvoiceByIssueDateAsync(issueDate);
+            return Ok(invoices);
         }
-        return Ok(result);
+        catch (NullReferenceException e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("PaymentDataFilter/{paymentDate}")]
     public async Task<IActionResult> PaymentDateFilter(DateTime paymentDate)
     {
-        var Invoices = await _invoiceServices.GetInvoicesByPaymentDateAsync(paymentDate);
-        var result = new List<object>();
-        foreach (var invoice in Invoices)
+        try
         {
-            var products = new List<object>();
-            var inv = await _invoiceServices.GetInvoiceProductAsync(invoice.Id);
-            foreach (var invProducts in inv.ProductInvoices)
-            {
-                products.Add(new
-                {
-                    invProducts.Product.Id,
-                    invProducts.Product.Name,
-                    invProducts.Product.Price,
-                    invProducts.Count
-                });
-            }
-            
-            result.Add(new
-            {
-                invoice.Id,
-                invoice.OwnerName,
-                invoice.IdentificationCode,
-                invoice.OwnerFamilyName,
-                invoice.IssuerName,
-                invoice.IssueDate,
-                invoice.PaymentDate,
-                payment_status = invoice.PaymentStatus.ToString("G"),
-                invoice.TotalPrice,
-                Products = products
-            });
+            var invoices = await _invoiceServices.GetInvoicesByPaymentDateAsync(paymentDate);
+            return Ok(invoices);
         }
-        return Ok(result);
+        catch (NullReferenceException e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
-[HttpGet("GetAllInvoices")]
+    [HttpGet("GetAllInvoices")]
     public async Task<IActionResult> GetAllInvoices()
     {
-        var Invoices = await _invoiceServices.GetAllInvoicesAsync();
-        var result = new List<object>();
-        foreach (var invoice in Invoices)
-        {
-            var products = new List<object>();
-            var inv = await _invoiceServices.GetInvoiceProductAsync(invoice.Id);
-            foreach (var invProducts in inv.ProductInvoices)
-            {
-                products.Add(new
-                {
-                    invProducts.Product.Id,
-                    invProducts.Product.Name,
-                    invProducts.Product.Price,
-                    invProducts.Count
-                });
-            }
-            
-            result.Add(new
-            {
-                invoice.Id,
-                invoice.OwnerName,
-                invoice.IdentificationCode,
-                invoice.OwnerFamilyName,
-                invoice.IssuerName,
-                invoice.IssueDate,
-                invoice.PaymentDate,
-                payment_status = invoice.PaymentStatus.ToString("G"),
-                invoice.TotalPrice,
-                Products = products
-            });
-        }
-        return Ok(result);
+        var invoices = await _invoiceServices.GetAllInvoicesAsync();
+        return Ok(invoices);
     }
-    [HttpGet("GetAllInvoicesTest")]
-    public async Task<IActionResult> GetAllInvoicesTest()
-    {
-        var Invoices = await _invoiceServices.GetAllInvoicesAsync();
-        return Ok(Invoices);
-        var result = new List<object>();
-        foreach (var invoice in Invoices)
-        {
-            var products = new List<object>();
-            var inv = await _invoiceServices.GetInvoiceProductAsync(invoice.Id);
-            foreach (var invProducts in inv.ProductInvoices)
-            {
-                products.Add(new
-                {
-                    invProducts.Product.Id,
-                    invProducts.Product.Name,
-                    invProducts.Product.Price,
-                    invProducts.Count
-                });
-            }
-            
-            result.Add(new
-            {
-                invoice.Id,
-                invoice.OwnerName,
-                invoice.IdentificationCode,
-                invoice.OwnerFamilyName,
-                invoice.IssuerName,
-                invoice.IssueDate,
-                invoice.PaymentDate,
-                payment_status = invoice.PaymentStatus.ToString("G"),
-                invoice.TotalPrice,
-                Products = products
-            });
-        }
-        return Ok(result);
-    }
+
     [HttpPost("IssueNewInvoice")]
-    public async Task<IActionResult> IssueNewInvoice([ModelBinder(typeof(InvoiceModelBinder))] AddInvoiceDto newInvoice)
+    [Consumes("application/json")]
+    public async Task<IActionResult> IssueNewInvoice([FromBody] AddInvoiceDto newInvoice)
     {
         if (!ModelState.IsValid)
         {
-            
-            var errors = ModelState.Values.SelectMany(v => v.Errors)
-                .Select(e => e.ErrorMessage).ToList();
-            
-            return BadRequest(new { Errors = errors });
+            return BadRequest(ModelState["Invoice"]?.Errors.Select(e => e.ErrorMessage).ToList());
         }
+
         var invoice = await _invoiceServices.AddInvoiceAsync(newInvoice);
         return CreatedAtAction(nameof(GetInvoiceById), new { id = invoice.Id }, invoice);
     }
 
     [HttpPost("AddInvoiceProducts")]
-    public async Task<IActionResult> AddProductToInvoice([FromQuery] Guid invoiceId, [FromQuery] Guid productId, [FromQuery] int count)
+    public async Task<IActionResult> AddProductToInvoice([FromQuery] Guid invoiceId, [FromQuery] Guid productId,
+        [FromQuery] int count)
     {
-        await _invoiceServices.AssignInvoiceProductAsync(invoiceId, productId, count);
-        return Ok(_invoiceServices.GetInvoiceByIdAsync(invoiceId));
+        try
+        {
+            await _invoiceServices.AssignInvoiceProductAsync(invoiceId, productId, count);
+            return Ok($"The {count}  products are added successfully.");
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpPut("UpdateInvoice/{id}")]
-    public async Task<IActionResult> UpdateInvoice(Guid id, [ModelBinder(typeof(InvoiceModelBinder))] UpdateInvoiceDto updateInvoiceDto)
+    [Consumes("application/json")]
+    public async Task<IActionResult> UpdateInvoice(Guid id, [FromBody] UpdateInvoiceDto updateInvoiceDto)
     {
         if (!ModelState.IsValid)
         {
-            
-            var errors = ModelState.Values.SelectMany(v => v.Errors)
-                .Select(e => e.ErrorMessage).ToList();
-            
-            return BadRequest(new { Errors = errors });
+            return BadRequest(ModelState["Invoice"]?.Errors.Select(e => e.ErrorMessage).ToList());
         }
 
-        var updatedInvoice = await _invoiceServices.UpdateInvoiceAsync(id, updateInvoiceDto);
-        return Ok(updatedInvoice);
+        try
+        {
+            var updatedInvoice = await _invoiceServices.UpdateInvoiceAsync(id, updateInvoiceDto);
+            return Ok(updatedInvoice);
+        }
+        catch (NullReferenceException e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     [HttpPut("Pay")]
     public async Task<IActionResult> PayInvoice([FromQuery] Guid invoiceId, [FromQuery] decimal price)
     {
-        var paymentResult = await _invoiceServices.PayAsync(invoiceId, price);
-        var invoice = await _invoiceServices.GetInvoiceByIdAsync(invoiceId);
-        
-
-        if (invoice.PaymentStatus ==PaymentStatus.Payed)
+        try
         {
-            return NotFound("Payment unsuccessful: The invoice payed Before");
-        }
-
-        if (invoice.TotalPrice != price)
-        {
-            return NotFound("Payment unsuccessful: Check the payment amount.");
-        }
-        if (paymentResult)
-        {
+            await _invoiceServices.PayAsync(invoiceId, price);
             return Ok($"The invoice with Id {invoiceId} payed Successfully. ");
         }
-
-        return NotFound("Payment unsuccessful");
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     [HttpDelete("DeleteInvoice/{id}")]
     public async Task<IActionResult> DeleteInvoice(Guid id)
     {
-        var invoice = await _invoiceServices.GetInvoiceByIdAsync(id);
-        if (invoice.PaymentStatus == PaymentStatus.Pending || invoice.PaymentStatus == PaymentStatus.Payed)
+        try
         {
             await _invoiceServices.DeleteInvoiceAsync(id);
-            return Ok($"The invoice with ID {invoice} successfully Deleted!");
+            return Ok($"The invoice with ID {id} successfully Deleted!");
         }
-
-        return NotFound("Check the payment Status!");
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpDelete("DeleteInvoiceProduct")]
     public async Task<IActionResult> DeleteInvoiceProduct(Guid invoiceId, Guid productId)
     {
-        var deleted = await _invoiceServices.DeleteInvoiceProductAsync(invoiceId, productId);
-        if (deleted)
+        try
         {
+            await _invoiceServices.DeleteInvoiceProductAsync(invoiceId, productId);
             return Ok($"Product with ID{productId} has successfully deleted from Invoice with Id{invoiceId}");
         }
-
-        return NotFound($"There is no Product({productId}) inside the invoice ({invoiceId})!!");
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
 }

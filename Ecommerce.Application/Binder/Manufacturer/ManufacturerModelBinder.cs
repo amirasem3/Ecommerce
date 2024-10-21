@@ -1,7 +1,11 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text.Json;
+using System.Text.RegularExpressions;
+using Ecommerce.Application.DTOs;
 using Ecommerce.Application.DTOs.Manufacturer;
 using Ecommerce.Application.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Ecommerce.Application.Binder;
 
@@ -13,192 +17,230 @@ public class ManufacturerModelBinder : IModelBinder
     {
         _manufacturerService = manufacturerService;
     }
+
     public async Task BindModelAsync(ModelBindingContext bindingContext)
     {
-        var nameValue = bindingContext.ValueProvider.GetValue("name").FirstValue;
-        var ownerNameValue = bindingContext.ValueProvider.GetValue("ownerName").FirstValue;
-        var manufacturerCountryValue = bindingContext.ValueProvider.GetValue("manufacturerCountry").FirstValue;
-        var emailValue = bindingContext.ValueProvider.GetValue("email").FirstValue;
-        var addressValue = bindingContext.ValueProvider.GetValue("address").FirstValue;
-        var phoneNumberValue = bindingContext.ValueProvider.GetValue("phoneNumber").FirstValue;
-        var rateValue = bindingContext.ValueProvider.GetValue("rate").FirstValue;
-        var establishDateValue = bindingContext.ValueProvider.GetValue("establishDate").FirstValue;
-        var statusValue = bindingContext.ValueProvider.GetValue("status").FirstValue;
+        bindingContext.HttpContext.Request.EnableBuffering();
+        var requestBody = await new StreamReader(bindingContext.HttpContext.Request.Body).ReadToEndAsync();
+        bindingContext.HttpContext.Request.Body.Position = 0;
+
+
+        AddUpdateManufacturerDto? addUpdateManufacturerDto;
+        try
+        {
+            addUpdateManufacturerDto = JsonSerializer.Deserialize<AddUpdateManufacturerDto>(requestBody,
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+        }
+        catch (JsonException)
+        {
+            bindingContext.ModelState.AddModelError("Manufacturer", "Invalid JSON format.");
+            return;
+        }
+
+        if (addUpdateManufacturerDto == null)
+        {
+            bindingContext.ModelState.AddModelError("Manufacturer", "Invalid invoice data.");
+            return;
+        }
 
         //Name
-        if (string.IsNullOrWhiteSpace(nameValue))
+        if (string.IsNullOrWhiteSpace(addUpdateManufacturerDto.Name))
         {
-            bindingContext.ModelState.AddModelError("name", "Name is required.");
-            return;
+            bindingContext.ModelState.AddModelError("Manufacturer", "Name is required.");
         }
 
-        if (nameValue.Length > 40)
+        if (addUpdateManufacturerDto.Name.Length > 40)
         {
-            bindingContext.ModelState.AddModelError("name", "Name cannot exceed 40 characters!");
-            return;
+            bindingContext.ModelState.AddModelError("Manufacturer", "Name cannot exceed 40 characters!");
         }
 
-        if (!Regex.Match(nameValue, @"^[a-zA-Z''\s]+$", RegexOptions.IgnoreCase).Success)
+        if (!Regex.Match(addUpdateManufacturerDto.Name, @"^[a-zA-Z''\s]+$", RegexOptions.IgnoreCase).Success)
         {
-            bindingContext.ModelState.AddModelError("name", "Invalid characters in name!");
-            return;
+            bindingContext.ModelState.AddModelError("Manufacturer", "Invalid characters in name!");
         }
 
         //Owner Name
-        if (string.IsNullOrWhiteSpace(ownerNameValue))
+        if (string.IsNullOrWhiteSpace(addUpdateManufacturerDto.OwnerName))
         {
-            bindingContext.ModelState.AddModelError("ownerName", "Owner name is required.");
-            return;
-        }
-        if (ownerNameValue.Length > 40)
-        {
-            bindingContext.ModelState.AddModelError("ownerName", "Ownername cannot exceed 40 characters!");
-            return;
+            bindingContext.ModelState.AddModelError("Manufacturer", "Owner name is required.");
         }
 
-        if (!Regex.Match(ownerNameValue, @"^[a-zA-Z''\s]+$", RegexOptions.IgnoreCase).Success)
+        if (addUpdateManufacturerDto.OwnerName.Length > 40)
         {
-            bindingContext.ModelState.AddModelError("ownerName", "Invalid characters in owner name!");
-            return;
+            bindingContext.ModelState.AddModelError("Manufacturer", "Owner name cannot exceed 40 characters!");
         }
-        
+
+        if (!Regex.Match(addUpdateManufacturerDto.OwnerName, @"^[a-zA-Z''\s]+$", RegexOptions.IgnoreCase).Success)
+        {
+            bindingContext.ModelState.AddModelError("Manufacturer", "Invalid characters in owner name!");
+        }
+
         //Manufacturer Country
 
-        if (string.IsNullOrWhiteSpace(manufacturerCountryValue))
+        if (string.IsNullOrWhiteSpace(addUpdateManufacturerDto.ManufacturerCountry))
         {
-            bindingContext.ModelState.AddModelError("manufacturerCountry", "Manufacturer country is required.");
-            return;
-        }
-        if (manufacturerCountryValue.Length > 40)
-        {
-            bindingContext.ModelState.AddModelError("manufacturerCountry", "Manufacturer country cannot exceed 40 characters!");
-            return;
+            bindingContext.ModelState.AddModelError("Manufacturer", "Manufacturer country is required.");
         }
 
-        if (!Regex.Match(manufacturerCountryValue, @"^[a-zA-Z''\s]+$", RegexOptions.IgnoreCase).Success)
+        if (addUpdateManufacturerDto.ManufacturerCountry.Length > 40)
         {
-            bindingContext.ModelState.AddModelError("manufacturerCountry", "Invalid characters in manufacturer name!");
-            return;
+            bindingContext.ModelState.AddModelError("Manufacturer",
+                "Manufacturer country cannot exceed 40 characters!");
         }
-        
+
+        if (!Regex.Match(addUpdateManufacturerDto.ManufacturerCountry, @"^[a-zA-Z''\s]+$", RegexOptions.IgnoreCase)
+                .Success)
+        {
+            bindingContext.ModelState.AddModelError("Manufacturer", "Invalid characters in manufacturer name!");
+        }
+
         //Email
 
-        if (string.IsNullOrWhiteSpace(emailValue))
+        if (string.IsNullOrWhiteSpace(addUpdateManufacturerDto.Email))
         {
-            bindingContext.ModelState.AddModelError("email", "Email is required.");
-            return;
-        }
-        if (emailValue.Length > 20)
-        {
-            bindingContext.ModelState.AddModelError("email", "Email cannot exceed 20 characters!");
-            return;
+            bindingContext.ModelState.AddModelError("Manufacturer", "Email is required.");
         }
 
-        if (!emailValue.Contains("@"))
+        if (addUpdateManufacturerDto.Email.Length > 20)
         {
-            bindingContext.ModelState.AddModelError("email", "Enter a valid email address!");
-            return;
+            bindingContext.ModelState.AddModelError("Manufacturer", "Email cannot exceed 20 characters!");
         }
 
-        var manufacturerExistEmail = await _manufacturerService.SearchManufacturerByEmailAsync(emailValue);
-        if (manufacturerExistEmail!=null)
+        if (!addUpdateManufacturerDto.Email.Contains("@"))
         {
-            bindingContext.ModelState.AddModelError("email", "Email is already exists!");
-            return;
+            bindingContext.ModelState.AddModelError("Manufacturer", "Enter a valid email address!");
         }
-        
+
+
+        try
+        {
+            await _manufacturerService.GetManufacturerByEmailAsync(addUpdateManufacturerDto.Email);
+            bindingContext.ModelState.AddModelError("Manufacturer", "Email is already exists!");
+        }
+        catch (Exception e)
+        {
+            if (e.Message != ManufacturerService.ManufacturerException)
+            {
+                bindingContext.ModelState.AddModelError("Manufacturer",
+                    "An unexpected error occurred while checking the email uniqueness.");
+            }
+        }
+
+
         //Address
-       
-        if (addressValue.Length > 100)
+
+        if (addUpdateManufacturerDto.Address.Length > 100)
         {
-            bindingContext.ModelState.AddModelError("address", "Address cannot exceed 40 characters!");
-            return;
+            bindingContext.ModelState.AddModelError("Manufacturer", "Address cannot exceed 40 characters!");
         }
 
-        if (!Regex.Match(addressValue,  @"^[a-zA-Z0-9''\s]+$", RegexOptions.IgnoreCase).Success)
+        if (!Regex.Match(addUpdateManufacturerDto.Address, @"^[a-zA-Z0-9''\s]+$", RegexOptions.IgnoreCase).Success)
         {
-            bindingContext.ModelState.AddModelError("address", "Invalid characters in address!");
-            return;
+            bindingContext.ModelState.AddModelError("Manufacturer", "Invalid characters in address!");
         }
 
-        if (string.IsNullOrWhiteSpace(addressValue))
+        if (string.IsNullOrWhiteSpace(addUpdateManufacturerDto.Address))
         {
-            bindingContext.ModelState.AddModelError("address", "Address is required.");
-            return;
+            bindingContext.ModelState.AddModelError("Manufacturer", "Address is required.");
         }
 
-        var manufacturerExistAddress = await _manufacturerService.SearchManufacturerByAddressAsync(addressValue);
-        if (manufacturerExistAddress!=null)
+        try
         {
-            bindingContext.ModelState.AddModelError("address", "Address is already exists." );
-            return;
+            await _manufacturerService.GetManufacturerByAddressAsync(addUpdateManufacturerDto.Address);
+            bindingContext.ModelState.AddModelError("Manufacturer", "Address is already exists.");
+        }
+        catch (Exception e)
+        {
+            if (e.Message!= ManufacturerService.ManufacturerException)
+            {
+                bindingContext.ModelState.AddModelError("Manufacturer","An unexpected error occurred while checking the address uniqueness.");
+            }
         }
         
+
         //PhoneNumber
 
-        if (phoneNumberValue.Length > 20)
+
+        try
         {
-            bindingContext.ModelState.AddModelError("phoneNumber", "Phone number cannot exceed 40 characters!");
-            return;
+            var manufacturerExistPhoneNumber =
+                await _manufacturerService.GetManufacturerByPhoneNumberAsync(addUpdateManufacturerDto.PhoneNumber);
+            bindingContext.ModelState.AddModelError("Manufacturer", "Phone number is already exist.");
+        }
+        catch (Exception e)
+        {
+            if (e.Message!=ManufacturerService.ManufacturerException)
+            {
+                bindingContext.ModelState.AddModelError("Manufacturer", "An unexpected error occurred while checking the phone number uniqueness.");
+            }
+        }
+        
+
+        if (addUpdateManufacturerDto.PhoneNumber.Length > 20)
+        {
+            bindingContext.ModelState.AddModelError("Manufacturer", "Phone number cannot exceed 40 characters!");
         }
 
-        if (!Regex.Match(phoneNumberValue,  @"^[0-9]+$", RegexOptions.IgnoreCase).Success)
+        if (!Regex.Match(addUpdateManufacturerDto.PhoneNumber, @"^[0-9]+$", RegexOptions.IgnoreCase).Success)
         {
-            bindingContext.ModelState.AddModelError("phoneNumber", "Non-numeric characters are not allowed in phone number");
-            return;
+            bindingContext.ModelState.AddModelError("Manufacturer",
+                "Non-numeric characters are not allowed in phone number");
         }
-        if (string.IsNullOrWhiteSpace(phoneNumberValue))
+
+        if (string.IsNullOrWhiteSpace(addUpdateManufacturerDto.PhoneNumber))
         {
-            bindingContext.ModelState.AddModelError("phoneNumber","Phone number is required.");
-            return;
+            bindingContext.ModelState.AddModelError("Manufacturer", "Phone number is required.");
         }
-        
-        
+
+
         //Rate
 
-        if (!int.TryParse(rateValue, out int rate))
+        if (addUpdateManufacturerDto.Rate.GetType()!= typeof(int))
         {
-            bindingContext.ModelState.AddModelError("rate", "Enter valid rate value!");
-            return;
+            bindingContext.ModelState.AddModelError("Manufacturer", "Enter valid rate value!");
         }
 
-        if (rate > 5)
+        if (addUpdateManufacturerDto.Rate > 5)
         {
-            bindingContext.ModelState.AddModelError("rate", "Rate cannot be greater than 5!");
-            return;
+            bindingContext.ModelState.AddModelError("Manufacturer", "Rate cannot be greater than 5!");
         }
 
         //Establish Date
-        if (string.IsNullOrWhiteSpace(establishDateValue))
+        if (addUpdateManufacturerDto.EstablishDate == null)
         {
-            bindingContext.ModelState.AddModelError("establishDate", "Establish Date is required.");
-            return;
+            bindingContext.ModelState.AddModelError("Manufacturer", "Establish Date is required.");
         }
 
-        if (Convert.ToDateTime(establishDateValue) > DateTime.Now)
+        if (addUpdateManufacturerDto.EstablishDate > DateTime.Now)
         {
-            bindingContext.ModelState.AddModelError("establishDate", "Enter valid establish date.");
-            return;
+            bindingContext.ModelState.AddModelError("Manufacturer", "Enter valid establish date.");
         }
-        
+
         //Status
 
-        if (string.IsNullOrWhiteSpace(statusValue))
+        if (addUpdateManufacturerDto.Status == null)
         {
-            bindingContext.ModelState.AddModelError("status", "Status is required!");
+            bindingContext.ModelState.AddModelError("Manufacturer", "Status is required!");
+        }
+
+        var objectValidator =
+            (IObjectModelValidator)bindingContext.HttpContext.RequestServices.GetService(
+                typeof(IObjectModelValidator))!;
+
+        objectValidator!.Validate(
+            actionContext: bindingContext.ActionContext,
+            validationState: null,
+            prefix: null!,
+            model: addUpdateManufacturerDto);
+
+        if (!bindingContext.ModelState.IsValid)
+        {
             return;
         }
 
-        var manufacturer = new AddUpdateManufacturerDto()
-        {
-            Name = nameValue,
-            Rate = rate,
-            OwnerName = ownerNameValue,
-            PhoneNumber = phoneNumberValue, EsatablishDate = Convert.ToDateTime(establishDateValue),
-            Address = addressValue, ManufacturerCountry = manufacturerCountryValue, Status = Convert.ToBoolean(statusValue),
-            Email = emailValue
-        };
-        
-        bindingContext.Result = ModelBindingResult.Success(manufacturer);
+        bindingContext.Result = ModelBindingResult.Success(addUpdateManufacturerDto);
     }
 }

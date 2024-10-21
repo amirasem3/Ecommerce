@@ -1,5 +1,5 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using Ecommerce.Application.DTOs;
+﻿using Ecommerce.Application.DTOs;
+using Ecommerce.Application.DTOs.Manufacturer;
 using Ecommerce.Application.Interfaces;
 using Ecommerce.Core.Entities;
 using Ecommerce.Core.Interfaces;
@@ -9,6 +9,7 @@ namespace Ecommerce.Application.Services;
 public class ProductService : IProductService
 {
     private readonly IProductRepository _productRepository;
+    public const string ProductException = "Product Not Found!";
 
     public ProductService(IProductRepository productRepository)
     {
@@ -18,6 +19,11 @@ public class ProductService : IProductService
     public async Task<ProductDto> GetProductByIdAsync(Guid id)
     {
         var product = await _productRepository.GetProductByIdAsync(id);
+        if (product == null)
+        {
+            throw new Exception(ProductException);
+        }
+
         return new ProductDto
         {
             Id = product.Id,
@@ -25,9 +31,17 @@ public class ProductService : IProductService
             Price = product.Price,
             Inventory = product.Inventory,
             Status = product.Status,
-            DOP = product.Dop,
-            DOE = product.Doe,
-            ManufacturerProducts = product.Manufacturers
+            Dop = product.Dop,
+            Doe = product.Doe,
+            Manufacturer = product.Manufacturers2.Select(m => new ManufacturerProductDto
+            {
+                Address = m.Address,
+                Email = m.Email,
+                Country = m.ManufacturerCountry,
+                Name = m.Name,
+                PhoneNumber = m.PhoneNumber,
+                Rate = m.Rate
+            }).ToList()
         };
     }
 
@@ -42,7 +56,7 @@ public class ProductService : IProductService
             Dop = updateProductDto.Dop,
             Doe = updateProductDto.Doe,
             Status = updateProductDto.Doe > updateProductDto.Dop && updateProductDto.Inventory > 0,
-            Manufacturers = []
+            Manufacturers2 = []
         };
         await _productRepository.AddProductAsync(product);
         return new ProductDto
@@ -52,9 +66,9 @@ public class ProductService : IProductService
             Price = product.Price,
             Status = product.Status,
             Inventory = product.Inventory,
-            DOP = product.Dop,
-            DOE = product.Doe,
-            ManufacturerProducts = product.Manufacturers
+            Dop = product.Dop,
+            Doe = product.Doe,
+            Manufacturer = []
         };
     }
 
@@ -63,7 +77,7 @@ public class ProductService : IProductService
         var product = await _productRepository.GetProductByIdAsync(id);
         if (product == null)
         {
-            return null;
+            throw new Exception(ProductException);
         }
 
         product.Name = updateProductDto.Name;
@@ -81,22 +95,30 @@ public class ProductService : IProductService
             Price = product.Price,
             Status = product.Status,
             Inventory = product.Inventory,
-            DOP = product.Dop,
-            DOE = product.Doe,
-            ManufacturerProducts = product.Manufacturers
+            Dop = product.Dop,
+            Doe = product.Doe,
+            Manufacturer = product.Manufacturers2.Select(m => new ManufacturerProductDto
+            {
+                PhoneNumber = m.PhoneNumber,
+                Address = m.Address,
+                Country = m.ManufacturerCountry,
+                Email = m.Email,
+                Name = m.Name,
+                Rate = m.Rate
+            }).ToList()
         };
     }
 
     public async Task<bool> DeleteProductByIdAsync(Guid id)
     {
         var product = await _productRepository.GetProductByIdAsync(id);
-        if (product != null)
+        if (product == null)
         {
-            await _productRepository.DeleteProductByIdAsync(id);
-            return true;
+            throw new Exception(ProductException);
         }
 
-        return false;
+        await _productRepository.DeleteProductByIdAsync(id);
+        return true;
     }
 
     public async Task<IEnumerable<ProductDto>> GetAllProductAsync()
@@ -109,14 +131,27 @@ public class ProductService : IProductService
             Price = product.Price,
             Status = product.Status,
             Inventory = product.Inventory,
-            DOP = product.Dop,
-            DOE = product.Doe
-        });
+            Dop = product.Dop,
+            Doe = product.Doe,
+            Manufacturer = product.Manufacturers2.Select(m => new ManufacturerProductDto
+            {
+                PhoneNumber = m.PhoneNumber,
+                Address = m.Address,
+                Country = m.ManufacturerCountry,
+                Email = m.Email,
+                Name = m.Name,
+                Rate = m.Rate
+            }).ToList()
+        }).ToList();
     }
 
     public async Task<IEnumerable<ProductDto>> GetAllProductsByNameAsync(string name)
     {
         var products = await _productRepository.GetAllProductsByNameAsync(name);
+        if (products == null)
+        {
+            throw new Exception(ProductException);
+        }
 
         return products.Select(product => new ProductDto
         {
@@ -125,14 +160,27 @@ public class ProductService : IProductService
             Price = product.Price,
             Status = product.Status,
             Inventory = product.Inventory,
-            DOP = product.Dop,
-            DOE = product.Doe,
-        });
+            Dop = product.Dop,
+            Doe = product.Doe,
+            Manufacturer = product.Manufacturers2.Select(m => new ManufacturerProductDto
+            {
+                PhoneNumber = m.PhoneNumber,
+                Address = m.Address,
+                Country = m.ManufacturerCountry,
+                Email = m.Email,
+                Name = m.Name,
+                Rate = m.Rate
+            }).ToList()
+        }).ToList();
     }
 
     public async Task<IEnumerable<ProductDto>> FilterProductByPriceAsync(decimal startPrice, decimal endPrice)
     {
         var products = await _productRepository.FilterProductsByPrice(startPrice, endPrice);
+        if (products == null)
+        {
+            throw new Exception(ProductException);
+        }
         return products.Select(product => new ProductDto
         {
             Id = product.Id,
@@ -140,41 +188,39 @@ public class ProductService : IProductService
             Price = product.Price,
             Status = product.Status,
             Inventory = product.Inventory,
-            DOP = product.Dop,
-            DOE = product.Doe,
+            Dop = product.Dop,
+            Doe = product.Doe,
+            Manufacturer = product.Manufacturers2.Select(m => new ManufacturerProductDto
+            {
+                PhoneNumber = m.PhoneNumber,
+                Address = m.Address,
+                Country = m.ManufacturerCountry,
+                Email = m.Email,
+                Name = m.Name,
+                Rate = m.Rate
+            }).ToList()
+        }).ToList();
+    }
+
+    public async Task<IEnumerable<InvoiceProductDto>> GetInvoicesByProductId(Guid productId)
+    {
+        var invoices = await _productRepository.GetInvoicesByProductIdAsync(productId);
+        if (invoices==null)
+        {
+            throw new Exception("No Invoice Found!");
+        }
+
+        return invoices.Select(invoice => new InvoiceProductDto()
+        {
+            Id = invoice.Id,
+            IssueDate = invoice.IssueDate,
+            OwnerName = invoice.OwnerFirstName,
+            OwnerFamilyName = invoice.OwnerLastName,
+            IdentificationCode = invoice.IdentificationCode,
+            IssuerName = invoice.IssuerName,
+            PaymentDate = invoice.PaymentDate,
+            PaymentStatus = invoice.PaymentStatus,
+            TotalPrice = invoice.TotalPrice,
         });
-    }
-
-    public async Task<ProductDto> GetProductManufacturersAsync(Guid productId)
-    {
-        var product = await _productRepository.GetProductManufacturersAsync(productId);
-        return new ProductDto
-        {
-            Id = product.Id,
-            Name = product.Name,
-            Price = product.Price,
-            Status = product.Status,
-            Inventory = product.Inventory,
-            DOP = product.Dop,
-            DOE = product.Doe,
-            ManufacturerProducts = product.Manufacturers
-        };
-    }
-
-    public async Task<ProductDto> GetProductInvoicesAsync(Guid productId)
-    {
-        var product = await _productRepository.GetProductInvoicesAsync(productId);
-        return new ProductDto
-        {
-            Id = product.Id,
-            Name = product.Name,
-            Price = product.Price,
-            Status = product.Status,
-            Inventory = product.Inventory,
-            DOP = product.Dop,
-            DOE = product.Doe,
-            ManufacturerProducts = product.Manufacturers,
-            ProductInvoices = product.Invoices
-        };
     }
 }

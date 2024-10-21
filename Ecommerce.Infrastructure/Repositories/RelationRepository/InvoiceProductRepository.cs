@@ -43,4 +43,19 @@ public class InvoiceProductRepository : IInvoiceProductRepository
     {
         return await _context.ProductInvoices.AnyAsync(pi => pi.InvoiceId == invoiceId && pi.ProductId == productId);
     }
+
+    public async Task<ProductInvoice> GetProductInvoiceAsync(Guid invoiceId, Guid productId)
+    {
+        return (await _context.ProductInvoices.FirstOrDefaultAsync(
+            pi => pi.InvoiceId == invoiceId && pi.ProductId == productId))!;
+    }
+
+    public async Task UpdateProductInvoiceAsync(ProductInvoice newProductInvoice)
+    {
+        _context.ProductInvoices.Update(newProductInvoice);
+        await _context.SaveChangesAsync();
+    }
+    
+    
+    
 }

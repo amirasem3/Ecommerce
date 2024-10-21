@@ -1,6 +1,4 @@
-﻿using Ecommerce.Application.Binder;
-using Ecommerce.Application.DTOs;
-using Ecommerce.Application.DTOs.Manufacturer;
+﻿using Ecommerce.Application.DTOs.Manufacturer;
 using Ecommerce.Application.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -8,8 +6,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcommerceSolution.Controller;
-[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
 
+[Authorize(AuthenticationSchemes =
+    JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
 [ApiController]
 [Route("api/[controller]")]
 public class ManufacturerController : ControllerBase
@@ -25,282 +24,164 @@ public class ManufacturerController : ControllerBase
     [ActionName(nameof(GetManufacturerById))]
     public async Task<IActionResult> GetManufacturerById(Guid id)
     {
-        var manufacturer = await _manufacturerService.GetManufacturerByIdAsync(id);
-        var manufacturer2 = await _manufacturerService.GetManufactureProductAsync(id);
-        var result = new
+        try
         {
-            manufacturer.Id,
-            manufacturer.Name,
-            manufacturer.OwnerName,
-            manufacturer.Email,
-            manufacturer.PhoneNumber,
-            manufacturer.Address,
-            manufacturer.Rate,
-            manufacturer.Status,
-            manufacturer.ManufacturerCountry,
-            Products  = manufacturer2.ManufacturerProducts.Select(mp => new
-            {
-                mp.Product.Id,
-                mp.Product.Name
-            })
-        };
-        if (manufacturer != null)
-        {
-            return Ok(result);
+            var manufacturer = await _manufacturerService.GetManufacturerByIdAsync(id);
+            return Ok(manufacturer);
         }
-
-        return NotFound($"There is no Manufacturer with Id {id}.");
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("GetAllManufacturers")]
     public async Task<IActionResult> GetAllManufacturers()
     {
         var manufacturers = await _manufacturerService.GetAllManufacturersAsync();
-        var result = new List<object>();
-        foreach (var manufacturer in manufacturers)
-        {
-            var products = new List<object>();
-            var man = await _manufacturerService.GetManufactureProductAsync(manufacturer.Id);
-            foreach (var manProduct in man.ManufacturerProducts)
-            {
-                products.Add(new
-                {
-                    manProduct.Product.Id,
-                    manProduct.Product.Name,
-                });
-            }
-            
-            result.Add(new
-            {
-                manufacturer.Id,
-                manufacturer.Name,
-                manufacturer.OwnerName,
-                manufacturer.Email,
-                manufacturer.PhoneNumber,
-                manufacturer.Address,
-                manufacturer.EsatablishDate,
-                manufacturer.Rate,
-                manufacturer.Status,
-                manufacturer.ManufacturerCountry,
-                Products = products
-            });
-        }
-        return Ok(result);
+        return Ok(manufacturers);
     }
 
 
     [HttpGet("GetManufacturerByAddress")]
     public async Task<IActionResult> SearchManufacturerAddresses([FromQuery] string address)
     {
-        var manufacturers = await _manufacturerService.SearchManufacturerByAddressAsync(address);
-        var result = new List<object>();
-        foreach (var manufacturer in manufacturers)
+        try
         {
-            var products = new List<object>();
-            var man = await _manufacturerService.GetManufactureProductAsync(manufacturer.Id);
-            foreach (var manProduct in man.ManufacturerProducts)
-            {
-                products.Add(new
-                {
-                    manProduct.Product.Id,
-                    manProduct.Product.Name,
-                });
-            }
-            
-            result.Add(new
-            {
-                manufacturer.Id,
-                manufacturer.Name,
-                manufacturer.OwnerName,
-                manufacturer.Email,
-                manufacturer.PhoneNumber,
-                manufacturer.Address,
-                manufacturer.Rate,
-                manufacturer.Status,
-                 manufacturer.ManufacturerCountry,
-                Products = products
-            });
+            var manufacturer = await _manufacturerService.GetManufacturerByAddressAsync(address);
+            return Ok(manufacturer);
         }
-        return Ok(result);
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("GetManufacturerByEmail")]
     public async Task<IActionResult> SearchManufacturerEmails([FromQuery] string email)
     {
-        var manufacturers = await _manufacturerService.SearchManufacturerByEmailAsync(email);
-
-        var result = new List<object>();
-        foreach (var manufacturer in manufacturers)
+        try
         {
-            var products = new List<object>();
-            var man = await _manufacturerService.GetManufactureProductAsync(manufacturer.Id);
-            foreach (var manProduct in man.ManufacturerProducts)
-            {
-                products.Add(new
-                {
-                    manProduct.Product.Id,
-                    manProduct.Product.Name,
-                });
-            }
-            
-            result.Add(new
-            {
-                manufacturer.Id,
-                manufacturer.Name,
-                manufacturer.OwnerName,
-                manufacturer.Email,
-                manufacturer.PhoneNumber,
-                manufacturer.Address,
-                manufacturer.Rate,
-                manufacturer.Status,
-                manufacturer.ManufacturerCountry,
-                Products = products
-            });
+            var manufacturer = await _manufacturerService.GetManufacturerByEmailAsync(email);
+            return Ok(manufacturer);
         }
-        return Ok(result);
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("GetManufacturerByPhoneNumber")]
     public async Task<IActionResult> SearchManufacturerPhoneNumbers([FromQuery] string phoneNumber)
     {
-        var manufacturers = await _manufacturerService.SearchManufacturerByPhoneNumberAsync(phoneNumber);
-        var result = new List<object>();
-        foreach (var manufacturer in manufacturers)
+        try
         {
-            var products = new List<object>();
-            var man = await _manufacturerService.GetManufactureProductAsync(manufacturer.Id);
-            foreach (var manProduct in man.ManufacturerProducts)
-            {
-                products.Add(new
-                {
-                    manProduct.Product.Id,
-                    manProduct.Product.Name,
-                });
-            }
-            
-            result.Add(new
-            {
-                manufacturer.Id,
-                manufacturer.Name,
-                manufacturer.OwnerName,
-                manufacturer.Email,
-                manufacturer.PhoneNumber,
-                manufacturer.Address,
-                manufacturer.Rate,
-                manufacturer.Status,
-                manufacturer.ManufacturerCountry,
-                Products = products
-            });
+            var manufacturer = await _manufacturerService.GetManufacturerByPhoneNumberAsync(phoneNumber);
+            return Ok(manufacturer);
         }
-        return Ok(result);
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("GetManufacturerByOwner")]
     public async Task<IActionResult> SearchManufacturerOwners(string owner)
     {
-        var manufacturers = await _manufacturerService.GetManufacturersByOwnerAsync(owner);
-        var result = new List<object>();
-        foreach (var manufacturer in manufacturers)
+        try
         {
-            var products = new List<object>();
-            var man = await _manufacturerService.GetManufactureProductAsync(manufacturer.Id);
-            foreach (var manProduct in man.ManufacturerProducts)
-            {
-                products.Add(new
-                {
-                    manProduct.Product.Id,
-                    manProduct.Product.Name,
-                });
-            }
-            
-            result.Add(new
-            {
-                manufacturer.Id,
-                manufacturer.Name,
-                manufacturer.OwnerName,
-                manufacturer.Email,
-                manufacturer.PhoneNumber,
-                manufacturer.Address,
-                manufacturer.Rate,
-                manufacturer.Status,
-                manufacturer.ManufacturerCountry,
-                Products = products
-            });
+            var manufacturers = await _manufacturerService.GetManufacturersByOwnerAsync(owner);
+            return Ok(manufacturers);
         }
-        return Ok(result);
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
-    [HttpPost("facturer")]
-    public async Task<IActionResult> AddManufacturer([ModelBinder(typeof(ManufacturerModelBinder))] AddUpdateManufacturerDto newManufacturer)
+    [HttpPost("AddManufacturer")]
+    [Consumes("application/json")]
+    public async Task<IActionResult> AddManufacturer([FromBody] AddUpdateManufacturerDto newManufacturer)
     {
         if (!ModelState.IsValid)
         {
-            
-            var errors = ModelState.Values.SelectMany(v => v.Errors)
-                .Select(e => e.ErrorMessage).ToList();
-            
-            return BadRequest(new { Errors = errors });
-        }   var manufacturer = await _manufacturerService.AddManufacturerAsync(newManufacturer);
-        
-        return CreatedAtAction(nameof(GetManufacturerById), new { id = manufacturer.Id }, manufacturer);
+            return BadRequest(ModelState["Manufacturer"]!.Errors.Select(e => e.ErrorMessage));
+        }
+
+        try
+        {
+            var manufacturer = await _manufacturerService.AddManufacturerAsync(newManufacturer);
+            return CreatedAtAction(nameof(GetManufacturerById), new { id = manufacturer.Id }, manufacturer);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpPost("AssignManufacturerProduct")]
-    public async Task<IActionResult> AssignManufacturerProduct([FromQuery] Guid manufacturerId, [FromQuery] Guid productId)
+    public async Task<IActionResult> AssignManufacturerProduct([FromQuery] Guid manufacturerId,
+        [FromQuery] Guid productId)
     {
-        await _manufacturerService.AssignManufacturerProductsAsync(manufacturerId, productId);
-        return Ok(_manufacturerService.GetManufacturerByIdAsync(manufacturerId));
+        try
+        {
+            await _manufacturerService.AssignManufacturerProductsAsync(manufacturerId, productId);
+            return Ok("The product is successfully added to the manufacturers' products.");
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     [HttpPut("UpdateManufacturer/{id}")]
-    public async Task<IActionResult> UpdateManufacturer(Guid id, [ModelBinder(typeof(ManufacturerModelBinder))]AddUpdateManufacturerDto manufacturerDto)
+    [Consumes("application/json")]
+    public async Task<IActionResult> UpdateManufacturer(Guid id, [FromBody] AddUpdateManufacturerDto manufacturerDto)
     {
         if (!ModelState.IsValid)
         {
-            
-            var errors = ModelState.Values.SelectMany(v => v.Errors)
-                .Select(e => e.ErrorMessage).ToList();
-            
-            return BadRequest(new { Errors = errors });
+            return BadRequest(ModelState["Manufacturer"]!.Errors.Select(e => e.ErrorMessage));
         }
 
-        var updatedManufacturer = await _manufacturerService.UpdateManufacturerAsync(id,manufacturerDto);
-        return Ok(updatedManufacturer);
+        try
+        {
+            var updatedManufacturer = await _manufacturerService.UpdateManufacturerAsync(id, manufacturerDto);
+            return Ok(updatedManufacturer);
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     [HttpDelete("DeleteManufacturer/{id}")]
     public async Task<IActionResult> DeleteManufacturer(Guid id)
     {
-        var manufacturer = await _manufacturerService.GetManufacturerByIdAsync(id);
-        var manufacturer2 = await _manufacturerService.GetManufactureProductAsync(id);
-        
-        if (manufacturer == null)
+        try
         {
-            return NotFound($"There is no manufacturer with ID {id}");
+            await _manufacturerService.GetManufacturerByIdAsync(id);
+            await _manufacturerService.DeleteManufacturerAsync(id);
+            return Ok($"Manufacture with ID {id} has successfully deleted!");
         }
-
-        if (manufacturer2.ManufacturerProducts.Count!=0)
+        catch (Exception e)
         {
-            return NotFound(
-                "There are products that relate to this manufacturer. You cannot remove this manufacturer " +
-                "before all of its products.");
-
+            return NotFound(e.Message);
         }
-
-        await _manufacturerService.DeleteManufacturerAsync(id);
-        return Ok($"Manufacture with ID {id} has successfully deleted!");
     }
 
     [HttpDelete("DeleteManufactureProduct")]
-    public async Task<IActionResult> DeleteManufactureProducts([FromQuery] Guid manufacturerId, [FromQuery] Guid productId)
+    public async Task<IActionResult> DeleteManufactureProducts([FromQuery] Guid manufacturerId,
+        [FromQuery] Guid productId)
     {
-        var result = await _manufacturerService.DeleteManufacturerProductAsync(manufacturerId, productId);
-
-        if (result)
+        try
         {
-            return Ok($"The product with ID {productId} has successfully deleted from manufacturer with ID {manufacturerId}.");
+            await _manufacturerService.DeleteManufacturerProductAsync(manufacturerId, productId);
+            return Ok(
+                $"The product with ID {productId} has successfully deleted from manufacturer with ID {manufacturerId}.");
         }
-
-        return NotFound("Invalid Manifacturer Id or productId");
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
 }

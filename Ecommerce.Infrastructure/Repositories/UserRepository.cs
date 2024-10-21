@@ -2,7 +2,6 @@
 using Ecommerce.Core.Interfaces;
 using Ecommerce.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 
 namespace Ecommerce.Infrastructure.Repositories;
 
@@ -17,7 +16,6 @@ public class UserRepository : IUserRepository
 
     public async Task<User> GetUserByIdAsync(Guid id)
     {
-        
         return (await _context.Users.FindAsync(id))!;
     }
 
@@ -56,7 +54,7 @@ public class UserRepository : IUserRepository
     {
         var deleted = await _context.Users.FindAsync(id);
 
-        if (deleted!= null)
+        if (deleted != null)
         {
             _context.Users.Remove(deleted);
         }
@@ -67,7 +65,6 @@ public class UserRepository : IUserRepository
     public async Task<bool> IsUserExist(string identifier)
     {
         return await _context.Users.AnyAsync(user => user.Username == identifier || user.Email == identifier);
-        
     }
 
     public async Task<IEnumerable<User>> GetUserByRoleAsync(string roleName)

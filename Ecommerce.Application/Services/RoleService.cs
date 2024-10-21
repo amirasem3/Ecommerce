@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Ecommerce.Application.DTOs;
+﻿using Ecommerce.Application.DTOs;
 using Ecommerce.Application.Interfaces;
 using Ecommerce.Core.Entities;
 using Ecommerce.Core.Interfaces;
@@ -9,6 +8,7 @@ namespace Ecommerce.Application.Services;
 public class RoleService : IRoleServices
 {
     private readonly IRoleRepository _roleRepository;
+    public const string RoleException = "Role Not Found!";
 
 
     public RoleService(IRoleRepository roleRepository)
@@ -18,6 +18,10 @@ public class RoleService : IRoleServices
     public  async Task<RoleDto> GetRoleByIdAsync(Guid id)
     {
         var role = await _roleRepository.GetRoleByIdAsync(id);
+        if (role == null)
+        {
+            throw new Exception(RoleException);
+        }
         
         return new RoleDto
         {
@@ -36,7 +40,6 @@ public class RoleService : IRoleServices
             Name = newRole.Name,
             Id = Guid.NewGuid()
         };
-        // ValidateRole(role);
         await _roleRepository.AddRoleAsync(role);
 
         return new RoleDto
@@ -50,6 +53,11 @@ public class RoleService : IRoleServices
     public async Task<RoleDto> UpdateRoleAsync(Guid id, AddUpdateRoleDto updateRoleDto)
     {
         var targetRole = await _roleRepository.GetRoleByIdAsync(id);
+
+        if (targetRole == null)
+        {
+            throw new Exception(RoleException);
+        }
 
         targetRole.Name = updateRoleDto.Name;
         // targetRole.UserRoles = updateRoleDto.UserRoles;
@@ -68,7 +76,7 @@ public class RoleService : IRoleServices
         var targetRole = await _roleRepository.GetRoleByIdAsync(id);
         if (targetRole == null)
         {
-            return false;
+            throw new Exception(RoleException);
         }
 
         await _roleRepository.DeleteRoleByIdAsync(id);
@@ -88,28 +96,16 @@ public class RoleService : IRoleServices
     public async Task<RoleDto> GetRoleByNameAsync(string name)
     {
         var role = await _roleRepository.GetRoleByName(name);
-
+        
         if (role == null)
         {
-            return null;
+            throw new Exception(RoleException);
         }
 
         return new RoleDto
         {
             Id = role.Id,
-            Name = role.Name!,
+            Name = role.Name,
         };
-    }
-    
-    private void ValidateRole(Role role)
-    {
-        var validationResults = new List<ValidationResult>();
-        var validationContext = new ValidationContext(role);
-
-        if (!Validator.TryValidateObject(role, validationContext, validationResults, true))
-        {
-            var validationErrors = validationResults.Select(r => r.ErrorMessage).ToArray();
-            throw new ValidationException(string.Join(", ", validationErrors));
-        }
     }
 }

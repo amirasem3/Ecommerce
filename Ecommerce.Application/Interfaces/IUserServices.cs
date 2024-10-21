@@ -13,8 +13,8 @@ public interface IUserServices
 
     Task<UserDto> GetUserByPhoneNumberAsync(string phoneNumber);
 
-    Task<UserDto> AddUserAsync(RegisterUserDto registerUserDto);
-    Task<UserDto> UpdateUserAsync(Guid id, UpdateUserDto updateUserDto);
+    Task<UserDto> AddUserAsync(AddUpdateUserDto registerUserDto);
+    Task<UserDto> UpdateUserAsync(Guid id, AddUpdateUserDto updateUserDto);
     Task<bool> DeleteUserAsync(Guid id);
     Task<IEnumerable<UserDto>> GetAllUsersAsync();
     Task<IEnumerable<UserDto>> GetAllUsersByNameAsync(string name);

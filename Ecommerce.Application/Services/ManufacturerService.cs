@@ -1,36 +1,34 @@
-﻿using Ecommerce.Application.DTOs.Manufacturer;
+﻿using Ecommerce.Application.DTOs;
+using Ecommerce.Application.DTOs.Manufacturer;
 using Ecommerce.Application.DTOs.User;
 using Ecommerce.Application.Interfaces;
 using Ecommerce.Core.Entities;
-using Ecommerce.Core.Entities.RelationEntities;
 using Ecommerce.Core.Interfaces;
-using Ecommerce.Core.Interfaces.RelationRepoInterfaces;
-using Microsoft.AspNetCore.Identity;
 
 namespace Ecommerce.Application.Services;
 
 public class ManufacturerService : IManufacturerService
 {
-
     private readonly IManufacturerRepository _manufacturerRepository;
     private readonly IProductRepository _productRepository;
-    private readonly IManufacturerProductRepository _manufacturerProductRepository;
     private readonly IUserServices _userServices;
-    private readonly IPasswordHasher<User> _passwordHasher;
+    public const string ManufacturerException = "Manufacturer Not Found!";
+
     public ManufacturerService(IManufacturerRepository manufacturerRepository, IProductRepository productRepository,
-        IManufacturerProductRepository manufacturerProductRepository, IUserServices userServices,
-        IPasswordHasher<User> passwordHasher)
+        IUserServices userServices)
     {
         _manufacturerRepository = manufacturerRepository;
         _productRepository = productRepository;
-        _manufacturerProductRepository = manufacturerProductRepository;
         _userServices = userServices;
-        _passwordHasher = passwordHasher;
     }
-     
+
     public async Task<ManufacturerDto> GetManufacturerByIdAsync(Guid id)
     {
         var manufacturer = await _manufacturerRepository.GetManufacturerByIdAsync(id);
+        if (manufacturer == null)
+        {
+            throw new Exception(ManufacturerException);
+        }
 
         return new ManufacturerDto
         {
@@ -39,69 +37,21 @@ public class ManufacturerService : IManufacturerService
             Email = manufacturer.Email,
             OwnerName = manufacturer.OwnerName,
             Address = manufacturer.Address,
-            EsatablishDate = manufacturer.EstablishDate,
+            EstablishDate = manufacturer.EstablishDate,
             Rate = manufacturer.Rate,
             Status = manufacturer.Status,
             ManufacturerCountry = manufacturer.ManufacturerCountry,
             PhoneNumber = manufacturer.PhoneNumber,
-        };
-    }
-
-    public async Task<IEnumerable<ManufacturerDto>> SearchManufacturerByAddressAsync(string address)
-    {
-        var manufacturers = await _manufacturerRepository.SearchManufacturerByAddressAsync(address);
-        
-        return manufacturers.Select(manufacturer =>new ManufacturerDto
+            Products = manufacturer.Products2.Select(p => new ProductManufacturerDto
             {
-                Id = manufacturer.Id,
-                Name = manufacturer.Name,
-                OwnerName = manufacturer.OwnerName,
-                Address = manufacturer.Address,
-                EsatablishDate = manufacturer.EstablishDate,
-                Rate = manufacturer.Rate,
-                Status = manufacturer.Status,
-                Email = manufacturer.Email,
-                ManufacturerCountry = manufacturer.ManufacturerCountry,
-                PhoneNumber = manufacturer.PhoneNumber,
-                
-            });
-    }
-
-    public async Task<IEnumerable<ManufacturerDto>> SearchManufacturerByEmailAsync(string email)
-    {
-        var manufacturers = await _manufacturerRepository.SearchManufacturerByEmailAsync(email);
-        return manufacturers.Select(manufacturer => new ManufacturerDto
-        {
-            Id = manufacturer.Id,
-            Name = manufacturer.Name,
-            OwnerName = manufacturer.OwnerName,
-            Address = manufacturer.Address,
-            EsatablishDate = manufacturer.EstablishDate,
-            Rate = manufacturer.Rate,
-            Status = manufacturer.Status,
-            ManufacturerCountry = manufacturer.ManufacturerCountry,
-            Email = manufacturer.Email,
-            PhoneNumber = manufacturer.PhoneNumber,
-        });
-    }
-
-    public async Task<IEnumerable<ManufacturerDto>> SearchManufacturerByPhoneNumberAsync(string phoneNumber)
-    {
-        var manufacturers = await _manufacturerRepository.SearchManufacturerByPhoneNumberAsync(phoneNumber);
-
-        return manufacturers.Select(manufacturer => new ManufacturerDto
-        {
-            Id = manufacturer.Id,
-            Name = manufacturer.Name,
-            OwnerName = manufacturer.OwnerName,
-            Address = manufacturer.Address,
-            Email = manufacturer.Email,
-            EsatablishDate = manufacturer.EstablishDate,
-            Rate = manufacturer.Rate,
-            Status = manufacturer.Status,
-            PhoneNumber = manufacturer.PhoneNumber,
-            ManufacturerCountry = manufacturer.ManufacturerCountry,
-        });
+                Name = p.Name,
+                Doe = p.Doe,
+                Dop = p.Dop,
+                Inventory = p.Inventory,
+                Price = p.Price,
+                Status = p.Status
+            }).ToList()
+        };
     }
 
     public async Task<IEnumerable<ManufacturerDto>> GetAllManufacturersAsync()
@@ -115,17 +65,118 @@ public class ManufacturerService : IManufacturerService
             OwnerName = manufacturer.OwnerName,
             Email = manufacturer.Email,
             Address = manufacturer.Address,
-            EsatablishDate = manufacturer.EstablishDate,
+            EstablishDate = manufacturer.EstablishDate,
             Rate = manufacturer.Rate,
             Status = manufacturer.Status,
             PhoneNumber = manufacturer.PhoneNumber,
             ManufacturerCountry = manufacturer.ManufacturerCountry,
-        });
+            Products = manufacturer.Products2.Select(p => new ProductManufacturerDto
+            {
+                Name = p.Name,
+                Doe = p.Doe,
+                Dop = p.Dop,
+                Inventory = p.Inventory,
+                Price = p.Price,
+                Status = p.Status
+            }).ToList()
+        }).ToList();
     }
+
+    public async Task<ManufacturerDto> GetManufacturerByAddressAsync(string address)
+    {
+        var manufacturer = await _manufacturerRepository.GetManufacturerByAddressAsync(address);
+        if (manufacturer == null)
+        {
+            throw new Exception(ManufacturerException);
+        }
+
+        return new ManufacturerDto
+        {
+            Id = manufacturer.Id,
+            Name = manufacturer.Name,
+            OwnerName = manufacturer.OwnerName,
+            Address = manufacturer.Address,
+            EstablishDate = manufacturer.EstablishDate,
+            Rate = manufacturer.Rate,
+            Status = manufacturer.Status,
+            Email = manufacturer.Email,
+            ManufacturerCountry = manufacturer.ManufacturerCountry,
+            PhoneNumber = manufacturer.PhoneNumber,
+        };
+    }
+
+    public async Task<ManufacturerDto> GetManufacturerByEmailAsync(string email)
+    {
+        var manufacturer = await _manufacturerRepository.GetManufacturerByEmailAsync(email);
+        if (manufacturer == null)
+        {
+            throw new Exception(ManufacturerException);
+        }
+
+        return new ManufacturerDto
+        {
+            Id = manufacturer.Id,
+            Name = manufacturer.Name,
+            OwnerName = manufacturer.OwnerName,
+            Address = manufacturer.Address,
+            EstablishDate = manufacturer.EstablishDate,
+            Rate = manufacturer.Rate,
+            Status = manufacturer.Status,
+            ManufacturerCountry = manufacturer.ManufacturerCountry,
+            Email = manufacturer.Email,
+            PhoneNumber = manufacturer.PhoneNumber,
+            Products = manufacturer.Products2.Select(p => new ProductManufacturerDto
+            {
+                Name = p.Name,
+                Doe = p.Doe,
+                Dop = p.Dop,
+                Inventory = p.Inventory,
+                Price = p.Price,
+                Status = p.Status
+            }).ToList()
+        };
+    }
+
+    public async Task<ManufacturerDto> GetManufacturerByPhoneNumberAsync(string phoneNumber)
+    {
+        var manufacturer = await _manufacturerRepository.GetManufacturerByPhoneNumberAsync(phoneNumber);
+        if (manufacturer == null)
+        {
+            throw new Exception(ManufacturerException);
+        }
+
+        return new ManufacturerDto
+        {
+            Id = manufacturer.Id,
+            Name = manufacturer.Name,
+            OwnerName = manufacturer.OwnerName,
+            Address = manufacturer.Address,
+            Email = manufacturer.Email,
+            EstablishDate = manufacturer.EstablishDate,
+            Rate = manufacturer.Rate,
+            Status = manufacturer.Status,
+            PhoneNumber = manufacturer.PhoneNumber,
+            ManufacturerCountry = manufacturer.ManufacturerCountry,
+            Products = manufacturer.Products2.Select(p => new ProductManufacturerDto
+            {
+                Name = p.Name,
+                Doe = p.Doe,
+                Dop = p.Dop,
+                Inventory = p.Inventory,
+                Price = p.Price,
+                Status = p.Status
+            }).ToList()
+        };
+    }
+
 
     public async Task<IEnumerable<ManufacturerDto>> GetManufacturersByOwnerAsync(string ownerName)
     {
         var manufacturers = await _manufacturerRepository.GetManufacturersByOwnerAsync(ownerName);
+        if (manufacturers == null)
+        {
+            throw new Exception(ManufacturerException);
+        }
 
         return manufacturers.Select(manufacturer => new ManufacturerDto
         {
@@ -134,12 +185,21 @@ public class ManufacturerService : IManufacturerService
             OwnerName = manufacturer.OwnerName,
             Email = manufacturer.Email,
             Address = manufacturer.Address,
-            EsatablishDate = manufacturer.EstablishDate,
+            EstablishDate = manufacturer.EstablishDate,
             Rate = manufacturer.Rate,
             Status = manufacturer.Status,
             PhoneNumber = manufacturer.PhoneNumber,
-            ManufacturerCountry = manufacturer.ManufacturerCountry
-        });
+            ManufacturerCountry = manufacturer.ManufacturerCountry,
+            Products = manufacturer.Products2.Select(p => new ProductManufacturerDto
+            {
+                Name = p.Name,
+                Doe = p.Doe,
+                Dop = p.Dop,
+                Inventory = p.Inventory,
+                Price = p.Price,
+                Status = p.Status
+            }).ToList()
+        }).ToList();
     }
 
     public async Task<ManufacturerDto> AddManufacturerAsync(AddUpdateManufacturerDto manufacturerDto)
@@ -154,13 +214,13 @@ public class ManufacturerService : IManufacturerService
             Address = manufacturerDto.Address,
             PhoneNumber = manufacturerDto.PhoneNumber,
             Rate = manufacturerDto.Rate,
-            EstablishDate = manufacturerDto.EsatablishDate,
+            EstablishDate = manufacturerDto.EstablishDate,
             Status = manufacturerDto.Status,
-            Products = []
+            Products2 = []
         };
-        
+
         await _manufacturerRepository.AddManufacturerAsync(manufacturer);
-        var manufacturerUser = new RegisterUserDto
+        var manufacturerUser = new AddUpdateUserDto()
         {
             FirstName = manufacturer.Name,
             LastName = manufacturer.OwnerName,
@@ -170,7 +230,15 @@ public class ManufacturerService : IManufacturerService
             PhoneNumber = manufacturer.PhoneNumber,
             Password = manufacturer.PhoneNumber
         };
-        await _userServices.AddUserAsync(manufacturerUser);
+        try
+        {
+            await _userServices.AddUserAsync(manufacturerUser);
+        }
+        catch (Exception e)
+        {
+            throw new Exception(e.Message);
+        }
+
         return new ManufacturerDto
         {
             Id = manufacturer.Id,
@@ -181,104 +249,97 @@ public class ManufacturerService : IManufacturerService
             Address = manufacturerDto.Address,
             PhoneNumber = manufacturerDto.PhoneNumber,
             Rate = manufacturerDto.Rate,
-            EsatablishDate = manufacturerDto.EsatablishDate,
+            EstablishDate = manufacturerDto.EstablishDate,
             Status = manufacturerDto.Status,
-            ManufacturerProducts = manufacturer.Products
+            Products = []
         };
     }
 
-    public async Task<ManufacturerDto> UpdateManufacturerAsync(Guid id,AddUpdateManufacturerDto addUpdateManufacturerDto)
+    public async Task<ManufacturerDto> UpdateManufacturerAsync(Guid id,
+        AddUpdateManufacturerDto addUpdateManufacturerDto)
     {
         var manufacturer = await _manufacturerRepository.GetManufacturerByIdAsync(id);
-       
-            manufacturer.Name = addUpdateManufacturerDto.Name;
-            manufacturer.OwnerName = addUpdateManufacturerDto.OwnerName;
-            manufacturer.Address = addUpdateManufacturerDto.Address;
-            manufacturer.EstablishDate = addUpdateManufacturerDto.EsatablishDate;
-            manufacturer.Rate = addUpdateManufacturerDto.Rate;
-            manufacturer.Status = addUpdateManufacturerDto.Status;
-            manufacturer.PhoneNumber = addUpdateManufacturerDto.PhoneNumber;
-            manufacturer.Email = addUpdateManufacturerDto.Email;
-            manufacturer.ManufacturerCountry = addUpdateManufacturerDto.ManufacturerCountry;
-            await _manufacturerRepository.UpdateManufacturerAsync(manufacturer);
-            return new ManufacturerDto
-            {
-                Id = manufacturer.Id,
-                Name = manufacturer.Name,
-                OwnerName = manufacturer.OwnerName,
-                Address = manufacturer.Address,
-                EsatablishDate = manufacturer.EstablishDate,
-                ManufacturerCountry = manufacturer.ManufacturerCountry,
-                Email = manufacturer.Email,
-                Rate = manufacturer.Rate,
-                Status = manufacturer.Status,
-                PhoneNumber = manufacturer.PhoneNumber,
-                ManufacturerProducts = manufacturer.Products
-            };
-            
-
-    }
-
-   
-
-    public async Task<bool> DeleteManufacturerAsync(Guid manufactureId)
-    {
-        var manufacturer = await _manufacturerRepository.GetManufacturerByIdAsync(manufactureId);
-        if (manufacturer != null)
+        if (manufacturer == null)
         {
-            await _manufacturerRepository.DeleteManufacturerAsync(manufactureId);
-            return true;
+            throw new Exception(ManufacturerException);
         }
 
-        return false;
-    }
-
-    public async Task<ManufacturerDto> GetManufactureProductAsync(Guid manufacturerId)
-    {
-        var manufacturer = await _manufacturerRepository.GetManufactureProductAsync(manufacturerId);
-
-        return new ManufacturerDto()
+        manufacturer.Name = addUpdateManufacturerDto.Name;
+        manufacturer.OwnerName = addUpdateManufacturerDto.OwnerName;
+        manufacturer.Address = addUpdateManufacturerDto.Address;
+        manufacturer.EstablishDate = addUpdateManufacturerDto.EstablishDate;
+        manufacturer.Rate = addUpdateManufacturerDto.Rate;
+        manufacturer.Status = addUpdateManufacturerDto.Status;
+        manufacturer.PhoneNumber = addUpdateManufacturerDto.PhoneNumber;
+        manufacturer.Email = addUpdateManufacturerDto.Email;
+        manufacturer.ManufacturerCountry = addUpdateManufacturerDto.ManufacturerCountry;
+        await _manufacturerRepository.UpdateManufacturerAsync(manufacturer);
+        return new ManufacturerDto
         {
             Id = manufacturer.Id,
             Name = manufacturer.Name,
             OwnerName = manufacturer.OwnerName,
-            Email = manufacturer.Email,
             Address = manufacturer.Address,
-            PhoneNumber = manufacturer.PhoneNumber,
-            EsatablishDate = manufacturer.EstablishDate,
-            Status = manufacturer.Status,
+            EstablishDate = manufacturer.EstablishDate,
             ManufacturerCountry = manufacturer.ManufacturerCountry,
+            Email = manufacturer.Email,
             Rate = manufacturer.Rate,
-            ManufacturerProducts = manufacturer.Products
+            Status = manufacturer.Status,
+            PhoneNumber = manufacturer.PhoneNumber,
+            Products = manufacturer.Products2.Select(p => new ProductManufacturerDto
+            {
+                Name = p.Name,
+                Doe = p.Doe,
+                Dop = p.Dop,
+                Inventory = p.Inventory,
+                Price = p.Price,
+                Status = p.Status
+            }).ToList()
         };
     }
-    
-    public async Task AssignManufacturerProductsAsync(Guid manufacturerID, Guid productID)
+
+
+    public async Task<bool> DeleteManufacturerAsync(Guid manufactureId)
     {
-        var manufacturer = await _manufacturerRepository.GetManufacturerByIdAsync(manufacturerID);
-        var product = await _productRepository.GetProductByIdAsync(productID);
+        var manufacturer = await _manufacturerRepository.GetManufacturerByIdAsync(manufactureId);
         if (manufacturer == null)
         {
-            throw new ArgumentException("User not found.");
+            throw new Exception(ManufacturerException);
+        }
+
+        if (manufacturer.Products2.Count != 0)
+        {
+            throw new Exception(
+                "There are products that relate to this manufacturer. You cannot remove this manufacturer " +
+                "before all of its products.");
+        }
+
+        await _manufacturerRepository.DeleteManufacturerAsync(manufactureId);
+        return true;
+    }
+
+    public async Task AssignManufacturerProductsAsync(Guid manufacturerId, Guid productId)
+    {
+        var manufacturer = await _manufacturerRepository.GetManufacturerByIdAsync(manufacturerId);
+        var product = await _productRepository.GetProductByIdAsync(productId);
+        if (manufacturer == null)
+        {
+            throw new ArgumentException(ManufacturerException);
         }
 
         if (product == null)
         {
-            throw new ArgumentException("Role not found.");
+            throw new ArgumentException(ProductService.ProductException);
         }
 
-        var exists = await _manufacturerProductRepository.ManufacturerHaveTheProductAsync(manufacturerID, productID);
-        // Check if the user already has this role
-        if (!exists)
+        bool productExists = manufacturer.Products2.Any(p => p.Id == productId);
+        if (!productExists)
         {
-            var manufacturerProduct = new ManufacturerProduct
-            {
-                ManufacturerId = manufacturerID,
-                ProductId = productID
-            };
-
-            await _manufacturerProductRepository.AddManufacturerProductAsync(manufacturerProduct);
-
+            await _manufacturerRepository.AddManufacturerProduct(manufacturer, product);
+        }
+        else
+        {
+            throw new Exception($"The product already exists in the {manufacturer.Name}'s products");
         }
     }
 
@@ -288,17 +349,20 @@ public class ManufacturerService : IManufacturerService
         var product = await _productRepository.GetProductByIdAsync(productId);
         if (manufacturer == null)
         {
-            throw new ArgumentException("User not found.");
+            throw new ArgumentException(ManufacturerException);
         }
 
         if (product == null)
         {
-            throw new ArgumentException("Role not found.");
+            throw new ArgumentException(ProductService.ProductException);
         }
 
-        return await _manufacturerProductRepository.DeleteManufacturerProductAsync(manufacturerId, productId);
-       
-
-
+        bool existProduct = manufacturer.Products2.Any(p => p.Id == productId);
+        if (existProduct)
+        {
+            await _manufacturerRepository.DeleteManufacturerProductAsync(manufacturer, product);
+            return true;
+        }
+        return false;
     }
 }

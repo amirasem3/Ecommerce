@@ -15,12 +15,16 @@ public class ProductRepository : IProductRepository
     }
     public async Task<Product> GetProductByIdAsync(Guid id)
     {
-        return await _context.Products.FindAsync(id);
+        return (await _context.Products
+            .Include(p => p.Manufacturers2)
+            .FirstOrDefaultAsync(p => p.Id == id))!;
     }
 
     public async Task<IEnumerable<Product>> GetAllProductsAsync()
     {
-        return await _context.Products.ToListAsync();
+        return await _context.Products
+            .Include(p => p.Manufacturers2)
+            .ToListAsync();
     }
 
     public async Task<IEnumerable<Product>> GetAllProductsByNameAsync(string name)
@@ -31,7 +35,9 @@ public class ProductRepository : IProductRepository
             return await GetAllProductsAsync();
         }
 
-        return await _context.Products.Where(product => product.Name.Contains(name)).ToListAsync();
+        return await _context.Products
+            .Include(p => p.Manufacturers2)
+            .Where(product => product.Name.Contains(name)).ToListAsync();
     }
 
     public async Task<Product> AddProductAsync(Product product)
@@ -44,7 +50,7 @@ public class ProductRepository : IProductRepository
     public async Task DeleteProductByIdAsync(Guid id)
     {
         var product = await _context.Products.FindAsync(id);
-        _context.Products.Remove(product);
+        _context.Products.Remove(product!);
         await _context.SaveChangesAsync();
     }
 
@@ -56,22 +62,35 @@ public class ProductRepository : IProductRepository
 
     public async Task<IEnumerable<Product>> FilterProductsByPrice(decimal startPrice, decimal endPrice)
     {
-        return await _context.Products.Where(p => p.Price >= startPrice && p.Price <= endPrice).ToListAsync();
+        return await _context.Products
+            .Include(p => p.Manufacturers2)
+            .Where(p => p.Price >= startPrice && p.Price <= endPrice).ToListAsync();
     }
 
-    public async Task<Product> GetProductManufacturersAsync(Guid productId)
-    {
-        return (await _context.Products
-            .Include(p => p.Manufacturers)
-            .ThenInclude(mp => mp.Manufacturer)
-            .FirstOrDefaultAsync(p => p.Id == productId))!;
-    }
+    // public async Task<Product> GetProductManufacturersAsync(Guid productId)
+    // {
+    //     return (await _context.Products
+    //         .Include(p => p.Manufacturers)
+    //         .ThenInclude(mp => mp.Manufacturer)
+    //         .FirstOrDefaultAsync(p => p.Id == productId))!;
+    // }
 
     public async Task<Product> GetProductInvoicesAsync(Guid productId)
     {
         return (await _context.Products
+            .Include(p => p.Manufacturers2)
             .Include(p => p.Invoices)
             .ThenInclude(pi => pi.Invoice)
             .FirstOrDefaultAsync(p => p.Id == productId))!;
+    }
+
+    public async Task<IEnumerable<Invoice>> GetInvoicesByProductIdAsync(Guid productId)
+    {
+        
+        var invoices = await _context.ProductInvoices
+            .Where(pi => pi.ProductId == productId)
+            .Select(pi=> pi.Invoice)
+            .ToListAsync();
+        return invoices;
     }
 }

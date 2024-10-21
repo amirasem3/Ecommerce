@@ -1,10 +1,8 @@
-﻿using Ecommerce.Application.Binder.User;
-using Ecommerce.Application.DTOs.User;
+﻿using Ecommerce.Application.DTOs.User;
 using Ecommerce.Application.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcommerceSolution.Controller;
@@ -24,255 +22,162 @@ public class UserController : ControllerBase
     [HttpGet("GetUserById/{userId}")]
     public async Task<IActionResult> GetUserById(Guid userId)
     {
-        var user = await _userServices.GetUserByIdAsync(userId);
-        // var user2 = await _userServices.GetUserRoleAsync(userId);
-        var result = new
+        try
         {
-            user.Id,
-            user.FirstName,
-            user.LastName,
-            user.Email,
-            user.PhoneNumber,
-            user.Username,
-            user.RoleName,
-            user.RoleId
-        };
-        if (user != null)
-        {
-            return Ok(result);
+            var user = await _userServices.GetUserByIdAsync(userId);
+            return Ok(user);
         }
-
-        return NotFound($"There is no user with Id {userId}.");
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("GetUserByUsername/{username}")]
     public async Task<IActionResult> GetUserByUsername(string username)
     {
-        var user = await _userServices.GetUserByUsernameAsync(username);
-        // var user2 = await _userServices.GetUserRoleAsync(user.RoleId);
-        var result = new
+        try
         {
-            user.Id,
-            user.FirstName,
-            user.LastName,
-            user.Email,
-            user.PhoneNumber,
-            user.Username,
-            user.RoleName,
-            user.RoleId
-        };
-        if (user != null)
-        {
-            return Ok(result);
+            var user = await _userServices.GetUserByUsernameAsync(username);
+            return Ok(user);
         }
-
-        return NotFound($"There is no user with username {username}");
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("GetUserByEmail/{email}")]
     public async Task<IActionResult> GetUserByEmail(string email)
     {
-        var user = await _userServices.GetUserByEmailAsync(email);
-        // var user2 = await _userServices.GetUserRoleAsync(user.Id);
-        var result = new
+        try
         {
-            user.Id,
-            user.FirstName,
-            user.LastName,
-            user.Email,
-            user.PhoneNumber,
-            user.Username,
-            user.RoleName,
-            user.RoleId,
-        };
-        if (user != null)
-        {
-            return Ok(result);
+            var user = await _userServices.GetUserByEmailAsync(email);
+            return Ok(user);
         }
-
-        return NotFound($"There is no user with Email {email}");
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("GetUserByPhoneNumber/{phoneNumber}")]
     public async Task<IActionResult> GetUserByPhoneNumber(string phoneNumber)
     {
-        var user = await _userServices.GetUserByPhoneNumberAsync(phoneNumber);
-        // var user2 = await _userServices.GetUserRoleAsync(user.Id);
-        var result = new
+        try
         {
-            user.Id,
-            user.FirstName,
-            user.LastName,
-            user.Email,
-            user.PhoneNumber,
-            user.Username,
-            user.RoleId,
-            user.RoleName
-        };
-        if (user != null)
-        {
-            return Ok(result);
+            var user = await _userServices.GetUserByPhoneNumberAsync(phoneNumber);
+            return Ok(user);
         }
-
-        return NotFound($"There is no user with phone number {phoneNumber}");
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("GetAllUsers")]
     public async Task<IActionResult> GetAllUsers()
     {
         var users = await _userServices.GetAllUsersAsync();
-        var result = new List<object>();
-        if (users == null)
-        {
-            return NotFound();
-        }
-
-        foreach (var user in users)
-        {
-            var roles = new List<object>();
-            // var  user2 = await _userServices.GetUserRoleAsync(user.Id);
-
-
-            result.Add(new
-            {
-                user.Id,
-                user.FirstName,
-                user.LastName,
-                user.Username,
-                user.Email,
-                user.PhoneNumber,
-                user.RoleId,
-                user.RoleName
-            });
-        }
-
-
-        return Ok(result);
+        return Ok(users);
     }
 
     [HttpGet("SearchUserName")]
     public async Task<IActionResult> SearchUserByName([FromQuery] string name)
     {
-        var users = await _userServices.GetAllUsersByNameAsync(name);
-        var result = new List<object>();
-        foreach (var user in users)
+        try
         {
-            var roles = new List<object>();
-            // var  user2 = await _userServices.GetUserRoleAsync(user.Id);
-
-
-            result.Add(new
-            {
-                user.Id,
-                user.FirstName,
-                user.LastName,
-                user.Username,
-                user.Email,
-                user.PhoneNumber,
-                user.RoleId,
-                user.RoleName
-            });
+            var users = await _userServices.GetAllUsersByNameAsync(name);
+            return Ok(users);
         }
-
-        return Ok(result);
-    }
-
-    [HttpGet("GetUserRole")]
-    public async Task<IActionResult> GetUserRole([FromQuery] Guid userId)
-    {
-        var user = await _userServices.GetUserByIdAsync(userId);
-        if (user != null)
+        catch (Exception e)
         {
-            var result = new
-            {
-                user.Id,
-                user.Username,
-                user.RoleId,
-                user.RoleName
-            };
-            return Ok(result);
+            return NotFound(e.Message);
         }
-
-        return NotFound($"There is no rule for user with ID {userId}");
     }
 
     [HttpGet("GetUserByRole/{roleName}")]
     public async Task<IActionResult> GetUserByRoleName(string roleName)
     {
-        var users = await _userServices.GetUserByRoleAsync(roleName);
-
-        return Ok(users);
+        try
+        {
+            var users = await _userServices.GetUserByRoleAsync(roleName);
+            return Ok(users);
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
+      
     }
 
     [AllowAnonymous]
     [HttpPost("SignUp")]
-    public async Task<IActionResult> AddUser([ModelBinder(typeof(UserModelBinder))] RegisterUserDto userDto)
+    [Consumes("application/json")]
+    public async Task<IActionResult> AddUser([FromBody] AddUpdateUserDto userDto)
     {
-        
         if (!ModelState.IsValid)
         {
-            
-            var errors = ModelState.Values.SelectMany(v => v.Errors)
-                .Select(e => e.ErrorMessage).ToList();
-            
-            return BadRequest(new { Errors = errors });
+            return BadRequest(ModelState["User"]!.Errors.Select(e => e.ErrorMessage));
         }
-        var user = await _userServices.AddUserAsync(userDto);
 
-        return Ok(user);
+        try
+        {
+            var user = await _userServices.AddUserAsync(userDto);
+            return Ok(user);
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
+       
     }
 
     [HttpPost("Login")]
-    public async Task<IActionResult> LoginUser([ModelBinder(typeof(UserModelBinder))] LoginUserDto loginRequestDto)
+    public async Task<IActionResult> LoginUser([FromQuery] LoginUserDto loginRequestDto)
     {
-        if (!ModelState.IsValid)
+        try
         {
-            
-            var errors = ModelState.Values.SelectMany(v => v.Errors)
-                .Select(e => e.ErrorMessage).ToList();
-            
-            return BadRequest(new { Errors = errors });
+            var user = await _userServices.AuthenticateUserAsync(loginRequestDto.Username, loginRequestDto.Password);
+            return Ok(user);
         }
-        var user = await _userServices.AuthenticateUserAsync(loginRequestDto.Username, loginRequestDto.Password);
-        if (user == null)
+        catch (Exception e)
         {
-            return NotFound();
+           return Unauthorized(e.Message);
         }
-
-        return Ok(user);
     }
 
-    [HttpPut("UpdateUser")]
-    public async Task<IActionResult> UpdateUser([FromQuery] Guid userId, [ModelBinder(typeof(UserModelBinder))] UpdateUserDto updateUserDto)
+    [HttpPut("UpdateUser/{userId}")]
+    [Consumes("application/json")]
+    public async Task<IActionResult> UpdateUser(Guid userId, [FromBody] AddUpdateUserDto updateUserDto)
     {
         if (!ModelState.IsValid)
         {
-            
-            var errors = ModelState.Values.SelectMany(v => v.Errors)
-                .Select(e => e.ErrorMessage).ToList();
-            
-            return BadRequest(new { Errors = errors });
+            return BadRequest(ModelState["User"]!.Errors.Select(e => e.ErrorMessage));
         }
-        var targetUser = await _userServices.GetUserByIdAsync(userId);
-        if (targetUser != null)
+        try
         {
             var user = await _userServices.UpdateUserAsync(userId, updateUserDto);
             return Ok(user);
         }
-
-        return NotFound($"There is no user with ID {userId}");
+        catch (Exception e)
+        {
+            return NotFound(e);
+        }
     }
 
 
     [HttpDelete("DeleteUser/{userId}")]
     public async Task<IActionResult> DeleteUser(Guid userId)
     {
-        var deleted = await _userServices.DeleteUserAsync(userId);
-        if (deleted)
+        try
         {
+            await _userServices.DeleteUserAsync(userId);
             return Ok($"The user with Id ({userId}) is successfully deleted.");
         }
-
-        return NotFound($"There is no user with ID {userId}.");
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Ecommerce.Core.Entities.RelationEntities;
+using System.Text.Json.Serialization;
 using Ecommerce.Core.Interfaces.RelationRepoInterfaces;
 
 namespace Ecommerce.Core.Entities;
@@ -8,11 +8,11 @@ namespace Ecommerce.Core.Entities;
 public class Product
 {
     public Guid Id { get; init; }
-    
+
     [RegularExpression(@"^[a-zA-Z0-9''-'\s]+$", ErrorMessage = "Name can only contain ")]
     [MaxLength(40, ErrorMessage = "Name cannot exceed 40 characters.")]
-    [Required (ErrorMessage = "Name should be specified.")]
-    public string? Name { get; set; }
+    [Required(ErrorMessage = "Name should be specified.")]
+    public string Name { get; set; } = null!;
     
     [Column(TypeName = "decimal(15,2)")]
     [DataType(DataType.Currency)]
@@ -37,13 +37,12 @@ public class Product
         get ;
         set;
     }
-
-
-    //Relation N-N with Product
-    public ICollection<ManufacturerProduct> Manufacturers { get; set; } = null!;
+    
 
     //Relation N-N with Invoice
     public ICollection<ProductInvoice> Invoices { get; set; } = null!;
 
+    [JsonIgnore]
     public ICollection<Manufacturer> Manufacturers2 { get; set; } = null!;
+    
 }

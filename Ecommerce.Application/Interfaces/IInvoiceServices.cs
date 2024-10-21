@@ -1,5 +1,5 @@
 ﻿using Ecommerce.Application.DTOs;
-using Ecommerce.Core.Entities;
+using Ecommerce.Application.DTOs.Invoice;
 
 namespace Ecommerce.Application.Interfaces;
 
@@ -32,7 +32,7 @@ public interface IInvoiceServices
 
     public Task<bool> PayAsync(Guid id, decimal price);
 
-    public Task<InvoiceDto> GetInvoiceProductAsync(Guid id);
+    // public Task<InvoiceDto> GetInvoiceProductAsync(Guid id);
 
     public Task AssignInvoiceProductAsync(Guid invoiceId, Guid productId, int count);
     

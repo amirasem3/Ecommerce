@@ -1,7 +1,11 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text.Json;
+using System.Text.RegularExpressions;
+using Ecommerce.Application.DTOs;
 using Ecommerce.Application.DTOs.User;
 using Ecommerce.Application.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Ecommerce.Application.Binder.User;
 
@@ -16,227 +20,190 @@ public class UserModelBinder : IModelBinder
 
     public async Task BindModelAsync(ModelBindingContext bindingContext)
     {
-        var firstNameValue = bindingContext.ValueProvider.GetValue("firstName").FirstValue;
-        var lastNameValue = bindingContext.ValueProvider.GetValue("lastName").FirstValue;
-        var usernameValue = bindingContext.ValueProvider.GetValue("username").FirstValue;
-        var emailValue = bindingContext.ValueProvider.GetValue("email").FirstValue;
-        var phoneNumberValue = bindingContext.ValueProvider.GetValue("phoneNumber").FirstValue;
-        var passwordValue = bindingContext.ValueProvider.GetValue("password").FirstValue;
-        var roleNameValue = bindingContext.ValueProvider.GetValue("roleName").FirstValue;
+        bindingContext.HttpContext.Request.EnableBuffering();
+        var requestBody = await new StreamReader(bindingContext.HttpContext.Request.Body).ReadToEndAsync();
+        bindingContext.HttpContext.Request.Body.Position = 0;
 
 
-        if (bindingContext.ModelMetadata.ModelType == typeof(UpdateUserDto))
+        AddUpdateUserDto? userModel;
+        try
         {
-            var idValue = bindingContext.ValueProvider.GetValue("id").FirstValue;
-            if (string.IsNullOrWhiteSpace(idValue))
+            userModel = JsonSerializer.Deserialize<AddUpdateUserDto>(requestBody, new JsonSerializerOptions
+            { 
+                PropertyNameCaseInsensitive = true
+            });
+        }
+        catch (JsonException)
+        {
+            bindingContext.ModelState.AddModelError("User", "Invalid JSON format.");
+            return;
+        }
+
+        if (userModel == null)
+        {
+            bindingContext.ModelState.AddModelError("User", "Invalid user data.");
+            return;
+        }
+
+        try
+        {
+            var roleExistEmail = await _userService.GetUserByEmailAsync(userModel.Email);
+            if (roleExistEmail != null)
             {
-                bindingContext.ModelState.AddModelError("id", "You cannot update without valid user ID.");
-                return;
+                bindingContext.ModelState.AddModelError("User", "This Email is already exists.");
             }
         }
-
-        if (bindingContext.ModelMetadata.ModelType == typeof(LoginUserDto))
+        catch (Exception e)
         {
-            var authUser = await _userService.AuthenticateUserAsync(usernameValue, passwordValue);
-            if (authUser == null)
+            if (e.Message != UserService.UserException)
             {
-                bindingContext.ModelState.AddModelError("auth", "Incorrect Username or Password!");
-                return;
+                bindingContext.ModelState.AddModelError("User",
+                    "An unexpected error occurred while checking the email uniqueness.");
             }
         }
-
-        if (bindingContext.ModelMetadata.ModelType == typeof(RegisterUserDto) || bindingContext.ModelMetadata.ModelType == typeof(UpdateUserDto))
-        {
-              if (string.IsNullOrWhiteSpace(firstNameValue))
-        {
-            // Add error to ModelState
-            bindingContext.ModelState.AddModelError("firstName", "Firstname is required.");
-            return;
-        }
-
-        if (string.IsNullOrWhiteSpace(lastNameValue))
-        {
-            bindingContext.ModelState.AddModelError("lastName", "Lastname is required.");
-            return;
-        }
-
-        if (string.IsNullOrWhiteSpace(usernameValue))
-        {
-            bindingContext.ModelState.AddModelError("username", "Username is required.");
-            return;
-        }
-
-        if (string.IsNullOrWhiteSpace(emailValue))
-        {
-            bindingContext.ModelState.AddModelError("email", "Email is required.");
-            return;
-        }
-
-        if (string.IsNullOrWhiteSpace(phoneNumberValue))
-        {
-            bindingContext.ModelState.AddModelError("phoneNumber", "PhoneNumber is required.");
-            return;
-        }
-
         
-
-        if (string.IsNullOrWhiteSpace(roleNameValue))
+        try
         {
-            bindingContext.ModelState.AddModelError("roleName", "Role name is required.");
-            return;
+            var roleExistUsername = await _userService.GetUserByUsernameAsync(userModel.Username);
+            if (roleExistUsername != null)
+            {
+                bindingContext.ModelState.AddModelError("User", "This Username already exists.");
+            }
         }
-
-        var roleExistEmail = await _userService.GetUserByEmailAsync(emailValue);
-        var roleExistUsername = await _userService.GetUserByUsernameAsync(usernameValue);
-        var roleExistPhoneNumber = await _userService.GetUserByPhoneNumberAsync(phoneNumberValue);
-        if (roleExistEmail != null)
+        catch (Exception e)
         {
-            bindingContext.ModelState.AddModelError("email", "This Email is already exists.");
+            if (e.Message != UserService.UserException)
+            {
+                bindingContext.ModelState.AddModelError("User",
+                    "An unexpected error occurred while checking the username uniqueness.");
+            }
         }
-
-        if (roleExistUsername != null)
+        
+        try
         {
-            bindingContext.ModelState.AddModelError("username", "This Username already exists.");
+            var roleExistPhoneNumber = await _userService.GetUserByPhoneNumberAsync(userModel.PhoneNumber);
+            if (roleExistPhoneNumber != null)
+            {
+                bindingContext.ModelState.AddModelError("User", "This PhoneNumber is already exists.");
+            }
         }
-
-        if (roleExistPhoneNumber != null)
+        catch (Exception e)
         {
-            bindingContext.ModelState.AddModelError("phoneNumber", "This PhoneNumber is already exists.");
+            if (e.Message != UserService.UserException)
+            {
+                bindingContext.ModelState.AddModelError("User",
+                    "An unexpected error occurred while checking the phone number uniqueness.");
+            }
         }
 
         //FirstName
-        if (firstNameValue.Length > 40)
+        if (string.IsNullOrWhiteSpace(userModel.FirstName))
         {
-            bindingContext.ModelState.AddModelError("firstName", "Firstname cannot exceed 40 characters.");
-            return;
+            bindingContext.ModelState.AddModelError("User", "Firstname is required.");
         }
 
-        if (!Regex.Match(firstNameValue,@"^[a-zA-Z''آ-ی\s]+$", RegexOptions.IgnoreCase).Success)
+        if (userModel.FirstName.Length > 40)
         {
-            bindingContext.ModelState.AddModelError("firstName", "Numbers in FirstName is not allowed.");
-            return;
+            bindingContext.ModelState.AddModelError("User", "Firstname cannot exceed 40 characters.");
+        }
+
+        if (!Regex.Match(userModel.FirstName, @"^[a-zA-Z''آ-ی\s]+$", RegexOptions.IgnoreCase).Success)
+        {
+            bindingContext.ModelState.AddModelError("User", "Numbers in FirstName is not allowed.");
         }
 
         //LastName
-        if (lastNameValue.Length > 40)
+        if (string.IsNullOrWhiteSpace(userModel.LastName))
         {
-            bindingContext.ModelState.AddModelError("lastName", "Lastname cannot exceed 40 characters.");
-            return;
+            bindingContext.ModelState.AddModelError("User", "Lastname is required.");
         }
 
-        if (!Regex.Match(lastNameValue,@"^[a-zA-Z''آ-ی\s]+$", RegexOptions.IgnoreCase).Success)
+        if (userModel.LastName.Length > 40)
         {
-            bindingContext.ModelState.AddModelError("lastName", "Numbers in Lastname is not allowed.");
-            return;
+            bindingContext.ModelState.AddModelError("User", "Lastname cannot exceed 40 characters.");
         }
+
+        if (!Regex.Match(userModel.LastName, @"^[a-zA-Z''آ-ی\s]+$", RegexOptions.IgnoreCase).Success)
+        {
+            bindingContext.ModelState.AddModelError("User", "Numbers in Lastname is not allowed.");
+        }
+
         //Email
-        if (emailValue.Length > 30)
+        if (string.IsNullOrWhiteSpace(userModel.Email))
         {
-            bindingContext.ModelState.AddModelError("email", "Email cannot exceed 30 characters.");
-            return;
+            bindingContext.ModelState.AddModelError("User", "Email is required.");
         }
 
-        if (!emailValue.Contains("@"))
+        if (userModel.Email.Length > 30)
         {
-            bindingContext.ModelState.AddModelError("email", "Enter valid email address.");
-            return;
+            bindingContext.ModelState.AddModelError("User", "Email cannot exceed 30 characters.");
         }
-        
+
+        if (!userModel.Email.Contains("@"))
+        {
+            bindingContext.ModelState.AddModelError("User", "Enter valid email address.");
+        }
+
         //PhoneNumber
-        if (phoneNumberValue.Length > 20)
+        if (string.IsNullOrWhiteSpace(userModel.PhoneNumber))
         {
-            bindingContext.ModelState.AddModelError("phoneNumber", "PhoneNumber cannot exceed 20 characters");
-            return;
+            bindingContext.ModelState.AddModelError("User", "PhoneNumber is required.");
         }
 
-        if (!Regex.Match(phoneNumberValue,@"^[0-9]+$", RegexOptions.IgnoreCase).Success)
+        if (userModel.PhoneNumber.Length > 20)
         {
-            bindingContext.ModelState.AddModelError("phoneNumber", "Non-numeric characters are not allowed in PhoneNumber.");
-            return;
-        }
-        //Username
-        if (usernameValue.Length > 30)
-        {
-            bindingContext.ModelState.AddModelError("username", "Username cannot exceed 30 characters.");
-            return;
+            bindingContext.ModelState.AddModelError("User", "PhoneNumber cannot exceed 20 characters");
         }
 
-        if (!Regex.Match(usernameValue,@"^[a-zA-Z0-9''\s]+$", RegexOptions.IgnoreCase).Success)
+        if (!Regex.Match(userModel.PhoneNumber, @"^[0-9]+$", RegexOptions.IgnoreCase).Success)
         {
-            bindingContext.ModelState.AddModelError("username", "Invalid characters in Username.");
-            return;
+            bindingContext.ModelState.AddModelError("User", "Non-numeric characters are not allowed in PhoneNumber.");
         }
-        //Password
-        if (string.IsNullOrWhiteSpace(passwordValue))
-        {
-            bindingContext.ModelState.AddModelError("password", "Password is required.");
-            return;
-        }
-        }
-      
 
         //Username
-        if (usernameValue.Length > 30)
+        if (string.IsNullOrWhiteSpace(userModel.Username))
         {
-            bindingContext.ModelState.AddModelError("username", "Username cannot exceed 30 characters.");
-            return;
+            bindingContext.ModelState.AddModelError("User", "Username is required.");
         }
 
-        if (!Regex.Match(usernameValue,@"^[a-zA-Z0-9''\s]+$", RegexOptions.IgnoreCase).Success)
+        if (userModel.Username.Length > 30)
         {
-            bindingContext.ModelState.AddModelError("username", "Invalid characters in Username.");
-            return;
+            bindingContext.ModelState.AddModelError("User", "Username cannot exceed 30 characters.");
         }
+
+        if (!Regex.Match(userModel.Username, @"^[a-zA-Z0-9''\s]+$", RegexOptions.IgnoreCase).Success)
+        {
+            bindingContext.ModelState.AddModelError("User", "Invalid characters in Username.");
+        }
+
         //Password
-        if (string.IsNullOrWhiteSpace(passwordValue))
+        if (string.IsNullOrWhiteSpace(userModel.Password))
         {
-            bindingContext.ModelState.AddModelError("password", "Password is required.");
+            bindingContext.ModelState.AddModelError("User", "Password is required.");
+        }
+
+        //Role Name
+        if (string.IsNullOrWhiteSpace(userModel.RoleName))
+        {
+            bindingContext.ModelState.AddModelError("User", "Role name is required.");
+        }
+
+
+        var objectValidator =
+            (IObjectModelValidator)bindingContext.HttpContext.RequestServices.GetService(
+                typeof(IObjectModelValidator))!;
+
+        objectValidator!.Validate(
+            actionContext: bindingContext.ActionContext,
+            validationState: null,
+            prefix: null!,
+            model: userModel);
+
+        if (!bindingContext.ModelState.IsValid)
+        {
             return;
         }
 
-      
-        
-
-        var user = new RegisterUserDto()
-        {
-            FirstName = firstNameValue,
-            LastName = lastNameValue,
-            Email = emailValue,
-            Password = passwordValue,
-            PhoneNumber = phoneNumberValue,
-            RoleName = roleNameValue,
-            Username = usernameValue
-        };
-
-        
-        if (bindingContext.ModelMetadata.ModelType == typeof(UpdateUserDto))
-        {
-            var updatedUser = new UpdateUserDto()
-            {
-                Id = bindingContext.ValueProvider.GetValue("id").FirstValue,
-                FirstName = firstNameValue,
-                LastName = lastNameValue,
-                Email = emailValue,
-                PhoneNumber = phoneNumberValue,
-                Password = passwordValue,
-                RoleName = roleNameValue,
-                Username = usernameValue
-            };
-            bindingContext.Result = ModelBindingResult.Success(updatedUser);
-            return;
-        }
-
-        if (bindingContext.ModelMetadata.ModelType == typeof(LoginUserDto))
-        {
-            var loginUser = new LoginUserDto()
-            {
-                Username = usernameValue,
-                Password = passwordValue
-            };
-            bindingContext.Result = ModelBindingResult.Success(loginUser);
-            return;
-        }
-
-        bindingContext.Result = ModelBindingResult.Success(user);
+        bindingContext.Result = ModelBindingResult.Success(userModel);
     }
 }

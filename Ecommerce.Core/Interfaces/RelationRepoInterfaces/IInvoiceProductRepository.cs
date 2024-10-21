@@ -7,4 +7,11 @@ public interface IInvoiceProductRepository
     public Task<bool> DeleteInvoiceProductAsync(Guid  invoiceId, Guid productId);
 
     public Task<bool> InvoiceHaveTheProductAsync(Guid invoiceId, Guid productId);
+
+    public Task<ProductInvoice> GetProductInvoiceAsync(Guid invoiceId, Guid productId);
+
+    public Task UpdateProductInvoiceAsync(ProductInvoice newProductInvoice);
+    
+    
+    
 }

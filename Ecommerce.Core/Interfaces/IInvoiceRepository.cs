@@ -27,5 +27,5 @@ public interface IInvoiceRepository
 
     public Task<bool> DeleteInvoiceAsync(Guid id);
 
-    public Task<Invoice> GetInvoiceProductAsync(Guid invoiceId);
+    // public Task<Invoice> GetInvoiceProductAsync(Guid invoiceId);
 }

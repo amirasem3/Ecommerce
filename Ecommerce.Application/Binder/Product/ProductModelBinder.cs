@@ -1,8 +1,12 @@
 ﻿using System.Globalization;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using Ecommerce.Application.DTOs;
+using Ecommerce.Application.DTOs.Manufacturer;
 using Ecommerce.Application.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Ecommerce.Application.Binder.Product;
 
@@ -17,104 +21,113 @@ public class ProductModelBinder : IModelBinder
     }
     public async Task BindModelAsync(ModelBindingContext bindingContext)
     {
-        var nameValue = bindingContext.ValueProvider.GetValue("name").FirstValue;
-        var priceValue = bindingContext.ValueProvider.GetValue("price").FirstValue;
-        var inventoryValue = bindingContext.ValueProvider.GetValue("inventory").FirstValue;
-        var dopValue = bindingContext.ValueProvider.GetValue("dop").FirstValue;
-        var doeValue = bindingContext.ValueProvider.GetValue("doe").FirstValue;
-        var statusValue = bindingContext.ValueProvider.GetValue("status").FirstValue;
-        
+        bindingContext.HttpContext.Request.EnableBuffering();
+        var requestBody = await new StreamReader(bindingContext.HttpContext.Request.Body).ReadToEndAsync();
+        bindingContext.HttpContext.Request.Body.Position = 0;
+
+    
+        AddUpdateProductDto? addUpdateProductDto;
+        try
+        {
+            addUpdateProductDto = JsonSerializer.Deserialize<AddUpdateProductDto>(requestBody, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+        }
+        catch (JsonException)
+        {
+            bindingContext.ModelState.AddModelError("Manufacturer", "Invalid JSON format.");
+            return;
+        }
+
+        if (addUpdateProductDto == null)
+        {
+            bindingContext.ModelState.AddModelError("Manufacturer", "Invalid invoice data.");
+            return;
+        }
         //Name
-        if (string.IsNullOrWhiteSpace(nameValue))
+        if (string.IsNullOrWhiteSpace(addUpdateProductDto.Name))
         {
-            bindingContext.ModelState.AddModelError("name", "Name is required.");
-            return;
+            bindingContext.ModelState.AddModelError("Product", "Name is required.");
+          
         }
 
-        if (nameValue.Length > 40)
+        if (addUpdateProductDto.Name.Length > 40)
         {
-            bindingContext.ModelState.AddModelError("name", "Name cannot exceed 40 characters.");
-            return;
+            bindingContext.ModelState.AddModelError("Product", "Name cannot exceed 40 characters.");
+           
         }
 
-        if (!Regex.Match(nameValue, @"^[a-zA-Z0-9''-'\s]+$", RegexOptions.IgnoreCase).Success)
+        if (!Regex.Match(addUpdateProductDto.Name, @"^[a-zA-Z0-9''-'\s]+$", RegexOptions.IgnoreCase).Success)
         {
-            bindingContext.ModelState.AddModelError("name", "Invalid characters in name!");
-            return;
+            bindingContext.ModelState.AddModelError("Product", "Invalid characters in name!");
+           
         }
 
         //Price
-        if (string.IsNullOrWhiteSpace(priceValue))
+        if (addUpdateProductDto.Price == null)
         {
-            bindingContext.ModelState.AddModelError("priceValue", "Price is required.");
-            return;
+            bindingContext.ModelState.AddModelError("Product", "Price is required.");
         }
         
-        if (!decimal.TryParse(priceValue, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal price))
+        if (addUpdateProductDto.Price.GetType() != typeof(decimal))
         {
-            bindingContext.ModelState.AddModelError("price", "Invalid decimal value for Price.");
-            return;
+            bindingContext.ModelState.AddModelError("Product", "Invalid decimal value for Price.");
+            
         }
         
         //Inventory
-        if (string.IsNullOrWhiteSpace(inventoryValue))
+        if (addUpdateProductDto.Inventory == null)
         {
-            bindingContext.ModelState.AddModelError("inventory", "Inventory is required.");
-            return;
+            bindingContext.ModelState.AddModelError("Product", "Inventory is required.");
         }
-        if (!decimal.TryParse(inventoryValue, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal inventory))
+        if (addUpdateProductDto.Inventory.GetType() != typeof(decimal))
         {
-            bindingContext.ModelState.AddModelError("price", "Invalid decimal value for Price.");
-            return;
+            bindingContext.ModelState.AddModelError("Product", "Invalid decimal value for Price.");
         }
 
-        if (inventory <= 0)
+        if (addUpdateProductDto.Inventory <= 0)
         {
-            bindingContext.ModelState.AddModelError("inventory", "Enter valid inventory!");
-            return;
+            bindingContext.ModelState.AddModelError("Product", "Enter valid inventory!");
         }
         //DOP
-        if (string.IsNullOrWhiteSpace(dopValue))
+        if (addUpdateProductDto.Dop == null)
         {
-            bindingContext.ModelState.AddModelError("dop", "Date of Production is required.");
-            return;
+            bindingContext.ModelState.AddModelError("Product", "Date of Production is required.");
         }
 
         //DOE
-        if (string.IsNullOrWhiteSpace(doeValue))
+        if (addUpdateProductDto.Doe == null)
         {
-            bindingContext.ModelState.AddModelError("doe", "Data of Expiration is required.");
-            return;
+            bindingContext.ModelState.AddModelError("Product", "Data of Expiration is required.");
         }
 
-        if (Convert.ToDateTime(doeValue) < Convert.ToDateTime(dopValue))
+        if (addUpdateProductDto.Doe < addUpdateProductDto.Dop)
         {
-            bindingContext.ModelState.AddModelError("status", "Invalid expiration date!");
-            return;
+            bindingContext.ModelState.AddModelError("Product", "Invalid expiration date!");
         }
         
         
         //Status
-        if (string.IsNullOrWhiteSpace(statusValue))
+        if (addUpdateProductDto.Status.GetType() != typeof(bool))
         {
-            bindingContext.ModelState.AddModelError("status", "Status is required.");
-            return;
+            bindingContext.ModelState.AddModelError("Product", "Status is required.");
         }
-        if (!bool.TryParse(statusValue, out bool isAvailable))
+        var objectValidator =
+            (IObjectModelValidator)bindingContext.HttpContext.RequestServices.GetService(
+                typeof(IObjectModelValidator))!;
+        
+        objectValidator!.Validate(
+            actionContext: bindingContext.ActionContext,
+            validationState: null,
+            prefix: null!,
+            model: addUpdateProductDto);
+
+        if (!bindingContext.ModelState.IsValid)
         {
-            bindingContext.ModelState.AddModelError("status", "Invalid boolean value for status.");
             return;
         }
 
-        
-        var addProduct = new AddUpdateProductDto()
-        {
-            Name = nameValue,
-            Price = price,
-            Doe = Convert.ToDateTime(doeValue),
-            Dop = Convert.ToDateTime(dopValue),
-            Inventory = inventory,
-        };
-        bindingContext.Result = ModelBindingResult.Success(addProduct);
+        bindingContext.Result = ModelBindingResult.Success(addUpdateProductDto);
     }
 }

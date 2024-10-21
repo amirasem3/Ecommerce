@@ -1,6 +1,4 @@
-﻿using System.Data;
-using Ecommerce.Core.Entities;
-using Ecommerce.Core.Entities.RelationEntities;
+﻿using Ecommerce.Core.Entities;
 using Ecommerce.Core.Interfaces.RelationRepoInterfaces;
 using Microsoft.EntityFrameworkCore;
 namespace Ecommerce.Infrastructure.Persistence;
@@ -23,9 +21,6 @@ public class EcommerceDbContext : DbContext
     public DbSet<Invoice> Invoices { get; set; }
     
     public DbSet<Manufacturer> Manufacturers { get; set; }
-    
-    //Relation DB set
-    public DbSet<ManufacturerProduct> ManufacturerProducts { get; set; }
     
     public DbSet<ProductInvoice> ProductInvoices { get; set; }
     
@@ -104,17 +99,10 @@ public class EcommerceDbContext : DbContext
         
         
         //Manufacturer-Product Relations(Many-to-Many)
-        modelBuilder.Entity<ManufacturerProduct>()
-            .HasKey(mp => new { mp.ManufacturerId, mp.ProductId });
-        modelBuilder.Entity<ManufacturerProduct>()
-            .HasOne(mp => mp.Manufacturer)
-            .WithMany(m => m.Products)
-            .HasForeignKey(mp => mp.ManufacturerId);
-
-        modelBuilder.Entity<ManufacturerProduct>()
-            .HasOne(mp => mp.Product)
-            .WithMany(p => p.Manufacturers)
-            .HasForeignKey(mp => mp.ProductId);
+        modelBuilder.Entity<Manufacturer>()
+            .HasMany(m => m.Products2)
+            .WithMany(p => p.Manufacturers2)
+            .UsingEntity(j => j.ToTable("ManufacturerProduct2"));
         
         //Product-Invoice (Many-to-Many)
         modelBuilder.Entity<ProductInvoice>()
@@ -130,15 +118,6 @@ public class EcommerceDbContext : DbContext
             .WithMany(i => i.Products)
             .HasForeignKey(pi => pi.InvoiceId);
         
-        
-        //2nd try manufacturer and product many-to-many by convention
-        modelBuilder.Entity<Manufacturer>()
-            .HasMany(e => e.Products2)
-            .WithMany(e => e.Manufacturers2);
-
-        modelBuilder.Entity<Product>()
-            .HasMany(e => e.Manufacturers2)
-            .WithMany(e => e.Products2);
 
 
     }

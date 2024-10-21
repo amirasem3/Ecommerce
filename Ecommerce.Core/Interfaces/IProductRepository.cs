@@ -13,8 +13,8 @@ public interface IProductRepository
     Task UpdateProductAsync(Product newProduct);
 
     Task<IEnumerable<Product>> FilterProductsByPrice(decimal startPrice, decimal endPrice);
-
-    Task<Product> GetProductManufacturersAsync(Guid productId);
-
+    
     Task<Product> GetProductInvoicesAsync(Guid productId);
+
+    Task<IEnumerable<Invoice>> GetInvoicesByProductIdAsync(Guid productId);
 }

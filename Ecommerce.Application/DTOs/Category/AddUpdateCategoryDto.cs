@@ -2,9 +2,9 @@
 
 public class AddUpdateCategoryDto
 {
-    public string CategoryName { get; set; }
-    public string ParentCategoryName { get; set; }
-    
+    public string Name { get; set; } = null!;
+    public string ParentName { get; set; } = null!;
+
     public bool Type { get; set; }
     
 }

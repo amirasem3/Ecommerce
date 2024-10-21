@@ -193,21 +193,6 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Ecommerce.Core.Entities.RelationEntities.ManufacturerProduct", b =>
-                {
-                    b.Property<Guid>("ManufacturerId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("ManufacturerId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ManufacturerProducts");
-                });
-
             modelBuilder.Entity("Ecommerce.Core.Entities.Role", b =>
                 {
                     b.Property<Guid>("Id")
@@ -304,7 +289,7 @@ namespace Ecommerce.Infrastructure.Migrations
 
                     b.HasIndex("Products2Id");
 
-                    b.ToTable("ManufacturerProduct");
+                    b.ToTable("ManufacturerProduct2", (string)null);
                 });
 
             modelBuilder.Entity("Ecommerce.Core.Entities.Category", b =>
@@ -319,25 +304,6 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasOne("Ecommerce.Core.Entities.Invoice", null)
                         .WithMany("Products2")
                         .HasForeignKey("InvoiceId");
-                });
-
-            modelBuilder.Entity("Ecommerce.Core.Entities.RelationEntities.ManufacturerProduct", b =>
-                {
-                    b.HasOne("Ecommerce.Core.Entities.Manufacturer", "Manufacturer")
-                        .WithMany("Products")
-                        .HasForeignKey("ManufacturerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Ecommerce.Core.Entities.Product", "Product")
-                        .WithMany("Manufacturers")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Manufacturer");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Ecommerce.Core.Interfaces.RelationRepoInterfaces.ProductInvoice", b =>
@@ -386,16 +352,9 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Navigation("Products2");
                 });
 
-            modelBuilder.Entity("Ecommerce.Core.Entities.Manufacturer", b =>
-                {
-                    b.Navigation("Products");
-                });
-
             modelBuilder.Entity("Ecommerce.Core.Entities.Product", b =>
                 {
                     b.Navigation("Invoices");
-
-                    b.Navigation("Manufacturers");
                 });
 #pragma warning restore 612, 618
         }

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ecommerce.Infrastructure.Migrations
 {
     [DbContext(typeof(EcommerceDbContext))]
-    [Migration("20241006065403_AddPostgresEnumPaymentStatus")]
-    partial class AddPostgresEnumPaymentStatus
+    [Migration("20241020070137_RemoveUnnecessaryManufactureProductRelationEntity")]
+    partial class RemoveUnnecessaryManufactureProductRelationEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,7 +38,8 @@ namespace Ecommerce.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)");
 
                     b.Property<Guid>("ParentCategoryId")
                         .HasColumnType("uuid");
@@ -49,9 +50,6 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
 
                     b.ToTable("Categories");
                 });
@@ -64,24 +62,28 @@ namespace Ecommerce.Infrastructure.Migrations
 
                     b.Property<string>("IdentificationCode")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)");
 
                     b.Property<DateTime>("IssueDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("IssuerName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)");
 
-                    b.Property<string>("OwnerFamilyName")
+                    b.Property<string>("OwnerFirstName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)");
 
-                    b.Property<string>("OwnerName")
+                    b.Property<string>("OwnerLastName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)");
 
-                    b.Property<DateTime>("PaymentDate")
+                    b.Property<DateTime?>("PaymentDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("PaymentStatus")
@@ -107,30 +109,36 @@ namespace Ecommerce.Infrastructure.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(60)
+                        .HasColumnType("character varying(60)");
 
-                    b.Property<DateTime>("EsatablishDate")
+                    b.Property<DateTime>("EstablishDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("ManufacturerCountry")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(60)
+                        .HasColumnType("character varying(60)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
 
                     b.Property<string>("OwnerName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
 
                     b.Property<int>("Rate")
                         .HasColumnType("integer");
@@ -156,46 +164,36 @@ namespace Ecommerce.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(24)
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("DOE")
+                    b.Property<DateTime>("Doe")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime>("DOP")
+                    b.Property<DateTime>("Dop")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<decimal>("Inventory")
-                        .HasColumnType("numeric");
+                        .HasColumnType("decimal(15,2)");
+
+                    b.Property<Guid?>("InvoiceId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(15,2)");
 
                     b.Property<bool>("Status")
                         .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("InvoiceId");
+
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("Ecommerce.Core.Entities.RelationEntities.ManufacturerProduct", b =>
-                {
-                    b.Property<Guid>("ManufacturerId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("ManufacturerId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ManufacturerProducts");
                 });
 
             modelBuilder.Entity("Ecommerce.Core.Entities.Role", b =>
@@ -206,7 +204,8 @@ namespace Ecommerce.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)");
 
                     b.HasKey("Id");
 
@@ -223,38 +222,38 @@ namespace Ecommerce.Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)");
 
                     b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(90)
+                        .HasColumnType("character varying(90)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
 
                     b.Property<Guid>("RoleId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.HasIndex("PhoneNumber")
                         .IsUnique();
 
                     b.HasIndex("Username")
@@ -281,6 +280,21 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.ToTable("ProductInvoices");
                 });
 
+            modelBuilder.Entity("ManufacturerProduct", b =>
+                {
+                    b.Property<Guid>("Manufacturers2Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("Products2Id")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Manufacturers2Id", "Products2Id");
+
+                    b.HasIndex("Products2Id");
+
+                    b.ToTable("ManufacturerProduct2", (string)null);
+                });
+
             modelBuilder.Entity("Ecommerce.Core.Entities.Category", b =>
                 {
                     b.HasOne("Ecommerce.Core.Entities.Category", null)
@@ -288,23 +302,11 @@ namespace Ecommerce.Infrastructure.Migrations
                         .HasForeignKey("CategoryId");
                 });
 
-            modelBuilder.Entity("Ecommerce.Core.Entities.RelationEntities.ManufacturerProduct", b =>
+            modelBuilder.Entity("Ecommerce.Core.Entities.Product", b =>
                 {
-                    b.HasOne("Ecommerce.Core.Entities.Manufacturer", "Manufacturer")
-                        .WithMany("Products")
-                        .HasForeignKey("ManufacturerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Ecommerce.Core.Entities.Product", "Product")
-                        .WithMany("Manufacturers")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Manufacturer");
-
-                    b.Navigation("Product");
+                    b.HasOne("Ecommerce.Core.Entities.Invoice", null)
+                        .WithMany("Products2")
+                        .HasForeignKey("InvoiceId");
                 });
 
             modelBuilder.Entity("Ecommerce.Core.Interfaces.RelationRepoInterfaces.ProductInvoice", b =>
@@ -326,6 +328,21 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("ManufacturerProduct", b =>
+                {
+                    b.HasOne("Ecommerce.Core.Entities.Manufacturer", null)
+                        .WithMany()
+                        .HasForeignKey("Manufacturers2Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ecommerce.Core.Entities.Product", null)
+                        .WithMany()
+                        .HasForeignKey("Products2Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Ecommerce.Core.Entities.Category", b =>
                 {
                     b.Navigation("SubCategories");
@@ -334,18 +351,13 @@ namespace Ecommerce.Infrastructure.Migrations
             modelBuilder.Entity("Ecommerce.Core.Entities.Invoice", b =>
                 {
                     b.Navigation("Products");
-                });
 
-            modelBuilder.Entity("Ecommerce.Core.Entities.Manufacturer", b =>
-                {
-                    b.Navigation("Products");
+                    b.Navigation("Products2");
                 });
 
             modelBuilder.Entity("Ecommerce.Core.Entities.Product", b =>
                 {
                     b.Navigation("Invoices");
-
-                    b.Navigation("Manufacturers");
                 });
 #pragma warning restore 612, 618
         }

@@ -23,14 +23,15 @@ public class RoleController : ControllerBase
     [HttpGet("GetRoleById/{id}")]
     public async Task<IActionResult> GetRoleById(Guid id)
     {
-        var role = await _roleServices.GetRoleByIdAsync(id);
-
-        if (role != null)
+        try
         {
-            return Ok(role);
+            var role = await _roleServices.GetRoleByIdAsync(id);
+                return Ok(role);
         }
-
-        return NotFound($"There is no role with Id {id}.");
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("AllRoles")]
@@ -43,54 +44,64 @@ public class RoleController : ControllerBase
     [HttpGet("SearchRoles")]
     public async Task<IActionResult> SearchRoles([FromQuery] String name)
     {
-        var roles = await _roleServices.GetRoleByNameAsync(name);
-        return Ok(roles);
+        try
+        {
+            var roles = await _roleServices.GetRoleByNameAsync(name);
+            return Ok(roles);
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
+     
     }
 
     [AllowAnonymous]
-    [HttpPost]
-    public async Task<IActionResult> AddRole([ModelBinder(typeof(RoleModelBinder))] AddUpdateRoleDto role)
+    [HttpPost("AddNewRole")]
+    [Consumes("application/json")]
+    public async Task<IActionResult> AddRole([FromBody] AddUpdateRoleDto role)
     {
         if (!ModelState.IsValid)
         {
-            if (ModelState.ContainsKey("Name"))
-            {
-                var nameErrors = ModelState["Name"].Errors;
-                if (nameErrors.Count > 0)
-                {
-                    return BadRequest(new { message = nameErrors[0].ErrorMessage });
-                }
-            }
-            return BadRequest(new { message = "Invalid input" });
+            return BadRequest(ModelState["Role"]!.Errors.Select(e => e.ErrorMessage));
         }
         var user = await _roleServices.AddRoleAsync(role);
-       
-
         return Ok(user);
     }
 
 
     [HttpPut("UpdateRole")]
+    [Consumes("application/json")]
     public async Task<IActionResult> UpdateRole([FromQuery] Guid id, [FromBody] AddUpdateRoleDto roleDto)
     {
         if (!ModelState.IsValid)
         {
-            return ValidationProblem(ModelState);
+            return BadRequest(ModelState["Role"]!.Errors.Select(e => e.ErrorMessage));
         }
 
-        var updatedRole = await _roleServices.UpdateRoleAsync(id, roleDto);
-        return Ok(updatedRole);
+        try
+        {
+            var updatedRole = await _roleServices.UpdateRoleAsync(id, roleDto);
+            return Ok(updatedRole);
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
+        
     }
 
     [HttpDelete("DeleteRole/{id}")]
     public async Task<IActionResult> DeleteRoleByIdAsync(Guid id)
     {
-        var deleted = await _roleServices.DeleteRoleByIdAsync(id);
-        if (!deleted)
+        try
         {
-            return NotFound();
+            await _roleServices.DeleteRoleByIdAsync(id);
+            return Ok($"The role with Id {id} successfully deleted");
         }
-
-        return Ok($"The role with Id {id} successfully deleted");
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
 }

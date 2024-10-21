@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Azure.Core.Pipeline;
+using System.Text.Json.Serialization;
 using Ecommerce.Core.Interfaces.RelationRepoInterfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,23 +20,23 @@ public class Invoice
     [RegularExpression(@"^[a-zA-Z0-9''-'\s]+$", ErrorMessage = "Invalid Characters!")]
     [MaxLength(40, ErrorMessage = "Name cannot exceed 40 characters.")]
     [Required(ErrorMessage = "Name should be specified.")]
-    public string? OwnerFirstName { get; set; }
+    public string OwnerFirstName { get; set; } = null!;
 
     [RegularExpression(@"^[a-zA-Z0-9''-'\s]+$", ErrorMessage = "Invalid Characters!")]
     [MaxLength(40, ErrorMessage = "Name cannot exceed 40 characters.")]
     [Required(ErrorMessage = "Owner lastname should be specified.")]
 
-    public string? OwnerLastName { get; set; }
+    public string OwnerLastName { get; set; } = null!;
 
     [RegularExpression(@"^[a-zA-Z0-9''-'\s]+$", ErrorMessage = "Invalid Characters!")]
     [MaxLength(40, ErrorMessage = "Name cannot exceed 40 characters.")]
     [Required(ErrorMessage = "Owner lastname should be specified.")]
-    public string? IdentificationCode { get; set; }
+    public string IdentificationCode { get; set; } = null!;
 
     [RegularExpression(@"^[a-zA-Z0-9''-'\s]+$", ErrorMessage = "Invalid Characters!")]
     [MaxLength(40, ErrorMessage = "Issuer name cannot exceed 40 characters.")]
     [Required(ErrorMessage = "Issuer name should be specified.")]
-    public string? IssuerName { get; set; }
+    public string IssuerName { get; set; } = null!;
 
 
     [DataType(DataType.Date)]
@@ -51,7 +51,8 @@ public class Invoice
     //Payment Status: Payed, Pending, Cencelled
     public PaymentStatus PaymentStatus { get; set; }
 
-    public ICollection<ProductInvoice> Products { get; set; }
 
-    public ICollection<Product> Products2 { get; set; }
+    [JsonIgnore] public ICollection<ProductInvoice> Products { get; set; } = null!;
+
+    [JsonIgnore] public ICollection<Product> Products2 { get; set; } = null!;
 }

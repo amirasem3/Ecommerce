@@ -1,6 +1,4 @@
-using System.ComponentModel.DataAnnotations;
 using System.Text;
-using BookStoreClean2.Middleware;
 using Ecommerce.Application.Binder;
 using Ecommerce.Application.Binder.Category;
 using Ecommerce.Application.Binder.Invoice;
@@ -41,7 +39,7 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = "AmirHosseinIssuer",
         ValidAudience = "AmirHosseinAudience",
         IssuerSigningKey = new SymmetricSecurityKey
-            (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+            (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
@@ -87,7 +85,6 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
 builder.Services.AddScoped<IManufacturerService, ManufacturerService>();
-builder.Services.AddScoped<IManufacturerProductRepository, ManufacturerProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryServices>();
 builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();

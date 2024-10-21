@@ -2,7 +2,7 @@
 
 namespace Ecommerce.Application.DTOs;
 
-public class InvoiceDto
+public class InvoiceProductDto
 {
     public Guid Id { get; set; }
 
@@ -19,11 +19,7 @@ public class InvoiceDto
     public DateTime? PaymentDate { get; init; }
 
     public decimal TotalPrice { get; init; }
-    
-    public string PaymentStatus { get; set; } = null!;
 
-    public ICollection<ProductInvoiceDto> Products { get; set; } = new List<ProductInvoiceDto>();
-    
-    
-
+    //Payment Status: Payed, Pending, Cencelled
+    public PaymentStatus PaymentStatus { get; init; }
 }

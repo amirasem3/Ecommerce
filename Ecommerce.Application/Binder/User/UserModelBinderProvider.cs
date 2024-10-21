@@ -15,9 +15,7 @@ public class UserModelBinderProvider : IModelBinderProvider
     }
     public IModelBinder? GetBinder(ModelBinderProviderContext context)
     {
-        if (context.Metadata.ModelType == typeof(RegisterUserDto) || 
-            context.Metadata.ModelType == typeof(UpdateUserDto) ||
-            context.Metadata.ModelType == typeof(LoginUserDto))
+        if (context.Metadata.ModelType == typeof(AddUpdateUserDto))
         {
             return new UserModelBinder(_userService);
         }

@@ -10,10 +10,9 @@ public interface ICategoryRepository
     public Task<Category> GetCategoryByName(string name);
 
     public Task<Category> GetCategoryById(Guid id);
-
+    
+    public Task AddSubCategoryAsync(Category parent, Category child);
     public Task<Category> GetParentByChildId(Guid id);
-
-    public Task<IEnumerable<Category>> GetSubCategory(Guid parentId);
 
     public Task<IEnumerable<Category>> GetAllCategories();
 

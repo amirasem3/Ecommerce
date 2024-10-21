@@ -14,12 +14,5 @@ public interface IProductService
     Task<IEnumerable<ProductDto>> GetAllProductsByNameAsync(string name);
 
     Task<IEnumerable<ProductDto>> FilterProductByPriceAsync(decimal startPrice, decimal endPrice);
-    public Task<ProductDto> GetProductManufacturersAsync(Guid productId);
-
-    public Task<ProductDto> GetProductInvoicesAsync(Guid productId);
-
-
-
-
-
+    Task<IEnumerable<InvoiceProductDto>> GetInvoicesByProductId(Guid productId);
 }
