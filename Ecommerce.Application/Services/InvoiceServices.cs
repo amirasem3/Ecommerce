@@ -9,17 +9,14 @@ namespace Ecommerce.Application.Services;
 
 public class InvoiceServices
 {
-    private readonly IInvoiceRepository _invoiceRepository;
     private readonly IProductRepository _productRepository;
     private readonly IInvoiceProductRepository _invoiceProductRepository;
     public const string InvoiceException = "Invoice Not Found";
     private readonly UnitOfWork _unitOfWork;
 
-    public InvoiceServices(IInvoiceRepository invoiceRepository,
-        IProductRepository productRepository, IInvoiceProductRepository invoiceProductRepository,
+    public InvoiceServices(IProductRepository productRepository, IInvoiceProductRepository invoiceProductRepository,
         UnitOfWork unitOfWork)
     {
-        _invoiceRepository = invoiceRepository;
         _productRepository = productRepository;
         _invoiceProductRepository = invoiceProductRepository;
         _unitOfWork = unitOfWork;
@@ -373,7 +370,7 @@ public class InvoiceServices
 
     public async Task<bool> DeleteInvoiceProductAsync(Guid invoiceId, Guid productId)
     {
-        var invoice = await _invoiceRepository.GetInvoiceById(invoiceId);
+        var invoice = await _unitOfWork.InvoiceRepository.GetByIdAsync(invoiceId);
         var product = await _productRepository.GetProductByIdAsync(productId);
         if (invoice == null)
         {

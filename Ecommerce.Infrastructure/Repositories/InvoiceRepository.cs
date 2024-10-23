@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.Infrastructure.Repositories;
 
-public class InvoiceRepository : IInvoiceRepository
+public class InvoiceRepository
 {
     private readonly EcommerceDbContext _context;
 

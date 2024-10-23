@@ -88,7 +88,6 @@ builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
 builder.Services.AddScoped<ManufacturerService>();
 builder.Services.AddScoped<CategoryServices>();
-builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
 builder.Services.AddScoped<InvoiceServices>();
 builder.Services.AddScoped<IInvoiceProductRepository, InvoiceProductRepository>();
 
