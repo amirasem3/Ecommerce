@@ -1,21 +1,20 @@
 ﻿using Ecommerce.Application.DTOs;
 using Ecommerce.Application.DTOs.Manufacturer;
 using Ecommerce.Application.DTOs.User;
-using Ecommerce.Application.Interfaces;
 using Ecommerce.Core.Entities;
 using Ecommerce.Core.Interfaces;
 
 namespace Ecommerce.Application.Services;
 
-public class ManufacturerService : IManufacturerService
+public class ManufacturerService
 {
     private readonly IManufacturerRepository _manufacturerRepository;
     private readonly IProductRepository _productRepository;
-    private readonly IUserServices _userServices;
+    private readonly UserService _userServices;
     public const string ManufacturerException = "Manufacturer Not Found!";
 
     public ManufacturerService(IManufacturerRepository manufacturerRepository, IProductRepository productRepository,
-        IUserServices userServices)
+        UserService userServices)
     {
         _manufacturerRepository = manufacturerRepository;
         _productRepository = productRepository;

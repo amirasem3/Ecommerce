@@ -1,23 +1,23 @@
 ﻿using Ecommerce.Application.DTOs.User;
-using Ecommerce.Application.Interfaces;
 using Ecommerce.Core.Entities;
 using Ecommerce.Core.Interfaces;
+using Ecommerce.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 
 namespace Ecommerce.Application.Services;
 
-public class UserService : IUserServices
+public class UserService
 {
     private readonly IUserRepository _userRepository;
-    private readonly IRoleRepository _roleRepository;
     private readonly IPasswordHasher<User> _passwordHasher;
+    private readonly UnitOfWork _unitOfWork;
     public const string UserException = "User Not Found!";
-    public UserService(IUserRepository userRepository, IRoleRepository roleRepository,
-        IPasswordHasher<User> passwordHasher)
+    public UserService(IUserRepository userRepository,
+        IPasswordHasher<User> passwordHasher, UnitOfWork unitOfWork)
     {
         _userRepository = userRepository;
-        _roleRepository = roleRepository;
         _passwordHasher = passwordHasher;
+        _unitOfWork = unitOfWork;
     }
 
 
@@ -28,7 +28,7 @@ public class UserService : IUserServices
         {
             throw new Exception(UserException);
         }
-        var role = await _roleRepository.GetRoleByIdAsync(user.RoleId);
+        var role = await _unitOfWork.RoleRepository.GetByIdAsync(user.RoleId);
         if (role == null)
         {
             throw new Exception(RoleService.RoleException);
@@ -55,7 +55,7 @@ public class UserService : IUserServices
             throw new Exception(UserException);
         }
 
-        var role = await _roleRepository.GetRoleByIdAsync(user.RoleId);
+        var role = await _unitOfWork.RoleRepository.GetByIdAsync(user.RoleId);
         if (role == null)
         {
             throw new Exception(RoleService.RoleException);
@@ -82,7 +82,7 @@ public class UserService : IUserServices
             throw new Exception(UserException);
         }
 
-        var role = await _roleRepository.GetRoleByIdAsync(user.RoleId);
+        var role = await _unitOfWork.RoleRepository.GetByIdAsync(user.RoleId);
         if (role == null)
         {
             throw new Exception(RoleService.RoleException);
@@ -110,7 +110,7 @@ public class UserService : IUserServices
             throw new Exception(UserException);
         }
 
-        var role = await _roleRepository.GetRoleByIdAsync(user.RoleId);
+        var role = await _unitOfWork.RoleRepository.GetByIdAsync(user.RoleId);
         if (role == null)
         {
             throw new Exception(RoleService.RoleException);
@@ -132,7 +132,8 @@ public class UserService : IUserServices
 
     public async Task<UserDto> AddUserAsync(AddUpdateUserDto registerUserDto)
     {
-        var userRole = await _roleRepository.GetRoleByName(registerUserDto.RoleName);
+        var userRole = await _unitOfWork.RoleRepository.GetByUniquePropertyAsync(uniqueProperty: "Name",
+            uniquePropertyValue: registerUserDto.RoleName);
         if (userRole == null)
         {
             throw new Exception(RoleService.RoleException);
@@ -171,7 +172,8 @@ public class UserService : IUserServices
         {
             throw new Exception(UserException);
         }
-        var targetRole = await _roleRepository.GetRoleByName(updateUserDto.RoleName);
+        var targetRole =  await _unitOfWork.RoleRepository.GetByUniquePropertyAsync(uniqueProperty: "Name",
+            uniquePropertyValue: updateUserDto.RoleName);
         if (targetRole == null)
         {
             throw new Exception(RoleService.RoleException);
@@ -217,7 +219,7 @@ public class UserService : IUserServices
     public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
     {
         var users = await _userRepository.GetAllUsersAsync();
-        var roles = await _roleRepository.GetAllRulesAsync();
+        var roles = await _unitOfWork.RoleRepository.GetAsync();
         return users.Select(user => new UserDto
         {
             Id = user.Id,
@@ -238,7 +240,7 @@ public class UserService : IUserServices
         {
             throw new Exception("Users Not Found!");
         }
-        var roles = await _roleRepository.GetAllRulesAsync();
+        var roles = await _unitOfWork.RoleRepository.GetAsync();
 
         return users.Select(user => new UserDto
         {
@@ -260,7 +262,7 @@ public class UserService : IUserServices
         {
             throw new Exception("Users Not Found!");
         }
-        var roles = await _roleRepository.GetAllRulesAsync();
+        var roles = await _unitOfWork.RoleRepository.GetAsync();
 
         return users.Select(user => new UserDto
         {
@@ -285,7 +287,11 @@ public class UserService : IUserServices
             throw new Exception("Incorrect Username!");
         }
 
-        var role = await _roleRepository.GetRoleByIdAsync(user.RoleId);
+        var role = await _unitOfWork.RoleRepository.GetByIdAsync(user.RoleId);
+        if (role==null)
+        {
+            throw new Exception(user.RoleId.ToString());
+        }
 
 
         var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password);

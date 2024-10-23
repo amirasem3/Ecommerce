@@ -1,6 +1,6 @@
 ﻿using Ecommerce.Application.DTOs;
 using Ecommerce.Application.DTOs.Invoice;
-using Ecommerce.Application.Interfaces;
+using Ecommerce.Application.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -14,9 +14,9 @@ namespace EcommerceSolution.Controller;
 [Route("api/[controller]")]
 public class InvoiceController : ControllerBase
 {
-    private readonly IInvoiceServices _invoiceServices;
+    private readonly InvoiceServices _invoiceServices;
 
-    public InvoiceController(IInvoiceServices invoiceServices)
+    public InvoiceController(InvoiceServices invoiceServices)
     {
         _invoiceServices = invoiceServices;
     }

@@ -1,23 +1,23 @@
 ﻿using Ecommerce.Application.DTOs;
-using Ecommerce.Application.Interfaces;
 using Ecommerce.Core.Entities;
 using Ecommerce.Core.Interfaces;
+using Ecommerce.Infrastructure.Repositories;
 
 namespace Ecommerce.Application.Services;
 
-public class RoleService : IRoleServices
+public class RoleService
 {
-    private readonly IRoleRepository _roleRepository;
     public const string RoleException = "Role Not Found!";
+    private readonly UnitOfWork _unitOfWork;
 
 
-    public RoleService(IRoleRepository roleRepository)
+    public RoleService (UnitOfWork unitOfWork)
     {
-        _roleRepository = roleRepository;
+        _unitOfWork = unitOfWork;
     }
     public  async Task<RoleDto> GetRoleByIdAsync(Guid id)
     {
-        var role = await _roleRepository.GetRoleByIdAsync(id);
+        var role = await _unitOfWork.RoleRepository.GetByIdAsync(id);
         if (role == null)
         {
             throw new Exception(RoleException);
@@ -40,7 +40,8 @@ public class RoleService : IRoleServices
             Name = newRole.Name,
             Id = Guid.NewGuid()
         };
-        await _roleRepository.AddRoleAsync(role);
+        await _unitOfWork.RoleRepository.InsertAsync(role);
+        await _unitOfWork.SaveAsync();
 
         return new RoleDto
         {
@@ -52,7 +53,7 @@ public class RoleService : IRoleServices
 
     public async Task<RoleDto> UpdateRoleAsync(Guid id, AddUpdateRoleDto updateRoleDto)
     {
-        var targetRole = await _roleRepository.GetRoleByIdAsync(id);
+        var targetRole = await _unitOfWork.RoleRepository.GetByIdAsync(id);
 
         if (targetRole == null)
         {
@@ -62,7 +63,8 @@ public class RoleService : IRoleServices
         targetRole.Name = updateRoleDto.Name;
         // targetRole.UserRoles = updateRoleDto.UserRoles;
 
-        await _roleRepository.UpdateRoleAsync(targetRole);
+         _unitOfWork.RoleRepository.Update(targetRole);
+         await _unitOfWork.SaveAsync();
 
         return new RoleDto
         {
@@ -73,19 +75,20 @@ public class RoleService : IRoleServices
 
     public async Task<bool> DeleteRoleByIdAsync(Guid id)
     {
-        var targetRole = await _roleRepository.GetRoleByIdAsync(id);
+        var targetRole = await _unitOfWork.RoleRepository.GetByIdAsync(id);
         if (targetRole == null)
         {
             throw new Exception(RoleException);
         }
 
-        await _roleRepository.DeleteRoleByIdAsync(id);
+        await _unitOfWork.RoleRepository.DeleteByIdAsync(id);
+        await _unitOfWork.SaveAsync();
         return true;
     }
 
     public async Task<IEnumerable<RoleDto>> GetAllRolesAsync()
     {
-        var roles = await _roleRepository.GetAllRulesAsync();
+        var roles = await _unitOfWork.RoleRepository.GetAsync();
         return roles.Select(role => new RoleDto
         {
             Id = role.Id,
@@ -95,7 +98,7 @@ public class RoleService : IRoleServices
 
     public async Task<RoleDto> GetRoleByNameAsync(string name)
     {
-        var role = await _roleRepository.GetRoleByName(name);
+        var role = await _unitOfWork.RoleRepository.GetByUniquePropertyAsync(uniqueProperty:"Name", uniquePropertyValue:name);
         
         if (role == null)
         {

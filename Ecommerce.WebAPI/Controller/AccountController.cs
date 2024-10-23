@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using Ecommerce.Application.DTOs.User;
-using Ecommerce.Application.Interfaces;
+using Ecommerce.Application.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -16,9 +16,9 @@ namespace EcommerceSolution.Controller;
 [Route("[controller]")]
 public class AccountController : ControllerBase
 {
-    private readonly IUserServices _userService;
+    private readonly UserService _userService;
 
-    public AccountController(IUserServices userService)
+    public AccountController(UserService userService)
     {
         _userService = userService;
     }

@@ -1,5 +1,5 @@
 ﻿using Ecommerce.Application.DTOs;
-using Ecommerce.Application.Interfaces;
+using Ecommerce.Application.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -13,9 +13,9 @@ namespace EcommerceSolution.Controller;
 [Route("api/[controller]")]
 public class ProductController : ControllerBase
 {
-    private readonly IProductService _productService;
+    private readonly ProductService _productService;
 
-    public ProductController(IProductService productService)
+    public ProductController(ProductService productService)
     {
         _productService = productService;
     }

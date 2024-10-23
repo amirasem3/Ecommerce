@@ -1,215 +1,379 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Ecommerce.Application.DTOs;
-using Ecommerce.Application.Interfaces;
 using Ecommerce.Core.Entities;
-using Ecommerce.Core.Interfaces;
+using Ecommerce.Infrastructure.Repositories;
 
 namespace Ecommerce.Application.Services;
 
-public class CategoryServices : ICategoryService
+public class CategoryServices
 {
     public const string CategoryException = "Category Not Found!";
     public const string ParentCategoryException = "Parent Category Not Found!";
-    private readonly ICategoryRepository _categoryRepository;
+    private readonly UnitOfWork _unitOfWork;
 
-    public CategoryServices(ICategoryRepository categoryRepository)
+    public CategoryServices(UnitOfWork unitOfWork)
     {
-        this._categoryRepository = categoryRepository;
+        _unitOfWork = unitOfWork;
     }
-    public async Task<CategoryDto> AddCategoryAsync(AddUpdateCategoryDto updateCategoryDto)
+
+    public async Task<CategoryDto> GetCategoryById(Guid id)
     {
-        if (updateCategoryDto.ParentName == " ")
+        var category = await _unitOfWork.CategoryRepository.GetByIdAsync(id, "SubCategories");
+        // var allCategories = await _unitOfWork.CategoryRepository.GetAsync(includeProperties:"SubCategories");
+
+        if (category == null)
+        {
+            throw new Exception(CategoryException);
+        }
+
+
+        if (category.IsParentChild() || (!category.IsParent() && !category.IsParentChild()))
+        {
+            var parentInParent =
+                await _unitOfWork.CategoryRepository.GetByIdAsync(category.ParentCategoryId!, "SubCategories");
+            if (parentInParent == null)
+            {
+                throw new Exception(ParentCategoryException);
+            }
+
+            Console.WriteLine(parentInParent.Name);
+            return new CategoryDto(category.IsParent())
+            {
+                Id = category.Id,
+                Name = category.Name,
+                ParentCategoryId = (Guid)category.ParentCategoryId!,
+                SubCategories = category.SubCategories,
+                ParentCategoryName = parentInParent.Name
+            };
+        }
+
+        return new CategoryDto(category.IsParent())
+        {
+            Id = category.Id,
+            Name = category.Name,
+            ParentCategoryName = "Root",
+            SubCategories = category.SubCategories
+        };
+    }
+
+    public async Task<CategoryDto> InsertCategoryAsync(AddUpdateCategoryDto newCategory)
+    {
+        var parentRequested = await _unitOfWork.CategoryRepository.GetByUniquePropertyAsync(uniqueProperty: "Name",
+            "SubCategories", uniquePropertyValue: newCategory.ParentName);
+        if (parentRequested == null && newCategory.ParentName != "Root")
+        {
+            throw new Exception(ParentCategoryException);
+        }
+        if (newCategory.TypeString == "Parent" && newCategory.ParentName=="Root")
         {
             var categoryParent = new Category
             {
                 Id = Guid.NewGuid(),
-                Name = updateCategoryDto.Name,
-                Type = updateCategoryDto.Type,
+                Name = newCategory.Name,
+                TypeString = newCategory.TypeString,
+                ParentCategoryId = Guid.Empty,
                 SubCategories = []
             };
-            await _categoryRepository.AddNewCategory(categoryParent);
-            return new CategoryDto
+            await _unitOfWork.CategoryRepository.InsertAsync(categoryParent);
+            await _unitOfWork.SaveAsync();
+            return new CategoryDto(categoryParent.IsParent())
             {
                 Id = categoryParent.Id,
-                CategoryName = categoryParent.Name,
-                ParentCategoryName = "This is Parent",
-                Type = categoryParent.Type,
-                SubCategories = categoryParent.SubCategories
+                Name = categoryParent.Name,
+                SubCategories = categoryParent.SubCategories,
+                ParentCategoryName = "Root"
             };
         }
 
-        var parentCategory = await _categoryRepository.GetCategoryByName(updateCategoryDto.ParentName);
-        if (parentCategory == null)
+        if(newCategory.TypeString == "Parent" && newCategory.ParentName!="Root")
         {
-            throw new Exception(CategoryException);
+            var categoryParentSubParent = new Category()
+            {
+                Id = Guid.NewGuid(),
+                Name = newCategory.Name,
+                TypeString = newCategory.TypeString,
+                SubCategories = [],
+                ParentCategoryId = parentRequested.Id
+            };
+            await _unitOfWork.CategoryRepository.InsertAsync(categoryParentSubParent);
+            await _unitOfWork.SaveAsync();
+            
+            parentRequested.SubCategories.Add(categoryParentSubParent);
+            _unitOfWork.CategoryRepository.Update(parentRequested);
+            await _unitOfWork.SaveAsync();
+
+            return new CategoryDto(newCategory.TypeString == "Parent" && parentRequested != null)
+            {
+                Id = categoryParentSubParent.Id,
+                Name = categoryParentSubParent.Name,
+                SubCategories = categoryParentSubParent.SubCategories,
+                ParentCategoryId = (Guid)categoryParentSubParent.ParentCategoryId,
+                ParentCategoryName = parentRequested!.Name
+            };
         }
         var childCategory = new Category
         {
             Id = Guid.NewGuid(),
-            Name = updateCategoryDto.Name,
-            ParentCategoryId = parentCategory.Id,
-            Type = updateCategoryDto.Type,
+            Name = newCategory.Name,
+            TypeString = newCategory.TypeString,
+            ParentCategoryId = parentRequested.Id,
             SubCategories = []
         };
+        await _unitOfWork.CategoryRepository.InsertAsync(childCategory);
+        parentRequested.SubCategories.Add(childCategory);
+        _unitOfWork.CategoryRepository.Update(parentRequested);
+        await _unitOfWork.SaveAsync();
 
-      
-        await _categoryRepository.AddNewCategory(childCategory);
-        await _categoryRepository.AddSubCategoryAsync(parentCategory, childCategory);
-        return new CategoryDto
+        return new CategoryDto(childCategory.IsParent())
         {
             Id = childCategory.Id,
-            CategoryName = childCategory.Name,
-            ParentCategoryName = parentCategory.Name,
-            ParentCategoryId = parentCategory.Id,
-            Type = childCategory.Type,
+            Name = childCategory.Name,
+            ParentCategoryName = parentRequested.Name,
+            ParentCategoryId = parentRequested.Id,
         };
     }
 
     public async Task<IEnumerable<CategoryDto>> GetAllCategoriesAsync()
     {
-        var categories = await _categoryRepository.GetAllCategories();
-        return categories.Select(cat => new CategoryDto
+        var categories = await _unitOfWork.CategoryRepository.GetAsync(includeProperties: "SubCategories");
+        List<CategoryDto> allCategories = new List<CategoryDto>();
+        foreach (var category in categories)
         {
-            Id = cat.Id,
-            CategoryName = cat.Name,
-            ParentCategoryId = cat.ParentCategoryId,
-            Type = cat.Type,
-            SubCategories = cat.SubCategories
-        });
+            if (category.IsParentChild()  || (!category.IsParent() && !category.IsParentChild()))
+            {
+                var parentInParent =
+                    await _unitOfWork.CategoryRepository.GetByIdAsync(category.ParentCategoryId!, "SubCategories");
+                if (parentInParent == null)
+                {
+                    throw new Exception(ParentCategoryException);
+                }
+
+                Console.WriteLine(parentInParent.Name);
+                allCategories.Add(new CategoryDto(category.IsParent())
+                {
+                    Id = category.Id,
+                    Name = category.Name,
+                    ParentCategoryId = (Guid)category.ParentCategoryId!,
+                    SubCategories = category.SubCategories,
+                    ParentCategoryName = parentInParent.Name
+                });
+                // continue;
+            }
+            else
+            {
+                allCategories.Add(new CategoryDto(category.IsParent())
+                {
+                    Id = category.Id,
+                    Name = category.Name,
+                    ParentCategoryName = "Root",
+                    SubCategories = category.SubCategories
+                });
+            }
+        }
+
+        return allCategories;
     }
+
 
     public async Task<CategoryDto> GetCategoryByNameAsync(string name)
     {
-        var cat = await _categoryRepository.GetCategoryByName(name);
+        var cat = await _unitOfWork.CategoryRepository.GetByUniquePropertyAsync(uniqueProperty: "Name",
+            includeProperties: "SubCategories", uniquePropertyValue: name);
         if (cat == null)
         {
             throw new Exception(CategoryException);
         }
-        if (!cat.Type)
+
+
+        if (cat.IsParentChild()  || (!cat.IsParent() && !cat.IsParentChild()))
         {
-            return new CategoryDto
+            var parent = await _unitOfWork.CategoryRepository.GetByIdAsync(cat.ParentCategoryId!, "SubCategories");
+            if (parent == null)
+            {
+                throw new Exception(ParentCategoryException);
+            }
+
+            Console.WriteLine(parent.Name);
+            return new CategoryDto(cat.IsParent())
             {
                 Id = cat.Id,
-                CategoryName = cat.Name,
-                ParentCategoryId = cat.ParentCategoryId,
-                Type = cat.Type,
-                SubCategories = cat.SubCategories
+                Name = cat.Name,
+                ParentCategoryId = (Guid)cat.ParentCategoryId!,
+                SubCategories = cat.SubCategories,
+                ParentCategoryName = parent.Name
             };
         }
 
-        return new CategoryDto
+        return new CategoryDto(cat.IsParent())
         {
             Id = cat.Id,
-            CategoryName = cat.Name,
-            ParentCategoryId = cat.ParentCategoryId,
-            Type = cat.Type,
+            Name = cat.Name,
+            ParentCategoryName = "Root",
             SubCategories = cat.SubCategories
         };
     }
 
+
     public async Task<CategoryDto> GetParentCategoryAsync(Guid childId)
     {
-        var parent = await _categoryRepository.GetParentByChildId(childId);
+        var child = await _unitOfWork.CategoryRepository.GetByIdAsync(childId, "SubCategories");
+        if (child == null)
+        {
+            throw new Exception(CategoryException);
+        }
+
+        if (child.IsParent() && !child.IsParentChild())
+        {
+            throw new Exception("There is no child category with this ID.");
+        }
+
+        var parent = await _unitOfWork.CategoryRepository.GetByIdAsync(child.ParentCategoryId!);
         if (parent == null)
         {
             throw new Exception(ParentCategoryException);
         }
+        
 
-        if (!parent.Type)
+        if (parent.IsParentChild())
         {
-            throw new Exception("There is no subcategory for a subcategory");
+            var parentInParent = await _unitOfWork.CategoryRepository.GetByIdAsync(parent.ParentCategoryId!);
+            return new CategoryDto(!parent.IsParent())
+            {
+                Id = parent.Id,
+                Name = parent.Name,
+                ParentCategoryName = parentInParent.Name,
+                ParentCategoryId = parentInParent.Id,
+                SubCategories = parent.SubCategories
+            };
         }
-        var child = await _categoryRepository.GetCategoryById(childId);
-        return new CategoryDto
+
+        return new CategoryDto(parent.IsParent())
         {
             Id = parent.Id,
-            CategoryName = parent.Name,
-            ParentCategoryId = child.ParentCategoryId,
-            Type = parent.Type,
+            Name = parent.Name,
+            ParentCategoryName = "Root",
             SubCategories = parent.SubCategories
-        };
-    }
-
-    public async Task<CategoryDto> GetCategoryByIdAsync(Guid id)
-    {
-        var cat = await _categoryRepository.GetCategoryById(id);
-        if (cat == null)
-        {
-            throw new Exception(CategoryException);
-        }
-        return new CategoryDto
-        {
-            Id = cat.Id,
-            CategoryName = cat.Name,
-            ParentCategoryId = cat.ParentCategoryId,
-            Type = cat.Type,
-            SubCategories = cat.SubCategories
         };
     }
 
     public async Task<CategoryDto> UpdateCategoryAsync(Guid id, AddUpdateCategoryDto updateCategoryDto)
     {
-        var targetCategory = await _categoryRepository.GetCategoryById(id);
+        var targetCategory = await _unitOfWork.CategoryRepository.GetByIdAsync(id, "SubCategories");
         if (targetCategory == null)
         {
             throw new Exception(CategoryException);
         }
+
         targetCategory.Name = updateCategoryDto.Name;
-        targetCategory.Type = updateCategoryDto.Type;
-       
-        if (updateCategoryDto.ParentName == " ")
+        targetCategory.TypeString = updateCategoryDto.TypeString;
+
+        if (!targetCategory.IsParent() && !targetCategory.IsParentChild() && updateCategoryDto.TypeString == "Parent")
         {
-            await _categoryRepository.UpdateCategory(targetCategory);
-            return new CategoryDto
+            var parentInParent =
+                await _unitOfWork.CategoryRepository.GetByIdAsync(targetCategory.ParentCategoryId!, "SubCategories");
+            if (parentInParent == null)
+            {
+                throw new Exception(ParentCategoryException);
+            }
+
+            if (parentInParent.Name != updateCategoryDto.ParentName)
+            {
+                var newParentCatChild = await _unitOfWork.CategoryRepository.GetByUniquePropertyAsync(
+                    uniqueProperty: "Name",
+                    includeProperties: "SubCategories", uniquePropertyValue: updateCategoryDto.ParentName);
+                targetCategory.ParentCategoryId = newParentCatChild.Id;
+
+                _unitOfWork.CategoryRepository.Update(targetCategory);
+                await _unitOfWork.SaveAsync();
+                return new CategoryDto(!targetCategory.IsParent() && !targetCategory.IsParentChild())
+                {
+                    Id = targetCategory.Id,
+                    Name = targetCategory.Name,
+                    ParentCategoryId = (Guid)targetCategory.ParentCategoryId!,
+                    SubCategories = targetCategory.SubCategories,
+                    ParentCategoryName = newParentCatChild.Name
+                };
+            }
+
+            _unitOfWork.CategoryRepository.Update(targetCategory);
+            await _unitOfWork.SaveAsync();
+            return new CategoryDto(targetCategory.IsParent())
             {
                 Id = targetCategory.Id,
-                ParentCategoryId =new Guid("00000000-0000-0000-0000-000000000000"),
-                ParentCategoryName = "This is a parent",
-                Type = targetCategory.Type,
-                CategoryName = targetCategory.Name,
+                Name = targetCategory.Name,
+                ParentCategoryId = (Guid)targetCategory.ParentCategoryId!,
+                SubCategories = targetCategory.SubCategories,
+                ParentCategoryName = parentInParent.Name
+            };
+        }
+
+        if (targetCategory.IsParent() && !targetCategory.IsParentChild())
+        {
+            var newCategory = new Category()
+            {
+                Id = Guid.NewGuid(),
+                Name = targetCategory.Name,
+                TypeString = targetCategory.TypeString,
+                ParentCategoryId = Guid.Empty,
+                SubCategories = targetCategory.SubCategories
+            };
+            _unitOfWork.CategoryRepository.Update(targetCategory);
+            await _unitOfWork.SaveAsync();
+            return new CategoryDto(!targetCategory.IsParent())
+            {
+                Id = newCategory.Id,
+                ParentCategoryId = (Guid)newCategory.ParentCategoryId!,
+                Name = newCategory.Name,
                 SubCategories = targetCategory.SubCategories
             };
         }
-        var newParentCat = await _categoryRepository.GetCategoryByName(updateCategoryDto.ParentName);
+
+        var newParentCat = await _unitOfWork.CategoryRepository.GetByUniquePropertyAsync(uniqueProperty: "Name",
+            includeProperties: "SubCategories", uniquePropertyValue: updateCategoryDto.ParentName);
         if (newParentCat == null)
         {
             throw new Exception(ParentCategoryException);
         }
+
         targetCategory.ParentCategoryId = newParentCat.Id;
-        await _categoryRepository.AddSubCategoryAsync(newParentCat, targetCategory);
-       
-        await _categoryRepository.UpdateCategory(targetCategory);
-        return new CategoryDto
+        newParentCat.SubCategories.Add(targetCategory);
+        _unitOfWork.CategoryRepository.Update(newParentCat);
+        await _unitOfWork.SaveAsync();
+
+        _unitOfWork.CategoryRepository.Update(targetCategory);
+        await _unitOfWork.SaveAsync();
+        return new CategoryDto(targetCategory.IsParent())
         {
             Id = targetCategory.Id,
-            ParentCategoryId = targetCategory.ParentCategoryId,
+            ParentCategoryId = (Guid)targetCategory.ParentCategoryId,
             ParentCategoryName = newParentCat.Name,
-            Type = targetCategory.Type,
-            CategoryName = targetCategory.Name,
+            Name = targetCategory.Name,
             SubCategories = targetCategory.SubCategories
         };
     }
 
-    public async Task<bool> DeleteCategoryByIdAsync(Guid id)
+
+    public async Task DeleteCategoryByIdAsync(Guid id)
     {
-        var category = await _categoryRepository.GetCategoryById(id);
+        var category = await _unitOfWork.CategoryRepository.GetByIdAsync(id);
         if (category == null)
         {
             throw new Exception(CategoryException);
         }
-        if (!category.Type)
+
+        if (!category.IsParent())
         {
-            await _categoryRepository.DeleteCategoryById(id);
-            return true;
+            await _unitOfWork.CategoryRepository.DeleteByIdAsync(id);
+            await _unitOfWork.SaveAsync();
+            return;
         }
-        
+
         if (category.SubCategories.Count() != 0)
         {
             throw new ValidationException("You cannot delete this category before its children!");
         }
 
-        await _categoryRepository.DeleteCategoryById(id);
-        return true;
+        await _unitOfWork.CategoryRepository.DeleteByIdAsync(id);
+        await _unitOfWork.SaveAsync();
     }
-    
 }

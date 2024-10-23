@@ -1,5 +1,5 @@
 ﻿using Ecommerce.Application.DTOs.Manufacturer;
-using Ecommerce.Application.Interfaces;
+using Ecommerce.Application.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -13,9 +13,9 @@ namespace EcommerceSolution.Controller;
 [Route("api/[controller]")]
 public class ManufacturerController : ControllerBase
 {
-    private readonly IManufacturerService _manufacturerService;
+    private readonly ManufacturerService _manufacturerService;
 
-    public ManufacturerController(IManufacturerService manufacturerService)
+    public ManufacturerController(ManufacturerService manufacturerService)
     {
         _manufacturerService = manufacturerService;
     }

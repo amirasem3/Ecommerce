@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.Infrastructure.Repositories;
 
-public class RoleRepository : IRoleRepository
+public class RoleRepository
 {
     private readonly EcommerceDbContext _context;
     

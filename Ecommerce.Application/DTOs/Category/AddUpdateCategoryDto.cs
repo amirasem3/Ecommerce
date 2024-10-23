@@ -3,8 +3,10 @@
 public class AddUpdateCategoryDto
 {
     public string Name { get; set; } = null!;
-    public string ParentName { get; set; } = null!;
+    public string ParentName { get; set; } = "Root";
 
-    public bool Type { get; set; }
+    public string TypeString { get; set; } = null!;
+
+    // public bool Type { get; set; }
     
 }

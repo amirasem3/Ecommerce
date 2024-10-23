@@ -1,12 +1,11 @@
 ﻿using Ecommerce.Application.DTOs;
 using Ecommerce.Application.DTOs.Manufacturer;
-using Ecommerce.Application.Interfaces;
 using Ecommerce.Core.Entities;
 using Ecommerce.Core.Interfaces;
 
 namespace Ecommerce.Application.Services;
 
-public class ProductService : IProductService
+public class ProductService
 {
     private readonly IProductRepository _productRepository;
     public const string ProductException = "Product Not Found!";

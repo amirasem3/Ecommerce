@@ -1,5 +1,5 @@
 ﻿using Ecommerce.Application.DTOs.User;
-using Ecommerce.Application.Interfaces;
+using Ecommerce.Application.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -12,9 +12,9 @@ namespace EcommerceSolution.Controller;
 [Route("api/[controller]")]
 public class UserController : ControllerBase
 {
-    private readonly IUserServices _userServices;
+    private readonly UserService _userServices;
 
-    public UserController(IUserServices userServices)
+    public UserController(UserService userServices)
     {
         _userServices = userServices;
     }

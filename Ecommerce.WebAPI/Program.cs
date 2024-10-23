@@ -1,10 +1,10 @@
 using System.Text;
+using System.Text.Json.Serialization;
 using Ecommerce.Application.Binder;
 using Ecommerce.Application.Binder.Category;
 using Ecommerce.Application.Binder.Invoice;
 using Ecommerce.Application.Binder.Product;
 using Ecommerce.Application.Binder.User;
-using Ecommerce.Application.Interfaces;
 using Ecommerce.Application.Services;
 using Ecommerce.Core.Entities;
 using Ecommerce.Core.Interfaces;
@@ -76,19 +76,20 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
+builder.Services.AddScoped<UnitOfWork>();
+builder.Services.AddScoped(typeof(GenericRepository<>));
+
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IRoleRepository, RoleRepository>();
-builder.Services.AddScoped<IRoleServices, RoleService>();
-builder.Services.AddScoped<IUserServices, UserService>();
+builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<RoleService>();
+builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
-builder.Services.AddScoped<IManufacturerService, ManufacturerService>();
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<ICategoryService, CategoryServices>();
+builder.Services.AddScoped<ManufacturerService>();
+builder.Services.AddScoped<CategoryServices>();
 builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
-builder.Services.AddScoped<IInvoiceServices, InvoiceServices>();
+builder.Services.AddScoped<InvoiceServices>();
 builder.Services.AddScoped<IInvoiceProductRepository, InvoiceProductRepository>();
 
 builder.Services.AddScoped<RoleService>();
@@ -136,6 +137,15 @@ builder.Services.AddControllers(options =>
     
     options.ModelBinderProviders.Insert(5, new CategoryModelBinderProvider(
         builder.Services.BuildServiceProvider().GetRequiredService<CategoryServices>()));
+   
+}).AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+}).AddNewtonsoftJson(options =>
+{
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
 });
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {

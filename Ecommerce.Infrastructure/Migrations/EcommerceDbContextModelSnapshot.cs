@@ -38,11 +38,13 @@ namespace Ecommerce.Infrastructure.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)");
 
-                    b.Property<Guid>("ParentCategoryId")
+                    b.Property<Guid?>("ParentCategoryId")
                         .HasColumnType("uuid");
 
-                    b.Property<bool>("Type")
-                        .HasColumnType("boolean");
+                    b.Property<string>("TypeString")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)");
 
                     b.HasKey("Id");
 
@@ -219,6 +221,7 @@ namespace Ecommerce.Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("character varying(30)");
 
@@ -233,10 +236,12 @@ namespace Ecommerce.Infrastructure.Migrations
                         .HasColumnType("character varying(40)");
 
                     b.Property<string>("PasswordHash")
+                        .IsRequired()
                         .HasMaxLength(90)
                         .HasColumnType("character varying(90)");
 
                     b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
 

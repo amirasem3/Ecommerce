@@ -11,7 +11,7 @@ public class EcommerceDbContext : DbContext
 
 
     }
-
+    
     public DbSet<Product> Products { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
@@ -90,6 +90,7 @@ public class EcommerceDbContext : DbContext
         //Invoice Attributes Constraints
         // modelBuilder.Entity<Invoice>()
         //     .HasIndex(i => i.IdentificationCode).IsUnique();
+        
 
         modelBuilder.HasPostgresEnum<PaymentStatus>(name:"payment_status");
         modelBuilder.Entity<Invoice>()

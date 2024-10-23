@@ -1,5 +1,5 @@
 ﻿using Ecommerce.Application.DTOs;
-using Ecommerce.Application.Interfaces;
+using Ecommerce.Application.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -13,9 +13,9 @@ namespace EcommerceSolution.Controller;
 [Route("api/[controller]")]
 public class RoleController : ControllerBase
 {
-    private readonly IRoleServices _roleServices;
+    private readonly RoleService _roleServices;
 
-    public RoleController(IRoleServices roleServices)
+    public RoleController(RoleService roleServices)
     {
         _roleServices = roleServices;
     }
