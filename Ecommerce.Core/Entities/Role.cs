@@ -14,4 +14,9 @@ public class Role
     public string Name { get; set; } = null!;
 
 
+    public override string ToString()
+    {
+        return $"\n\t Id : {Id}" +
+               $"\n\t Name : {Name}";
+    }
 }

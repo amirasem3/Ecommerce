@@ -11,4 +11,14 @@ public class AddUpdateUserDto
     public string Password { get; set; } = null!;
 
     public string RoleName { get; set; } = null!;
+
+    public override string ToString()
+    {
+        return $"\n \tFirstName: {FirstName}\n" +
+               $"\tLastName: {LastName}\n" +
+               $"\tUsername: {Username}\n" +
+               $"\tEmail: {Email}\n" +
+               $"\tPhoneNumber: {PhoneNumber}\n" +
+               $"\tRoleName: {RoleName}";
+    }
 }

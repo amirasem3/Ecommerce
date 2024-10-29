@@ -39,4 +39,15 @@ public class User
     [MaxLength(20, ErrorMessage = "PhoneNumber cannot exceed 30 characters.")]
     public string PhoneNumber { get; set; } = null!;
     public Guid RoleId { get; set; }
+
+    public override string ToString()
+    {
+        return $"\n \tFirstName: {FirstName}\n" +
+               $"\tLastName: {LastName}\n" +
+               $"\tUsername: {Username}\n" +
+               $"\tEmail: {Email}\n" +
+               $"\tPhoneNumber: {PhoneNumber}\n" +
+               $"\tRoleId: {RoleId}";
+    }
 }
+

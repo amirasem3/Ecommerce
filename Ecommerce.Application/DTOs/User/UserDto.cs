@@ -17,4 +17,6 @@ public class UserDto
     public Guid RoleId { get; set; }
     
     
+    
+    
 }
