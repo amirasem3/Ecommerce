@@ -2,23 +2,19 @@
 using Ecommerce.Application.DTOs.Manufacturer;
 using Ecommerce.Application.DTOs.User;
 using Ecommerce.Core.Entities;
-using Ecommerce.Core.Interfaces;
 using Ecommerce.Infrastructure.Repositories;
 
 namespace Ecommerce.Application.Services;
 
 public class ManufacturerService
 {
-    private readonly IProductRepository _productRepository;
     private readonly UserService _userServices;
     private readonly UnitOfWork _unitOfWork;
     public const string ManufacturerException = "Manufacturer Not Found!";
 
 
-    public ManufacturerService(IProductRepository productRepository,
-        UserService userServices, UnitOfWork unitOfWork)
+    public ManufacturerService(UserService userServices, UnitOfWork unitOfWork)
     {
-        _productRepository = productRepository;
         _userServices = userServices;
         _unitOfWork = unitOfWork;
     }
@@ -339,7 +335,7 @@ public class ManufacturerService
     public async Task AssignManufacturerProductsAsync(Guid manufacturerId, Guid productId)
     {
         var manufacturer = await _unitOfWork.ManufacturerRepository.GetByIdAsync(manufacturerId, "Products2");
-        var product = await _productRepository.GetProductByIdAsync(productId);
+        var product = await _unitOfWork.ProductRepository.GetByIdAsync(productId);
         if (manufacturer == null)
         {
             throw new ArgumentException(ManufacturerException);
@@ -366,7 +362,7 @@ public class ManufacturerService
     public async Task<bool> DeleteManufacturerProductAsync(Guid manufacturerId, Guid productId)
     {
         var manufacturer = await _unitOfWork.ManufacturerRepository.GetByIdAsync(manufacturerId, "Products2");
-        var product = await _productRepository.GetProductByIdAsync(productId);
+        var product = await _unitOfWork.ProductRepository.GetByIdAsync(productId);
         if (manufacturer == null)
         {
             throw new ArgumentException(ManufacturerException);

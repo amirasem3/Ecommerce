@@ -18,7 +18,7 @@ public class CategoryServices
 
     public async Task<CategoryDto> GetCategoryById(Guid id)
     {
-        var category = await _unitOfWork.CategoryRepository.GetByIdAsync(id, "SubCategories");
+        var category = await _unitOfWork.CategoryRepository.GetByIdAsync(id, "SubCategories,SubCategories.SubCategories");
 
         if (category == null)
         {
@@ -92,7 +92,7 @@ public class CategoryServices
                 Name = newCategory.Name,
                 TypeString = newCategory.TypeString,
                 SubCategories = [],
-                ParentCategoryId = parentRequested.Id
+                ParentCategoryId = parentRequested!.Id
             };
             await _unitOfWork.CategoryRepository.InsertAsync(categoryParentSubParent);
             await _unitOfWork.SaveAsync();
@@ -134,7 +134,7 @@ public class CategoryServices
 
     public async Task<IEnumerable<CategoryDto>> GetAllCategoriesAsync()
     {
-        var categories = await _unitOfWork.CategoryRepository.GetAsync(includeProperties: "SubCategories");
+        var categories = await _unitOfWork.CategoryRepository.GetAsync(includeProperties: "SubCategories,SubCategories.SubCategories");
         List<CategoryDto> allCategories = new List<CategoryDto>();
         foreach (var category in categories)
         {
@@ -177,7 +177,7 @@ public class CategoryServices
     public async Task<CategoryDto> GetCategoryByNameAsync(string name)
     {
         var cat = await _unitOfWork.CategoryRepository.GetByUniquePropertyAsync(uniqueProperty: "Name",
-            includeProperties: "SubCategories", uniquePropertyValue: name);
+            includeProperties: "SubCategories,SubCategories.SubCategories", uniquePropertyValue: name);
         if (cat == null)
         {
             throw new Exception(CategoryException);

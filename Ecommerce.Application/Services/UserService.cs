@@ -1,6 +1,5 @@
 ﻿using Ecommerce.Application.DTOs.User;
 using Ecommerce.Core.Entities;
-using Ecommerce.Core.Interfaces;
 using Ecommerce.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 
@@ -8,14 +7,12 @@ namespace Ecommerce.Application.Services;
 
 public class UserService
 {
-    private readonly IUserRepository _userRepository;
     private readonly IPasswordHasher<User> _passwordHasher;
     private readonly UnitOfWork _unitOfWork;
     public const string UserException = "User Not Found!";
-    public UserService(IUserRepository userRepository,
-        IPasswordHasher<User> passwordHasher, UnitOfWork unitOfWork)
+
+    public UserService(IPasswordHasher<User> passwordHasher, UnitOfWork unitOfWork)
     {
-        _userRepository = userRepository;
         _passwordHasher = passwordHasher;
         _unitOfWork = unitOfWork;
     }
@@ -23,11 +20,12 @@ public class UserService
 
     public async Task<UserDto> GetUserByIdAsync(Guid id)
     {
-        var user = await _userRepository.GetUserByIdAsync(id);
+        var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
         if (user == null)
         {
             throw new Exception(UserException);
         }
+
         var role = await _unitOfWork.RoleRepository.GetByIdAsync(user.RoleId);
         if (role == null)
         {
@@ -42,6 +40,7 @@ public class UserService
             Username = user.Username,
             Email = user.Email,
             PhoneNumber = user.PhoneNumber,
+            PasswordHash = user.PasswordHash,
             RoleId = user.RoleId,
             RoleName = role.Name
         };
@@ -49,7 +48,8 @@ public class UserService
 
     public async Task<UserDto> GetUserByUsernameAsync(string username)
     {
-        var user = await _userRepository.GetUserByUsernameAsync(username);
+        var user = await _unitOfWork.UserRepository.GetByUniquePropertyAsync(uniqueProperty: "Username",
+            uniquePropertyValue: username);
         if (user == null)
         {
             throw new Exception(UserException);
@@ -68,6 +68,7 @@ public class UserService
             LastName = user.LastName,
             Username = user.Username,
             Email = user.Email,
+            PasswordHash = user.PasswordHash,
             PhoneNumber = user.PhoneNumber,
             RoleId = user.RoleId,
             RoleName = role.Name
@@ -76,7 +77,8 @@ public class UserService
 
     public async Task<UserDto> GetUserByEmailAsync(string email)
     {
-        var user = await _userRepository.GetUserByEmailAsync(email);
+        var user = await _unitOfWork.UserRepository.GetByUniquePropertyAsync(uniqueProperty: "Email",
+            uniquePropertyValue: email);
         if (user == null)
         {
             throw new Exception(UserException);
@@ -104,7 +106,8 @@ public class UserService
 
     public async Task<UserDto> GetUserByPhoneNumberAsync(string phoneNumber)
     {
-        var user = await _userRepository.GetUserByPhoneNumberAsync(phoneNumber);
+        var user = await _unitOfWork.UserRepository.GetByUniquePropertyAsync(uniqueProperty: "PhoneNumber",
+            uniquePropertyValue: phoneNumber);
         if (user == null)
         {
             throw new Exception(UserException);
@@ -138,6 +141,7 @@ public class UserService
         {
             throw new Exception(RoleService.RoleException);
         }
+
         var user = new User
         {
             Id = Guid.NewGuid(),
@@ -149,7 +153,8 @@ public class UserService
             RoleId = userRole.Id
         };
         user.PasswordHash = _passwordHasher.HashPassword(user, registerUserDto.Password);
-        await _userRepository.AddUserAsync(user);
+        await _unitOfWork.UserRepository.InsertAsync(user);
+        await _unitOfWork.SaveAsync();
         return new UserDto
         {
             Id = user.Id,
@@ -167,17 +172,19 @@ public class UserService
 
     public async Task<UserDto> UpdateUserAsync(Guid id, AddUpdateUserDto updateUserDto)
     {
-        var targetUser = await _userRepository.GetUserByIdAsync(id);
+        var targetUser = await _unitOfWork.UserRepository.GetByIdAsync(id);
         if (targetUser == null)
         {
             throw new Exception(UserException);
         }
-        var targetRole =  await _unitOfWork.RoleRepository.GetByUniquePropertyAsync(uniqueProperty: "Name",
+
+        var targetRole = await _unitOfWork.RoleRepository.GetByUniquePropertyAsync(uniqueProperty: "Name",
             uniquePropertyValue: updateUserDto.RoleName);
         if (targetRole == null)
         {
             throw new Exception(RoleService.RoleException);
         }
+
         targetUser.FirstName = updateUserDto.FirstName;
         targetUser.LastName = updateUserDto.LastName;
         targetUser.Email = updateUserDto.Email;
@@ -186,8 +193,8 @@ public class UserService
         targetUser.PasswordHash = _passwordHasher.HashPassword(targetUser, updateUserDto.Password);
         targetUser.RoleId = targetRole.Id;
 
-
-        await _userRepository.UpdateUserAsync(targetUser);
+        _unitOfWork.UserRepository.Update(targetUser);
+        await _unitOfWork.SaveAsync();
 
         return new UserDto
         {
@@ -205,22 +212,24 @@ public class UserService
 
     public async Task<bool> DeleteUserAsync(Guid id)
     {
-        var user = await _userRepository.GetUserByIdAsync(id);
+        var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
 
         if (user == null)
         {
             throw new Exception(UserException);
         }
 
-        await _userRepository.DeleteUserByIdAsync(id);
+        await _unitOfWork.UserRepository.DeleteByIdAsync(id);
+        await _unitOfWork.SaveAsync();
         return true;
     }
 
     public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
     {
-        var users = await _userRepository.GetAllUsersAsync();
+        var users = await _unitOfWork.UserRepository.GetAsync();
         var roles = await _unitOfWork.RoleRepository.GetAsync();
-        return users.Select(user => new UserDto
+
+        return users.Select(user => new UserDto()
         {
             Id = user.Id,
             FirstName = user.FirstName,
@@ -229,17 +238,19 @@ public class UserService
             Username = user.Username,
             PhoneNumber = user.PhoneNumber,
             RoleId = user.RoleId,
+            PasswordHash = user.PasswordHash,
             RoleName = roles.FirstOrDefault(role => role.Id == user.RoleId)!.Name
         });
     }
 
     public async Task<IEnumerable<UserDto>> GetAllUsersByNameAsync(string name)
     {
-        var users = await _userRepository.GetUsersByNameAsync(name);
+        var users = await _unitOfWork.UserRepository.GetAsync(filter: user => user.FirstName.Contains(name));
         if (users == null)
         {
             throw new Exception("Users Not Found!");
         }
+
         var roles = await _unitOfWork.RoleRepository.GetAsync();
 
         return users.Select(user => new UserDto
@@ -251,17 +262,21 @@ public class UserService
             Username = user.Username,
             PhoneNumber = user.PhoneNumber,
             RoleId = user.RoleId,
+            PasswordHash = user.PasswordHash,
             RoleName = roles.FirstOrDefault(role => role.Id == user.RoleId)!.Name
         });
     }
 
     public async Task<IEnumerable<UserDto>> GetUserByRoleAsync(string roleName)
     {
-        var users = await _userRepository.GetUserByRoleAsync(roleName);
-        if (users==null)
+        var role = await _unitOfWork.RoleRepository.GetByUniquePropertyAsync(uniqueProperty: "Name",
+            uniquePropertyValue: roleName);
+        var users = await _unitOfWork.UserRepository.GetAsync(filter: user => user.RoleId == role.Id);
+        if (users == null)
         {
             throw new Exception("Users Not Found!");
         }
+
         var roles = await _unitOfWork.RoleRepository.GetAsync();
 
         return users.Select(user => new UserDto
@@ -274,21 +289,22 @@ public class UserService
             Email = user.Email,
             PhoneNumber = user.PhoneNumber,
             RoleId = user.RoleId,
-            RoleName = roles.FirstOrDefault(role => role.Id == user.RoleId)!.Name
+            RoleName = roles.FirstOrDefault(r => r.Id == user.RoleId)!.Name
         });
     }
 
 
     public async Task<UserDto> AuthenticateUserAsync(string username, string password)
     {
-        var user = await _userRepository.GetUserByUsernameAsync(username);
+        var user = await _unitOfWork.UserRepository.GetByUniquePropertyAsync(uniqueProperty: "Username",
+            uniquePropertyValue: username);
         if (user == null)
         {
             throw new Exception("Incorrect Username!");
         }
 
         var role = await _unitOfWork.RoleRepository.GetByIdAsync(user.RoleId);
-        if (role==null)
+        if (role == null)
         {
             throw new Exception(user.RoleId.ToString());
         }

@@ -11,7 +11,6 @@ using Ecommerce.Core.Interfaces;
 using Ecommerce.Core.Interfaces.RelationRepoInterfaces;
 using Ecommerce.Infrastructure.Persistence;
 using Ecommerce.Infrastructure.Repositories;
-using Ecommerce.Infrastructure.Repositories.RelationRepository;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -79,16 +78,13 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddScoped<UnitOfWork>();
 builder.Services.AddScoped(typeof(GenericRepository<>));
 
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<RoleService>();
 builder.Services.AddScoped<UserService>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<ManufacturerService>();
 builder.Services.AddScoped<CategoryServices>();
 builder.Services.AddScoped<InvoiceServices>();
-builder.Services.AddScoped<IInvoiceProductRepository, InvoiceProductRepository>();
 
 builder.Services.AddScoped<RoleService>();
 builder.Services.AddScoped<IModelBinder, RoleModelBinder>();

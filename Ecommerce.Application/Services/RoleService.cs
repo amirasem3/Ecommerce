@@ -1,6 +1,5 @@
 ﻿using Ecommerce.Application.DTOs;
 using Ecommerce.Core.Entities;
-using Ecommerce.Core.Interfaces;
 using Ecommerce.Infrastructure.Repositories;
 
 namespace Ecommerce.Application.Services;
@@ -11,30 +10,28 @@ public class RoleService
     private readonly UnitOfWork _unitOfWork;
 
 
-    public RoleService (UnitOfWork unitOfWork)
+    public RoleService(UnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }
-    public  async Task<RoleDto> GetRoleByIdAsync(Guid id)
+
+    public async Task<RoleDto> GetRoleByIdAsync(Guid id)
     {
         var role = await _unitOfWork.RoleRepository.GetByIdAsync(id);
         if (role == null)
         {
             throw new Exception(RoleException);
         }
-        
+
         return new RoleDto
         {
-           Name = role.Name,
-           Id = role.Id,
+            Name = role.Name,
+            Id = role.Id,
         };
-
-
     }
 
     public async Task<RoleDto> AddRoleAsync(AddUpdateRoleDto newRole)
     {
-       
         var role = new Role
         {
             Name = newRole.Name,
@@ -48,7 +45,6 @@ public class RoleService
             Id = role.Id,
             Name = role.Name
         };
-
     }
 
     public async Task<RoleDto> UpdateRoleAsync(Guid id, AddUpdateRoleDto updateRoleDto)
@@ -61,10 +57,9 @@ public class RoleService
         }
 
         targetRole.Name = updateRoleDto.Name;
-        // targetRole.UserRoles = updateRoleDto.UserRoles;
 
-         _unitOfWork.RoleRepository.Update(targetRole);
-         await _unitOfWork.SaveAsync();
+        _unitOfWork.RoleRepository.Update(targetRole);
+        await _unitOfWork.SaveAsync();
 
         return new RoleDto
         {
@@ -98,8 +93,9 @@ public class RoleService
 
     public async Task<RoleDto> GetRoleByNameAsync(string name)
     {
-        var role = await _unitOfWork.RoleRepository.GetByUniquePropertyAsync(uniqueProperty:"Name", uniquePropertyValue:name);
-        
+        var role = await _unitOfWork.RoleRepository.GetByUniquePropertyAsync(uniqueProperty: "Name",
+            uniquePropertyValue: name);
+
         if (role == null)
         {
             throw new Exception(RoleException);

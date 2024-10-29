@@ -1,4 +1,5 @@
 ﻿using Ecommerce.Core.Entities;
+using Ecommerce.Core.Interfaces.RelationRepoInterfaces;
 using Ecommerce.Infrastructure.Persistence;
 
 namespace Ecommerce.Infrastructure.Repositories;
@@ -10,6 +11,9 @@ public class UnitOfWork : IDisposable
     private GenericRepository<Role> roleRepository;
     private GenericRepository<Invoice> invoiceRepository;
     private GenericRepository<Manufacturer> manufacturerRepository;
+    private GenericRepository<Product> productRepository;
+    private GenericRepository<ProductInvoice> productInvoiceRepository;
+    private GenericRepository<User> userRepository;
 
     public UnitOfWork(EcommerceDbContext context)
     {
@@ -41,7 +45,7 @@ public class UnitOfWork : IDisposable
             return roleRepository;
         }
     }
-    
+
     public GenericRepository<Invoice> InvoiceRepository
     {
         get
@@ -55,8 +59,10 @@ public class UnitOfWork : IDisposable
         }
     }
 
-    public GenericRepository<Manufacturer> ManufacturerRepository {
-        get{
+    public GenericRepository<Manufacturer> ManufacturerRepository
+    {
+        get
+        {
             if (manufacturerRepository == null)
             {
                 manufacturerRepository = new GenericRepository<Manufacturer>(_context);
@@ -64,9 +70,47 @@ public class UnitOfWork : IDisposable
 
             return manufacturerRepository;
         }
-    
-}
-    
+    }
+
+    public GenericRepository<Product> ProductRepository
+    {
+        get
+        {
+            if (productRepository == null)
+            {
+                productRepository = new GenericRepository<Product>(_context);
+            }
+
+            return productRepository;
+        }
+    }
+
+    public GenericRepository<ProductInvoice> ProductInvoiceRepository
+    {
+        get
+        {
+            if (productInvoiceRepository == null)
+            {
+                productInvoiceRepository = new GenericRepository<ProductInvoice>(_context);
+            }
+
+            return productInvoiceRepository;
+        }
+    }
+
+    public GenericRepository<User> UserRepository
+    {
+        get
+        {
+            if (userRepository == null)
+            {
+                userRepository = new GenericRepository<User>(_context);
+            }
+
+            return userRepository;
+        }
+    }
+
 
     public async Task SaveAsync()
     {

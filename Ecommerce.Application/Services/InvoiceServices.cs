@@ -1,7 +1,6 @@
 ﻿using Ecommerce.Application.DTOs;
 using Ecommerce.Application.DTOs.Invoice;
 using Ecommerce.Core.Entities;
-using Ecommerce.Core.Interfaces;
 using Ecommerce.Core.Interfaces.RelationRepoInterfaces;
 using Ecommerce.Infrastructure.Repositories;
 
@@ -9,22 +8,17 @@ namespace Ecommerce.Application.Services;
 
 public class InvoiceServices
 {
-    private readonly IProductRepository _productRepository;
-    private readonly IInvoiceProductRepository _invoiceProductRepository;
     public const string InvoiceException = "Invoice Not Found";
     private readonly UnitOfWork _unitOfWork;
 
-    public InvoiceServices(IProductRepository productRepository, IInvoiceProductRepository invoiceProductRepository,
-        UnitOfWork unitOfWork)
+    public InvoiceServices(UnitOfWork unitOfWork)
     {
-        _productRepository = productRepository;
-        _invoiceProductRepository = invoiceProductRepository;
         _unitOfWork = unitOfWork;
     }
 
     public async Task<InvoiceDto> GetInvoiceByIdAsync(Guid id)
     {
-        var invoice = await _unitOfWork.InvoiceRepository.GetByIdAsync(id);
+        var invoice = await _unitOfWork.InvoiceRepository.GetByIdAsync(id, "Products");
         if (invoice == null)
         {
             throw new Exception(InvoiceException);
@@ -55,7 +49,7 @@ public class InvoiceServices
     public async Task<InvoiceDto> GetInvoiceByIdentificationCodeAsync(string identificationCode)
     {
         var invoice = await _unitOfWork.InvoiceRepository.GetByUniquePropertyAsync(uniqueProperty: "IdentificationCode",
-            uniquePropertyValue: identificationCode);
+            uniquePropertyValue: identificationCode, includeProperties: "Products,Products.Product");
         if (invoice == null)
         {
             throw new Exception(InvoiceException);
@@ -84,8 +78,9 @@ public class InvoiceServices
     public async Task<IEnumerable<InvoiceDto>> GetInvoicesByOwnerNameAsync(string ownerName)
     {
         var invoices = await _unitOfWork.InvoiceRepository.GetAsync(
-            filter: invoice => invoice.OwnerFirstName.Contains(ownerName), includeProperties:"Products,Products.Product");
-        
+            filter: invoice => invoice.OwnerFirstName.Contains(ownerName),
+            includeProperties: "Products,Products.Product");
+
         return invoices.Select(invoice => new InvoiceDto
         {
             Id = invoice.Id,
@@ -109,7 +104,8 @@ public class InvoiceServices
     public async Task<IEnumerable<InvoiceDto>> GetInvoicesByOwnerFamilyNameAsync(string familyName)
     {
         var invoices = await _unitOfWork.InvoiceRepository.GetAsync(
-            filter: invoice => invoice.OwnerLastName.Contains(familyName), includeProperties: "Products,Products.Product");
+            filter: invoice => invoice.OwnerLastName.Contains(familyName),
+            includeProperties: "Products,Products.Product");
         if (invoices == null)
         {
             throw new Exception(InvoiceException);
@@ -197,7 +193,7 @@ public class InvoiceServices
     public async Task<IEnumerable<InvoiceDto>> GetInvoiceByIssueDateAsync(DateTime issueDate)
     {
         var invoices = await _unitOfWork.InvoiceRepository.GetAsync(
-            filter: invoice => invoice.IssueDate== issueDate, includeProperties: "Products,Products.Product");
+            filter: invoice => invoice.IssueDate == issueDate, includeProperties: "Products,Products.Product");
         if (invoices == null)
         {
             throw new Exception(InvoiceException);
@@ -226,7 +222,7 @@ public class InvoiceServices
     public async Task<IEnumerable<InvoiceDto>> GetInvoicesByPaymentDateAsync(DateTime paymentDate)
     {
         var invoices = await _unitOfWork.InvoiceRepository.GetAsync(
-            filter: invoice => invoice.PaymentDate== paymentDate, includeProperties: "Products,Products.Product");
+            filter: invoice => invoice.PaymentDate == paymentDate, includeProperties: "Products,Products.Product");
         if (invoices == null)
         {
             throw new Exception(InvoiceException);
@@ -312,7 +308,7 @@ public class InvoiceServices
 
     public async Task<InvoiceDto> UpdateInvoiceAsync(Guid id, UpdateInvoiceDto updateInvoiceDto)
     {
-        var invoice = await _unitOfWork.InvoiceRepository.GetByIdAsync(id);
+        var invoice = await _unitOfWork.InvoiceRepository.GetByIdAsync(id, "Products");
         if (invoice == null)
         {
             throw new Exception(InvoiceException);
@@ -326,7 +322,7 @@ public class InvoiceServices
         invoice.PaymentDate = invoice.PaymentDate;
         invoice.TotalPrice = updateInvoiceDto.TotalPrice;
         invoice.IdentificationCode = invoice.IdentificationCode;
-        
+
         _unitOfWork.InvoiceRepository.Update(invoice);
         await _unitOfWork.SaveAsync();
         return new InvoiceDto()
@@ -370,8 +366,8 @@ public class InvoiceServices
 
     public async Task<bool> DeleteInvoiceProductAsync(Guid invoiceId, Guid productId)
     {
-        var invoice = await _unitOfWork.InvoiceRepository.GetByIdAsync(invoiceId);
-        var product = await _productRepository.GetProductByIdAsync(productId);
+        var invoice = await _unitOfWork.InvoiceRepository.GetByIdAsync(invoiceId, "Products");
+        var product = await _unitOfWork.ProductRepository.GetByIdAsync(productId);
         if (invoice == null)
         {
             throw new ArgumentException(InvoiceException);
@@ -382,12 +378,18 @@ public class InvoiceServices
             throw new ArgumentException(ProductService.ProductException);
         }
 
-        return await _invoiceProductRepository.DeleteInvoiceProductAsync(invoiceId, productId);
+        var targetProductInvoice =
+            invoice.Products.FirstOrDefault(pi => pi.InvoiceId == invoiceId && pi.ProductId == productId);
+        invoice.Products.Remove(targetProductInvoice!);
+        _unitOfWork.InvoiceRepository.Update(invoice);
+        await _unitOfWork.SaveAsync();
+        return true;
+        // return await _invoiceProductRepository.DeleteInvoiceProductAsync(invoiceId, productId);
     }
 
     public async Task<bool> PayAsync(Guid id, decimal price)
     {
-        var invoice = await _unitOfWork.InvoiceRepository.GetByIdAsync(id);
+        var invoice = await _unitOfWork.InvoiceRepository.GetByIdAsync(id, "Products");
         if (invoice == null)
         {
             throw new Exception(InvoiceException);
@@ -406,9 +408,11 @@ public class InvoiceServices
 
         foreach (var product in invoice.Products)
         {
-            var newProduct = await _productRepository.GetProductByIdAsync(product.ProductId);
+            var newProduct = await _unitOfWork.ProductRepository.GetByIdAsync(product.ProductId);
             newProduct.Inventory -= product.Count;
-            await _productRepository.UpdateProductAsync(newProduct);
+            _unitOfWork.ProductRepository.Update(newProduct);
+            await _unitOfWork.SaveAsync();
+            // await _productRepository.UpdateProductAsync(newProduct);
         }
 
         invoice.PaymentStatus = PaymentStatus.Payed;
@@ -420,7 +424,7 @@ public class InvoiceServices
 
     private async Task<decimal> CalculateTotalPriceAsync(Guid invoiceId)
     {
-        var invoice = await _unitOfWork.InvoiceRepository.GetByIdAsync(invoiceId);
+        var invoice = await _unitOfWork.InvoiceRepository.GetByIdAsync(invoiceId, "Products");
         if (invoice == null)
         {
             throw new Exception(InvoiceException);
@@ -429,7 +433,7 @@ public class InvoiceServices
         decimal result = 0;
         foreach (var product in invoice.Products)
         {
-            var productTemp = await _productRepository.GetProductByIdAsync(product.ProductId);
+            var productTemp = await _unitOfWork.ProductRepository.GetByIdAsync(product.ProductId);
             if (productTemp == null)
             {
                 throw new Exception(ProductService.ProductException);
@@ -443,8 +447,8 @@ public class InvoiceServices
 
     public async Task AssignInvoiceProductAsync(Guid invoiceId, Guid productId, int count)
     {
-        var invoice = await _unitOfWork.InvoiceRepository.GetByIdAsync(invoiceId);
-        var product = await _productRepository.GetProductByIdAsync(productId);
+        var invoice = await _unitOfWork.InvoiceRepository.GetByIdAsync(invoiceId, "Products");
+        var product = await _unitOfWork.ProductRepository.GetByIdAsync(productId);
         if (invoice == null)
         {
             throw new ArgumentException(InvoiceException);
@@ -460,7 +464,7 @@ public class InvoiceServices
             throw new ArgumentException($"The count number is more than {product.Name} inventory!");
         }
 
-        var exists = await _invoiceProductRepository.InvoiceHaveTheProductAsync(invoiceId, productId);
+        var exists = invoice.Products.Any(pi => pi.InvoiceId == invoiceId && pi.ProductId == productId);
         if (!exists)
         {
             var invoiceProduct = new ProductInvoice
@@ -469,7 +473,7 @@ public class InvoiceServices
                 ProductId = productId,
                 Count = count,
             };
-            await _invoiceProductRepository.AddInvoiceProductAsync(invoiceProduct);
+            invoice.Products.Add(invoiceProduct);
             invoice.TotalPrice = await CalculateTotalPriceAsync(invoiceId);
             invoice.PaymentStatus = PaymentStatus.Pending;
             _unitOfWork.InvoiceRepository.Update(invoice);
@@ -477,9 +481,11 @@ public class InvoiceServices
         }
         else
         {
-            var productInvoice = await _invoiceProductRepository.GetProductInvoiceAsync(invoiceId, productId);
-            productInvoice.Count += count;
-            await _invoiceProductRepository.UpdateProductInvoiceAsync(productInvoice);
+            var targetProductInvoice =
+                invoice.Products.FirstOrDefault(pi => pi.InvoiceId == invoiceId && pi.ProductId == productId);
+            invoice.Products.Remove(targetProductInvoice!);
+            targetProductInvoice!.Count += count;
+            invoice.Products.Add(targetProductInvoice);
             invoice.TotalPrice = await CalculateTotalPriceAsync(invoiceId);
             invoice.PaymentStatus = PaymentStatus.Pending;
             _unitOfWork.InvoiceRepository.Update(invoice);
