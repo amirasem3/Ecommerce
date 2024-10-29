@@ -3,27 +3,29 @@ using Ecommerce.Application.DTOs.Manufacturer;
 using Ecommerce.Application.DTOs.User;
 using Ecommerce.Core.Entities;
 using Ecommerce.Core.Interfaces;
+using Ecommerce.Infrastructure.Repositories;
 
 namespace Ecommerce.Application.Services;
 
 public class ManufacturerService
 {
-    private readonly IManufacturerRepository _manufacturerRepository;
     private readonly IProductRepository _productRepository;
     private readonly UserService _userServices;
+    private readonly UnitOfWork _unitOfWork;
     public const string ManufacturerException = "Manufacturer Not Found!";
 
-    public ManufacturerService(IManufacturerRepository manufacturerRepository, IProductRepository productRepository,
-        UserService userServices)
+
+    public ManufacturerService(IProductRepository productRepository,
+        UserService userServices, UnitOfWork unitOfWork)
     {
-        _manufacturerRepository = manufacturerRepository;
         _productRepository = productRepository;
         _userServices = userServices;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<ManufacturerDto> GetManufacturerByIdAsync(Guid id)
     {
-        var manufacturer = await _manufacturerRepository.GetManufacturerByIdAsync(id);
+        var manufacturer = await _unitOfWork.ManufacturerRepository.GetByIdAsync(id, "Products2");
         if (manufacturer == null)
         {
             throw new Exception(ManufacturerException);
@@ -55,7 +57,8 @@ public class ManufacturerService
 
     public async Task<IEnumerable<ManufacturerDto>> GetAllManufacturersAsync()
     {
-        var manufacturers = await _manufacturerRepository.GetAllManufacturersAsync();
+        var manufacturers = await _unitOfWork.ManufacturerRepository.GetAsync(includeProperties: "Products2");
+
 
         return manufacturers.Select(manufacturer => new ManufacturerDto
         {
@@ -83,7 +86,8 @@ public class ManufacturerService
 
     public async Task<ManufacturerDto> GetManufacturerByAddressAsync(string address)
     {
-        var manufacturer = await _manufacturerRepository.GetManufacturerByAddressAsync(address);
+        var manufacturer = await _unitOfWork.ManufacturerRepository.GetByUniquePropertyAsync(uniqueProperty: "Address",
+            uniquePropertyValue: address, includeProperties: "Products2");
         if (manufacturer == null)
         {
             throw new Exception(ManufacturerException);
@@ -101,12 +105,22 @@ public class ManufacturerService
             Email = manufacturer.Email,
             ManufacturerCountry = manufacturer.ManufacturerCountry,
             PhoneNumber = manufacturer.PhoneNumber,
+            Products = manufacturer.Products2.Select(p => new ProductManufacturerDto
+            {
+                Name = p.Name,
+                Doe = p.Doe,
+                Dop = p.Dop,
+                Inventory = p.Inventory,
+                Price = p.Price,
+                Status = p.Status
+            }).ToList()
         };
     }
 
     public async Task<ManufacturerDto> GetManufacturerByEmailAsync(string email)
     {
-        var manufacturer = await _manufacturerRepository.GetManufacturerByEmailAsync(email);
+        var manufacturer = await _unitOfWork.ManufacturerRepository.GetByUniquePropertyAsync(uniqueProperty: "Email",
+            uniquePropertyValue: email, includeProperties: "Products2");
         if (manufacturer == null)
         {
             throw new Exception(ManufacturerException);
@@ -138,7 +152,8 @@ public class ManufacturerService
 
     public async Task<ManufacturerDto> GetManufacturerByPhoneNumberAsync(string phoneNumber)
     {
-        var manufacturer = await _manufacturerRepository.GetManufacturerByPhoneNumberAsync(phoneNumber);
+        var manufacturer = await _unitOfWork.ManufacturerRepository.GetByUniquePropertyAsync(
+            uniqueProperty: "PhoneNumber", uniquePropertyValue: phoneNumber, includeProperties: "Products2");
         if (manufacturer == null)
         {
             throw new Exception(ManufacturerException);
@@ -171,7 +186,8 @@ public class ManufacturerService
 
     public async Task<IEnumerable<ManufacturerDto>> GetManufacturersByOwnerAsync(string ownerName)
     {
-        var manufacturers = await _manufacturerRepository.GetManufacturersByOwnerAsync(ownerName);
+        var manufacturers = await _unitOfWork.ManufacturerRepository.GetAsync(
+            filter: man => man.OwnerName.Contains(ownerName), includeProperties: "Products2");
         if (manufacturers == null)
         {
             throw new Exception(ManufacturerException);
@@ -217,8 +233,8 @@ public class ManufacturerService
             Status = manufacturerDto.Status,
             Products2 = []
         };
-
-        await _manufacturerRepository.AddManufacturerAsync(manufacturer);
+        await _unitOfWork.ManufacturerRepository.InsertAsync(manufacturer);
+        await _unitOfWork.SaveAsync();
         var manufacturerUser = new AddUpdateUserDto()
         {
             FirstName = manufacturer.Name,
@@ -257,7 +273,8 @@ public class ManufacturerService
     public async Task<ManufacturerDto> UpdateManufacturerAsync(Guid id,
         AddUpdateManufacturerDto addUpdateManufacturerDto)
     {
-        var manufacturer = await _manufacturerRepository.GetManufacturerByIdAsync(id);
+        var manufacturer = await _unitOfWork.ManufacturerRepository.GetByIdAsync(id, "Products2");
+
         if (manufacturer == null)
         {
             throw new Exception(ManufacturerException);
@@ -272,7 +289,8 @@ public class ManufacturerService
         manufacturer.PhoneNumber = addUpdateManufacturerDto.PhoneNumber;
         manufacturer.Email = addUpdateManufacturerDto.Email;
         manufacturer.ManufacturerCountry = addUpdateManufacturerDto.ManufacturerCountry;
-        await _manufacturerRepository.UpdateManufacturerAsync(manufacturer);
+        _unitOfWork.ManufacturerRepository.Update(manufacturer);
+        await _unitOfWork.SaveAsync();
         return new ManufacturerDto
         {
             Id = manufacturer.Id,
@@ -300,7 +318,7 @@ public class ManufacturerService
 
     public async Task<bool> DeleteManufacturerAsync(Guid manufactureId)
     {
-        var manufacturer = await _manufacturerRepository.GetManufacturerByIdAsync(manufactureId);
+        var manufacturer = await _unitOfWork.ManufacturerRepository.GetByIdAsync(manufactureId, "Products2");
         if (manufacturer == null)
         {
             throw new Exception(ManufacturerException);
@@ -313,13 +331,14 @@ public class ManufacturerService
                 "before all of its products.");
         }
 
-        await _manufacturerRepository.DeleteManufacturerAsync(manufactureId);
+        await _unitOfWork.ManufacturerRepository.DeleteByIdAsync(manufactureId);
+        await _unitOfWork.SaveAsync();
         return true;
     }
 
     public async Task AssignManufacturerProductsAsync(Guid manufacturerId, Guid productId)
     {
-        var manufacturer = await _manufacturerRepository.GetManufacturerByIdAsync(manufacturerId);
+        var manufacturer = await _unitOfWork.ManufacturerRepository.GetByIdAsync(manufacturerId, "Products2");
         var product = await _productRepository.GetProductByIdAsync(productId);
         if (manufacturer == null)
         {
@@ -334,7 +353,9 @@ public class ManufacturerService
         bool productExists = manufacturer.Products2.Any(p => p.Id == productId);
         if (!productExists)
         {
-            await _manufacturerRepository.AddManufacturerProduct(manufacturer, product);
+            manufacturer.Products2.Add(product);
+            _unitOfWork.ManufacturerRepository.Update(manufacturer);
+            await _unitOfWork.SaveAsync();
         }
         else
         {
@@ -344,7 +365,7 @@ public class ManufacturerService
 
     public async Task<bool> DeleteManufacturerProductAsync(Guid manufacturerId, Guid productId)
     {
-        var manufacturer = await _manufacturerRepository.GetManufacturerByIdAsync(manufacturerId);
+        var manufacturer = await _unitOfWork.ManufacturerRepository.GetByIdAsync(manufacturerId, "Products2");
         var product = await _productRepository.GetProductByIdAsync(productId);
         if (manufacturer == null)
         {
@@ -359,9 +380,12 @@ public class ManufacturerService
         bool existProduct = manufacturer.Products2.Any(p => p.Id == productId);
         if (existProduct)
         {
-            await _manufacturerRepository.DeleteManufacturerProductAsync(manufacturer, product);
+            manufacturer.Products2.Remove(product);
+            _unitOfWork.ManufacturerRepository.Update(manufacturer);
+            await _unitOfWork.SaveAsync();
             return true;
         }
+
         return false;
     }
 }

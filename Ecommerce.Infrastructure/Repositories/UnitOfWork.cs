@@ -9,6 +9,7 @@ public class UnitOfWork : IDisposable
     private GenericRepository<Category> categoryRepository;
     private GenericRepository<Role> roleRepository;
     private GenericRepository<Invoice> invoiceRepository;
+    private GenericRepository<Manufacturer> manufacturerRepository;
 
     public UnitOfWork(EcommerceDbContext context)
     {
@@ -53,6 +54,18 @@ public class UnitOfWork : IDisposable
             return invoiceRepository;
         }
     }
+
+    public GenericRepository<Manufacturer> ManufacturerRepository {
+        get{
+            if (manufacturerRepository == null)
+            {
+                manufacturerRepository = new GenericRepository<Manufacturer>(_context);
+            }
+
+            return manufacturerRepository;
+        }
+    
+}
     
 
     public async Task SaveAsync()

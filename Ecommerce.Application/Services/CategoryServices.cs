@@ -19,7 +19,6 @@ public class CategoryServices
     public async Task<CategoryDto> GetCategoryById(Guid id)
     {
         var category = await _unitOfWork.CategoryRepository.GetByIdAsync(id, "SubCategories");
-        // var allCategories = await _unitOfWork.CategoryRepository.GetAsync(includeProperties:"SubCategories");
 
         if (category == null)
         {
