@@ -2652,3 +2652,1083 @@ System.NotSupportedException: Serialization and deserialization of 'System.Refle
 [2024-10-30 15:13:45.483 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: DeleteProductByIdAsync] [Arguments: [
   "0fd9fd0b-cd84-4007-844e-b8dd1e7089da"
 ]] [RetrieveData: "Product Not Found!"] Incorrect Product ID.
+[2024-10-30 15:14:39.715 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: Program] [FunctionName: <Main>$] [Arguments: null] [RetrieveData: null] Starting up the application
+[2024-10-30 15:18:41.982 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: Program] [FunctionName: <Main>$] [Arguments: null] [RetrieveData: null] Starting up the application
+[2024-10-30 15:22:04.696 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products2"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Manufacturer with filter 
+[2024-10-30 15:22:23.271 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: GetManufacturerById] [Arguments: [
+  "251e6f0f-c940-46f8-8186-a4c138eaabf6"
+]] [RetrieveData: null] Attempts to get a manufacturer by ID
+[2024-10-30 15:22:23.275 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByIdAsync] [Arguments: [
+  "251e6f0f-c940-46f8-8186-a4c138eaabf6"
+]] [RetrieveData: null] Attempt to get a manufacturer by ID
+[2024-10-30 15:22:23.329 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "251e6f0f-c940-46f8-8186-a4c138eaabf6",
+  "Products2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Manufacturer by its ID.
+[2024-10-30 15:22:23.401 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByIdAsync] [Arguments: [
+  "251e6f0f-c940-46f8-8186-a4c138eaabf6"
+]] [RetrieveData: {
+  "Id": "251e6f0f-c940-46f8-8186-a4c138eaabf6",
+  "Name": "Amir",
+  "OwnerName": "Amir",
+  "ManufacturerCountry": "Amir",
+  "Email": "aAMir@gmail.com",
+  "Address": "Amirabad",
+  "PhoneNumber": "984234",
+  "Rate": 3,
+  "EstablishDate": "2024-10-20T11:08:46.478",
+  "Status": true
+}] Manufacturer Found
+[2024-10-30 15:22:23.409 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: GetManufacturerById] [Arguments: [
+  "251e6f0f-c940-46f8-8186-a4c138eaabf6"
+]] [RetrieveData: {
+  "Id": "251e6f0f-c940-46f8-8186-a4c138eaabf6",
+  "Name": "Amir",
+  "OwnerName": "Amir",
+  "ManufacturerCountry": "Amir",
+  "Email": "aAMir@gmail.com",
+  "Address": "Amirabad",
+  "PhoneNumber": "984234",
+  "Rate": 3,
+  "EstablishDate": "2024-10-20T11:08:46.478",
+  "Status": true,
+  "Products": []
+}] Manufacturer DTO Result
+[2024-10-30 15:26:43.170 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: GetAllManufacturers] [Arguments: null] [RetrieveData: null] Attempts to get all manufacturers
+[2024-10-30 15:26:43.173 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetAllManufacturersAsync] [Arguments: null] [RetrieveData: null] Attempts to get all manufacturers
+[2024-10-30 15:26:43.186 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products2"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Manufacturer with filter 
+[2024-10-30 15:26:43.199 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetAllManufacturersAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "251e6f0f-c940-46f8-8186-a4c138eaabf6",
+    "Name": "Amir",
+    "OwnerName": "Amir",
+    "ManufacturerCountry": "Amir",
+    "Email": "aAMir@gmail.com",
+    "Address": "Amirabad",
+    "PhoneNumber": "984234",
+    "Rate": 3,
+    "EstablishDate": "2024-10-20T11:08:46.478",
+    "Status": true
+  },
+  {
+    "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+    "Name": "string2",
+    "OwnerName": "string",
+    "ManufacturerCountry": "string",
+    "Email": "string",
+    "Address": "string",
+    "PhoneNumber": "string",
+    "Rate": 0,
+    "EstablishDate": "2024-10-12T12:57:25.923",
+    "Status": true
+  },
+  {
+    "Id": "47000b87-1ffc-4f9b-bd05-50aed27bab2b",
+    "Name": "Test",
+    "OwnerName": "Test Owner Name",
+    "ManufacturerCountry": "Test manufacturer country",
+    "Email": "test4@gmail.com",
+    "Address": "test address",
+    "PhoneNumber": "123567887",
+    "Rate": 4,
+    "EstablishDate": "2023-10-19T11:25:41.184",
+    "Status": true
+  },
+  {
+    "Id": "528b2ba7-3852-4f62-9692-0e6f41369afb",
+    "Name": "AmirCo",
+    "OwnerName": "AmirHossein",
+    "ManufacturerCountry": "yousefi",
+    "Email": "amirasem8@hgmail.com",
+    "Address": "tehran",
+    "PhoneNumber": "0912121212",
+    "Rate": 4,
+    "EstablishDate": "2024-10-29T05:07:13.315",
+    "Status": true
+  },
+  {
+    "Id": "5ccd1d75-5d31-44b0-b891-b17b441b454d",
+    "Name": "Amir",
+    "OwnerName": "Amiri",
+    "ManufacturerCountry": "Amirabad",
+    "Email": "amirrrrr@gmail.com",
+    "Address": "amirabadf",
+    "PhoneNumber": "2222222222",
+    "Rate": 5,
+    "EstablishDate": "2024-10-20T11:11:16.435",
+    "Status": true
+  },
+  {
+    "Id": "b8d45e51-4b15-49b6-abee-48acaf1b3fd9",
+    "Name": "mantest",
+    "OwnerName": "man owner test",
+    "ManufacturerCountry": "iran",
+    "Email": "mantest@gmail.com",
+    "Address": "man test address",
+    "PhoneNumber": "99993333",
+    "Rate": 4,
+    "EstablishDate": "2024-10-20T09:56:18.586",
+    "Status": true
+  }
+]] All manufacturers retrieved successfully
+[2024-10-30 15:26:43.209 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: GetAllManufacturers] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "251e6f0f-c940-46f8-8186-a4c138eaabf6",
+    "Name": "Amir",
+    "OwnerName": "Amir",
+    "ManufacturerCountry": "Amir",
+    "Email": "aAMir@gmail.com",
+    "Address": "Amirabad",
+    "PhoneNumber": "984234",
+    "Rate": 3,
+    "EstablishDate": "2024-10-20T11:08:46.478",
+    "Status": true,
+    "Products": []
+  },
+  {
+    "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+    "Name": "string2",
+    "OwnerName": "string",
+    "ManufacturerCountry": "string",
+    "Email": "string",
+    "Address": "string",
+    "PhoneNumber": "string",
+    "Rate": 0,
+    "EstablishDate": "2024-10-12T12:57:25.923",
+    "Status": true,
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Inventory": -1.00,
+        "Dop": "2024-10-20T14:19:30.933",
+        "Doe": "2024-10-20T14:19:30.933",
+        "Status": false
+      }
+    ]
+  },
+  {
+    "Id": "47000b87-1ffc-4f9b-bd05-50aed27bab2b",
+    "Name": "Test",
+    "OwnerName": "Test Owner Name",
+    "ManufacturerCountry": "Test manufacturer country",
+    "Email": "test4@gmail.com",
+    "Address": "test address",
+    "PhoneNumber": "123567887",
+    "Rate": 4,
+    "EstablishDate": "2023-10-19T11:25:41.184",
+    "Status": true,
+    "Products": []
+  },
+  {
+    "Id": "528b2ba7-3852-4f62-9692-0e6f41369afb",
+    "Name": "AmirCo",
+    "OwnerName": "AmirHossein",
+    "ManufacturerCountry": "yousefi",
+    "Email": "amirasem8@hgmail.com",
+    "Address": "tehran",
+    "PhoneNumber": "0912121212",
+    "Rate": 4,
+    "EstablishDate": "2024-10-29T05:07:13.315",
+    "Status": true,
+    "Products": [
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Inventory": 8.00,
+        "Dop": "2024-10-20T13:52:33.182",
+        "Doe": "2024-10-20T13:52:33.182",
+        "Status": false
+      }
+    ]
+  },
+  {
+    "Id": "5ccd1d75-5d31-44b0-b891-b17b441b454d",
+    "Name": "Amir",
+    "OwnerName": "Amiri",
+    "ManufacturerCountry": "Amirabad",
+    "Email": "amirrrrr@gmail.com",
+    "Address": "amirabadf",
+    "PhoneNumber": "2222222222",
+    "Rate": 5,
+    "EstablishDate": "2024-10-20T11:11:16.435",
+    "Status": true,
+    "Products": []
+  },
+  {
+    "Id": "b8d45e51-4b15-49b6-abee-48acaf1b3fd9",
+    "Name": "mantest",
+    "OwnerName": "man owner test",
+    "ManufacturerCountry": "iran",
+    "Email": "mantest@gmail.com",
+    "Address": "man test address",
+    "PhoneNumber": "99993333",
+    "Rate": 4,
+    "EstablishDate": "2024-10-20T09:56:18.586",
+    "Status": true,
+    "Products": [
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Inventory": 8.00,
+        "Dop": "2024-10-20T13:52:33.182",
+        "Doe": "2024-10-20T13:52:33.182",
+        "Status": false
+      }
+    ]
+  }
+]] All Manufacturers
+[2024-10-30 15:31:06.811 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: SearchManufacturerAddresses] [Arguments: [
+  "test address"
+]] [RetrieveData: null] Attempts to get a manufacturer by address
+[2024-10-30 15:31:06.814 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByAddressAsync] [Arguments: [
+  "test address"
+]] [RetrieveData: null] Attempt to get a manufacturer by address
+[2024-10-30 15:31:06.818 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: [
+  "Address",
+  "test address",
+  "Products2"
+]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Manufacturer by its UniqueProperty.
+[2024-10-30 15:31:14.336 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByAddressAsync] [Arguments: [
+  "test address"
+]] [RetrieveData: {
+  "Id": "47000b87-1ffc-4f9b-bd05-50aed27bab2b",
+  "Name": "Test",
+  "OwnerName": "Test Owner Name",
+  "ManufacturerCountry": "Test manufacturer country",
+  "Email": "test4@gmail.com",
+  "Address": "test address",
+  "PhoneNumber": "123567887",
+  "Rate": 4,
+  "EstablishDate": "2023-10-19T11:25:41.184",
+  "Status": true
+}] Manufacturer Found
+[2024-10-30 15:31:14.340 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: SearchManufacturerAddresses] [Arguments: [
+  "test address"
+]] [RetrieveData: {
+  "Id": "47000b87-1ffc-4f9b-bd05-50aed27bab2b",
+  "Name": "Test",
+  "OwnerName": "Test Owner Name",
+  "ManufacturerCountry": "Test manufacturer country",
+  "Email": "test4@gmail.com",
+  "Address": "test address",
+  "PhoneNumber": "123567887",
+  "Rate": 4,
+  "EstablishDate": "2023-10-19T11:25:41.184",
+  "Status": true,
+  "Products": []
+}] Manufacturer DTO Result
+[2024-10-30 15:33:36.752 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: SearchManufacturerEmails] [Arguments: [
+  "test4@gmail.com"
+]] [RetrieveData: null] Attempts to get a manufacturer by email
+[2024-10-30 15:33:36.756 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByEmailAsync] [Arguments: [
+  "test4@gmail.com"
+]] [RetrieveData: null] Attempt to get a manufacturer by email
+[2024-10-30 15:33:36.758 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: [
+  "Email",
+  "test4@gmail.com",
+  "Products2"
+]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Manufacturer by its UniqueProperty.
+[2024-10-30 15:33:36.774 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByEmailAsync] [Arguments: [
+  "test4@gmail.com"
+]] [RetrieveData: {
+  "Id": "47000b87-1ffc-4f9b-bd05-50aed27bab2b",
+  "Name": "Test",
+  "OwnerName": "Test Owner Name",
+  "ManufacturerCountry": "Test manufacturer country",
+  "Email": "test4@gmail.com",
+  "Address": "test address",
+  "PhoneNumber": "123567887",
+  "Rate": 4,
+  "EstablishDate": "2023-10-19T11:25:41.184",
+  "Status": true
+}] Manufacturer Found
+[2024-10-30 15:33:36.777 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: SearchManufacturerEmails] [Arguments: [
+  "test4@gmail.com"
+]] [RetrieveData: {
+  "Id": "47000b87-1ffc-4f9b-bd05-50aed27bab2b",
+  "Name": "Test",
+  "OwnerName": "Test Owner Name",
+  "ManufacturerCountry": "Test manufacturer country",
+  "Email": "test4@gmail.com",
+  "Address": "test address",
+  "PhoneNumber": "123567887",
+  "Rate": 4,
+  "EstablishDate": "2023-10-19T11:25:41.184",
+  "Status": true,
+  "Products": []
+}] Manufacturer DTO Result
+[2024-10-30 15:35:50.401 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: SearchManufacturerPhoneNumbers] [Arguments: [
+  "123567887"
+]] [RetrieveData: null] Attempts to get a manufacturer by phone number
+[2024-10-30 15:35:50.405 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByPhoneNumberAsync] [Arguments: [
+  "123567887"
+]] [RetrieveData: null] Attempt to get a manufacturer by phone number
+[2024-10-30 15:35:50.407 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: [
+  "PhoneNumber",
+  "123567887",
+  "Products2"
+]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Manufacturer by its UniqueProperty.
+[2024-10-30 15:35:50.424 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByPhoneNumberAsync] [Arguments: [
+  "123567887"
+]] [RetrieveData: {
+  "Id": "47000b87-1ffc-4f9b-bd05-50aed27bab2b",
+  "Name": "Test",
+  "OwnerName": "Test Owner Name",
+  "ManufacturerCountry": "Test manufacturer country",
+  "Email": "test4@gmail.com",
+  "Address": "test address",
+  "PhoneNumber": "123567887",
+  "Rate": 4,
+  "EstablishDate": "2023-10-19T11:25:41.184",
+  "Status": true
+}] Manufacturer Found
+[2024-10-30 15:35:50.429 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: SearchManufacturerPhoneNumbers] [Arguments: [
+  "123567887"
+]] [RetrieveData: {
+  "Id": "47000b87-1ffc-4f9b-bd05-50aed27bab2b",
+  "Name": "Test",
+  "OwnerName": "Test Owner Name",
+  "ManufacturerCountry": "Test manufacturer country",
+  "Email": "test4@gmail.com",
+  "Address": "test address",
+  "PhoneNumber": "123567887",
+  "Rate": 4,
+  "EstablishDate": "2023-10-19T11:25:41.184",
+  "Status": true,
+  "Products": []
+}] Manufacturer DTO Result
+[2024-10-30 15:38:53.119 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: SearchManufacturerOwners] [Arguments: [
+  "Test Owner Name"
+]] [RetrieveData: null] Attempts to get a manufacturer by owner name
+[2024-10-30 15:38:53.124 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturersByOwnerAsync] [Arguments: [
+  "Test Owner Name"
+]] [RetrieveData: null] Attempt to get a manufacturer by owner name
+[2024-10-30 15:38:53.129 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products2"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Manufacturer with filter man => man.OwnerName.Contains(value(Ecommerce.Application.Services.ManufacturerService+<>c__DisplayClass9_0).ownerName)
+[2024-10-30 15:39:00.658 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturersByOwnerAsync] [Arguments: [
+  "Test Owner Name"
+]] [RetrieveData: [
+  {
+    "Id": "47000b87-1ffc-4f9b-bd05-50aed27bab2b",
+    "Name": "Test",
+    "OwnerName": "Test Owner Name",
+    "ManufacturerCountry": "Test manufacturer country",
+    "Email": "test4@gmail.com",
+    "Address": "test address",
+    "PhoneNumber": "123567887",
+    "Rate": 4,
+    "EstablishDate": "2023-10-19T11:25:41.184",
+    "Status": true
+  }
+]] Manufacturers Found
+[2024-10-30 15:39:00.664 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: SearchManufacturerOwners] [Arguments: [
+  "Test Owner Name"
+]] [RetrieveData: [
+  {
+    "Id": "47000b87-1ffc-4f9b-bd05-50aed27bab2b",
+    "Name": "Test",
+    "OwnerName": "Test Owner Name",
+    "ManufacturerCountry": "Test manufacturer country",
+    "Email": "test4@gmail.com",
+    "Address": "test address",
+    "PhoneNumber": "123567887",
+    "Rate": 4,
+    "EstablishDate": "2023-10-19T11:25:41.184",
+    "Status": true,
+    "Products": []
+  }
+]] Manufacturer DTO Result
+[2024-10-30 15:46:18.674 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByEmailAsync] [Arguments: [
+  "amir@gmail.com"
+]] [RetrieveData: null] Attempt to get a manufacturer by email
+[2024-10-30 15:46:18.677 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: [
+  "Email",
+  "amir@gmail.com",
+  "Products2"
+]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Manufacturer by its UniqueProperty.
+[2024-10-30 15:46:26.198 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByEmailAsync] [Arguments: [
+  "amir@gmail.com"
+]] [RetrieveData: null] There is no manufacturer with this email
+[2024-10-30 15:46:26.203 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByAddressAsync] [Arguments: [
+  "amirhossein"
+]] [RetrieveData: null] Attempt to get a manufacturer by address
+[2024-10-30 15:46:26.205 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: [
+  "Address",
+  "amirhossein",
+  "Products2"
+]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Manufacturer by its UniqueProperty.
+[2024-10-30 15:46:26.209 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByAddressAsync] [Arguments: [
+  "amirhossein"
+]] [RetrieveData: null] There is no manufacturer with this address
+[2024-10-30 15:46:26.211 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByPhoneNumberAsync] [Arguments: [
+  "998898"
+]] [RetrieveData: null] Attempt to get a manufacturer by phone number
+[2024-10-30 15:46:26.212 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: [
+  "PhoneNumber",
+  "998898",
+  "Products2"
+]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Manufacturer by its UniqueProperty.
+[2024-10-30 15:46:26.216 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByPhoneNumberAsync] [Arguments: [
+  "998898"
+]] [RetrieveData: null] There is no manufacturer with this phone number
+[2024-10-30 15:46:26.226 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: AddManufacturer] [Arguments: [
+  {
+    "Name": "Amir",
+    "OwnerName": "AmirAmir",
+    "ManufacturerCountry": "AMir",
+    "Email": "amir@gmail.com",
+    "Address": "amirhossein",
+    "PhoneNumber": "998898",
+    "Rate": 3,
+    "EstablishDate": "2024-10-30T12:15:50.593Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to add new manufacturer
+[2024-10-30 15:46:26.229 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: AddManufacturerAsync] [Arguments: [
+  {
+    "Name": "Amir",
+    "OwnerName": "AmirAmir",
+    "ManufacturerCountry": "AMir",
+    "Email": "amir@gmail.com",
+    "Address": "amirhossein",
+    "PhoneNumber": "998898",
+    "Rate": 3,
+    "EstablishDate": "2024-10-30T12:15:50.593Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempts to add new manufacturer
+[2024-10-30 15:46:26.238 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: InsertAsync] [Arguments: [
+  {
+    "Id": "ae2d3699-702b-4286-a862-166ca61710d5",
+    "Name": "Amir",
+    "OwnerName": "AmirAmir",
+    "ManufacturerCountry": "AMir",
+    "Email": "amir@gmail.com",
+    "Address": "amirhossein",
+    "PhoneNumber": "998898",
+    "Rate": 3,
+    "EstablishDate": "2024-10-30T12:15:50.593Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to add an new entity with type Ecommerce.Core.Entities.Manufacturer
+[2024-10-30 15:46:26.263 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: InsertAsync] [Arguments: [
+  {
+    "Id": "ae2d3699-702b-4286-a862-166ca61710d5",
+    "Name": "Amir",
+    "OwnerName": "AmirAmir",
+    "ManufacturerCountry": "AMir",
+    "Email": "amir@gmail.com",
+    "Address": "amirhossein",
+    "PhoneNumber": "998898",
+    "Rate": 3,
+    "EstablishDate": "2024-10-30T12:15:50.593Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Successful Insert.
+[2024-10-30 15:46:26.389 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-10-30 15:46:26.391 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: AddManufacturerAsync] [Arguments: [
+  {
+    "Name": "Amir",
+    "OwnerName": "AmirAmir",
+    "ManufacturerCountry": "AMir",
+    "Email": "amir@gmail.com",
+    "Address": "amirhossein",
+    "PhoneNumber": "998898",
+    "Rate": 3,
+    "EstablishDate": "2024-10-30T12:15:50.593Z",
+    "Status": true
+  }
+]] [RetrieveData: {
+  "Id": "ae2d3699-702b-4286-a862-166ca61710d5",
+  "Name": "Amir",
+  "OwnerName": "AmirAmir",
+  "ManufacturerCountry": "AMir",
+  "Email": "amir@gmail.com",
+  "Address": "amirhossein",
+  "PhoneNumber": "998898",
+  "Rate": 3,
+  "EstablishDate": "2024-10-30T12:15:50.593Z",
+  "Status": true
+}] Manufacturer Successful Insertion!
+[2024-10-30 15:46:26.396 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: AddUserAsync] [Arguments: [
+  {
+    "FirstName": "Amir",
+    "LastName": "AmirAmir",
+    "Username": "amir@gmail.com",
+    "Email": "amir@gmail.com",
+    "PhoneNumber": "998898",
+    "Password": "998898",
+    "RoleName": "Manufacturer"
+  }
+]] [RetrieveData: null] Attempting to add new user .
+[2024-10-30 15:46:26.398 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: AddUserAsync] [Arguments: null] [RetrieveData: null] Check existence of Manufacturer
+[2024-10-30 15:46:26.400 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: [
+  "Name",
+  "Manufacturer",
+  ""
+]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Role by its UniqueProperty.
+[2024-10-30 15:46:26.416 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: AddUserAsync] [Arguments: null] [RetrieveData: {
+  "Id": "04d513b8-e7b4-4538-9f61-be3e56b5b59d",
+  "Name": "Manufacturer"
+}] Manufacturer exists.
+[2024-10-30 15:46:26.481 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: AddUserAsync] [Arguments: [
+  {
+    "FirstName": "Amir",
+    "LastName": "AmirAmir",
+    "Username": "amir@gmail.com",
+    "Email": "amir@gmail.com",
+    "PhoneNumber": "998898",
+    "Password": "998898",
+    "RoleName": "Manufacturer"
+  }
+]] [RetrieveData: {
+  "Id": "0486d1c2-05b5-4b9f-8fff-a86474f5de48",
+  "FirstName": "Amir",
+  "LastName": "AmirAmir",
+  "Username": "amir@gmail.com",
+  "PasswordHash": "AQAAAAIAAYagAAAAEG0zAohCivqfrLj5jhwlO6rnSXm7fIfluYwRIKcVSgibDRjdvcizJBotRMGnLBetVA==",
+  "Email": "amir@gmail.com",
+  "PhoneNumber": "998898",
+  "RoleId": "04d513b8-e7b4-4538-9f61-be3e56b5b59d"
+}] New User Created Successfully.
+[2024-10-30 15:46:26.485 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: InsertAsync] [Arguments: [
+  {
+    "Id": "0486d1c2-05b5-4b9f-8fff-a86474f5de48",
+    "FirstName": "Amir",
+    "LastName": "AmirAmir",
+    "Username": "amir@gmail.com",
+    "PasswordHash": "AQAAAAIAAYagAAAAEG0zAohCivqfrLj5jhwlO6rnSXm7fIfluYwRIKcVSgibDRjdvcizJBotRMGnLBetVA==",
+    "Email": "amir@gmail.com",
+    "PhoneNumber": "998898",
+    "RoleId": "04d513b8-e7b4-4538-9f61-be3e56b5b59d"
+  }
+]] [RetrieveData: null] Attempt to add an new entity with type Ecommerce.Core.Entities.User
+[2024-10-30 15:46:26.499 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: InsertAsync] [Arguments: [
+  {
+    "Id": "0486d1c2-05b5-4b9f-8fff-a86474f5de48",
+    "FirstName": "Amir",
+    "LastName": "AmirAmir",
+    "Username": "amir@gmail.com",
+    "PasswordHash": "AQAAAAIAAYagAAAAEG0zAohCivqfrLj5jhwlO6rnSXm7fIfluYwRIKcVSgibDRjdvcizJBotRMGnLBetVA==",
+    "Email": "amir@gmail.com",
+    "PhoneNumber": "998898",
+    "RoleId": "04d513b8-e7b4-4538-9f61-be3e56b5b59d"
+  }
+]] [RetrieveData: null] Successful Insert.
+[2024-10-30 15:46:26.520 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-10-30 15:46:26.523 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: AddUserAsync] [Arguments: null] [RetrieveData: {
+  "Id": "0486d1c2-05b5-4b9f-8fff-a86474f5de48",
+  "FirstName": "Amir",
+  "LastName": "AmirAmir",
+  "Username": "amir@gmail.com",
+  "PasswordHash": "AQAAAAIAAYagAAAAEG0zAohCivqfrLj5jhwlO6rnSXm7fIfluYwRIKcVSgibDRjdvcizJBotRMGnLBetVA==",
+  "Email": "amir@gmail.com",
+  "PhoneNumber": "998898",
+  "RoleId": "04d513b8-e7b4-4538-9f61-be3e56b5b59d"
+}] User Saved Successfully
+[2024-10-30 15:46:26.529 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: AddManufacturerAsync] [Arguments: [
+  {
+    "FirstName": "Amir",
+    "LastName": "AmirAmir",
+    "Username": "amir@gmail.com",
+    "Email": "amir@gmail.com",
+    "PhoneNumber": "998898",
+    "Password": "998898",
+    "RoleName": "Manufacturer"
+  }
+]] [RetrieveData: {
+  "Id": "0486d1c2-05b5-4b9f-8fff-a86474f5de48",
+  "FirstName": "Amir",
+  "LastName": "AmirAmir",
+  "Username": "amir@gmail.com",
+  "Email": "amir@gmail.com",
+  "PhoneNumber": "998898",
+  "PasswordHash": "AQAAAAIAAYagAAAAEG0zAohCivqfrLj5jhwlO6rnSXm7fIfluYwRIKcVSgibDRjdvcizJBotRMGnLBetVA==",
+  "RoleName": "Manufacturer",
+  "RoleId": "04d513b8-e7b4-4538-9f61-be3e56b5b59d"
+}] Manufacturer's user added successfully.
+[2024-10-30 15:46:26.533 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: AddManufacturer] [Arguments: [
+  {
+    "Name": "Amir",
+    "OwnerName": "AmirAmir",
+    "ManufacturerCountry": "AMir",
+    "Email": "amir@gmail.com",
+    "Address": "amirhossein",
+    "PhoneNumber": "998898",
+    "Rate": 3,
+    "EstablishDate": "2024-10-30T12:15:50.593Z",
+    "Status": true
+  }
+]] [RetrieveData: {
+  "Id": "ae2d3699-702b-4286-a862-166ca61710d5",
+  "Name": "Amir",
+  "OwnerName": "AmirAmir",
+  "ManufacturerCountry": "AMir",
+  "Email": "amir@gmail.com",
+  "Address": "amirhossein",
+  "PhoneNumber": "998898",
+  "Rate": 3,
+  "EstablishDate": "2024-10-30T12:15:50.593Z",
+  "Status": true,
+  "Products": []
+}] Manufacturer ADD DTO Result
+[2024-10-30 15:53:35.758 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetAllProducts] [Arguments: null] [RetrieveData: null] Attempts to get all Products
+[2024-10-30 15:53:35.765 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductAsync] [Arguments: null] [RetrieveData: null] Attempts to get all products
+[2024-10-30 15:53:35.769 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Product with filter 
+[2024-10-30 15:53:43.312 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+    "Name": "PRODUCT2",
+    "Price": 123.54,
+    "Inventory": -1.00,
+    "Dop": "2024-10-20T14:19:30.933",
+    "Doe": "2024-10-20T14:19:30.933",
+    "Status": false
+  },
+  {
+    "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Name": "PRODUCT1",
+    "Price": 12.00,
+    "Inventory": 8.00,
+    "Dop": "2024-10-20T13:52:33.182",
+    "Doe": "2024-10-20T13:52:33.182",
+    "Status": false
+  }
+]] All Product Retrieved
+[2024-10-30 15:53:43.335 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetAllProducts] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+    "Name": "PRODUCT2",
+    "Price": 123.54,
+    "Inventory": -1.00,
+    "Dop": "2024-10-20T14:19:30.933",
+    "Doe": "2024-10-20T14:19:30.933",
+    "Status": false,
+    "ProductInvoices": null
+  },
+  {
+    "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Name": "PRODUCT1",
+    "Price": 12.00,
+    "Inventory": 8.00,
+    "Dop": "2024-10-20T13:52:33.182",
+    "Doe": "2024-10-20T13:52:33.182",
+    "Status": false,
+    "ProductInvoices": null
+  }
+]] All Products DTO
+[2024-10-30 15:54:18.903 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: AssignManufacturerProduct] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  "ae2d3699-702b-4286-a862-166ca61710d5"
+]] [RetrieveData: null] Attempt to add a product to a manufacturer
+[2024-10-30 15:54:18.909 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: AssignManufacturerProductsAsync] [Arguments: [
+  "ae2d3699-702b-4286-a862-166ca61710d5",
+  "7ce053d4-4d01-4657-b38a-3013096f0021"
+]] [RetrieveData: null] Attempts to add a product to a manufacturer
+[2024-10-30 15:54:18.913 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "ae2d3699-702b-4286-a862-166ca61710d5",
+  "Products2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Manufacturer by its ID.
+[2024-10-30 15:54:18.919 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 15:54:18.929 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: AssignManufacturerProductsAsync] [Arguments: [
+  [],
+  "7ce053d4-4d01-4657-b38a-3013096f0021"
+]] [RetrieveData: false] Check existence of a product for a manufacturer
+[2024-10-30 15:54:18.933 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "ae2d3699-702b-4286-a862-166ca61710d5",
+    "Name": "Amir",
+    "OwnerName": "AmirAmir",
+    "ManufacturerCountry": "AMir",
+    "Email": "amir@gmail.com",
+    "Address": "amirhossein",
+    "PhoneNumber": "998898",
+    "Rate": 3,
+    "EstablishDate": "2024-10-30T12:15:50.593",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to Update a Ecommerce.Core.Entities.Manufacturer
+[2024-10-30 15:54:18.955 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "ae2d3699-702b-4286-a862-166ca61710d5",
+    "Name": "Amir",
+    "OwnerName": "AmirAmir",
+    "ManufacturerCountry": "AMir",
+    "Email": "amir@gmail.com",
+    "Address": "amirhossein",
+    "PhoneNumber": "998898",
+    "Rate": 3,
+    "EstablishDate": "2024-10-30T12:15:50.593",
+    "Status": true
+  }
+]] [RetrieveData: null] Successful Update.
+[2024-10-30 15:54:19.017 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-10-30 15:54:19.019 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: AssignManufacturerProductsAsync] [Arguments: [
+  {
+    "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Name": "PRODUCT1",
+    "Price": 12.00,
+    "Inventory": 8.00,
+    "Dop": "2024-10-20T13:52:33.182",
+    "Doe": "2024-10-20T13:52:33.182",
+    "Status": false
+  },
+  [
+    {
+      "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+      "Name": "PRODUCT1",
+      "Price": 12.00,
+      "Inventory": 8.00,
+      "Dop": "2024-10-20T13:52:33.182",
+      "Doe": "2024-10-20T13:52:33.182",
+      "Status": false
+    }
+  ]
+]] [RetrieveData: {
+  "Id": "ae2d3699-702b-4286-a862-166ca61710d5",
+  "Name": "Amir",
+  "OwnerName": "AmirAmir",
+  "ManufacturerCountry": "AMir",
+  "Email": "amir@gmail.com",
+  "Address": "amirhossein",
+  "PhoneNumber": "998898",
+  "Rate": 3,
+  "EstablishDate": "2024-10-30T12:15:50.593",
+  "Status": true
+}] The product added to manufacture products successfully.
+[2024-10-30 15:54:19.021 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: AssignManufacturerProduct] [Arguments: [
+  "ae2d3699-702b-4286-a862-166ca61710d5",
+  "7ce053d4-4d01-4657-b38a-3013096f0021"
+]] [RetrieveData: null] The product is successfully added to the manufacturers' products
+[2024-10-30 15:54:49.596 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: GetAllManufacturers] [Arguments: null] [RetrieveData: null] Attempts to get all manufacturers
+[2024-10-30 15:54:49.600 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetAllManufacturersAsync] [Arguments: null] [RetrieveData: null] Attempts to get all manufacturers
+[2024-10-30 15:54:49.620 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products2"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Manufacturer with filter 
+[2024-10-30 15:54:49.633 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetAllManufacturersAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "251e6f0f-c940-46f8-8186-a4c138eaabf6",
+    "Name": "Amir",
+    "OwnerName": "Amir",
+    "ManufacturerCountry": "Amir",
+    "Email": "aAMir@gmail.com",
+    "Address": "Amirabad",
+    "PhoneNumber": "984234",
+    "Rate": 3,
+    "EstablishDate": "2024-10-20T11:08:46.478",
+    "Status": true
+  },
+  {
+    "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+    "Name": "string2",
+    "OwnerName": "string",
+    "ManufacturerCountry": "string",
+    "Email": "string",
+    "Address": "string",
+    "PhoneNumber": "string",
+    "Rate": 0,
+    "EstablishDate": "2024-10-12T12:57:25.923",
+    "Status": true
+  },
+  {
+    "Id": "47000b87-1ffc-4f9b-bd05-50aed27bab2b",
+    "Name": "Test",
+    "OwnerName": "Test Owner Name",
+    "ManufacturerCountry": "Test manufacturer country",
+    "Email": "test4@gmail.com",
+    "Address": "test address",
+    "PhoneNumber": "123567887",
+    "Rate": 4,
+    "EstablishDate": "2023-10-19T11:25:41.184",
+    "Status": true
+  },
+  {
+    "Id": "528b2ba7-3852-4f62-9692-0e6f41369afb",
+    "Name": "AmirCo",
+    "OwnerName": "AmirHossein",
+    "ManufacturerCountry": "yousefi",
+    "Email": "amirasem8@hgmail.com",
+    "Address": "tehran",
+    "PhoneNumber": "0912121212",
+    "Rate": 4,
+    "EstablishDate": "2024-10-29T05:07:13.315",
+    "Status": true
+  },
+  {
+    "Id": "5ccd1d75-5d31-44b0-b891-b17b441b454d",
+    "Name": "Amir",
+    "OwnerName": "Amiri",
+    "ManufacturerCountry": "Amirabad",
+    "Email": "amirrrrr@gmail.com",
+    "Address": "amirabadf",
+    "PhoneNumber": "2222222222",
+    "Rate": 5,
+    "EstablishDate": "2024-10-20T11:11:16.435",
+    "Status": true
+  },
+  {
+    "Id": "ae2d3699-702b-4286-a862-166ca61710d5",
+    "Name": "Amir",
+    "OwnerName": "AmirAmir",
+    "ManufacturerCountry": "AMir",
+    "Email": "amir@gmail.com",
+    "Address": "amirhossein",
+    "PhoneNumber": "998898",
+    "Rate": 3,
+    "EstablishDate": "2024-10-30T12:15:50.593",
+    "Status": true
+  },
+  {
+    "Id": "b8d45e51-4b15-49b6-abee-48acaf1b3fd9",
+    "Name": "mantest",
+    "OwnerName": "man owner test",
+    "ManufacturerCountry": "iran",
+    "Email": "mantest@gmail.com",
+    "Address": "man test address",
+    "PhoneNumber": "99993333",
+    "Rate": 4,
+    "EstablishDate": "2024-10-20T09:56:18.586",
+    "Status": true
+  }
+]] All manufacturers retrieved successfully
+[2024-10-30 15:54:49.642 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: GetAllManufacturers] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "251e6f0f-c940-46f8-8186-a4c138eaabf6",
+    "Name": "Amir",
+    "OwnerName": "Amir",
+    "ManufacturerCountry": "Amir",
+    "Email": "aAMir@gmail.com",
+    "Address": "Amirabad",
+    "PhoneNumber": "984234",
+    "Rate": 3,
+    "EstablishDate": "2024-10-20T11:08:46.478",
+    "Status": true,
+    "Products": []
+  },
+  {
+    "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+    "Name": "string2",
+    "OwnerName": "string",
+    "ManufacturerCountry": "string",
+    "Email": "string",
+    "Address": "string",
+    "PhoneNumber": "string",
+    "Rate": 0,
+    "EstablishDate": "2024-10-12T12:57:25.923",
+    "Status": true,
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Inventory": -1.00,
+        "Dop": "2024-10-20T14:19:30.933",
+        "Doe": "2024-10-20T14:19:30.933",
+        "Status": false
+      }
+    ]
+  },
+  {
+    "Id": "47000b87-1ffc-4f9b-bd05-50aed27bab2b",
+    "Name": "Test",
+    "OwnerName": "Test Owner Name",
+    "ManufacturerCountry": "Test manufacturer country",
+    "Email": "test4@gmail.com",
+    "Address": "test address",
+    "PhoneNumber": "123567887",
+    "Rate": 4,
+    "EstablishDate": "2023-10-19T11:25:41.184",
+    "Status": true,
+    "Products": []
+  },
+  {
+    "Id": "528b2ba7-3852-4f62-9692-0e6f41369afb",
+    "Name": "AmirCo",
+    "OwnerName": "AmirHossein",
+    "ManufacturerCountry": "yousefi",
+    "Email": "amirasem8@hgmail.com",
+    "Address": "tehran",
+    "PhoneNumber": "0912121212",
+    "Rate": 4,
+    "EstablishDate": "2024-10-29T05:07:13.315",
+    "Status": true,
+    "Products": [
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Inventory": 8.00,
+        "Dop": "2024-10-20T13:52:33.182",
+        "Doe": "2024-10-20T13:52:33.182",
+        "Status": false
+      }
+    ]
+  },
+  {
+    "Id": "5ccd1d75-5d31-44b0-b891-b17b441b454d",
+    "Name": "Amir",
+    "OwnerName": "Amiri",
+    "ManufacturerCountry": "Amirabad",
+    "Email": "amirrrrr@gmail.com",
+    "Address": "amirabadf",
+    "PhoneNumber": "2222222222",
+    "Rate": 5,
+    "EstablishDate": "2024-10-20T11:11:16.435",
+    "Status": true,
+    "Products": []
+  },
+  {
+    "Id": "ae2d3699-702b-4286-a862-166ca61710d5",
+    "Name": "Amir",
+    "OwnerName": "AmirAmir",
+    "ManufacturerCountry": "AMir",
+    "Email": "amir@gmail.com",
+    "Address": "amirhossein",
+    "PhoneNumber": "998898",
+    "Rate": 3,
+    "EstablishDate": "2024-10-30T12:15:50.593",
+    "Status": true,
+    "Products": [
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Inventory": 8.00,
+        "Dop": "2024-10-20T13:52:33.182",
+        "Doe": "2024-10-20T13:52:33.182",
+        "Status": false
+      }
+    ]
+  },
+  {
+    "Id": "b8d45e51-4b15-49b6-abee-48acaf1b3fd9",
+    "Name": "mantest",
+    "OwnerName": "man owner test",
+    "ManufacturerCountry": "iran",
+    "Email": "mantest@gmail.com",
+    "Address": "man test address",
+    "PhoneNumber": "99993333",
+    "Rate": 4,
+    "EstablishDate": "2024-10-20T09:56:18.586",
+    "Status": true,
+    "Products": [
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Inventory": 8.00,
+        "Dop": "2024-10-20T13:52:33.182",
+        "Doe": "2024-10-20T13:52:33.182",
+        "Status": false
+      }
+    ]
+  }
+]] All Manufacturers
+[2024-10-30 15:55:24.680 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: AssignManufacturerProduct] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  "ae2d3699-702b-4286-a862-166ca61710d5"
+]] [RetrieveData: null] Attempt to add a product to a manufacturer
+[2024-10-30 15:55:24.684 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: AssignManufacturerProductsAsync] [Arguments: [
+  "ae2d3699-702b-4286-a862-166ca61710d5",
+  "7ce053d4-4d01-4657-b38a-3013096f0021"
+]] [RetrieveData: null] Attempts to add a product to a manufacturer
+[2024-10-30 15:55:24.699 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "ae2d3699-702b-4286-a862-166ca61710d5",
+  "Products2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Manufacturer by its ID.
+[2024-10-30 15:55:24.713 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 15:55:24.717 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: AssignManufacturerProductsAsync] [Arguments: [
+  [
+    {
+      "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+      "Name": "PRODUCT1",
+      "Price": 12.00,
+      "Inventory": 8.00,
+      "Dop": "2024-10-20T13:52:33.182",
+      "Doe": "2024-10-20T13:52:33.182",
+      "Status": false
+    }
+  ],
+  "7ce053d4-4d01-4657-b38a-3013096f0021"
+]] [RetrieveData: true] Check existence of a product for a manufacturer
+[2024-10-30 15:55:24.719 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: AssignManufacturerProductsAsync] [Arguments: [
+  {
+    "Id": "ae2d3699-702b-4286-a862-166ca61710d5",
+    "Name": "Amir",
+    "OwnerName": "AmirAmir",
+    "ManufacturerCountry": "AMir",
+    "Email": "amir@gmail.com",
+    "Address": "amirhossein",
+    "PhoneNumber": "998898",
+    "Rate": 3,
+    "EstablishDate": "2024-10-30T12:15:50.593",
+    "Status": true
+  }
+]] [RetrieveData: null] The product already exists in the Amir's products
+[2024-10-30 15:55:24.720 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: AssignManufacturerProduct] [Arguments: [
+  "ae2d3699-702b-4286-a862-166ca61710d5",
+  "7ce053d4-4d01-4657-b38a-3013096f0021"
+]] [RetrieveData: "The product already exists in the Amir\u0027s products"] Incorrect manufacturer or product ID
+[2024-10-30 15:55:45.920 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: GetManufacturerById] [Arguments: [
+  "ae2d3699-702b-4286-a862-166ca61710d5"
+]] [RetrieveData: null] Attempts to get a manufacturer by ID
+[2024-10-30 15:55:45.929 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByIdAsync] [Arguments: [
+  "ae2d3699-702b-4286-a862-166ca61710d5"
+]] [RetrieveData: null] Attempt to get a manufacturer by ID
+[2024-10-30 15:55:45.934 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "ae2d3699-702b-4286-a862-166ca61710d5",
+  "Products2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Manufacturer by its ID.
+[2024-10-30 15:55:45.938 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByIdAsync] [Arguments: [
+  "ae2d3699-702b-4286-a862-166ca61710d5"
+]] [RetrieveData: {
+  "Id": "ae2d3699-702b-4286-a862-166ca61710d5",
+  "Name": "Amir",
+  "OwnerName": "AmirAmir",
+  "ManufacturerCountry": "AMir",
+  "Email": "amir@gmail.com",
+  "Address": "amirhossein",
+  "PhoneNumber": "998898",
+  "Rate": 3,
+  "EstablishDate": "2024-10-30T12:15:50.593",
+  "Status": true
+}] Manufacturer Found
+[2024-10-30 15:55:45.942 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: GetManufacturerById] [Arguments: [
+  "ae2d3699-702b-4286-a862-166ca61710d5"
+]] [RetrieveData: {
+  "Id": "ae2d3699-702b-4286-a862-166ca61710d5",
+  "Name": "Amir",
+  "OwnerName": "AmirAmir",
+  "ManufacturerCountry": "AMir",
+  "Email": "amir@gmail.com",
+  "Address": "amirhossein",
+  "PhoneNumber": "998898",
+  "Rate": 3,
+  "EstablishDate": "2024-10-30T12:15:50.593",
+  "Status": true,
+  "Products": [
+    {
+      "Name": "PRODUCT1",
+      "Price": 12.00,
+      "Inventory": 8.00,
+      "Dop": "2024-10-20T13:52:33.182",
+      "Doe": "2024-10-20T13:52:33.182",
+      "Status": false
+    }
+  ]
+}] Manufacturer DTO Result
