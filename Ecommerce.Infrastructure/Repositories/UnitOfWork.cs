@@ -1,5 +1,6 @@
 ﻿using Ecommerce.Core.Entities;
 using Ecommerce.Core.Interfaces.RelationRepoInterfaces;
+using Ecommerce.Core.Log;
 using Ecommerce.Infrastructure.Persistence;
 
 namespace Ecommerce.Infrastructure.Repositories;
@@ -115,6 +116,7 @@ public class UnitOfWork : IDisposable
     public async Task SaveAsync()
     {
         await _context.SaveChangesAsync();
+        LoggerHelper.LogWithDetails("Saved Successfully.");
     }
 
     private bool disposed = false;

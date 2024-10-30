@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7OT6JR80EOPh/eljIJLMyVYpZcEGVcYUQBUwxNwCpfJRR/DAljVujvRW5jaXWblW8oxKsvB392vzw30qzP2QxQ==",
+  "dgSpecHash": "dOjnXQG4l/brmWdsjb/mRi5OkgcsdXIi5V1G6B8U+b6osv3iVnAkKLvLdbM+639Tu3ZxfG+tx3baBP28Qaa9wg==",
   "success": true,
   "projectFilePath": "C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.WebAPI\\Ecommerce.WebAPI.csproj",
   "expectedPackageFiles": [
@@ -91,6 +91,8 @@
     "C:\\Users\\AH.Yousefi\\.nuget\\packages\\npgsql.nettopologysuite\\8.0.4\\npgsql.nettopologysuite.8.0.4.nupkg.sha512",
     "C:\\Users\\AH.Yousefi\\.nuget\\packages\\serilog\\4.1.0\\serilog.4.1.0.nupkg.sha512",
     "C:\\Users\\AH.Yousefi\\.nuget\\packages\\serilog.aspnetcore\\8.0.3\\serilog.aspnetcore.8.0.3.nupkg.sha512",
+    "C:\\Users\\AH.Yousefi\\.nuget\\packages\\serilog.enrichers.environment\\3.0.1\\serilog.enrichers.environment.3.0.1.nupkg.sha512",
+    "C:\\Users\\AH.Yousefi\\.nuget\\packages\\serilog.enrichers.thread\\4.0.0\\serilog.enrichers.thread.4.0.0.nupkg.sha512",
     "C:\\Users\\AH.Yousefi\\.nuget\\packages\\serilog.extensions.hosting\\8.0.0\\serilog.extensions.hosting.8.0.0.nupkg.sha512",
     "C:\\Users\\AH.Yousefi\\.nuget\\packages\\serilog.extensions.logging\\8.0.0\\serilog.extensions.logging.8.0.0.nupkg.sha512",
     "C:\\Users\\AH.Yousefi\\.nuget\\packages\\serilog.formatting.compact\\2.0.0\\serilog.formatting.compact.2.0.0.nupkg.sha512",

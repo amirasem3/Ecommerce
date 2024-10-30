@@ -1,11 +1,9 @@
 ﻿using Ecommerce.Application.DTOs.User;
 using Ecommerce.Core.Entities;
+using Ecommerce.Core.Log;
 using Ecommerce.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
-using EcommerceSolution.Logs;
-using Serilog;
-using ILogger = Serilog.ILogger;
+
 
 namespace Ecommerce.Application.Services;
 
@@ -18,45 +16,27 @@ public class UserService
     public const string Location = "UserService";
 
 
-    private readonly LoggerHelper<UserService> _logger;
-
-    public UserService(IPasswordHasher<User> passwordHasher, UnitOfWork unitOfWork, LoggerHelper<UserService> logger)
+    public UserService(IPasswordHasher<User> passwordHasher, UnitOfWork unitOfWork)
     {
         _passwordHasher = passwordHasher;
         _unitOfWork = unitOfWork;
-        _logger = logger;
     }
 
 
     public async Task<UserDto> GetUserByIdAsync(Guid id)
     {
-        _logger.Log(0, "User", 0, input: $"{id}");
-        _logger.Log(0, "User", 4, input: $"{id}", repoFunctionIndex: 0, repoEntity: "User");
+        LoggerHelper.LogWithDetails("Attempting to retrieve user data by Id.", null!, [id]);
         var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
-        _logger.Log(0, "User", 5, output: $"{user}", repoFunctionIndex: 0, repoEntity: "User");
         if (user == null)
         {
-            _logger.Log(0, "User", 7, message: "Unsuccessful Search!", repoEntity: "User",
-                repoFunctionIndex: 0);
-            _logger.Log(0, "User", 7, message: $"User with Id {id} not found.", repoEntity: "User"
-                , repoFunctionIndex: 0);
+            LoggerHelper.LogWithDetails(args: [id], retrievedData: UserException,
+                logLevel: LoggerHelper.LogLevel.Error);
             throw new Exception(UserException);
         }
-
-        _logger.Log(0, "User", 4, input: $"{user.RoleId}", repoFunctionIndex: 0, repoEntity: "Role");
+        LoggerHelper.LogWithDetails($"Attempting to get user({id}) role", args: [user.RoleId]);
         var role = await _unitOfWork.RoleRepository.GetByIdAsync(user.RoleId);
-        _logger.Log(0, "User", 5, output: role.ToString(), repoEntity: "Role");
-        if (role == null)
-        {
-            _logger.Log(0, "User", 7, message: "Unsuccessful Search!", repoEntity: "Role", repoFunctionIndex: 0);
-            _logger.Log(0, "User", 7, message: $"Role with Id {user.RoleId} not found for User ID {user.Id}.",
-                repoEntity: "Role", repoFunctionIndex: 0);
-            throw new Exception(RoleService.RoleException);
-        }
-
-        _logger.Log(0, "User", 2, message: $"User with ID {id} found successfully.");
-        _logger.Log(0, "User", 2, message: $"Output  {FoundUser} {user}");
-
+        LoggerHelper.LogWithDetails("Role found",args:[user.RoleId],retrievedData:role);
+        LoggerHelper.LogWithDetails("User found successfully", args: [id], retrievedData: user);
         return new UserDto
         {
             Id = user.Id,
@@ -73,37 +53,20 @@ public class UserService
 
     public async Task<UserDto> GetUserByUsernameAsync(string username)
     {
-        _logger.Log(1, "User", 0, input: $"{username}");
-        _logger.Log(1, "User", 4, input: $"uniqueProperty: \"Username\",uniquePropertyValue: {username}",
-            repoFunctionIndex: 1, repoEntity: "User");
+        LoggerHelper.LogWithDetails("Attempting to retrieve user data by username.", null!, [username]);
         var user = await _unitOfWork.UserRepository.GetByUniquePropertyAsync(uniqueProperty: "Username",
             uniquePropertyValue: username);
-        _logger.Log(1, "User", 5, output: user.ToString(),
-            repoFunctionIndex: 1, repoEntity: "User");
         if (user == null)
         {
-            _logger.Log(1, "User", 7, message: "Unsuccessful Search!", repoEntity: "User",
-                repoFunctionIndex: 1);
-            _logger.Log(1, "User", 7, message: $" User with Username {username} not found.", repoEntity: "User",
-                repoFunctionIndex: 1);
+            LoggerHelper.LogWithDetails(args: [username], retrievedData: UserException,
+                logLevel: LoggerHelper.LogLevel.Error);
             throw new Exception(UserException);
         }
 
-        _logger.Log(1, "User", 4, input: $"{user.RoleId}", repoFunctionIndex: 0, repoEntity: "Role");
+        LoggerHelper.LogWithDetails($"Attempting to get user({user.Id}) role", args: [user.RoleId]);
         var role = await _unitOfWork.RoleRepository.GetByIdAsync(user.RoleId);
-        _logger.Log(1, "User", 5, output: role.ToString(), repoEntity: "Role");
-        if (role == null)
-        {
-            _logger.Log(1, "User", 7, message: $" Role with RoleID {user.RoleId} not found!", repoEntity: "Role",
-                repoFunctionIndex: 0);
-            _logger.Log(1, "User", 7, message: $"Role with Id {user.RoleId} not found for User ID {user.Id}.",
-                repoEntity: "Role", repoFunctionIndex: 0);
-            throw new Exception(RoleService.RoleException);
-        }
-
-
-        _logger.Log(1, "User", 2, message: $"User with Username {username} found successfully.");
-        _logger.Log(1, "User", 2, message: $"{FoundUser} {user}");
+        LoggerHelper.LogWithDetails($"Role Found", args: [user.RoleId], retrievedData: role);
+        LoggerHelper.LogWithDetails("User found successfully", args: [username], retrievedData: user);
 
         return new UserDto
         {
@@ -121,43 +84,23 @@ public class UserService
 
     public async Task<UserDto> GetUserByEmailAsync(string email)
     {
-        _logger.Log(2, "User", 0, input: $"{email}");
-        _logger.Log(2, "User", 4, input: $"uniqueProperty: \"Email\",uniquePropertyValue: {email}",
-            repoFunctionIndex: 1, repoEntity: "User");
+        LoggerHelper.LogWithDetails("Attempting to get user by Email.", args: [email]);
 
         var user = await _unitOfWork.UserRepository.GetByUniquePropertyAsync(uniqueProperty: "Email",
             uniquePropertyValue: email);
 
-        _logger.Log(2, "User", 5, output: user.ToString(),
-            repoFunctionIndex: 1, repoEntity: "User");
-
         if (user == null)
         {
-            _logger.Log(2, "User", 7, message: "Unsuccessful Search!", repoEntity: "User",
-                repoFunctionIndex: 1);
-            _logger.Log(2, "User", 7, message: $" User with Email {email} not found.", repoEntity: "User",
-                repoFunctionIndex: 1);
+            LoggerHelper.LogWithDetails(args: [email], retrievedData: UserException,
+                logLevel: LoggerHelper.LogLevel.Error);
             throw new Exception(UserException);
         }
 
-        _logger.Log(2, "User", 4, input: $"{user.RoleId}", repoFunctionIndex: 0, repoEntity: "Role");
-
+        LoggerHelper.LogWithDetails($"Attempting to get user({user.Id}) role", args: [user.RoleId]);
         var role = await _unitOfWork.RoleRepository.GetByIdAsync(user.RoleId);
+        LoggerHelper.LogWithDetails("Role Found.", args: [user.RoleId], retrievedData: role);
+        LoggerHelper.LogWithDetails("User found Successfully.", retrievedData: user, args: [email]);
 
-        _logger.Log(2, "User", 5, output: role.ToString(), repoEntity: "Role");
-
-        if (role == null)
-        {
-            _logger.Log(2, "User", 7, message: $" Role with RoleID {user.RoleId} not found!", repoEntity: "Role",
-                repoFunctionIndex: 0);
-            _logger.Log(2, "User", 7, message: $"Role with Id {user.RoleId} not found for User ID {user.Id}.",
-                repoEntity: "Role", repoFunctionIndex: 0);
-            throw new Exception(RoleService.RoleException);
-        }
-
-
-        _logger.Log(2, "User", 2, message: $"User with Email {email} found successfully.");
-        _logger.Log(2, "User", 2, message: $"{FoundUser} {user}");
         return new UserDto
         {
             Id = user.Id,
@@ -174,42 +117,21 @@ public class UserService
 
     public async Task<UserDto> GetUserByPhoneNumberAsync(string phoneNumber)
     {
-        _logger.Log(3, "User", 0, input: $"{phoneNumber}");
-        _logger.Log(3, "User", 4, input: $"uniqueProperty: \"PhoneNumber\",uniquePropertyValue: {phoneNumber}",
-            repoFunctionIndex: 1, repoEntity: "User");
-
+        LoggerHelper.LogWithDetails("Attempting to get user by Phone number.", args: [phoneNumber]);
         var user = await _unitOfWork.UserRepository.GetByUniquePropertyAsync(uniqueProperty: "PhoneNumber",
             uniquePropertyValue: phoneNumber);
 
-        _logger.Log(3, "User", 5, output: user.ToString(),
-            repoFunctionIndex: 1, repoEntity: "User");
         if (user == null)
         {
-            _logger.Log(3, "User", 7, message: "Unsuccessful Search!", repoEntity: "User",
-                repoFunctionIndex: 1);
-            _logger.Log(3, "User", 7, message: $" User with Phone number {phoneNumber} not found.", repoEntity: "User",
-                repoFunctionIndex: 1);
+            LoggerHelper.LogWithDetails(args: [phoneNumber], retrievedData: UserException,
+                logLevel: LoggerHelper.LogLevel.Error);
             throw new Exception(UserException);
         }
 
-        _logger.Log(3, "User", 4, input: $"{user.RoleId}", repoFunctionIndex: 0, repoEntity: "Role");
-
+        LoggerHelper.LogWithDetails($"Attempting to get user({user.Id}) role", args: [user.RoleId]);
         var role = await _unitOfWork.RoleRepository.GetByIdAsync(user.RoleId);
-
-        _logger.Log(3, "User", 5, output: role.ToString(), repoEntity: "Role");
-
-        if (role == null)
-        {
-            _logger.Log(3, "User", 7, message: $" Role with RoleID {user.RoleId} not found!", repoEntity: "Role",
-                repoFunctionIndex: 0);
-            _logger.Log(3, "User", 7, message: $"Role with Id {user.RoleId} not found for User ID {user.Id}.",
-                repoEntity: "Role", repoFunctionIndex: 0);
-            throw new Exception(RoleService.RoleException);
-        }
-
-
-        _logger.Log(3, "User", 2, message: $"User with phone number {phoneNumber} found successfully.");
-        _logger.Log(3, "User", 2, message: $"{FoundUser} {user}");
+        LoggerHelper.LogWithDetails("Role Found", args: [user.RoleId], retrievedData: role);
+        LoggerHelper.LogWithDetails("User found Successfully.", retrievedData: user, args: [phoneNumber]);
         return new UserDto
         {
             Id = user.Id,
@@ -226,24 +148,18 @@ public class UserService
 
     public async Task<UserDto> AddUserAsync(AddUpdateUserDto registerUserDto)
     {
-        _logger.Log(4, "User", 0, input: $"{registerUserDto}");
-        _logger.Log(4, "User", 4, input: $"uniqueProperty: \"Name\",uniquePropertyValue: {registerUserDto.RoleName}",
-            repoFunctionIndex: 1, repoEntity: "Role");
-
+        LoggerHelper.LogWithDetails("Attempting to add new user .", args: [registerUserDto]);
+        LoggerHelper.LogWithDetails($"Check existence of {registerUserDto.RoleName}");
         var userRole = await _unitOfWork.RoleRepository.GetByUniquePropertyAsync(uniqueProperty: "Name",
             uniquePropertyValue: registerUserDto.RoleName);
-
-        _logger.Log(4, "User", 5, output: userRole.ToString(),
-            repoFunctionIndex: 1, repoEntity: "Role");
         if (userRole == null)
         {
-            _logger.Log(4, "User", 7, message: "Unsuccessful Add.", repoEntity: "Role",
-                repoFunctionIndex: 1);
-            _logger.Log(4, "User", 7, message: $"Role with name {registerUserDto.RoleName} not found!",
-                repoEntity: "Role",
-                repoFunctionIndex: 1);
+            LoggerHelper.LogWithDetails(args: [registerUserDto.RoleName], retrievedData: RoleService.RoleException,
+                logLevel: LoggerHelper.LogLevel.Error);
             throw new Exception(RoleService.RoleException);
         }
+
+        LoggerHelper.LogWithDetails($"{registerUserDto.RoleName} exists.", retrievedData: userRole);
 
         var user = new User
         {
@@ -257,12 +173,12 @@ public class UserService
         };
         user.PasswordHash = _passwordHasher.HashPassword(user, registerUserDto.Password);
 
-        _logger.Log(4, "User", 2, message: $"New User created: {user}");
+        LoggerHelper.LogWithDetails("New User Created Successfully.", args: [registerUserDto], retrievedData: user);
 
         await _unitOfWork.UserRepository.InsertAsync(user);
         await _unitOfWork.SaveAsync();
+        LoggerHelper.LogWithDetails("User Saved Successfully", retrievedData: user);
 
-        _logger.Log(4, "User", 2, message: "The user Added successfully.");
         return new UserDto
         {
             Id = user.Id,
@@ -280,40 +196,29 @@ public class UserService
 
     public async Task<UserDto> UpdateUserAsync(Guid id, AddUpdateUserDto updateUserDto)
     {
-        _logger.Log(5, "User", 0, input: $"{updateUserDto}");
-        _logger.Log(5, "User", 4, input: $"{id}",
-            repoFunctionIndex: 0, repoEntity: "User");
-
+        LoggerHelper.LogWithDetails("Attempt to Update an user.", args: [id, updateUserDto]);
+        LoggerHelper.LogWithDetails("Check existence of the User", args: [id]);
         var targetUser = await _unitOfWork.UserRepository.GetByIdAsync(id);
-
-        _logger.Log(5, "User", 5, output: $"{targetUser}",
-            repoFunctionIndex: 0, repoEntity: "User");
-
 
         if (targetUser == null)
         {
-            _logger.Log(5, "User", 7, message: "Unsuccessful Update!", repoEntity: "User",
-                repoFunctionIndex: 0);
-            _logger.Log(5, "User", 7, message: $" User with ID {id} not found.", repoEntity: "User",
-                repoFunctionIndex: 0);
+            LoggerHelper.LogWithDetails(args: [id], retrievedData: UserException,
+                logLevel: LoggerHelper.LogLevel.Error);
             throw new Exception(UserException);
         }
 
-        _logger.Log(5, "User", 4, input: $"uniqueProperty: \"Name\",uniquePropertyValue: {updateUserDto.RoleName}",
-            repoFunctionIndex: 1, repoEntity: "Role");
+        LoggerHelper.LogWithDetails("User exists", args: [id], retrievedData: targetUser);
+        LoggerHelper.LogWithDetails("Check existence of new the Role.", args: [updateUserDto.RoleName]);
         var targetRole = await _unitOfWork.RoleRepository.GetByUniquePropertyAsync(uniqueProperty: "Name",
             uniquePropertyValue: updateUserDto.RoleName);
-
-        _logger.Log(5, "User", 5, output: $"{targetRole}",
-            repoFunctionIndex: 1, repoEntity: "Role");
-
         if (targetRole == null)
         {
-            _logger.Log(5, "User", 7, message: $" Role with RoleID {targetUser.RoleId} not found!", repoEntity: "Role",
-                repoFunctionIndex: 1);
-            _logger.Log(5, "User", 3, message: $"Role with name {updateUserDto.RoleName} not found!");
+            LoggerHelper.LogWithDetails(args: [updateUserDto.RoleName], retrievedData: RoleService.RoleException,
+                logLevel: LoggerHelper.LogLevel.Error);
             throw new Exception(RoleService.RoleException);
         }
+
+        LoggerHelper.LogWithDetails("Role exists", args: [updateUserDto.RoleName], retrievedData: targetRole);
 
         targetUser.FirstName = updateUserDto.FirstName;
         targetUser.LastName = updateUserDto.LastName;
@@ -324,12 +229,10 @@ public class UserService
         targetUser.RoleId = targetRole.Id;
 
 
-        _logger.Log(5, "User", 2, message: $"Updated User {id} data : {targetUser}");
-
         _unitOfWork.UserRepository.Update(targetUser);
         await _unitOfWork.SaveAsync();
 
-        _logger.Log(5, "User", 2, message: $"The User with Id {id} updated successfully.");
+        LoggerHelper.LogWithDetails("User Updated Successfully.", args: [id, updateUserDto], retrievedData: targetUser);
 
         return new UserDto
         {
@@ -347,64 +250,50 @@ public class UserService
 
     public async Task<bool> DeleteUserAsync(Guid id)
     {
-        _logger.Log(6, "User", 0, input: $"{id}");
-        _logger.Log(6, "User", 4, input: $"{id}",
-            repoFunctionIndex: 0, repoEntity: "User");
-
+        LoggerHelper.LogWithDetails("Attempt to Delete an user by ID.", args: [id]);
+        LoggerHelper.LogWithDetails("Checking existence of the user.", args: [id]);
         var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
-
-
-        _logger.Log(6, "User", 5, output: $"{user}",
-            repoFunctionIndex: 0, repoEntity: "User");
-
-
         if (user == null)
         {
-            _logger.Log(6, "User", 7, message: "Unsuccessful Delete!", repoEntity: "User",
-                repoFunctionIndex: 0);
-            _logger.Log(6, "User", 7, message: $" User with ID {id} not found.", repoEntity: "User",
-                repoFunctionIndex: 0);
+            LoggerHelper.LogWithDetails(args: [id], retrievedData: UserException,
+                logLevel: LoggerHelper.LogLevel.Error);
             throw new Exception(UserException);
         }
 
-
-        _logger.Log(6, "User", 2, message: $"{FoundUser} {user}");
-
+        LoggerHelper.LogWithDetails("User exists", args: [id], retrievedData: user);
 
         await _unitOfWork.UserRepository.DeleteByIdAsync(id);
         await _unitOfWork.SaveAsync();
 
-        _logger.Log(6, "User", 2, message: $"User with ID {id} deleted Successfully.");
+        LoggerHelper.LogWithDetails("User Deleted successfully.", args: [id], retrievedData: user);
         return true;
     }
 
     public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
     {
-        _logger.Log(7, "User", 0);
-        _logger.Log(7, "User", 4, repoFunctionIndex: 2, repoEntity: "User");
+        LoggerHelper.LogWithDetails("Attempt to get all Users.");
 
         var users = await _unitOfWork.UserRepository.GetAsync();
 
-        _logger.Log(7, "User", 5, repoFunctionIndex: 2, repoEntity: "User");
         if (users == null)
         {
-            _logger.Log(7, "User", 7, message: "There is no User.", repoEntity: "User");
-            throw new Exception("There is no User");
+            LoggerHelper.LogWithDetails(message: "User table is empty.", retrievedData: UserException,
+                logLevel: LoggerHelper.LogLevel.Error);
+            throw new Exception("There are no Users");
         }
 
 
-        _logger.Log(7, "User", 4, repoFunctionIndex: 2, repoEntity: "Role");
-
+        LoggerHelper.LogWithDetails("Attempt to get all users' role names");
         var roles = await _unitOfWork.RoleRepository.GetAsync();
-        _logger.Log(7, "User", 5, repoFunctionIndex: 2, repoEntity: "Role");
         if (roles == null)
         {
-            _logger.Log(7, "User", 7, message: "There is no Role.", repoEntity: "Role");
-            throw new Exception("There is no roles.");
+            LoggerHelper.LogWithDetails(message: "Role table is empty.", retrievedData: RoleService.RoleException,
+                logLevel: LoggerHelper.LogLevel.Error);
+            throw new Exception("There are no roles.");
         }
 
-
-        _logger.Log(7, "User", 2, message: "All users retrieved successfully.");
+        LoggerHelper.LogWithDetails("Roles retrieved Successfully", retrievedData: roles);
+        LoggerHelper.LogWithDetails("Users Retrieved Successfully", retrievedData: users);
         return users.Select(user => new UserDto()
         {
             Id = user.Id,
@@ -421,31 +310,24 @@ public class UserService
 
     public async Task<IEnumerable<UserDto>> GetAllUsersByNameAsync(string name)
     {
-        _logger.Log(8, "User", 0, input: $"{name}");
-        _logger.Log(8, "User", 4, repoFunctionIndex: 2, repoEntity: "User",
-            input: $"filter: user => user.FirstName.Contains({name})");
-
+        string searchTerm = name;
+        LoggerHelper.LogWithDetails("Attempt to search users by its Name", args: [searchTerm]);
         var users = await _unitOfWork.UserRepository.GetAsync(filter: user => user.FirstName.Contains(name));
-        
-        
-        _logger.Log(8, "User", 5, repoFunctionIndex: 2, repoEntity: "User",
-            output: $"All users, have {name} in their firstnames, fetched successfully.");
-        
+
         if (users == null)
         {
-            _logger.Log(8,"User",3,message:"There is no user.");
+            LoggerHelper.LogWithDetails(message: "User table is empty or there is no user with this name", args: [searchTerm],
+                retrievedData: UserException,
+                logLevel: LoggerHelper.LogLevel.Error);
             throw new Exception("There is no User!");
         }
 
-        _logger.Log(8, "User", 4, repoFunctionIndex: 2, repoEntity: "Role");
-        
+        LoggerHelper.LogWithDetails("Attempt to get all users' role names");
         var roles = await _unitOfWork.RoleRepository.GetAsync();
-        
-        _logger.Log(8, "User", 5, repoFunctionIndex: 2, repoEntity: "Role",
-            output: "All roles fetched successfully.");
-      
-        _logger.Log(8, "User",2,message:$"All users, have {name} in their firstnames, retrieved successfully.");
-   
+
+        LoggerHelper.LogWithDetails("Roles retrieved Successfully", retrievedData: roles);
+        LoggerHelper.LogWithDetails("Users Retrieved Successfully", retrievedData: users);
+
         return users.Select(user => new UserDto
         {
             Id = user.Id,
@@ -462,35 +344,34 @@ public class UserService
 
     public async Task<IEnumerable<UserDto>> GetUserByRoleAsync(string roleName)
     {
-        
-        _logger.Log(9, "User", 0, input: $"{roleName}");
-        _logger.Log(9, "User", 4, repoFunctionIndex: 1, repoEntity: "Role",
-            input: $"uniqueProperty: \"Name\",uniquePropertyValue: {roleName}");
-        
+        LoggerHelper.LogWithDetails("Attempt to get users by role name.", args: [roleName]);
+        LoggerHelper.LogWithDetails("Check the role name existence", args: [roleName]);
         var role = await _unitOfWork.RoleRepository.GetByUniquePropertyAsync(uniqueProperty: "Name",
             uniquePropertyValue: roleName);
-        
-        _logger.Log(9, "User", 5, repoFunctionIndex: 1, repoEntity: "Role",
-            output: $"{role}");
-        
-        
-        _logger.Log(9, "User", 4, repoFunctionIndex: 2, repoEntity: "User",
-            input: $"filter: user => user.RoleId == role.Id");
-        
+
+        if (role == null)
+        {
+            LoggerHelper.LogWithDetails("There is no role with this name.", args: [roleName],
+                retrievedData: RoleService.RoleException, logLevel: LoggerHelper.LogLevel.Error);
+            throw new Exception(RoleService.RoleException);
+        }
+
+        LoggerHelper.LogWithDetails("Role exists", args: [roleName], retrievedData: role);
+        LoggerHelper.LogWithDetails("Attempt to filter users by this role name", args: [roleName]);
         var users = await _unitOfWork.UserRepository.GetAsync(filter: user => user.RoleId == role.Id);
-        
-        _logger.Log(9, "User", 5, repoFunctionIndex: 2, repoEntity: "User",
-            output: $"All User fetched that have the condition");
+
         if (users == null)
         {
-            _logger.Log(9, "User", 3,message:"Users Not Found!");
+            LoggerHelper.LogWithDetails("There is no user with this role name.", args: [roleName],
+                retrievedData: UserException,
+                logLevel: LoggerHelper.LogLevel.Error);
             throw new Exception("Users Not Found!");
         }
 
-        _logger.Log(9, "User", 4, repoFunctionIndex: 2, repoEntity: "Role");
         var roles = await _unitOfWork.RoleRepository.GetAsync();
-        _logger.Log(9, "User", 5, repoFunctionIndex: 2, repoEntity: "Role",
-            output:"All roles fetched");
+
+        LoggerHelper.LogWithDetails($"Users which have role named {roleName} successfully found.", args: [roleName],
+            retrievedData: users);
 
         return users.Select(user => new UserDto
         {
@@ -509,25 +390,34 @@ public class UserService
 
     public async Task<UserDto> AuthenticateUserAsync(string username, string password)
     {
+        LoggerHelper.LogWithDetails("Attempt to authenticate an user", args: [username, password]);
+        LoggerHelper.LogWithDetails("Check the user existence", args: [username]);
         var user = await _unitOfWork.UserRepository.GetByUniquePropertyAsync(uniqueProperty: "Username",
             uniquePropertyValue: username);
         if (user == null)
         {
+            LoggerHelper.LogWithDetails("Incorrect username.", args: [username], retrievedData: UserException,
+                logLevel: LoggerHelper.LogLevel.Error);
             throw new Exception("Incorrect Username!");
         }
 
+        LoggerHelper.LogWithDetails("User exists", args: [username], retrievedData: user);
         var role = await _unitOfWork.RoleRepository.GetByIdAsync(user.RoleId);
         if (role == null)
         {
             throw new Exception(user.RoleId.ToString());
         }
 
-
+        LoggerHelper.LogWithDetails("Attempt to verify the password", args: [password]);
         var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password);
         if (result == PasswordVerificationResult.Failed)
         {
+            LoggerHelper.LogWithDetails("Incorrect Password!", args: [password], logLevel: LoggerHelper.LogLevel.Error);
             throw new Exception("Incorrect Password!");
         }
+
+        LoggerHelper.LogWithDetails("User authenticated successfully.", args: [username, password],
+            retrievedData: user);
 
         return new UserDto
         {

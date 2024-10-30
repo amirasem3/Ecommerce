@@ -9,9 +9,9 @@ using Ecommerce.Application.Services;
 using Ecommerce.Core.Entities;
 using Ecommerce.Core.Interfaces;
 using Ecommerce.Core.Interfaces.RelationRepoInterfaces;
+using Ecommerce.Core.Log;
 using Ecommerce.Infrastructure.Persistence;
 using Ecommerce.Infrastructure.Repositories;
-using EcommerceSolution.Logs;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
@@ -27,14 +27,15 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
 Log.Logger = new LoggerConfiguration()
+    .Enrich.FromLogContext()
+    .Enrich.WithMachineName()
     .MinimumLevel.Information() // Set global minimum log level
     .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning) // Suppress framework logs
     .MinimumLevel.Override("System", Serilog.Events.LogEventLevel.Warning)    
-    .WriteTo.Console(outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}] [{Level}] {Message:lj}{NewLine}{Exception}")
+    .WriteTo.Console(outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}] [{Level}] [Machine: {MachineName}] [ClassName: {ClassName}] [FunctionName: {FunctionName}] [Arguments: {Arguments}] [RetrieveData: {RetrieveData}] {Message:lj}{NewLine}{Exception}")
     .WriteTo.File("Logs/log.txt",
         rollingInterval: RollingInterval.Day,
-        outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}] [{Level}] {Message:lj}{NewLine}{Exception}")
-    .Enrich.FromLogContext()
+        outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}] [{Level}] [Machine: {MachineName}] [ClassName: {ClassName}] [FunctionName: {FunctionName}] [Arguments: {Arguments}] [RetrieveData: {RetrieveData}] {Message:lj}{NewLine}{Exception}")
     .CreateLogger();
 
 builder.Host.UseSerilog();
@@ -43,7 +44,8 @@ builder.Host.UseSerilog();
 
 try
 {
-    Log.Information("Starting up the application {Date}", DateTime.Now);
+    // Log.Information("Starting up the application");
+    LoggerHelper.LogWithDetails("Starting up the application",logLevel:LoggerHelper.LogLevel.Information);
     builder.Services.AddControllersWithViews();
     builder.Services.AddMvcCore();
     builder.Services.AddMvc();
@@ -96,7 +98,7 @@ try
 
     builder.Services.AddScoped<UnitOfWork>();
     builder.Services.AddScoped(typeof(GenericRepository<>));
-
+    builder.Services.AddScoped<LoggerHelper>();
     builder.Services.AddScoped<ProductService>();
     builder.Services.AddScoped<RoleService>();
     builder.Services.AddScoped<UserService>();
@@ -104,7 +106,6 @@ try
     builder.Services.AddScoped<ManufacturerService>();
     builder.Services.AddScoped<CategoryServices>();
     builder.Services.AddScoped<InvoiceServices>();
-    builder.Services.AddScoped(typeof(LoggerHelper<>));
     builder.Services.AddScoped<RoleService>();
     builder.Services.AddScoped<IModelBinder, RoleModelBinder>();
     builder.Services.AddScoped<RoleModelBinderProvider>();

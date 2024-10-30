@@ -1,5 +1,6 @@
 ﻿using Ecommerce.Application.DTOs.User;
 using Ecommerce.Application.Services;
+using Ecommerce.Core.Log;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -14,13 +15,10 @@ namespace EcommerceSolution.Controller;
 public class UserController : ControllerBase
 {
     private readonly UserService _userServices;
-    private readonly ILogger<UserController> _logger;
-    private const string UserControllerString = "User Controller";
 
-    public UserController(UserService userServices, ILogger<UserController> logger)
+    public UserController(UserService userServices)
     {
         _userServices = userServices;
-        _logger = logger;
     }
 
     [HttpGet("GetUserById/{userId}")]
@@ -28,18 +26,15 @@ public class UserController : ControllerBase
     {
         try
         {
-            _logger.LogInformation("({UserController}Call GetUserById ({Id})", UserControllerString, userId);
-            _logger.LogInformation("{UserController} Call {UserService}'s GetUserByIdAsync.", UserControllerString,
-                UserService.Location);
+            LoggerHelper.LogWithDetails(args: [userId], logLevel: LoggerHelper.LogLevel.Information);
             var user = await _userServices.GetUserByIdAsync(userId);
-            _logger.LogInformation("{UserController} {FoundUser} {User}", UserControllerString, UserService.FoundUser,
-                user.ToString());
+            LoggerHelper.LogWithDetails("User DTO Result", args: [userId], retrievedData: user);
             return Ok(user);
         }
         catch (Exception e)
         {
-            _logger.LogError("{UserController}: {FunctionName} :  Exception : {ExceptionMessage}", UserControllerString,
-                "GetUserById", e.Message);
+            LoggerHelper.LogWithDetails("Wrong User ID.", args: [userId], retrievedData: e,
+                logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
     }
@@ -49,19 +44,15 @@ public class UserController : ControllerBase
     {
         try
         {
-            _logger.LogInformation("({UserController}Call GetUserByUsername ({Username})", UserControllerString,
-                username);
-            _logger.LogInformation("{UserController} Call {UserService}'s GetUserByUsernameAsync.",
-                UserControllerString, UserService.Location);
+            LoggerHelper.LogWithDetails(args: [username], logLevel: LoggerHelper.LogLevel.Information);
             var user = await _userServices.GetUserByUsernameAsync(username);
-            _logger.LogInformation("{UserController} {FoundUser} {User}", UserControllerString, UserService.FoundUser,
-                user.ToString());
+            LoggerHelper.LogWithDetails("User DTO Result", args: [username], retrievedData: user);
             return Ok(user);
         }
         catch (Exception e)
         {
-            _logger.LogError("{UserController}: {FunctionName} :  Exception : {ExceptionMessage}", UserControllerString,
-                "GetUserByUsername", e.Message);
+            LoggerHelper.LogWithDetails("Wrong User Username.", args: [username], retrievedData: e,
+                logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
     }
@@ -71,18 +62,15 @@ public class UserController : ControllerBase
     {
         try
         {
-            _logger.LogInformation("({UserController}Call GetUserByEmail ({Email})", UserControllerString, email);
-            _logger.LogInformation("{UserController} Call {UserService}'s GetUserByEmailAsync.", UserControllerString,
-                UserService.Location);
+            LoggerHelper.LogWithDetails(args: [email], logLevel: LoggerHelper.LogLevel.Information);
             var user = await _userServices.GetUserByEmailAsync(email);
-            _logger.LogInformation("{UserController} {FoundUser} {User}", UserControllerString, UserService.FoundUser,
-                user.ToString());
+            LoggerHelper.LogWithDetails("User DTO Result", args: [email], retrievedData: user);
             return Ok(user);
         }
         catch (Exception e)
         {
-            _logger.LogError("{UserController}: {FunctionName} :  Exception : {ExceptionMessage}", UserControllerString,
-                "GetUserByEmail", e.Message);
+            LoggerHelper.LogWithDetails("Wrong User Email.", args: [email], retrievedData: e,
+                logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
     }
@@ -92,19 +80,15 @@ public class UserController : ControllerBase
     {
         try
         {
-            _logger.LogInformation("({UserController}Call GetUserByPhoneNumber ({PhoneNumber})", UserControllerString,
-                phoneNumber);
-            _logger.LogInformation("{UserController} Call {UserService}'s GetUserByPhoneNumberAsync.",
-                UserControllerString, UserService.Location);
+            LoggerHelper.LogWithDetails(args: [phoneNumber], logLevel: LoggerHelper.LogLevel.Information);
             var user = await _userServices.GetUserByPhoneNumberAsync(phoneNumber);
-            _logger.LogInformation("{UserController} {FoundUser} {User}", UserControllerString, UserService.FoundUser,
-                user.ToString());
+            LoggerHelper.LogWithDetails("User DTO Result", args: [phoneNumber], retrievedData: user);
             return Ok(user);
         }
         catch (Exception e)
         {
-            _logger.LogError("{UserController}: {FunctionName} :  Exception : {ExceptionMessage}", UserControllerString,
-                "GetUserByPhoneNumber", e.Message);
+            LoggerHelper.LogWithDetails("Wrong User Phone Number.", args: [phoneNumber], retrievedData: e,
+                logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
     }
@@ -112,19 +96,16 @@ public class UserController : ControllerBase
     [HttpGet("GetAllUsers")]
     public async Task<IActionResult> GetAllUsers()
     {
+        LoggerHelper.LogWithDetails("Attempt to get all users.");
         try
         {
-            _logger.LogInformation("({UserController}Call GetAllUsers)", UserControllerString);
-            _logger.LogInformation("{UserController} Call {UserService}'s GetAllUsersAsync.", UserControllerString,
-                UserService.Location);
             var users = await _userServices.GetAllUsersAsync();
-            _logger.LogInformation("All user retrieved successfully.");
+            LoggerHelper.LogWithDetails("All Users", retrievedData: users);
             return Ok(users);
         }
         catch (Exception e)
         {
-            _logger.LogError("{UserController}: {FunctionName} :  Exception : {ExceptionMessage}", UserControllerString,
-                "GetAllUsers", e.Message);
+            LoggerHelper.LogWithDetails("Unexpected Errors", retrievedData: e);
             return NotFound(e.Message);
         }
     }
@@ -132,19 +113,18 @@ public class UserController : ControllerBase
     [HttpGet("SearchUserName")]
     public async Task<IActionResult> SearchUserByName([FromQuery] string name)
     {
+        LoggerHelper.LogWithDetails("Attempt to search users by name", args: [name]);
         try
         {
-            _logger.LogInformation("({UserController}Call SearchUserByName({Name})", UserControllerString, name);
-            _logger.LogInformation("{UserController} Call {UserService}'s GetAllUsersByNameAsync.",
-                UserControllerString, UserService.Location);
             var users = await _userServices.GetAllUsersByNameAsync(name);
-            _logger.LogInformation("All users,have {Name} in their firstnames., found successfully", name);
+            LoggerHelper.LogWithDetails($"All users which have this name in their firstnames found successfully.",
+                retrievedData: users
+                , args: [name]);
             return Ok(users);
         }
         catch (Exception e)
         {
-            _logger.LogError("{UserController}: {FunctionName} :  Exception : {ExceptionMessage}", UserControllerString,
-                "SearchUserByName", e.Message);
+            LoggerHelper.LogWithDetails("Unexpected Errors", args: [name], retrievedData: e);
             return NotFound(e.Message);
         }
     }
@@ -152,20 +132,17 @@ public class UserController : ControllerBase
     [HttpGet("GetUserByRole/{roleName}")]
     public async Task<IActionResult> GetUserByRoleName(string roleName)
     {
+        LoggerHelper.LogWithDetails("Attempt to search users by role name", args: [roleName]);
         try
         {
-            _logger.LogInformation("({UserController}Call GetUserByRoleName({RoleName})", UserControllerString,
-                roleName);
-            _logger.LogInformation("{UserController} Call {UserService}'s GetUserByRoleAsync.", UserControllerString,
-                UserService.Location);
             var users = await _userServices.GetUserByRoleAsync(roleName);
-            _logger.LogInformation("All users,have {RoleName} in their RoleNames., found successfully", roleName);
+            LoggerHelper.LogWithDetails($"All users which have role named {roleName} found successfully.",
+                args: [roleName], retrievedData: users);
             return Ok(users);
         }
         catch (Exception e)
         {
-            _logger.LogError("{UserController}: {FunctionName} :  Exception : {ExceptionMessage}", UserControllerString,
-                "GetUserByRoleName", e.Message);
+            LoggerHelper.LogWithDetails("Wrong Role Name.", args: [roleName], retrievedData: e);
             return NotFound(e.Message);
         }
     }
@@ -175,31 +152,25 @@ public class UserController : ControllerBase
     [Consumes("application/json")]
     public async Task<IActionResult> AddUser([FromBody] AddUpdateUserDto userDto)
     {
-        _logger.LogInformation("({UserController}Call AddUser({NewUserInfo})", UserControllerString,
-            userDto.ToString());
+        LoggerHelper.LogWithDetails("Attempt to SignUp an user.", args: [userDto]);
         if (!ModelState.IsValid)
         {
-            var errors = string.Join("\n, ", ModelState["User"]!.Errors.Select(e => e.ErrorMessage));
-
-            _logger.LogError("{UserController}:{FunctionName}: Binding Error: {BindingError}", UserControllerString,
-                "AddUser", errors);
-
+            LoggerHelper.LogWithDetails("Binding Errors.", args: [userDto],
+                retrievedData: ModelState["User"]!.Errors.Select(e => e.ErrorMessage),
+                logLevel: LoggerHelper.LogLevel.Error);
             return BadRequest(ModelState["User"]!.Errors.Select(e => e.ErrorMessage));
         }
 
         try
         {
-            _logger.LogInformation("{UserController} Call {UserService}'s AddUserAsync.", UserControllerString,
-                UserService.Location);
             var user = await _userServices.AddUserAsync(userDto);
-            _logger.LogInformation("{UserController} {FoundUser} {User}", UserControllerString, UserService.FoundUser,
-                user.ToString());
+            LoggerHelper.LogWithDetails("User DTO Result", args: [userDto], retrievedData: user);
             return Ok(user);
         }
         catch (Exception e)
         {
-            _logger.LogError("{UserController}: {FunctionName} :  Exception : {ExceptionMessage}", UserControllerString,
-                "AddUser", e.Message);
+            LoggerHelper.LogWithDetails("Wrong User Data.", args: [userDto], retrievedData: e,
+                logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
     }
@@ -207,21 +178,17 @@ public class UserController : ControllerBase
     [HttpPost("Login")]
     public async Task<IActionResult> LoginUser([FromQuery] LoginUserDto loginRequestDto)
     {
-        _logger.LogInformation("({UserController} : Login({NewUserInfo})", UserControllerString,
-            loginRequestDto.ToString());
+        LoggerHelper.LogWithDetails("Attempts to Login.", args: [loginRequestDto]);
         try
         {
-            _logger.LogInformation("{UserController} Call {UserService}'s AuthenticateUserAsync.", UserControllerString,
-                UserService.Location);
             var user = await _userServices.AuthenticateUserAsync(loginRequestDto.Username, loginRequestDto.Password);
-            _logger.LogInformation("{UserController} {FoundUser} {User}", UserControllerString, UserService.FoundUser,
-                user.ToString());
+            LoggerHelper.LogWithDetails("Successful Login.", args: [loginRequestDto], retrievedData: user);
             return Ok(user);
         }
         catch (Exception e)
         {
-            _logger.LogError("{UserController}: {FunctionName} :  Exception : {ExceptionMessage}", UserControllerString,
-                "Login", e.Message);
+            LoggerHelper.LogWithDetails("Incorrect Username or Password!", args: [loginRequestDto], retrievedData: e,
+                logLevel: LoggerHelper.LogLevel.Error);
             return Unauthorized(e.Message);
         }
     }
@@ -230,33 +197,26 @@ public class UserController : ControllerBase
     [Consumes("application/json")]
     public async Task<IActionResult> UpdateUser(Guid userId, [FromBody] AddUpdateUserDto updateUserDto)
     {
-        
-        _logger.LogInformation("({UserController} : Update({UpdateUserInfo})", UserControllerString,
-            updateUserDto.ToString());
+        LoggerHelper.LogWithDetails("Attempt to Update an user.", args: [updateUserDto]);
+
         if (!ModelState.IsValid)
         {
-            
-            var errors = string.Join("\n, ", ModelState["User"]!.Errors.Select(e => e.ErrorMessage));
-
-            _logger.LogError("{UserController}:{FunctionName}: Binding Error: {BindingError}", UserControllerString,
-                "UpdateUser", errors);
+            LoggerHelper.LogWithDetails("Binding Errors.", args: [updateUserDto],
+                retrievedData: ModelState["User"]!.Errors.Select(e => e.ErrorMessage),
+                logLevel: LoggerHelper.LogLevel.Error);
             return BadRequest(ModelState["User"]!.Errors.Select(e => e.ErrorMessage));
         }
 
         try
         {
-            _logger.LogInformation("{UserController} Call {UserService}'s UpdateUserAsync.", UserControllerString,
-                UserService.Location);
             var user = await _userServices.UpdateUserAsync(userId, updateUserDto);
-            _logger.LogInformation("{UserController} {FoundUser} {User}", UserControllerString, UserService.FoundUser,
-                user.ToString());
+            LoggerHelper.LogWithDetails("User DTO Result", args: [userId, updateUserDto], retrievedData: user);
             return Ok(user);
         }
         catch (Exception e)
         {
-            
-            _logger.LogError("{UserController}: {FunctionName} :  Exception : {ExceptionMessage}", UserControllerString,
-                "UpdateUser", e.Message);
+            LoggerHelper.LogWithDetails("Wrong User Data.", args: [userId, updateUserDto], retrievedData: e,
+                logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e);
         }
     }
@@ -265,20 +225,17 @@ public class UserController : ControllerBase
     [HttpDelete("DeleteUser/{userId}")]
     public async Task<IActionResult> DeleteUser(Guid userId)
     {
-        _logger.LogInformation("({UserController} : DeleteUser({UserId})", UserControllerString,
-            userId);
+        LoggerHelper.LogWithDetails("Attempt to Delete an User.", args: [userId]);
         try
         {
-            _logger.LogInformation("{UserController} Call {UserService}'s DeleteUserAsync.", UserControllerString,
-                UserService.Location);
             await _userServices.DeleteUserAsync(userId);
-            _logger.LogInformation("The user with Id ({UserId}) is successfully deleted.", userId);
+            LoggerHelper.LogWithDetails($"The user with ID {userId} is Successfully Deleted.", args: [userId]);
             return Ok($"The user with Id ({userId}) is successfully deleted.");
         }
         catch (Exception e)
         {
-            _logger.LogError("{UserController}: {FunctionName} :  Exception : {ExceptionMessage}", UserControllerString,
-                "DeleteUser", e.Message);
+            LoggerHelper.LogWithDetails("Wrong User ID.", args: [userId], retrievedData: e,
+                logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
     }
