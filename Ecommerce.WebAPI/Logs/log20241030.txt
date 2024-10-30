@@ -733,3 +733,1922 @@ LIMIT 1
 [2024-10-30 13:10:09.941 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: DeleteUserAsync] [Arguments: ["1ac007ac-cf10-4dd8-bdbd-3f9c4cdf0c6e"]] [RetrieveData: {"Id":"1ac007ac-cf10-4dd8-bdbd-3f9c4cdf0c6e","FirstName":"testupdate","LastName":"testupdate","Username":"testupdate","PasswordHash":"AQAAAAIAAYagAAAAELo7q/1hPQPfQg6x5sT5Ts4BVN88jDRHZiXy9SDb/+nA51AML1A1t87MoepnmABEtw==","Email":"testupdate@gmail.com","PhoneNumber":"22324332","RoleId":"04d513b8-e7b4-4538-9f61-be3e56b5b59d"}] User Deleted successfully.
 [2024-10-30 13:10:09.942 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserController] [FunctionName: DeleteUser] [Arguments: ["1ac007ac-cf10-4dd8-bdbd-3f9c4cdf0c6e"]] [RetrieveData: null] The user with ID 1ac007ac-cf10-4dd8-bdbd-3f9c4cdf0c6e is Successfully Deleted.
 [2024-10-30 13:35:55.120 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: Program] [FunctionName: <Main>$] [Arguments: null] [RetrieveData: null] Starting up the application
+[2024-10-30 13:36:11.338 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleController] [FunctionName: GetAllRoles] [Arguments: null] [RetrieveData: null] Attempt to get all the roles.
+[2024-10-30 13:36:12.220 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [null,""]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Role with filter 
+[2024-10-30 13:36:20.228 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: GetAllRolesAsync] [Arguments: null] [RetrieveData: [{"Id":"5c03a6cb-f544-4de7-bbeb-d5e771dd1444","Name":"admin"},{"Id":"04d513b8-e7b4-4538-9f61-be3e56b5b59d","Name":"Manufacturer"}]] All Roles retrieved successfully.
+[2024-10-30 13:36:20.234 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleController] [FunctionName: GetAllRoles] [Arguments: null] [RetrieveData: [{"Id":"5c03a6cb-f544-4de7-bbeb-d5e771dd1444","Name":"admin"},{"Id":"04d513b8-e7b4-4538-9f61-be3e56b5b59d","Name":"Manufacturer"}]] All Roles
+[2024-10-30 13:36:42.173 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleController] [FunctionName: GetRoleById] [Arguments: ["5c03a6cb-f544-4de7-bbeb-d5e771dd1443"]] [RetrieveData: null] Attempt to get a role by ID.
+[2024-10-30 13:36:42.179 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: GetRoleByIdAsync] [Arguments: ["5c03a6cb-f544-4de7-bbeb-d5e771dd1443"]] [RetrieveData: null] Attempt to get a role by ID.
+[2024-10-30 13:36:42.231 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: ["5c03a6cb-f544-4de7-bbeb-d5e771dd1443",""]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Role by its ID.
+[2024-10-30 13:36:42.357 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: GetRoleByIdAsync] [Arguments: ["5c03a6cb-f544-4de7-bbeb-d5e771dd1443"]] [RetrieveData: "Role Not Found!"] 
+[2024-10-30 13:36:42.375 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: RoleController] [FunctionName: GetRoleById] [Arguments: ["5c03a6cb-f544-4de7-bbeb-d5e771dd1443"]] [RetrieveData: {"ClassName":"System.Exception","Message":"Role Not Found!","Data":null,"InnerException":null,"HelpURL":null,"StackTraceString":"   at Ecommerce.Application.Services.RoleService.GetRoleByIdAsync(Guid id) in C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Application\\Services\\RoleService.cs:line 28\r\n   at EcommerceSolution.Controller.RoleController.GetRoleById(Guid id) in C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.WebAPI\\Controller\\RoleController.cs:line 32","RemoteStackTraceString":null,"RemoteStackIndex":0,"ExceptionMethod":null,"HResult":-2146233088,"Source":"Ecommerce.Application","WatsonBuckets":null}] Wrong Role ID
+[2024-10-30 13:36:51.541 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleController] [FunctionName: GetRoleById] [Arguments: ["5c03a6cb-f544-4de7-bbeb-d5e771dd1444"]] [RetrieveData: null] Attempt to get a role by ID.
+[2024-10-30 13:36:51.545 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: GetRoleByIdAsync] [Arguments: ["5c03a6cb-f544-4de7-bbeb-d5e771dd1444"]] [RetrieveData: null] Attempt to get a role by ID.
+[2024-10-30 13:36:51.559 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: ["5c03a6cb-f544-4de7-bbeb-d5e771dd1444",""]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Role by its ID.
+[2024-10-30 13:36:51.569 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: GetRoleByIdAsync] [Arguments: ["5c03a6cb-f544-4de7-bbeb-d5e771dd1444"]] [RetrieveData: {"Id":"5c03a6cb-f544-4de7-bbeb-d5e771dd1444","Name":"admin"}] Role found successfully.
+[2024-10-30 13:36:51.570 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleController] [FunctionName: GetRoleById] [Arguments: ["5c03a6cb-f544-4de7-bbeb-d5e771dd1444"]] [RetrieveData: {"Id":"5c03a6cb-f544-4de7-bbeb-d5e771dd1444","Name":"admin"}] Role DTO Result
+[2024-10-30 13:37:01.098 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleController] [FunctionName: SearchRoles] [Arguments: ["admin"]] [RetrieveData: null] Attempt to get a role by name
+[2024-10-30 13:37:01.102 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: GetRoleByNameAsync] [Arguments: ["admin"]] [RetrieveData: null] Attempts to get a role by name
+[2024-10-30 13:37:01.105 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: ["Name","admin",""]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Role by its UniqueProperty.
+[2024-10-30 13:37:01.117 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: GetRoleByNameAsync] [Arguments: ["admin"]] [RetrieveData: {"Id":"5c03a6cb-f544-4de7-bbeb-d5e771dd1444","Name":"admin"}] Role with nameadmin found successfully.
+[2024-10-30 13:37:01.118 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleController] [FunctionName: SearchRoles] [Arguments: ["admin"]] [RetrieveData: {"Id":"5c03a6cb-f544-4de7-bbeb-d5e771dd1444","Name":"admin"}] Role DTO Result
+[2024-10-30 13:37:04.653 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleController] [FunctionName: SearchRoles] [Arguments: ["admin2"]] [RetrieveData: null] Attempt to get a role by name
+[2024-10-30 13:37:04.657 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: GetRoleByNameAsync] [Arguments: ["admin2"]] [RetrieveData: null] Attempts to get a role by name
+[2024-10-30 13:37:04.665 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: ["Name","admin2",""]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Role by its UniqueProperty.
+[2024-10-30 13:37:04.671 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: GetRoleByNameAsync] [Arguments: null] [RetrieveData: "Role Not Found!"] There is no role with this name.
+[2024-10-30 13:37:14.556 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: GetRoleByNameAsync] [Arguments: ["admin"]] [RetrieveData: null] Attempts to get a role by name
+[2024-10-30 13:37:14.560 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: ["Name","admin",""]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Role by its UniqueProperty.
+[2024-10-30 13:37:14.566 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: GetRoleByNameAsync] [Arguments: ["admin"]] [RetrieveData: {"Id":"5c03a6cb-f544-4de7-bbeb-d5e771dd1444","Name":"admin"}] Role with nameadmin found successfully.
+[2024-10-30 13:37:14.573 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: RoleController] [FunctionName: AddRole] [Arguments: [null]] [RetrieveData: ["Role name already exists"]] Binding Errors.
+[2024-10-30 13:37:28.808 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: GetRoleByNameAsync] [Arguments: ["admin2"]] [RetrieveData: null] Attempts to get a role by name
+[2024-10-30 13:37:28.812 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: ["Name","admin2",""]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Role by its UniqueProperty.
+[2024-10-30 13:37:28.817 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: GetRoleByNameAsync] [Arguments: null] [RetrieveData: "Role Not Found!"] There is no role with this name.
+[2024-10-30 13:37:28.820 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: RoleController] [FunctionName: AddRole] [Arguments: [null]] [RetrieveData: ["Invalid character in name"]] Binding Errors.
+[2024-10-30 13:37:37.985 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: GetRoleByNameAsync] [Arguments: ["Admin"]] [RetrieveData: null] Attempts to get a role by name
+[2024-10-30 13:37:37.991 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: ["Name","Admin",""]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Role by its UniqueProperty.
+[2024-10-30 13:37:37.997 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: GetRoleByNameAsync] [Arguments: null] [RetrieveData: "Role Not Found!"] There is no role with this name.
+[2024-10-30 13:37:38.000 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: AddRoleAsync] [Arguments: [{"Name":"Admin"}]] [RetrieveData: null] Attempts to add a new Role
+[2024-10-30 13:37:38.002 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: AddRoleAsync] [Arguments: null] [RetrieveData: null] New Role Created Successfully.
+[2024-10-30 13:37:38.004 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: InsertAsync] [Arguments: [{"Id":"b0886036-d229-4a6b-a563-23bab760190e","Name":"Admin"}]] [RetrieveData: null] Attempt to add an new entity with type Ecommerce.Core.Entities.Role
+[2024-10-30 13:37:38.037 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: InsertAsync] [Arguments: ["Ecommerce.Core.Entities.Role, Ecommerce.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",{"Id":"b0886036-d229-4a6b-a563-23bab760190e","Name":"Admin"}]] [RetrieveData: null] Successful Insert.
+[2024-10-30 13:37:38.137 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-10-30 13:37:38.138 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: AddRoleAsync] [Arguments: [{"Name":"Admin"}]] [RetrieveData: {"Id":"b0886036-d229-4a6b-a563-23bab760190e","Name":"Admin"}] New Role added successfully.
+[2024-10-30 13:37:38.140 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleController] [FunctionName: AddRole] [Arguments: [{"Name":"Admin"}]] [RetrieveData: {"Id":"b0886036-d229-4a6b-a563-23bab760190e","Name":"Admin"}] New User DTO
+[2024-10-30 13:37:56.870 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: GetRoleByNameAsync] [Arguments: ["AdminPakhme"]] [RetrieveData: null] Attempts to get a role by name
+[2024-10-30 13:37:56.874 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: ["Name","AdminPakhme",""]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Role by its UniqueProperty.
+[2024-10-30 13:37:56.879 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: GetRoleByNameAsync] [Arguments: null] [RetrieveData: "Role Not Found!"] There is no role with this name.
+[2024-10-30 13:37:56.883 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: UpdateRoleAsync] [Arguments: ["b0886036-d229-4a6b-a563-23bab760190e",{"Name":"AdminPakhme"}]] [RetrieveData: null] Attempt to update a role.
+[2024-10-30 13:37:56.885 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: ["b0886036-d229-4a6b-a563-23bab760190e",""]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Role by its ID.
+[2024-10-30 13:37:56.888 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: UpdateRoleAsync] [Arguments: ["b0886036-d229-4a6b-a563-23bab760190e"]] [RetrieveData: {"Id":"b0886036-d229-4a6b-a563-23bab760190e","Name":"Admin"}] Role Found
+[2024-10-30 13:37:56.891 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [{"Id":"b0886036-d229-4a6b-a563-23bab760190e","Name":"AdminPakhme"}]] [RetrieveData: null] Attempt to Update a Ecommerce.Core.Entities.Role
+[2024-10-30 13:37:56.900 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: ["Ecommerce.Core.Entities.Role, Ecommerce.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",{"Id":"b0886036-d229-4a6b-a563-23bab760190e","Name":"AdminPakhme"}]] [RetrieveData: null] Successful Update.
+[2024-10-30 13:37:56.922 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-10-30 13:37:56.925 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: UpdateRoleAsync] [Arguments: ["b0886036-d229-4a6b-a563-23bab760190e",{"Name":"AdminPakhme"}]] [RetrieveData: {"Id":"b0886036-d229-4a6b-a563-23bab760190e","Name":"AdminPakhme"}] Role Updated Successfully.
+[2024-10-30 13:37:56.929 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleController] [FunctionName: UpdateRole] [Arguments: ["b0886036-d229-4a6b-a563-23bab760190e",{"Name":"AdminPakhme"}]] [RetrieveData: {"Id":"b0886036-d229-4a6b-a563-23bab760190e","Name":"AdminPakhme"}] Role Update DTO
+[2024-10-30 13:38:00.723 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: GetRoleByNameAsync] [Arguments: ["AdminPa2khme"]] [RetrieveData: null] Attempts to get a role by name
+[2024-10-30 13:38:00.727 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: ["Name","AdminPa2khme",""]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Role by its UniqueProperty.
+[2024-10-30 13:38:00.735 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: GetRoleByNameAsync] [Arguments: null] [RetrieveData: "Role Not Found!"] There is no role with this name.
+[2024-10-30 13:38:00.738 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: RoleController] [FunctionName: UpdateRole] [Arguments: ["b0886036-d229-4a6b-a563-23bab760190e",null]] [RetrieveData: ["Invalid character in name"]] Binding Errors.
+[2024-10-30 13:38:06.483 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleController] [FunctionName: GetAllRoles] [Arguments: null] [RetrieveData: null] Attempt to get all the roles.
+[2024-10-30 13:38:06.488 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [null,""]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Role with filter 
+[2024-10-30 13:38:06.500 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: GetAllRolesAsync] [Arguments: null] [RetrieveData: [{"Id":"5c03a6cb-f544-4de7-bbeb-d5e771dd1444","Name":"admin"},{"Id":"04d513b8-e7b4-4538-9f61-be3e56b5b59d","Name":"Manufacturer"},{"Id":"b0886036-d229-4a6b-a563-23bab760190e","Name":"AdminPakhme"}]] All Roles retrieved successfully.
+[2024-10-30 13:38:06.503 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleController] [FunctionName: GetAllRoles] [Arguments: null] [RetrieveData: [{"Id":"5c03a6cb-f544-4de7-bbeb-d5e771dd1444","Name":"admin"},{"Id":"04d513b8-e7b4-4538-9f61-be3e56b5b59d","Name":"Manufacturer"},{"Id":"b0886036-d229-4a6b-a563-23bab760190e","Name":"AdminPakhme"}]] All Roles
+[2024-10-30 13:38:20.620 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleController] [FunctionName: DeleteRoleByIdAsync] [Arguments: ["b0886036-d229-4a6b-a563-23bab760190e"]] [RetrieveData: null] Attempt to Delete a role by ID.
+[2024-10-30 13:38:20.623 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: DeleteRoleByIdAsync] [Arguments: ["b0886036-d229-4a6b-a563-23bab760190e"]] [RetrieveData: null] Attempt to delete a role by ID.
+[2024-10-30 13:38:20.627 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: ["b0886036-d229-4a6b-a563-23bab760190e",""]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Role by its ID.
+[2024-10-30 13:38:20.632 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: DeleteByIdAsync] [Arguments: ["b0886036-d229-4a6b-a563-23bab760190e"]] [RetrieveData: null] Attempt to Delete a Ecommerce.Core.Entities.Role
+[2024-10-30 13:38:20.637 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Delete] [Arguments: [{"Id":"b0886036-d229-4a6b-a563-23bab760190e","Name":"AdminPakhme"}]] [RetrieveData: null] Attempt to Delete a Ecommerce.Core.Entities.Role
+[2024-10-30 13:38:20.641 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Delete] [Arguments: ["Ecommerce.Core.Entities.Role, Ecommerce.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",{"Id":"b0886036-d229-4a6b-a563-23bab760190e","Name":"AdminPakhme"}]] [RetrieveData: null] Successful Delete.
+[2024-10-30 13:38:20.655 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-10-30 13:38:20.656 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleService] [FunctionName: DeleteRoleByIdAsync] [Arguments: ["b0886036-d229-4a6b-a563-23bab760190e"]] [RetrieveData: {"Id":"b0886036-d229-4a6b-a563-23bab760190e","Name":"AdminPakhme"}] Successful Delete
+[2024-10-30 13:38:20.659 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: RoleController] [FunctionName: DeleteRoleByIdAsync] [Arguments: ["b0886036-d229-4a6b-a563-23bab760190e"]] [RetrieveData: null] The role with Id b0886036-d229-4a6b-a563-23bab760190e successfully deleted
+[2024-10-30 14:09:43.866 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: Program] [FunctionName: <Main>$] [Arguments: null] [RetrieveData: null] Starting up the application
+[2024-10-30 14:09:58.286 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [null,"Manufacturers2"]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Product with filter 
+[2024-10-30 14:10:34.284 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetProductById] [Arguments: ["2a62ea53-7cc4-43bb-a485-91ba804172bb"]] [RetrieveData: null] Attempt to get a product by ID.
+[2024-10-30 14:10:34.288 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetProductByIdAsync] [Arguments: ["2a62ea53-7cc4-43bb-a485-91ba804172bb"]] [RetrieveData: null] Attempt to get a product by ID
+[2024-10-30 14:10:34.339 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: ["2a62ea53-7cc4-43bb-a485-91ba804172bb","Manufacturers2"]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 14:10:34.416 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetProductById] [Arguments: ["2a62ea53-7cc4-43bb-a485-91ba804172bb"]] [RetrieveData: {"ClassName":"Newtonsoft.Json.JsonSerializationException","Message":"Self referencing loop detected with type 'Ecommerce.Core.Entities.Product'. Path 'Manufacturers2[0].Products2'.","Data":null,"InnerException":null,"HelpURL":null,"StackTraceString":"   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.CheckForCircularReference(JsonWriter writer, Object value, JsonProperty property, JsonContract contract, JsonContainerContract containerContract, JsonProperty containerProperty)\r\n   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeList(JsonWriter writer, IEnumerable values, JsonArrayContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)\r\n   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)\r\n   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeObject(JsonWriter writer, Object value, JsonObjectContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)\r\n   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)\r\n   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeList(JsonWriter writer, IEnumerable values, JsonArrayContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)\r\n   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)\r\n   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeObject(JsonWriter writer, Object value, JsonObjectContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)\r\n   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)\r\n   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.Serialize(JsonWriter jsonWriter, Object value, Type objectType)\r\n   at Newtonsoft.Json.JsonSerializer.SerializeInternal(JsonWriter jsonWriter, Object value, Type objectType)\r\n   at Newtonsoft.Json.JsonSerializer.Serialize(JsonWriter jsonWriter, Object value, Type objectType)\r\n   at Newtonsoft.Json.JsonConvert.SerializeObjectInternal(Object value, Type type, JsonSerializer jsonSerializer)\r\n   at Newtonsoft.Json.JsonConvert.SerializeObject(Object value, Type type, JsonSerializerSettings settings)\r\n   at Newtonsoft.Json.JsonConvert.SerializeObject(Object value)\r\n   at Ecommerce.Core.Log.LoggerHelper.LogWithDetails(String message, Object retrievedData, Object[] args, String memberName, String sourceFilePath, LogLevel logLevel) in C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Core\\Log\\LoggerHelper.cs:line 30\r\n   at Ecommerce.Application.Services.ProductService.GetProductByIdAsync(Guid id) in C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Application\\Services\\ProductService.cs:line 30\r\n   at EcommerceSolution.Controller.ProductController.GetProductById(Guid id) in C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.WebAPI\\Controller\\ProductController.cs:line 31","RemoteStackTraceString":null,"RemoteStackIndex":0,"ExceptionMethod":null,"HResult":-2146233088,"Source":"Newtonsoft.Json","WatsonBuckets":null}] Incorrect Product ID
+[2024-10-30 14:15:21.924 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: Program] [FunctionName: <Main>$] [Arguments: null] [RetrieveData: null] Starting up the application
+[2024-10-30 14:15:34.588 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetProductById] [Arguments: ["2a62ea53-7cc4-43bb-a485-91ba804172bb"]] [RetrieveData: null] Attempt to get a product by ID.
+[2024-10-30 14:15:34.592 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetProductByIdAsync] [Arguments: ["2a62ea53-7cc4-43bb-a485-91ba804172bb"]] [RetrieveData: null] Attempt to get a product by ID
+[2024-10-30 14:15:35.350 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: ["2a62ea53-7cc4-43bb-a485-91ba804172bb","Manufacturers2"]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 14:15:43.657 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetProductById] [Arguments: ["2a62ea53-7cc4-43bb-a485-91ba804172bb"]] [RetrieveData: {"ClassName":"Newtonsoft.Json.JsonSerializationException","Message":"Self referencing loop detected with type 'Ecommerce.Core.Entities.Product'. Path 'Manufacturers2[0].Products2'.","Data":null,"InnerException":null,"HelpURL":null,"StackTraceString":"   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.CheckForCircularReference(JsonWriter writer, Object value, JsonProperty property, JsonContract contract, JsonContainerContract containerContract, JsonProperty containerProperty)\r\n   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeList(JsonWriter writer, IEnumerable values, JsonArrayContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)\r\n   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)\r\n   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeObject(JsonWriter writer, Object value, JsonObjectContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)\r\n   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)\r\n   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeList(JsonWriter writer, IEnumerable values, JsonArrayContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)\r\n   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)\r\n   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeObject(JsonWriter writer, Object value, JsonObjectContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)\r\n   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)\r\n   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.Serialize(JsonWriter jsonWriter, Object value, Type objectType)\r\n   at Newtonsoft.Json.JsonSerializer.SerializeInternal(JsonWriter jsonWriter, Object value, Type objectType)\r\n   at Newtonsoft.Json.JsonSerializer.Serialize(JsonWriter jsonWriter, Object value, Type objectType)\r\n   at Newtonsoft.Json.JsonConvert.SerializeObjectInternal(Object value, Type type, JsonSerializer jsonSerializer)\r\n   at Newtonsoft.Json.JsonConvert.SerializeObject(Object value, Type type, JsonSerializerSettings settings)\r\n   at Newtonsoft.Json.JsonConvert.SerializeObject(Object value)\r\n   at Ecommerce.Core.Log.LoggerHelper.LogWithDetails(String message, Object retrievedData, Object[] args, String memberName, String sourceFilePath, LogLevel logLevel) in C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Core\\Log\\LoggerHelper.cs:line 30\r\n   at Ecommerce.Application.Services.ProductService.GetProductByIdAsync(Guid id) in C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Application\\Services\\ProductService.cs:line 30\r\n   at EcommerceSolution.Controller.ProductController.GetProductById(Guid id) in C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.WebAPI\\Controller\\ProductController.cs:line 31","RemoteStackTraceString":null,"RemoteStackIndex":0,"ExceptionMethod":null,"HResult":-2146233088,"Source":"Newtonsoft.Json","WatsonBuckets":null}] Incorrect Product ID
+[2024-10-30 14:23:02.268 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: Program] [FunctionName: <Main>$] [Arguments: null] [RetrieveData: null] Starting up the application
+[2024-10-30 14:23:17.074 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetProductById] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: null] Attempt to get a product by ID.
+[2024-10-30 14:23:17.080 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetProductByIdAsync] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: null] Attempt to get a product by ID
+[2024-10-30 14:23:17.832 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 14:23:26.064 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetProductByIdAsync] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: {
+  "Id": "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+  "Name": "PRODUCT2",
+  "Price": 123.54,
+  "Inventory": -1.00,
+  "Dop": "2024-10-20T14:19:30.933",
+  "Doe": "2024-10-20T14:19:30.933",
+  "Status": false
+}] Product Found
+[2024-10-30 14:23:26.086 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetProductById] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: {
+  "Id": "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+  "Name": "PRODUCT2",
+  "Price": 123.54,
+  "Inventory": -1.00,
+  "Dop": "2024-10-20T14:19:30.933",
+  "Doe": "2024-10-20T14:19:30.933",
+  "Status": false,
+  "ProductInvoices": null
+}] Product DTO Result
+[2024-10-30 14:24:02.190 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserController] [FunctionName: GetAllUsers] [Arguments: null] [RetrieveData: null] Attempt to get all users.
+[2024-10-30 14:24:02.196 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: GetAllUsersAsync] [Arguments: null] [RetrieveData: null] Attempt to get all Users.
+[2024-10-30 14:24:02.243 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  ""
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.User with filter 
+[2024-10-30 14:24:02.271 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: GetAllUsersAsync] [Arguments: null] [RetrieveData: null] Attempt to get all users' role names
+[2024-10-30 14:24:02.275 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  ""
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Role with filter 
+[2024-10-30 14:24:02.289 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: GetAllUsersAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "5c03a6cb-f544-4de7-bbeb-d5e771dd1444",
+    "Name": "admin"
+  },
+  {
+    "Id": "04d513b8-e7b4-4538-9f61-be3e56b5b59d",
+    "Name": "Manufacturer"
+  }
+]] Roles retrieved Successfully
+[2024-10-30 14:24:02.295 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: GetAllUsersAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "ec7ded00-7b12-4244-a81e-c9ba4dc22b71",
+    "FirstName": "UserOne",
+    "LastName": "UserOne",
+    "Username": "amirasem1",
+    "PasswordHash": "AQAAAAIAAYagAAAAEDhPUqMu9KmcNsyqvixIv13khtenrU/6SCkDClSAnx1/0uo/rI6stEjSRPFwMUo/Tg==",
+    "Email": "userone@gmail.com",
+    "PhoneNumber": "88888",
+    "RoleId": "5c03a6cb-f544-4de7-bbeb-d5e771dd1444"
+  },
+  {
+    "Id": "03ec3411-e2d2-4ec0-863c-6816f6e4e36d",
+    "FirstName": "amirhossein",
+    "LastName": "yousefi",
+    "Username": "amirasem2",
+    "PasswordHash": "AQAAAAIAAYagAAAAELcALnUUOUnp6CHo7Mtd4qAA0kwIvwVuggsXuH0mTqFEQrXdjylOc5hN3tmGmLjCEQ==",
+    "Email": "amiryousefi@gmail.com",
+    "PhoneNumber": "33333",
+    "RoleId": "5c03a6cb-f544-4de7-bbeb-d5e771dd1444"
+  }
+]] Users Retrieved Successfully
+[2024-10-30 14:24:02.301 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserController] [FunctionName: GetAllUsers] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "ec7ded00-7b12-4244-a81e-c9ba4dc22b71",
+    "FirstName": "UserOne",
+    "LastName": "UserOne",
+    "Username": "amirasem1",
+    "Email": "userone@gmail.com",
+    "PhoneNumber": "88888",
+    "PasswordHash": "AQAAAAIAAYagAAAAEDhPUqMu9KmcNsyqvixIv13khtenrU/6SCkDClSAnx1/0uo/rI6stEjSRPFwMUo/Tg==",
+    "RoleName": "admin",
+    "RoleId": "5c03a6cb-f544-4de7-bbeb-d5e771dd1444"
+  },
+  {
+    "Id": "03ec3411-e2d2-4ec0-863c-6816f6e4e36d",
+    "FirstName": "amirhossein",
+    "LastName": "yousefi",
+    "Username": "amirasem2",
+    "Email": "amiryousefi@gmail.com",
+    "PhoneNumber": "33333",
+    "PasswordHash": "AQAAAAIAAYagAAAAELcALnUUOUnp6CHo7Mtd4qAA0kwIvwVuggsXuH0mTqFEQrXdjylOc5hN3tmGmLjCEQ==",
+    "RoleName": "admin",
+    "RoleId": "5c03a6cb-f544-4de7-bbeb-d5e771dd1444"
+  }
+]] All Users
+[2024-10-30 14:24:06.855 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserController] [FunctionName: GetAllUsers] [Arguments: null] [RetrieveData: null] Attempt to get all users.
+[2024-10-30 14:24:06.858 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: GetAllUsersAsync] [Arguments: null] [RetrieveData: null] Attempt to get all Users.
+[2024-10-30 14:24:06.872 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  ""
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.User with filter 
+[2024-10-30 14:24:06.882 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: GetAllUsersAsync] [Arguments: null] [RetrieveData: null] Attempt to get all users' role names
+[2024-10-30 14:24:06.884 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  ""
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Role with filter 
+[2024-10-30 14:24:06.886 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: GetAllUsersAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "5c03a6cb-f544-4de7-bbeb-d5e771dd1444",
+    "Name": "admin"
+  },
+  {
+    "Id": "04d513b8-e7b4-4538-9f61-be3e56b5b59d",
+    "Name": "Manufacturer"
+  }
+]] Roles retrieved Successfully
+[2024-10-30 14:24:06.888 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: GetAllUsersAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "ec7ded00-7b12-4244-a81e-c9ba4dc22b71",
+    "FirstName": "UserOne",
+    "LastName": "UserOne",
+    "Username": "amirasem1",
+    "PasswordHash": "AQAAAAIAAYagAAAAEDhPUqMu9KmcNsyqvixIv13khtenrU/6SCkDClSAnx1/0uo/rI6stEjSRPFwMUo/Tg==",
+    "Email": "userone@gmail.com",
+    "PhoneNumber": "88888",
+    "RoleId": "5c03a6cb-f544-4de7-bbeb-d5e771dd1444"
+  },
+  {
+    "Id": "03ec3411-e2d2-4ec0-863c-6816f6e4e36d",
+    "FirstName": "amirhossein",
+    "LastName": "yousefi",
+    "Username": "amirasem2",
+    "PasswordHash": "AQAAAAIAAYagAAAAELcALnUUOUnp6CHo7Mtd4qAA0kwIvwVuggsXuH0mTqFEQrXdjylOc5hN3tmGmLjCEQ==",
+    "Email": "amiryousefi@gmail.com",
+    "PhoneNumber": "33333",
+    "RoleId": "5c03a6cb-f544-4de7-bbeb-d5e771dd1444"
+  }
+]] Users Retrieved Successfully
+[2024-10-30 14:24:06.889 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserController] [FunctionName: GetAllUsers] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "ec7ded00-7b12-4244-a81e-c9ba4dc22b71",
+    "FirstName": "UserOne",
+    "LastName": "UserOne",
+    "Username": "amirasem1",
+    "Email": "userone@gmail.com",
+    "PhoneNumber": "88888",
+    "PasswordHash": "AQAAAAIAAYagAAAAEDhPUqMu9KmcNsyqvixIv13khtenrU/6SCkDClSAnx1/0uo/rI6stEjSRPFwMUo/Tg==",
+    "RoleName": "admin",
+    "RoleId": "5c03a6cb-f544-4de7-bbeb-d5e771dd1444"
+  },
+  {
+    "Id": "03ec3411-e2d2-4ec0-863c-6816f6e4e36d",
+    "FirstName": "amirhossein",
+    "LastName": "yousefi",
+    "Username": "amirasem2",
+    "Email": "amiryousefi@gmail.com",
+    "PhoneNumber": "33333",
+    "PasswordHash": "AQAAAAIAAYagAAAAELcALnUUOUnp6CHo7Mtd4qAA0kwIvwVuggsXuH0mTqFEQrXdjylOc5hN3tmGmLjCEQ==",
+    "RoleName": "admin",
+    "RoleId": "5c03a6cb-f544-4de7-bbeb-d5e771dd1444"
+  }
+]] All Users
+[2024-10-30 14:27:33.326 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: Program] [FunctionName: <Main>$] [Arguments: null] [RetrieveData: null] Starting up the application
+[2024-10-30 14:28:08.366 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetAllProducts] [Arguments: null] [RetrieveData: null] Attempts to get all Products
+[2024-10-30 14:28:08.373 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductAsync] [Arguments: null] [RetrieveData: null] Attempts to get all products
+[2024-10-30 14:28:09.194 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Product with filter 
+[2024-10-30 14:28:37.313 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: Program] [FunctionName: <Main>$] [Arguments: null] [RetrieveData: null] Starting up the application
+[2024-10-30 14:28:43.577 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetAllProducts] [Arguments: null] [RetrieveData: null] Attempts to get all Products
+[2024-10-30 14:28:43.582 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductAsync] [Arguments: null] [RetrieveData: null] Attempts to get all products
+[2024-10-30 14:28:44.418 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Product with filter 
+[2024-10-30 14:28:52.679 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+    "Name": "PRODUCT2",
+    "Price": 123.54,
+    "Inventory": -1.00,
+    "Dop": "2024-10-20T14:19:30.933",
+    "Doe": "2024-10-20T14:19:30.933",
+    "Status": false
+  },
+  {
+    "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Name": "PRODUCT1",
+    "Price": 12.00,
+    "Inventory": 8.00,
+    "Dop": "2024-10-20T13:52:33.182",
+    "Doe": "2024-10-20T13:52:33.182",
+    "Status": false
+  }
+]] All Product Retrieved
+[2024-10-30 14:29:48.313 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetAllProducts] [Arguments: null] [RetrieveData: null] Attempts to get all Products
+[2024-10-30 14:29:48.316 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductAsync] [Arguments: null] [RetrieveData: null] Attempts to get all products
+[2024-10-30 14:29:48.364 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Product with filter 
+[2024-10-30 14:29:48.381 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductAsync] [Arguments: null] [RetrieveData: [
+  [
+    {
+      "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+      "Name": "string2",
+      "OwnerName": "string",
+      "ManufacturerCountry": "string",
+      "Email": "string",
+      "Address": "string",
+      "PhoneNumber": "string",
+      "Rate": 0,
+      "EstablishDate": "2024-10-12T12:57:25.923",
+      "Status": true
+    }
+  ],
+  [
+    {
+      "Id": "528b2ba7-3852-4f62-9692-0e6f41369afb",
+      "Name": "AmirCo",
+      "OwnerName": "AmirHossein",
+      "ManufacturerCountry": "yousefi",
+      "Email": "amirasem8@hgmail.com",
+      "Address": "tehran",
+      "PhoneNumber": "0912121212",
+      "Rate": 4,
+      "EstablishDate": "2024-10-29T05:07:13.315",
+      "Status": true
+    },
+    {
+      "Id": "b8d45e51-4b15-49b6-abee-48acaf1b3fd9",
+      "Name": "mantest",
+      "OwnerName": "man owner test",
+      "ManufacturerCountry": "iran",
+      "Email": "mantest@gmail.com",
+      "Address": "man test address",
+      "PhoneNumber": "99993333",
+      "Rate": 4,
+      "EstablishDate": "2024-10-20T09:56:18.586",
+      "Status": true
+    }
+  ]
+]] All Product Retrieved
+[2024-10-30 14:29:51.849 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetAllProducts] [Arguments: null] [RetrieveData: null] Attempts to get all Products
+[2024-10-30 14:29:51.853 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductAsync] [Arguments: null] [RetrieveData: null] Attempts to get all products
+[2024-10-30 14:29:51.869 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Product with filter 
+[2024-10-30 14:29:51.875 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductAsync] [Arguments: null] [RetrieveData: [
+  [
+    {
+      "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+      "Name": "string2",
+      "OwnerName": "string",
+      "ManufacturerCountry": "string",
+      "Email": "string",
+      "Address": "string",
+      "PhoneNumber": "string",
+      "Rate": 0,
+      "EstablishDate": "2024-10-12T12:57:25.923",
+      "Status": true
+    }
+  ],
+  [
+    {
+      "Id": "528b2ba7-3852-4f62-9692-0e6f41369afb",
+      "Name": "AmirCo",
+      "OwnerName": "AmirHossein",
+      "ManufacturerCountry": "yousefi",
+      "Email": "amirasem8@hgmail.com",
+      "Address": "tehran",
+      "PhoneNumber": "0912121212",
+      "Rate": 4,
+      "EstablishDate": "2024-10-29T05:07:13.315",
+      "Status": true
+    },
+    {
+      "Id": "b8d45e51-4b15-49b6-abee-48acaf1b3fd9",
+      "Name": "mantest",
+      "OwnerName": "man owner test",
+      "ManufacturerCountry": "iran",
+      "Email": "mantest@gmail.com",
+      "Address": "man test address",
+      "PhoneNumber": "99993333",
+      "Rate": 4,
+      "EstablishDate": "2024-10-20T09:56:18.586",
+      "Status": true
+    }
+  ]
+]] All Product Retrieved
+[2024-10-30 14:31:11.200 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetAllProducts] [Arguments: null] [RetrieveData: null] Attempts to get all Products
+[2024-10-30 14:31:11.207 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductAsync] [Arguments: null] [RetrieveData: null] Attempts to get all products
+[2024-10-30 14:31:11.212 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Product with filter 
+[2024-10-30 14:31:11.228 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+    "Name": "PRODUCT2",
+    "Price": 123.54,
+    "Inventory": -1.00,
+    "Dop": "2024-10-20T14:19:30.933",
+    "Doe": "2024-10-20T14:19:30.933",
+    "Status": false
+  },
+  {
+    "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Name": "PRODUCT1",
+    "Price": 12.00,
+    "Inventory": 8.00,
+    "Dop": "2024-10-20T13:52:33.182",
+    "Doe": "2024-10-20T13:52:33.182",
+    "Status": false
+  }
+]] All Product Retrieved
+[2024-10-30 14:31:11.251 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetAllProducts] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+    "Name": "PRODUCT2",
+    "Price": 123.54,
+    "Inventory": -1.00,
+    "Dop": "2024-10-20T14:19:30.933",
+    "Doe": "2024-10-20T14:19:30.933",
+    "Status": false,
+    "ProductInvoices": null
+  },
+  {
+    "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Name": "PRODUCT1",
+    "Price": 12.00,
+    "Inventory": 8.00,
+    "Dop": "2024-10-20T13:52:33.182",
+    "Doe": "2024-10-20T13:52:33.182",
+    "Status": false,
+    "ProductInvoices": null
+  }
+]] All Products DTO
+[2024-10-30 14:36:14.873 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: FilterProductByPrice] [Arguments: [
+  10,
+  15
+]] [RetrieveData: null] Attempt to filter products by the price.
+[2024-10-30 14:36:14.878 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: FilterProductByPriceAsync] [Arguments: [
+  10,
+  15
+]] [RetrieveData: null] Attempt to filter products by the price
+[2024-10-30 14:36:14.880 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Product with filter p => ((p.Price >= value(Ecommerce.Application.Services.ProductService+<>c__DisplayClass9_0).startPrice) AndAlso (p.Price <= value(Ecommerce.Application.Services.ProductService+<>c__DisplayClass9_0).endPrice))
+[2024-10-30 14:36:22.442 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: FilterProductByPriceAsync] [Arguments: [
+  10,
+  15
+]] [RetrieveData: [
+  {
+    "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Name": "PRODUCT1",
+    "Price": 12.00,
+    "Inventory": 8.00,
+    "Dop": "2024-10-20T13:52:33.182",
+    "Doe": "2024-10-20T13:52:33.182",
+    "Status": false
+  }
+]] All product in the price range retrieved successfully.
+[2024-10-30 14:36:22.449 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: FilterProductByPrice] [Arguments: [
+  10,
+  15
+]] [RetrieveData: [
+  {
+    "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Name": "PRODUCT1",
+    "Price": 12.00,
+    "Inventory": 8.00,
+    "Dop": "2024-10-20T13:52:33.182",
+    "Doe": "2024-10-20T13:52:33.182",
+    "Status": false,
+    "ProductInvoices": null
+  }
+]] All product in the price range found successfully.
+[2024-10-30 14:41:34.397 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: SearchProducts] [Arguments: [
+  "PRODUCT"
+]] [RetrieveData: null] Attempt to search products by the name.
+[2024-10-30 14:41:34.400 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductsByNameAsync] [Arguments: [
+  "PRODUCT"
+]] [RetrieveData: null] Attempts to search products by name
+[2024-10-30 14:41:34.402 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Product with filter p => p.Name.Contains(value(Ecommerce.Application.Services.ProductService+<>c__DisplayClass8_0).name)
+[2024-10-30 14:41:41.940 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductsByNameAsync] [Arguments: [
+  "PRODUCT"
+]] [RetrieveData: [
+  {
+    "Id": "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+    "Name": "PRODUCT2",
+    "Price": 123.54,
+    "Inventory": -1.00,
+    "Dop": "2024-10-20T14:19:30.933",
+    "Doe": "2024-10-20T14:19:30.933",
+    "Status": false
+  },
+  {
+    "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Name": "PRODUCT1",
+    "Price": 12.00,
+    "Inventory": 8.00,
+    "Dop": "2024-10-20T13:52:33.182",
+    "Doe": "2024-10-20T13:52:33.182",
+    "Status": false
+  }
+]] All products with this name retrieved successfully.
+[2024-10-30 14:41:41.946 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: SearchProducts] [Arguments: [
+  "PRODUCT"
+]] [RetrieveData: [
+  {
+    "Id": "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+    "Name": "PRODUCT2",
+    "Price": 123.54,
+    "Inventory": -1.00,
+    "Dop": "2024-10-20T14:19:30.933",
+    "Doe": "2024-10-20T14:19:30.933",
+    "Status": false,
+    "ProductInvoices": null
+  },
+  {
+    "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Name": "PRODUCT1",
+    "Price": 12.00,
+    "Inventory": 8.00,
+    "Dop": "2024-10-20T13:52:33.182",
+    "Doe": "2024-10-20T13:52:33.182",
+    "Status": false,
+    "ProductInvoices": null
+  }
+]] Search DTO Result
+[2024-10-30 14:41:49.235 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: SearchProducts] [Arguments: [
+  "PRODUCT1"
+]] [RetrieveData: null] Attempt to search products by the name.
+[2024-10-30 14:41:49.240 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductsByNameAsync] [Arguments: [
+  "PRODUCT1"
+]] [RetrieveData: null] Attempts to search products by name
+[2024-10-30 14:41:49.244 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Product with filter p => p.Name.Contains(value(Ecommerce.Application.Services.ProductService+<>c__DisplayClass8_0).name)
+[2024-10-30 14:41:49.251 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductsByNameAsync] [Arguments: [
+  "PRODUCT1"
+]] [RetrieveData: [
+  {
+    "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Name": "PRODUCT1",
+    "Price": 12.00,
+    "Inventory": 8.00,
+    "Dop": "2024-10-20T13:52:33.182",
+    "Doe": "2024-10-20T13:52:33.182",
+    "Status": false
+  }
+]] All products with this name retrieved successfully.
+[2024-10-30 14:41:49.253 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: SearchProducts] [Arguments: [
+  "PRODUCT1"
+]] [RetrieveData: [
+  {
+    "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Name": "PRODUCT1",
+    "Price": 12.00,
+    "Inventory": 8.00,
+    "Dop": "2024-10-20T13:52:33.182",
+    "Doe": "2024-10-20T13:52:33.182",
+    "Status": false,
+    "ProductInvoices": null
+  }
+]] Search DTO Result
+[2024-10-30 14:46:59.939 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetInvoicesByProductId] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: null] Attempts to get invoices with this product.
+[2024-10-30 14:46:59.943 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetInvoicesByProductId] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: null] Attempt to get invoices with this product
+[2024-10-30 14:46:59.947 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Invoice"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Interfaces.RelationRepoInterfaces.ProductInvoice with filter pi => (pi.ProductId == value(Ecommerce.Application.Services.ProductService+<>c__DisplayClass10_0).productId)
+[2024-10-30 14:47:07.523 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetInvoicesByProductId] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: [
+  {
+    "ProductId": "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+    "Product": null,
+    "InvoiceId": "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+    "Invoice": {
+      "Id": "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+      "OwnerFirstName": "AMIRHOSSEIN",
+      "OwnerLastName": "AMIRHOSSEIN",
+      "IdentificationCode": "string",
+      "IssuerName": "string",
+      "IssueDate": "2024-10-19T09:45:09.307",
+      "PaymentDate": "2024-10-20T14:20:39.82842",
+      "TotalPrice": 542.16,
+      "PaymentStatus": 1
+    },
+    "Count": 4
+  },
+  {
+    "ProductId": "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+    "Product": null,
+    "InvoiceId": "2565f42a-de34-4a15-9b82-074532ff625b",
+    "Invoice": {
+      "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+      "OwnerFirstName": "gggg",
+      "OwnerLastName": "kkkk",
+      "IdentificationCode": "78089",
+      "IssuerName": "545",
+      "IssueDate": "2024-10-20T08:51:19.704",
+      "PaymentDate": "2024-10-21T09:48:10.170112",
+      "TotalPrice": 247.08,
+      "PaymentStatus": 1
+    },
+    "Count": 2
+  },
+  {
+    "ProductId": "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+    "Product": null,
+    "InvoiceId": "55df29b7-8280-4ee7-a8ef-4585fb96b6e8",
+    "Invoice": {
+      "Id": "55df29b7-8280-4ee7-a8ef-4585fb96b6e8",
+      "OwnerFirstName": "sss",
+      "OwnerLastName": "ssss",
+      "IdentificationCode": "55555",
+      "IssuerName": "sss",
+      "IssueDate": "2024-10-20T08:29:16.484",
+      "PaymentDate": "2024-10-23T16:36:58.830989",
+      "TotalPrice": 741.24,
+      "PaymentStatus": 0
+    },
+    "Count": 6
+  }
+]] All invoices that have this product retrieved successfully.
+[2024-10-30 14:47:07.530 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetInvoicesByProductId] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: [
+  {
+    "Id": "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+    "OwnerName": "AMIRHOSSEIN",
+    "OwnerFamilyName": "AMIRHOSSEIN",
+    "IdentificationCode": "string",
+    "IssuerName": "string",
+    "IssueDate": "2024-10-19T09:45:09.307",
+    "PaymentDate": "2024-10-20T14:20:39.82842",
+    "TotalPrice": 542.16,
+    "PaymentStatus": 1
+  },
+  {
+    "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+    "OwnerName": "gggg",
+    "OwnerFamilyName": "kkkk",
+    "IdentificationCode": "78089",
+    "IssuerName": "545",
+    "IssueDate": "2024-10-20T08:51:19.704",
+    "PaymentDate": "2024-10-21T09:48:10.170112",
+    "TotalPrice": 247.08,
+    "PaymentStatus": 1
+  },
+  {
+    "Id": "55df29b7-8280-4ee7-a8ef-4585fb96b6e8",
+    "OwnerName": "sss",
+    "OwnerFamilyName": "ssss",
+    "IdentificationCode": "55555",
+    "IssuerName": "sss",
+    "IssueDate": "2024-10-20T08:29:16.484",
+    "PaymentDate": "2024-10-23T16:36:58.830989",
+    "TotalPrice": 741.24,
+    "PaymentStatus": 0
+  }
+]] All Invoices DTO Result
+[2024-10-30 14:47:37.920 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetInvoicesByProductId] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804142bb"
+]] [RetrieveData: null] Attempts to get invoices with this product.
+[2024-10-30 14:47:37.931 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetInvoicesByProductId] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804142bb"
+]] [RetrieveData: null] Attempt to get invoices with this product
+[2024-10-30 14:47:37.938 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Invoice"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Interfaces.RelationRepoInterfaces.ProductInvoice with filter pi => (pi.ProductId == value(Ecommerce.Application.Services.ProductService+<>c__DisplayClass10_0).productId)
+[2024-10-30 14:47:37.943 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetInvoicesByProductId] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804142bb"
+]] [RetrieveData: []] All invoices that have this product retrieved successfully.
+[2024-10-30 14:47:37.945 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetInvoicesByProductId] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804142bb"
+]] [RetrieveData: []] All Invoices DTO Result
+[2024-10-30 14:52:06.900 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: AddProduct] [Arguments: [
+  {
+    "Name": "amir",
+    "Price": 2,
+    "Inventory": 3,
+    "Dop": "2024-10-30T11:21:58.81Z",
+    "Doe": "2024-10-30T11:21:58.81Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to add new product
+[2024-10-30 14:52:06.905 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: AddProductAsync] [Arguments: [
+  {
+    "Name": "amir",
+    "Price": 2,
+    "Inventory": 3,
+    "Dop": "2024-10-30T11:21:58.81Z",
+    "Doe": "2024-10-30T11:21:58.81Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to add a new product
+[2024-10-30 14:52:06.914 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: InsertAsync] [Arguments: [
+  {
+    "Id": "8bd91d14-6b8d-4e71-a513-dad72f243aca",
+    "Name": "amir",
+    "Price": 2,
+    "Inventory": 3,
+    "Dop": "2024-10-30T11:21:58.81Z",
+    "Doe": "2024-10-30T11:21:58.81Z",
+    "Status": false
+  }
+]] [RetrieveData: null] Attempt to add an new entity with type Ecommerce.Core.Entities.Product
+[2024-10-30 14:52:06.951 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ] [FunctionName: ] [Arguments: ] [RetrieveData: ] An unhandled exception has occurred while executing the request.
+System.NotSupportedException: Serialization and deserialization of 'System.RuntimeType' instances is not supported. The unsupported member type is located on type 'System.Object'. Path: $.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.RuntimeType' instances is not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWriteAsObject(Utf8JsonWriter writer, Object value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Converters.ArrayConverter`2.OnWriteResume(Utf8JsonWriter writer, TElement[] array, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryWrite(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.JsonSerializer.WriteString[TValue](TValue& value, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Serialize[TValue](TValue value, JsonSerializerOptions options)
+   at Ecommerce.Core.Log.LoggerHelper.LogWithDetails(String message, Object retrievedData, Object[] args, String memberName, String sourceFilePath, LogLevel logLevel) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\Log\LoggerHelper.cs:line 33
+   at Ecommerce.Infrastructure.Repositories.GenericRepository`1.InsertAsync(TEntity entity) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Infrastructure\Repositories\GenericRepository.cs:line 93
+   at Ecommerce.Application.Services.ProductService.AddProductAsync(AddUpdateProductDto newProductDto)
+   at EcommerceSolution.Controller.ProductController.AddProduct(AddUpdateProductDto newProductDto)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2024-10-30 14:52:06.983 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ] [FunctionName: ] [Arguments: ] [RetrieveData: ] An Unhandled exception occured! /api/Product/AddProduct
+System.NotSupportedException: Serialization and deserialization of 'System.RuntimeType' instances is not supported. The unsupported member type is located on type 'System.Object'. Path: $.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.RuntimeType' instances is not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWriteAsObject(Utf8JsonWriter writer, Object value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Converters.ArrayConverter`2.OnWriteResume(Utf8JsonWriter writer, TElement[] array, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryWrite(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.JsonSerializer.WriteString[TValue](TValue& value, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Serialize[TValue](TValue value, JsonSerializerOptions options)
+   at Ecommerce.Core.Log.LoggerHelper.LogWithDetails(String message, Object retrievedData, Object[] args, String memberName, String sourceFilePath, LogLevel logLevel) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\Log\LoggerHelper.cs:line 33
+   at Ecommerce.Infrastructure.Repositories.GenericRepository`1.InsertAsync(TEntity entity) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Infrastructure\Repositories\GenericRepository.cs:line 93
+   at Ecommerce.Application.Services.ProductService.AddProductAsync(AddUpdateProductDto newProductDto)
+   at EcommerceSolution.Controller.ProductController.AddProduct(AddUpdateProductDto newProductDto)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2024-10-30 14:53:25.381 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: AuthenticateUserAsync] [Arguments: [
+  "amirasem1",
+  "hosein77"
+]] [RetrieveData: null] Attempt to authenticate an user
+[2024-10-30 14:53:25.383 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: AuthenticateUserAsync] [Arguments: [
+  "amirasem1"
+]] [RetrieveData: null] Check the user existence
+[2024-10-30 14:53:25.388 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: [
+  "Username",
+  "amirasem1",
+  ""
+]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.User by its UniqueProperty.
+[2024-10-30 14:53:32.948 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: AuthenticateUserAsync] [Arguments: [
+  "amirasem1"
+]] [RetrieveData: {
+  "Id": "ec7ded00-7b12-4244-a81e-c9ba4dc22b71",
+  "FirstName": "UserOne",
+  "LastName": "UserOne",
+  "Username": "amirasem1",
+  "PasswordHash": "AQAAAAIAAYagAAAAEDhPUqMu9KmcNsyqvixIv13khtenrU/6SCkDClSAnx1/0uo/rI6stEjSRPFwMUo/Tg==",
+  "Email": "userone@gmail.com",
+  "PhoneNumber": "88888",
+  "RoleId": "5c03a6cb-f544-4de7-bbeb-d5e771dd1444"
+}] User exists
+[2024-10-30 14:53:32.954 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "5c03a6cb-f544-4de7-bbeb-d5e771dd1444",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Role by its ID.
+[2024-10-30 14:53:32.969 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: AuthenticateUserAsync] [Arguments: [
+  "hosein77"
+]] [RetrieveData: null] Attempt to verify the password
+[2024-10-30 14:53:33.039 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: AuthenticateUserAsync] [Arguments: [
+  "amirasem1",
+  "hosein77"
+]] [RetrieveData: {
+  "Id": "ec7ded00-7b12-4244-a81e-c9ba4dc22b71",
+  "FirstName": "UserOne",
+  "LastName": "UserOne",
+  "Username": "amirasem1",
+  "PasswordHash": "AQAAAAIAAYagAAAAEDhPUqMu9KmcNsyqvixIv13khtenrU/6SCkDClSAnx1/0uo/rI6stEjSRPFwMUo/Tg==",
+  "Email": "userone@gmail.com",
+  "PhoneNumber": "88888",
+  "RoleId": "5c03a6cb-f544-4de7-bbeb-d5e771dd1444"
+}] User authenticated successfully.
+[2024-10-30 14:53:46.074 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: AddProduct] [Arguments: [
+  {
+    "Name": "amir",
+    "Price": 2,
+    "Inventory": 3,
+    "Dop": "2024-10-30T11:21:58.81Z",
+    "Doe": "2024-10-30T11:21:58.81Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to add new product
+[2024-10-30 14:53:46.077 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: AddProductAsync] [Arguments: [
+  {
+    "Name": "amir",
+    "Price": 2,
+    "Inventory": 3,
+    "Dop": "2024-10-30T11:21:58.81Z",
+    "Doe": "2024-10-30T11:21:58.81Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to add a new product
+[2024-10-30 14:53:46.079 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: InsertAsync] [Arguments: [
+  {
+    "Id": "9c2fd531-a808-4043-bef1-dd5813c1633b",
+    "Name": "amir",
+    "Price": 2,
+    "Inventory": 3,
+    "Dop": "2024-10-30T11:21:58.81Z",
+    "Doe": "2024-10-30T11:21:58.81Z",
+    "Status": false
+  }
+]] [RetrieveData: null] Attempt to add an new entity with type Ecommerce.Core.Entities.Product
+[2024-10-30 14:53:46.081 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ] [FunctionName: ] [Arguments: ] [RetrieveData: ] An unhandled exception has occurred while executing the request.
+System.NotSupportedException: Serialization and deserialization of 'System.RuntimeType' instances is not supported. The unsupported member type is located on type 'System.Object'. Path: $.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.RuntimeType' instances is not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWriteAsObject(Utf8JsonWriter writer, Object value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Converters.ArrayConverter`2.OnWriteResume(Utf8JsonWriter writer, TElement[] array, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryWrite(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.JsonSerializer.WriteString[TValue](TValue& value, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Serialize[TValue](TValue value, JsonSerializerOptions options)
+   at Ecommerce.Core.Log.LoggerHelper.LogWithDetails(String message, Object retrievedData, Object[] args, String memberName, String sourceFilePath, LogLevel logLevel) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\Log\LoggerHelper.cs:line 33
+   at Ecommerce.Infrastructure.Repositories.GenericRepository`1.InsertAsync(TEntity entity) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Infrastructure\Repositories\GenericRepository.cs:line 93
+   at Ecommerce.Application.Services.ProductService.AddProductAsync(AddUpdateProductDto newProductDto)
+   at EcommerceSolution.Controller.ProductController.AddProduct(AddUpdateProductDto newProductDto)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2024-10-30 14:53:46.086 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ] [FunctionName: ] [Arguments: ] [RetrieveData: ] An Unhandled exception occured! /api/Product/AddProduct
+System.NotSupportedException: Serialization and deserialization of 'System.RuntimeType' instances is not supported. The unsupported member type is located on type 'System.Object'. Path: $.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.RuntimeType' instances is not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWriteAsObject(Utf8JsonWriter writer, Object value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Converters.ArrayConverter`2.OnWriteResume(Utf8JsonWriter writer, TElement[] array, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryWrite(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.JsonSerializer.WriteString[TValue](TValue& value, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Serialize[TValue](TValue value, JsonSerializerOptions options)
+   at Ecommerce.Core.Log.LoggerHelper.LogWithDetails(String message, Object retrievedData, Object[] args, String memberName, String sourceFilePath, LogLevel logLevel) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\Log\LoggerHelper.cs:line 33
+   at Ecommerce.Infrastructure.Repositories.GenericRepository`1.InsertAsync(TEntity entity) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Infrastructure\Repositories\GenericRepository.cs:line 93
+   at Ecommerce.Application.Services.ProductService.AddProductAsync(AddUpdateProductDto newProductDto)
+   at EcommerceSolution.Controller.ProductController.AddProduct(AddUpdateProductDto newProductDto)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2024-10-30 14:56:03.053 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: Program] [FunctionName: <Main>$] [Arguments: null] [RetrieveData: null] Starting up the application
+[2024-10-30 14:56:22.283 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: AddProduct] [Arguments: [
+  {
+    "Name": "amir",
+    "Price": 20,
+    "Inventory": 10,
+    "Dop": "2024-10-30T11:26:10.383Z",
+    "Doe": "2024-10-30T11:26:10.383Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to add new product
+[2024-10-30 14:56:22.287 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: AddProductAsync] [Arguments: [
+  {
+    "Name": "amir",
+    "Price": 20,
+    "Inventory": 10,
+    "Dop": "2024-10-30T11:26:10.383Z",
+    "Doe": "2024-10-30T11:26:10.383Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to add a new product
+[2024-10-30 14:56:23.130 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: InsertAsync] [Arguments: [
+  {
+    "Id": "58c131ef-8c78-45d9-9355-4f420985bd1b",
+    "Name": "amir",
+    "Price": 20,
+    "Inventory": 10,
+    "Dop": "2024-10-30T11:26:10.383Z",
+    "Doe": "2024-10-30T11:26:10.383Z",
+    "Status": false
+  }
+]] [RetrieveData: null] Attempt to add an new entity with type Ecommerce.Core.Entities.Product
+[2024-10-30 14:56:23.272 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ] [FunctionName: ] [Arguments: ] [RetrieveData: ] An unhandled exception has occurred while executing the request.
+System.NotSupportedException: Serialization and deserialization of 'System.RuntimeType' instances is not supported. The unsupported member type is located on type 'System.Object'. Path: $.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.RuntimeType' instances is not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWriteAsObject(Utf8JsonWriter writer, Object value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Converters.ArrayConverter`2.OnWriteResume(Utf8JsonWriter writer, TElement[] array, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryWrite(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.JsonSerializer.WriteString[TValue](TValue& value, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Serialize[TValue](TValue value, JsonSerializerOptions options)
+   at Ecommerce.Core.Log.LoggerHelper.LogWithDetails(String message, Object retrievedData, Object[] args, String memberName, String sourceFilePath, LogLevel logLevel) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\Log\LoggerHelper.cs:line 33
+   at Ecommerce.Infrastructure.Repositories.GenericRepository`1.InsertAsync(TEntity entity) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Infrastructure\Repositories\GenericRepository.cs:line 93
+   at Ecommerce.Application.Services.ProductService.AddProductAsync(AddUpdateProductDto newProductDto) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Application\Services\ProductService.cs:line 69
+   at EcommerceSolution.Controller.ProductController.AddProduct(AddUpdateProductDto newProductDto) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.WebAPI\Controller\ProductController.cs:line 130
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2024-10-30 14:56:23.299 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ] [FunctionName: ] [Arguments: ] [RetrieveData: ] An Unhandled exception occured! /api/Product/AddProduct
+System.NotSupportedException: Serialization and deserialization of 'System.RuntimeType' instances is not supported. The unsupported member type is located on type 'System.Object'. Path: $.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.RuntimeType' instances is not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWriteAsObject(Utf8JsonWriter writer, Object value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Converters.ArrayConverter`2.OnWriteResume(Utf8JsonWriter writer, TElement[] array, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryWrite(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.JsonSerializer.WriteString[TValue](TValue& value, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Serialize[TValue](TValue value, JsonSerializerOptions options)
+   at Ecommerce.Core.Log.LoggerHelper.LogWithDetails(String message, Object retrievedData, Object[] args, String memberName, String sourceFilePath, LogLevel logLevel) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\Log\LoggerHelper.cs:line 33
+   at Ecommerce.Infrastructure.Repositories.GenericRepository`1.InsertAsync(TEntity entity) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Infrastructure\Repositories\GenericRepository.cs:line 93
+   at Ecommerce.Application.Services.ProductService.AddProductAsync(AddUpdateProductDto newProductDto) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Application\Services\ProductService.cs:line 69
+   at EcommerceSolution.Controller.ProductController.AddProduct(AddUpdateProductDto newProductDto) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.WebAPI\Controller\ProductController.cs:line 130
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2024-10-30 15:00:02.355 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: Program] [FunctionName: <Main>$] [Arguments: null] [RetrieveData: null] Starting up the application
+[2024-10-30 15:00:23.934 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: AddProduct] [Arguments: [
+  {
+    "Name": "ffff",
+    "Price": 100,
+    "Inventory": 10,
+    "Dop": "2024-10-30T11:30:09.744Z",
+    "Doe": "2024-10-30T11:30:09.744Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to add new product
+[2024-10-30 15:00:23.942 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: AddProductAsync] [Arguments: [
+  {
+    "Name": "ffff",
+    "Price": 100,
+    "Inventory": 10,
+    "Dop": "2024-10-30T11:30:09.744Z",
+    "Doe": "2024-10-30T11:30:09.744Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to add a new product
+[2024-10-30 15:00:24.763 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: InsertAsync] [Arguments: [
+  {
+    "Id": "8956d435-579e-4c5b-882d-d3148ee8c448",
+    "Name": "ffff",
+    "Price": 100,
+    "Inventory": 10,
+    "Dop": "2024-10-30T11:30:09.744Z",
+    "Doe": "2024-10-30T11:30:09.744Z",
+    "Status": false
+  }
+]] [RetrieveData: null] Attempt to add an new entity with type Ecommerce.Core.Entities.Product
+[2024-10-30 15:00:24.871 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ] [FunctionName: ] [Arguments: ] [RetrieveData: ] An unhandled exception has occurred while executing the request.
+System.NotSupportedException: Serialization and deserialization of 'System.RuntimeType' instances is not supported. The unsupported member type is located on type 'System.Object'. Path: $.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.RuntimeType' instances is not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWriteAsObject(Utf8JsonWriter writer, Object value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Converters.ArrayConverter`2.OnWriteResume(Utf8JsonWriter writer, TElement[] array, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryWrite(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.JsonSerializer.WriteString[TValue](TValue& value, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Serialize[TValue](TValue value, JsonSerializerOptions options)
+   at Ecommerce.Core.Log.LoggerHelper.LogWithDetails(String message, Object retrievedData, Object[] args, String memberName, String sourceFilePath, LogLevel logLevel) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\Log\LoggerHelper.cs:line 33
+   at Ecommerce.Infrastructure.Repositories.GenericRepository`1.InsertAsync(TEntity entity) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Infrastructure\Repositories\GenericRepository.cs:line 93
+   at Ecommerce.Application.Services.ProductService.AddProductAsync(AddUpdateProductDto newProductDto) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Application\Services\ProductService.cs:line 69
+   at EcommerceSolution.Controller.ProductController.AddProduct(AddUpdateProductDto newProductDto) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.WebAPI\Controller\ProductController.cs:line 130
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2024-10-30 15:00:24.895 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ] [FunctionName: ] [Arguments: ] [RetrieveData: ] An Unhandled exception occured! /api/Product/AddProduct
+System.NotSupportedException: Serialization and deserialization of 'System.RuntimeType' instances is not supported. The unsupported member type is located on type 'System.Object'. Path: $.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.RuntimeType' instances is not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWriteAsObject(Utf8JsonWriter writer, Object value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Converters.ArrayConverter`2.OnWriteResume(Utf8JsonWriter writer, TElement[] array, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryWrite(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.JsonSerializer.WriteString[TValue](TValue& value, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Serialize[TValue](TValue value, JsonSerializerOptions options)
+   at Ecommerce.Core.Log.LoggerHelper.LogWithDetails(String message, Object retrievedData, Object[] args, String memberName, String sourceFilePath, LogLevel logLevel) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\Log\LoggerHelper.cs:line 33
+   at Ecommerce.Infrastructure.Repositories.GenericRepository`1.InsertAsync(TEntity entity) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Infrastructure\Repositories\GenericRepository.cs:line 93
+   at Ecommerce.Application.Services.ProductService.AddProductAsync(AddUpdateProductDto newProductDto) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Application\Services\ProductService.cs:line 69
+   at EcommerceSolution.Controller.ProductController.AddProduct(AddUpdateProductDto newProductDto) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.WebAPI\Controller\ProductController.cs:line 130
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2024-10-30 15:01:32.965 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: AddProduct] [Arguments: [
+  {
+    "Name": "ffff",
+    "Price": 100,
+    "Inventory": 10,
+    "Dop": "2024-10-30T11:30:09.744Z",
+    "Doe": "2024-10-30T11:30:09.744Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to add new product
+[2024-10-30 15:01:32.969 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: AddProductAsync] [Arguments: [
+  {
+    "Name": "ffff",
+    "Price": 100,
+    "Inventory": 10,
+    "Dop": "2024-10-30T11:30:09.744Z",
+    "Doe": "2024-10-30T11:30:09.744Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to add a new product
+[2024-10-30 15:01:33.021 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: InsertAsync] [Arguments: [
+  {
+    "Id": "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+    "Name": "ffff",
+    "Price": 100,
+    "Inventory": 10,
+    "Dop": "2024-10-30T11:30:09.744Z",
+    "Doe": "2024-10-30T11:30:09.744Z",
+    "Status": false
+  }
+]] [RetrieveData: null] Attempt to add an new entity with type Ecommerce.Core.Entities.Product
+[2024-10-30 15:01:33.025 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: InsertAsync] [Arguments: [
+  {
+    "Id": "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+    "Name": "ffff",
+    "Price": 100,
+    "Inventory": 10,
+    "Dop": "2024-10-30T11:30:09.744Z",
+    "Doe": "2024-10-30T11:30:09.744Z",
+    "Status": false
+  }
+]] [RetrieveData: null] Successful Insert.
+[2024-10-30 15:01:40.935 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-10-30 15:01:40.939 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: AddProductAsync] [Arguments: [
+  {
+    "Name": "ffff",
+    "Price": 100,
+    "Inventory": 10,
+    "Dop": "2024-10-30T11:30:09.744Z",
+    "Doe": "2024-10-30T11:30:09.744Z",
+    "Status": true
+  }
+]] [RetrieveData: {
+  "Id": "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+  "Name": "ffff",
+  "Price": 100,
+  "Inventory": 10,
+  "Dop": "2024-10-30T11:30:09.744Z",
+  "Doe": "2024-10-30T11:30:09.744Z",
+  "Status": false
+}] Successful Product Insertion
+[2024-10-30 15:01:40.964 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: AddProduct] [Arguments: [
+  {
+    "Name": "ffff",
+    "Price": 100,
+    "Inventory": 10,
+    "Dop": "2024-10-30T11:30:09.744Z",
+    "Doe": "2024-10-30T11:30:09.744Z",
+    "Status": true
+  }
+]] [RetrieveData: {
+  "Id": "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+  "Name": "ffff",
+  "Price": 100,
+  "Inventory": 10,
+  "Dop": "2024-10-30T11:30:09.744Z",
+  "Doe": "2024-10-30T11:30:09.744Z",
+  "Status": false,
+  "ProductInvoices": null
+}] Product Add DTO Result
+[2024-10-30 15:06:38.838 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: UpdateProduct] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+  {
+    "Name": "updatetst",
+    "Price": 1212,
+    "Inventory": 1212,
+    "Dop": "2024-10-29T11:36:08.149Z",
+    "Doe": "2024-10-30T11:36:08.149Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempts to update a product
+[2024-10-30 15:06:38.846 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: UpdateProductAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+  {
+    "Name": "updatetst",
+    "Price": 1212,
+    "Inventory": 1212,
+    "Dop": "2024-10-29T11:36:08.149Z",
+    "Doe": "2024-10-30T11:36:08.149Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to logger a product
+[2024-10-30 15:06:38.865 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 15:06:39.231 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+    "Name": "updatetst",
+    "Price": 1212,
+    "Inventory": 1212,
+    "Dop": "2024-10-29T11:36:08.149Z",
+    "Doe": "2024-10-30T11:36:08.149Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to Update a Ecommerce.Core.Entities.Product
+[2024-10-30 15:06:39.239 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ] [FunctionName: ] [Arguments: ] [RetrieveData: ] An unhandled exception has occurred while executing the request.
+System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances is not supported. Path: $.TargetSite.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances is not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsObject(Utf8JsonWriter writer, Object rootValue)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.JsonSerializer.WriteString[TValue](TValue& value, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Serialize[TValue](TValue value, JsonSerializerOptions options)
+   at Ecommerce.Core.Log.LoggerHelper.LogWithDetails(String message, Object retrievedData, Object[] args, String memberName, String sourceFilePath, LogLevel logLevel) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\Log\LoggerHelper.cs:line 34
+   at EcommerceSolution.Controller.ProductController.UpdateProduct(Guid id, AddUpdateProductDto productDto)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2024-10-30 15:06:39.251 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ] [FunctionName: ] [Arguments: ] [RetrieveData: ] An Unhandled exception occured! /api/Product/UpdateProduct
+System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances is not supported. Path: $.TargetSite.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances is not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsObject(Utf8JsonWriter writer, Object rootValue)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.JsonSerializer.WriteString[TValue](TValue& value, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Serialize[TValue](TValue value, JsonSerializerOptions options)
+   at Ecommerce.Core.Log.LoggerHelper.LogWithDetails(String message, Object retrievedData, Object[] args, String memberName, String sourceFilePath, LogLevel logLevel) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\Log\LoggerHelper.cs:line 34
+   at EcommerceSolution.Controller.ProductController.UpdateProduct(Guid id, AddUpdateProductDto productDto)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2024-10-30 15:07:06.502 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: UpdateProduct] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+  {
+    "Name": "updatetst",
+    "Price": 1212,
+    "Inventory": 1212,
+    "Dop": "2024-10-29T11:36:08.149Z",
+    "Doe": "2024-10-30T11:36:08.149Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempts to update a product
+[2024-10-30 15:07:06.504 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: UpdateProductAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+  {
+    "Name": "updatetst",
+    "Price": 1212,
+    "Inventory": 1212,
+    "Dop": "2024-10-29T11:36:08.149Z",
+    "Doe": "2024-10-30T11:36:08.149Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to logger a product
+[2024-10-30 15:07:06.506 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 15:07:14.027 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+    "Name": "updatetst",
+    "Price": 1212,
+    "Inventory": 1212,
+    "Dop": "2024-10-29T11:36:08.149Z",
+    "Doe": "2024-10-30T11:36:08.149Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to Update a Ecommerce.Core.Entities.Product
+[2024-10-30 15:07:14.029 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+    "Name": "updatetst",
+    "Price": 1212,
+    "Inventory": 1212,
+    "Dop": "2024-10-29T11:36:08.149Z",
+    "Doe": "2024-10-30T11:36:08.149Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Successful Update.
+[2024-10-30 15:07:14.042 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-10-30 15:07:14.044 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: UpdateProductAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+  {
+    "Name": "updatetst",
+    "Price": 1212,
+    "Inventory": 1212,
+    "Dop": "2024-10-29T11:36:08.149Z",
+    "Doe": "2024-10-30T11:36:08.149Z",
+    "Status": true
+  }
+]] [RetrieveData: {
+  "Id": "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+  "Name": "updatetst",
+  "Price": 1212,
+  "Inventory": 1212,
+  "Dop": "2024-10-29T11:36:08.149Z",
+  "Doe": "2024-10-30T11:36:08.149Z",
+  "Status": true
+}] Successful Update
+[2024-10-30 15:07:14.048 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: UpdateProduct] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+  {
+    "Name": "updatetst",
+    "Price": 1212,
+    "Inventory": 1212,
+    "Dop": "2024-10-29T11:36:08.149Z",
+    "Doe": "2024-10-30T11:36:08.149Z",
+    "Status": true
+  }
+]] [RetrieveData: {
+  "Id": "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+  "Name": "updatetst",
+  "Price": 1212,
+  "Inventory": 1212,
+  "Dop": "2024-10-29T11:36:08.149Z",
+  "Doe": "2024-10-30T11:36:08.149Z",
+  "Status": true,
+  "ProductInvoices": null
+}] Product Update DTO Result
+[2024-10-30 15:10:03.897 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: DeleteProductByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da"
+]] [RetrieveData: null] Attempt to delete a product by ID
+[2024-10-30 15:10:03.900 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: DeleteProductByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da"
+]] [RetrieveData: null] Attempts to delete a product by ID.
+[2024-10-30 15:10:03.903 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 15:10:03.913 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: DeleteByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da"
+]] [RetrieveData: null] Attempt to Delete a Ecommerce.Core.Entities.Product
+[2024-10-30 15:10:03.924 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Delete] [Arguments: [
+  {
+    "Id": "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+    "Name": "updatetst",
+    "Price": 1212.00,
+    "Inventory": 1212.00,
+    "Dop": "2024-10-29T11:36:08.149",
+    "Doe": "2024-10-30T11:36:08.149",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to Delete a Ecommerce.Core.Entities.Product
+[2024-10-30 15:10:03.932 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ] [FunctionName: ] [Arguments: ] [RetrieveData: ] An unhandled exception has occurred while executing the request.
+System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances is not supported. Path: $.TargetSite.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances is not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsObject(Utf8JsonWriter writer, Object rootValue)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.JsonSerializer.WriteString[TValue](TValue& value, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Serialize[TValue](TValue value, JsonSerializerOptions options)
+   at Ecommerce.Core.Log.LoggerHelper.LogWithDetails(String message, Object retrievedData, Object[] args, String memberName, String sourceFilePath, LogLevel logLevel) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\Log\LoggerHelper.cs:line 34
+   at EcommerceSolution.Controller.ProductController.DeleteProductByIdAsync(Guid id)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2024-10-30 15:10:03.943 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ] [FunctionName: ] [Arguments: ] [RetrieveData: ] An Unhandled exception occured! /api/Product/DeleteProduct/0fd9fd0b-cd84-4007-844e-b8dd1e7089da
+System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances is not supported. Path: $.TargetSite.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances is not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsObject(Utf8JsonWriter writer, Object rootValue)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.JsonSerializer.WriteString[TValue](TValue& value, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Serialize[TValue](TValue value, JsonSerializerOptions options)
+   at Ecommerce.Core.Log.LoggerHelper.LogWithDetails(String message, Object retrievedData, Object[] args, String memberName, String sourceFilePath, LogLevel logLevel) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\Log\LoggerHelper.cs:line 34
+   at EcommerceSolution.Controller.ProductController.DeleteProductByIdAsync(Guid id)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2024-10-30 15:10:26.086 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: DeleteProductByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da"
+]] [RetrieveData: null] Attempt to delete a product by ID
+[2024-10-30 15:10:26.088 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: DeleteProductByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da"
+]] [RetrieveData: null] Attempts to delete a product by ID.
+[2024-10-30 15:10:26.093 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 15:10:26.098 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: DeleteByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da"
+]] [RetrieveData: null] Attempt to Delete a Ecommerce.Core.Entities.Product
+[2024-10-30 15:10:26.103 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Delete] [Arguments: [
+  {
+    "Id": "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+    "Name": "updatetst",
+    "Price": 1212.00,
+    "Inventory": 1212.00,
+    "Dop": "2024-10-29T11:36:08.149",
+    "Doe": "2024-10-30T11:36:08.149",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to Delete a Ecommerce.Core.Entities.Product
+[2024-10-30 15:10:26.106 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Delete] [Arguments: [
+  {
+    "Id": "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+    "Name": "updatetst",
+    "Price": 1212.00,
+    "Inventory": 1212.00,
+    "Dop": "2024-10-29T11:36:08.149",
+    "Doe": "2024-10-30T11:36:08.149",
+    "Status": true
+  }
+]] [RetrieveData: null] Successful Delete.
+[2024-10-30 15:10:26.128 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-10-30 15:10:26.129 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: DeleteProductByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da"
+]] [RetrieveData: {
+  "Id": "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+  "Name": "updatetst",
+  "Price": 1212.00,
+  "Inventory": 1212.00,
+  "Dop": "2024-10-29T11:36:08.149",
+  "Doe": "2024-10-30T11:36:08.149",
+  "Status": true
+}] Successful Delete.
+[2024-10-30 15:10:26.131 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: DeleteProductByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da"
+]] [RetrieveData: null] The product with Id 0fd9fd0b-cd84-4007-844e-b8dd1e7089da successfully deleted
+[2024-10-30 15:10:41.623 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetProductById] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da"
+]] [RetrieveData: null] Attempt to get a product by ID.
+[2024-10-30 15:10:41.630 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetProductByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da"
+]] [RetrieveData: null] Attempt to get a product by ID
+[2024-10-30 15:10:41.635 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 15:10:41.641 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetProductByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da"
+]] [RetrieveData: "Product Not Found!"] Incorrect Product ID
+[2024-10-30 15:10:41.645 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ] [FunctionName: ] [Arguments: ] [RetrieveData: ] An unhandled exception has occurred while executing the request.
+System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances is not supported. Path: $.TargetSite.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances is not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsObject(Utf8JsonWriter writer, Object rootValue)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.JsonSerializer.WriteString[TValue](TValue& value, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Serialize[TValue](TValue value, JsonSerializerOptions options)
+   at Ecommerce.Core.Log.LoggerHelper.LogWithDetails(String message, Object retrievedData, Object[] args, String memberName, String sourceFilePath, LogLevel logLevel) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\Log\LoggerHelper.cs:line 34
+   at EcommerceSolution.Controller.ProductController.GetProductById(Guid id)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2024-10-30 15:10:41.651 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ] [FunctionName: ] [Arguments: ] [RetrieveData: ] An Unhandled exception occured! /api/Product/GetProductById/0fd9fd0b-cd84-4007-844e-b8dd1e7089da
+System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances is not supported. Path: $.TargetSite.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances is not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsObject(Utf8JsonWriter writer, Object rootValue)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.JsonSerializer.WriteString[TValue](TValue& value, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Serialize[TValue](TValue value, JsonSerializerOptions options)
+   at Ecommerce.Core.Log.LoggerHelper.LogWithDetails(String message, Object retrievedData, Object[] args, String memberName, String sourceFilePath, LogLevel logLevel) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\Log\LoggerHelper.cs:line 34
+   at EcommerceSolution.Controller.ProductController.GetProductById(Guid id)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2024-10-30 15:11:05.212 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetProductById] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da"
+]] [RetrieveData: null] Attempt to get a product by ID.
+[2024-10-30 15:11:05.214 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetProductByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da"
+]] [RetrieveData: null] Attempt to get a product by ID
+[2024-10-30 15:11:05.220 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 15:11:05.230 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetProductByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da"
+]] [RetrieveData: "Product Not Found!"] Incorrect Product ID
+[2024-10-30 15:11:05.233 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ] [FunctionName: ] [Arguments: ] [RetrieveData: ] An unhandled exception has occurred while executing the request.
+System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances is not supported. Path: $.TargetSite.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances is not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsObject(Utf8JsonWriter writer, Object rootValue)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.JsonSerializer.WriteString[TValue](TValue& value, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Serialize[TValue](TValue value, JsonSerializerOptions options)
+   at Ecommerce.Core.Log.LoggerHelper.LogWithDetails(String message, Object retrievedData, Object[] args, String memberName, String sourceFilePath, LogLevel logLevel) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\Log\LoggerHelper.cs:line 34
+   at EcommerceSolution.Controller.ProductController.GetProductById(Guid id)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2024-10-30 15:11:05.244 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ] [FunctionName: ] [Arguments: ] [RetrieveData: ] An Unhandled exception occured! /api/Product/GetProductById/0fd9fd0b-cd84-4007-844e-b8dd1e7089da
+System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances is not supported. Path: $.TargetSite.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances is not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsObject(Utf8JsonWriter writer, Object rootValue)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.JsonSerializer.WriteString[TValue](TValue& value, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Serialize[TValue](TValue value, JsonSerializerOptions options)
+   at Ecommerce.Core.Log.LoggerHelper.LogWithDetails(String message, Object retrievedData, Object[] args, String memberName, String sourceFilePath, LogLevel logLevel) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\Log\LoggerHelper.cs:line 34
+   at EcommerceSolution.Controller.ProductController.GetProductById(Guid id)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2024-10-30 15:11:09.291 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetAllProducts] [Arguments: null] [RetrieveData: null] Attempts to get all Products
+[2024-10-30 15:11:09.297 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductAsync] [Arguments: null] [RetrieveData: null] Attempts to get all products
+[2024-10-30 15:11:09.301 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Product with filter 
+[2024-10-30 15:11:09.363 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+    "Name": "PRODUCT2",
+    "Price": 123.54,
+    "Inventory": -1.00,
+    "Dop": "2024-10-20T14:19:30.933",
+    "Doe": "2024-10-20T14:19:30.933",
+    "Status": false
+  },
+  {
+    "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Name": "PRODUCT1",
+    "Price": 12.00,
+    "Inventory": 8.00,
+    "Dop": "2024-10-20T13:52:33.182",
+    "Doe": "2024-10-20T13:52:33.182",
+    "Status": false
+  }
+]] All Product Retrieved
+[2024-10-30 15:11:09.372 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetAllProducts] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+    "Name": "PRODUCT2",
+    "Price": 123.54,
+    "Inventory": -1.00,
+    "Dop": "2024-10-20T14:19:30.933",
+    "Doe": "2024-10-20T14:19:30.933",
+    "Status": false,
+    "ProductInvoices": null
+  },
+  {
+    "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Name": "PRODUCT1",
+    "Price": 12.00,
+    "Inventory": 8.00,
+    "Dop": "2024-10-20T13:52:33.182",
+    "Doe": "2024-10-20T13:52:33.182",
+    "Status": false,
+    "ProductInvoices": null
+  }
+]] All Products DTO
+[2024-10-30 15:11:39.438 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetProductById] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021"
+]] [RetrieveData: null] Attempt to get a product by ID.
+[2024-10-30 15:11:39.440 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetProductByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021"
+]] [RetrieveData: null] Attempt to get a product by ID
+[2024-10-30 15:11:39.444 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 15:11:39.451 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetProductByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021"
+]] [RetrieveData: {
+  "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+  "Name": "PRODUCT1",
+  "Price": 12.00,
+  "Inventory": 8.00,
+  "Dop": "2024-10-20T13:52:33.182",
+  "Doe": "2024-10-20T13:52:33.182",
+  "Status": false
+}] Product Found
+[2024-10-30 15:11:39.454 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetProductById] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021"
+]] [RetrieveData: {
+  "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+  "Name": "PRODUCT1",
+  "Price": 12.00,
+  "Inventory": 8.00,
+  "Dop": "2024-10-20T13:52:33.182",
+  "Doe": "2024-10-20T13:52:33.182",
+  "Status": false,
+  "ProductInvoices": null
+}] Product DTO Result
+[2024-10-30 15:11:47.567 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetProductById] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0020"
+]] [RetrieveData: null] Attempt to get a product by ID.
+[2024-10-30 15:11:47.570 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetProductByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0020"
+]] [RetrieveData: null] Attempt to get a product by ID
+[2024-10-30 15:11:47.574 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0020",
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 15:11:47.592 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetProductByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0020"
+]] [RetrieveData: "Product Not Found!"] Incorrect Product ID
+[2024-10-30 15:11:47.598 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ] [FunctionName: ] [Arguments: ] [RetrieveData: ] An unhandled exception has occurred while executing the request.
+System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances is not supported. Path: $.TargetSite.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances is not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsObject(Utf8JsonWriter writer, Object rootValue)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.JsonSerializer.WriteString[TValue](TValue& value, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Serialize[TValue](TValue value, JsonSerializerOptions options)
+   at Ecommerce.Core.Log.LoggerHelper.LogWithDetails(String message, Object retrievedData, Object[] args, String memberName, String sourceFilePath, LogLevel logLevel) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\Log\LoggerHelper.cs:line 34
+   at EcommerceSolution.Controller.ProductController.GetProductById(Guid id)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2024-10-30 15:11:47.614 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ] [FunctionName: ] [Arguments: ] [RetrieveData: ] An Unhandled exception occured! /api/Product/GetProductById/7ce053d4-4d01-4657-b38a-3013096f0020
+System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances is not supported. Path: $.TargetSite.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.Reflection.MethodBase' instances is not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsObject(Utf8JsonWriter writer, Object rootValue)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)
+   at System.Text.Json.JsonSerializer.WriteString[TValue](TValue& value, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Serialize[TValue](TValue value, JsonSerializerOptions options)
+   at Ecommerce.Core.Log.LoggerHelper.LogWithDetails(String message, Object retrievedData, Object[] args, String memberName, String sourceFilePath, LogLevel logLevel) in C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Core\Log\LoggerHelper.cs:line 34
+   at EcommerceSolution.Controller.ProductController.GetProductById(Guid id)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2024-10-30 15:13:20.418 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetProductById] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0020"
+]] [RetrieveData: null] Attempt to get a product by ID.
+[2024-10-30 15:13:20.435 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetProductByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0020"
+]] [RetrieveData: null] Attempt to get a product by ID
+[2024-10-30 15:13:20.443 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0020",
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 15:13:27.963 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetProductByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0020"
+]] [RetrieveData: "Product Not Found!"] Incorrect Product ID
+[2024-10-30 15:13:27.964 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetProductById] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0020"
+]] [RetrieveData: "Product Not Found!"] Incorrect Product ID
+[2024-10-30 15:13:45.468 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: DeleteProductByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da"
+]] [RetrieveData: null] Attempt to delete a product by ID
+[2024-10-30 15:13:45.472 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: DeleteProductByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da"
+]] [RetrieveData: null] Attempts to delete a product by ID.
+[2024-10-30 15:13:45.475 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da",
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 15:13:45.481 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: DeleteProductByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da"
+]] [RetrieveData: "Product Not Found!"] There is no product with this ID
+[2024-10-30 15:13:45.483 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: DeleteProductByIdAsync] [Arguments: [
+  "0fd9fd0b-cd84-4007-844e-b8dd1e7089da"
+]] [RetrieveData: "Product Not Found!"] Incorrect Product ID.

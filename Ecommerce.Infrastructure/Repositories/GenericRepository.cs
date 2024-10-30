@@ -90,7 +90,7 @@ public class GenericRepository<TEntity> where TEntity : class
         var entityType = typeof(TEntity);
         LoggerHelper.LogWithDetails($"Attempt to add an new entity with type {entityType}", args: [entity]);
         await _dbSet.AddAsync(entity);
-        LoggerHelper.LogWithDetails("Successful Insert.",args:[entityType,entity]);
+        LoggerHelper.LogWithDetails("Successful Insert.",args:[entity]);
     }
 
     public virtual async Task DeleteByIdAsync(object id)
@@ -112,7 +112,7 @@ public class GenericRepository<TEntity> where TEntity : class
         }
 
         _dbSet.Remove(entityToDelete);
-        LoggerHelper.LogWithDetails("Successful Delete.",args:[entityType,entityToDelete]);
+        LoggerHelper.LogWithDetails("Successful Delete.",args:[entityToDelete]);
         return Task.CompletedTask;
     }
 
@@ -122,6 +122,6 @@ public class GenericRepository<TEntity> where TEntity : class
         LoggerHelper.LogWithDetails($"Attempt to Update a {entityType}", args: [entityToUpdate]);
         _dbSet.Attach(entityToUpdate);
         _context.Entry(entityToUpdate).State = EntityState.Modified;
-        LoggerHelper.LogWithDetails($"Successful Update.",args:[entityType,entityToUpdate]);
+        LoggerHelper.LogWithDetails($"Successful Update.",args:[entityToUpdate]);
     }
 }

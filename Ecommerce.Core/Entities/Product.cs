@@ -40,6 +40,7 @@ public class Product
     
 
     //Relation N-N with Invoice
+    [JsonIgnore]
     public ICollection<ProductInvoice> Invoices { get; set; } = null!;
 
     [JsonIgnore]

@@ -1,6 +1,9 @@
 ﻿using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using Serilog.Context;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Ecommerce.Core.Log;
 
@@ -21,13 +24,14 @@ public class LoggerHelper
     {
         
         
-        var jsonSettings = new JsonSerializerSettings
+        var jsonOptions = new JsonSerializerOptions
         {
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            ReferenceHandler = ReferenceHandler.IgnoreCycles,
+            WriteIndented = true
         };
 
-        var serializedArgs = args != null ? JsonConvert.SerializeObject(args) : "null";
-        var serializedRetrievedData = retrievedData != null ? JsonConvert.SerializeObject(retrievedData) : "null";
+        var serializedArgs = args != null ? JsonSerializer.Serialize(args, jsonOptions) : "null";
+        var serializedRetrievedData = retrievedData != null ? JsonSerializer.Serialize(retrievedData, jsonOptions) : "null";
 
         var className = System.IO.Path.GetFileNameWithoutExtension(sourceFilePath);
 
