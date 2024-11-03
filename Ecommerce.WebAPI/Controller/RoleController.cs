@@ -26,11 +26,10 @@ public class RoleController : ControllerBase
     [HttpGet("GetRoleById/{id}")]
     public async Task<IActionResult> GetRoleById(Guid id)
     {
-        LoggerHelper.LogWithDetails("Attempt to get a role by ID.", args: [id]);
+        LoggerHelper.LogWithDetails(args: [id]);
         try
         {
             var role = await _roleServices.GetRoleByIdAsync(id);
-            LoggerHelper.LogWithDetails($"Role DTO Result", args: [id], retrievedData: role);
             return Ok(role);
         }
         catch (Exception e)
@@ -44,11 +43,10 @@ public class RoleController : ControllerBase
     [HttpGet("AllRoles")]
     public async Task<IActionResult> GetAllRoles()
     {
-        LoggerHelper.LogWithDetails("Attempt to get all the roles.");
+        LoggerHelper.LogWithDetails();
         try
         {
             var roles = await _roleServices.GetAllRolesAsync();
-            LoggerHelper.LogWithDetails("All Roles", retrievedData: roles);
             return Ok(roles);
         }
         catch (Exception e)
@@ -61,16 +59,17 @@ public class RoleController : ControllerBase
     [HttpGet("SearchRoles")]
     public async Task<IActionResult> SearchRoles([FromQuery] string name)
     {
-        LoggerHelper.LogWithDetails("Attempt to get a role by name", args: [name]);
+        LoggerHelper.LogWithDetails(args: [name]);
 
         try
         {
             var role = await _roleServices.GetRoleByNameAsync(name);
-            LoggerHelper.LogWithDetails("Role DTO Result", args: [name], retrievedData: role);
             return Ok(role);
         }
         catch (Exception e)
         {
+            LoggerHelper.LogWithDetails("Unexpected Errors", args: [name], retrievedData: e.Message,
+                logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
     }
@@ -78,29 +77,30 @@ public class RoleController : ControllerBase
     [AllowAnonymous]
     [HttpPost("AddNewRole")]
     [Consumes("application/json")]
-    public async Task<IActionResult> AddRole([FromBody] AddUpdateRoleDto role)
+    public async Task<IActionResult> AddRole([FromBody] AddUpdateRoleDto newRoleDto)
     {
+        LoggerHelper.LogWithDetails(args:[newRoleDto]);
         if (!ModelState.IsValid)
         {
-            LoggerHelper.LogWithDetails("Binding Errors.", args: [role],
+            LoggerHelper.LogWithDetails("Binding Errors.", args: [newRoleDto],
                 retrievedData: ModelState["Role"]!.Errors.Select(e => e.ErrorMessage),
                 logLevel: LoggerHelper.LogLevel.Error);
             return BadRequest(ModelState["Role"]!.Errors.Select(e => e.ErrorMessage));
         }
 
-        var newRole = await _roleServices.AddRoleAsync(role);
-        LoggerHelper.LogWithDetails("New User DTO", args: [role], retrievedData: newRole);
+        var newRole = await _roleServices.AddRoleAsync(newRoleDto);
         return Ok(newRole);
     }
 
 
     [HttpPut("UpdateRole")]
     [Consumes("application/json")]
-    public async Task<IActionResult> UpdateRole([FromQuery] Guid id, [FromBody] AddUpdateRoleDto roleDto)
+    public async Task<IActionResult> UpdateRole([FromQuery] Guid id, [FromBody] AddUpdateRoleDto updateRoleDto)
     {
+        LoggerHelper.LogWithDetails(args:[id,updateRoleDto]);
         if (!ModelState.IsValid)
         {
-            LoggerHelper.LogWithDetails("Binding Errors.", args: [id, roleDto],
+            LoggerHelper.LogWithDetails("Binding Errors.", args: [id, updateRoleDto],
                 retrievedData: ModelState["Role"]!.Errors.Select(e => e.ErrorMessage),
                 logLevel: LoggerHelper.LogLevel.Error);
             return BadRequest(ModelState["Role"]!.Errors.Select(e => e.ErrorMessage));
@@ -108,13 +108,12 @@ public class RoleController : ControllerBase
 
         try
         {
-            var updatedRole = await _roleServices.UpdateRoleAsync(id, roleDto);
-            LoggerHelper.LogWithDetails("Role Update DTO", args: [id, roleDto], retrievedData: updatedRole);
+            var updatedRole = await _roleServices.UpdateRoleAsync(id, updateRoleDto);
             return Ok(updatedRole);
         }
         catch (Exception e)
         {
-            LoggerHelper.LogWithDetails("Unexpected Errors", args: [id, roleDto], retrievedData: e,
+            LoggerHelper.LogWithDetails("Unexpected Errors", args: [id, updateRoleDto], retrievedData: e,
                 logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
@@ -123,17 +122,15 @@ public class RoleController : ControllerBase
     [HttpDelete("DeleteRole/{id}")]
     public async Task<IActionResult> DeleteRoleByIdAsync(Guid id)
     {
-        
-        LoggerHelper.LogWithDetails("Attempt to Delete a role by ID.",args:[id]);
+        LoggerHelper.LogWithDetails(args: [id]);
         try
         {
             await _roleServices.DeleteRoleByIdAsync(id);
-            LoggerHelper.LogWithDetails($"The role with Id {id} successfully deleted",args:[id]);
             return Ok($"The role with Id {id} successfully deleted");
         }
         catch (Exception e)
         {
-            LoggerHelper.LogWithDetails("Wrong ID/Unexpected Errors", args:[id],retrievedData:e);
+            LoggerHelper.LogWithDetails("Wrong ID/Unexpected Errors", args: [id], retrievedData: e);
             return NotFound(e.Message);
         }
     }

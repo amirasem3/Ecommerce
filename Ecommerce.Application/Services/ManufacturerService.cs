@@ -35,7 +35,7 @@ public class ManufacturerService
         }
 
         LoggerHelper.LogWithDetails("Manufacturer Found", args: [id], retrievedData: manufacturer);
-        return new ManufacturerDto
+        var manRes = new ManufacturerDto
         {
             Id = manufacturer.Id,
             Name = manufacturer.Name,
@@ -57,6 +57,8 @@ public class ManufacturerService
                 Status = p.Status
             }).ToList()
         };
+        LoggerHelper.LogWithDetails("Target Manufacturer Found", args: [id], retrievedData: manRes);
+        return manRes;
     }
 
     public async Task<IEnumerable<ManufacturerDto>> GetAllManufacturersAsync()
@@ -72,7 +74,7 @@ public class ManufacturerService
 
         LoggerHelper.LogWithDetails("All manufacturers retrieved successfully", retrievedData: manufacturers);
 
-        return manufacturers.Select(manufacturer => new ManufacturerDto
+        var manRes = manufacturers.Select(manufacturer => new ManufacturerDto
         {
             Id = manufacturer.Id,
             Name = manufacturer.Name,
@@ -94,6 +96,8 @@ public class ManufacturerService
                 Status = p.Status
             }).ToList()
         }).ToList();
+        LoggerHelper.LogWithDetails("All Manufacturers", retrievedData: manRes);
+        return manRes;
     }
 
     public async Task<ManufacturerDto> GetManufacturerByAddressAsync(string address)
@@ -109,7 +113,7 @@ public class ManufacturerService
         }
 
         LoggerHelper.LogWithDetails("Manufacturer Found", args: [address], retrievedData: manufacturer);
-        return new ManufacturerDto
+        var manRes = new ManufacturerDto
         {
             Id = manufacturer.Id,
             Name = manufacturer.Name,
@@ -131,6 +135,8 @@ public class ManufacturerService
                 Status = p.Status
             }).ToList()
         };
+        LoggerHelper.LogWithDetails("Manufacturer's Address search result", args: [address], retrievedData: manRes);
+        return manRes;
     }
 
     public async Task<ManufacturerDto> GetManufacturerByEmailAsync(string email)
@@ -146,28 +152,31 @@ public class ManufacturerService
         }
 
         LoggerHelper.LogWithDetails("Manufacturer Found", args: [email], retrievedData: manufacturer);
-        return new ManufacturerDto
-        {
-            Id = manufacturer.Id,
-            Name = manufacturer.Name,
-            OwnerName = manufacturer.OwnerName,
-            Address = manufacturer.Address,
-            EstablishDate = manufacturer.EstablishDate,
-            Rate = manufacturer.Rate,
-            Status = manufacturer.Status,
-            ManufacturerCountry = manufacturer.ManufacturerCountry,
-            Email = manufacturer.Email,
-            PhoneNumber = manufacturer.PhoneNumber,
-            Products = manufacturer.Products2.Select(p => new ProductManufacturerDto
+        var manRes =
+            new ManufacturerDto
             {
-                Name = p.Name,
-                Doe = p.Doe,
-                Dop = p.Dop,
-                Inventory = p.Inventory,
-                Price = p.Price,
-                Status = p.Status
-            }).ToList()
-        };
+                Id = manufacturer.Id,
+                Name = manufacturer.Name,
+                OwnerName = manufacturer.OwnerName,
+                Address = manufacturer.Address,
+                EstablishDate = manufacturer.EstablishDate,
+                Rate = manufacturer.Rate,
+                Status = manufacturer.Status,
+                ManufacturerCountry = manufacturer.ManufacturerCountry,
+                Email = manufacturer.Email,
+                PhoneNumber = manufacturer.PhoneNumber,
+                Products = manufacturer.Products2.Select(p => new ProductManufacturerDto
+                {
+                    Name = p.Name,
+                    Doe = p.Doe,
+                    Dop = p.Dop,
+                    Inventory = p.Inventory,
+                    Price = p.Price,
+                    Status = p.Status
+                }).ToList()
+            };
+        LoggerHelper.LogWithDetails("Manufacturer's Email search result", args: [email], retrievedData: manRes);
+        return manRes;
     }
 
     public async Task<ManufacturerDto> GetManufacturerByPhoneNumberAsync(string phoneNumber)
@@ -183,7 +192,7 @@ public class ManufacturerService
         }
 
         LoggerHelper.LogWithDetails("Manufacturer Found", args: [phoneNumber], retrievedData: manufacturer);
-        return new ManufacturerDto
+        var manRes = new ManufacturerDto
         {
             Id = manufacturer.Id,
             Name = manufacturer.Name,
@@ -205,6 +214,9 @@ public class ManufacturerService
                 Status = p.Status
             }).ToList()
         };
+        LoggerHelper.LogWithDetails("Manufacturer's Phone Number search result", args: [phoneNumber],
+            retrievedData: manRes);
+        return manRes;
     }
 
 
@@ -221,7 +233,7 @@ public class ManufacturerService
         }
 
         LoggerHelper.LogWithDetails("Manufacturers Found", args: [ownerName], retrievedData: manufacturers);
-        return manufacturers.Select(manufacturer => new ManufacturerDto
+        var manRes = manufacturers.Select(manufacturer => new ManufacturerDto
         {
             Id = manufacturer.Id,
             Name = manufacturer.Name,
@@ -243,6 +255,9 @@ public class ManufacturerService
                 Status = p.Status
             }).ToList()
         }).ToList();
+        LoggerHelper.LogWithDetails("Manufacturer's Owner Name search result", args: [ownerName],
+            retrievedData: manRes);
+        return manRes;
     }
 
     public async Task<ManufacturerDto> AddManufacturerAsync(AddUpdateManufacturerDto newManufacturerDto)
@@ -291,7 +306,7 @@ public class ManufacturerService
             throw new Exception(e.Message);
         }
 
-        return new ManufacturerDto
+        var manRes = new ManufacturerDto
         {
             Id = manufacturer.Id,
             Name = newManufacturerDto.Name,
@@ -305,6 +320,8 @@ public class ManufacturerService
             Status = newManufacturerDto.Status,
             Products = []
         };
+        LoggerHelper.LogWithDetails("New Manufacturer", args: [newManufacturerDto], retrievedData: manRes);
+        return manRes;
     }
 
     public async Task<ManufacturerDto> UpdateManufacturerAsync(Guid id,
@@ -331,7 +348,8 @@ public class ManufacturerService
         manufacturer.ManufacturerCountry = updateManufacturerDto.ManufacturerCountry;
         _unitOfWork.ManufacturerRepository.Update(manufacturer);
         await _unitOfWork.SaveAsync();
-        return new ManufacturerDto
+
+        var manRes = new ManufacturerDto
         {
             Id = manufacturer.Id,
             Name = manufacturer.Name,
@@ -353,6 +371,8 @@ public class ManufacturerService
                 Status = p.Status
             }).ToList()
         };
+        LoggerHelper.LogWithDetails("Updated Manufacturer", args: [id, updateManufacturerDto], retrievedData: manRes);
+        return manRes;
     }
 
 

@@ -1,9 +1,11 @@
-﻿using Ecommerce.Application.DTOs;
+﻿using Azure.Core;
+using Ecommerce.Application.DTOs;
 using Ecommerce.Application.DTOs.Manufacturer;
 using Ecommerce.Core.Entities;
 using Ecommerce.Core.Interfaces;
 using Ecommerce.Core.Log;
 using Ecommerce.Infrastructure.Repositories;
+using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Core;
 
@@ -31,25 +33,27 @@ public class ProductService
         }
 
         LoggerHelper.LogWithDetails("Product Found", args: [id], retrievedData: product);
-        return new ProductDto
-        {
-            Id = product.Id,
-            Name = product.Name,
-            Price = product.Price,
-            Inventory = product.Inventory,
-            Status = product.Status,
-            Dop = product.Dop,
-            Doe = product.Doe,
-            Manufacturer = product.Manufacturers2.Select(m => new ManufacturerProductDto
+        var resProd = new ProductDto
             {
-                Address = m.Address,
-                Email = m.Email,
-                Country = m.ManufacturerCountry,
-                Name = m.Name,
-                PhoneNumber = m.PhoneNumber,
-                Rate = m.Rate
-            }).ToList()
-        };
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                Inventory = product.Inventory,
+                Status = product.Status,
+                Dop = product.Dop,
+                Doe = product.Doe,
+                Manufacturer = product.Manufacturers2.Select(m => new ManufacturerProductDto
+                {
+                    Address = m.Address,
+                    Email = m.Email,
+                    Country = m.ManufacturerCountry,
+                    Name = m.Name,
+                    PhoneNumber = m.PhoneNumber,
+                    Rate = m.Rate
+                }).ToList()
+            };
+        LoggerHelper.LogWithDetails("Target Product Found",args:[id],retrievedData:resProd);
+        return resProd;
     }
 
     public async Task<ProductDto> AddProductAsync(AddUpdateProductDto newProductDto)
@@ -70,7 +74,7 @@ public class ProductService
         await _unitOfWork.SaveAsync();
 
         LoggerHelper.LogWithDetails("Successful Product Insertion", args: [newProductDto], retrievedData: product);
-        return new ProductDto
+        var resProd = new ProductDto
         {
             Id = product.Id,
             Name = product.Name,
@@ -81,6 +85,8 @@ public class ProductService
             Doe = product.Doe,
             Manufacturer = []
         };
+        LoggerHelper.LogWithDetails("New Product added Successfully.",args:[newProductDto],retrievedData:resProd);
+        return resProd;
     }
 
     public async Task<ProductDto> UpdateProductAsync(Guid id, AddUpdateProductDto updateProductDto)
@@ -105,7 +111,7 @@ public class ProductService
         await _unitOfWork.SaveAsync();
 
         LoggerHelper.LogWithDetails("Successful Update", args: [id, updateProductDto], retrievedData: product);
-        return new ProductDto
+        var resProd = new ProductDto
         {
             Id = product.Id,
             Name = product.Name,
@@ -124,6 +130,8 @@ public class ProductService
                 Rate = m.Rate
             }).ToList()
         };
+        LoggerHelper.LogWithDetails("Product Updated Successfully",args:[id,updateProductDto],retrievedData:resProd);
+        return resProd;
     }
 
     public async Task<bool> DeleteProductByIdAsync(Guid id)
@@ -140,7 +148,7 @@ public class ProductService
         // await _productRepository.DeleteProductByIdAsync(id);
         await _unitOfWork.ProductRepository.DeleteByIdAsync(id);
         await _unitOfWork.SaveAsync();
-        LoggerHelper.LogWithDetails("Successful Delete.",args:[id],retrievedData:product);
+        LoggerHelper.LogWithDetails("Successful Delete.", args: [id], retrievedData: product);
         return true;
     }
 
@@ -157,7 +165,7 @@ public class ProductService
 
         LoggerHelper.LogWithDetails("All Product Retrieved", retrievedData: products);
 
-        return products.Select(product => new ProductDto
+        var resProd =products.Select(product => new ProductDto
         {
             Id = product.Id,
             Name = product.Name,
@@ -176,6 +184,8 @@ public class ProductService
                 Rate = m.Rate
             }).ToList()
         }).ToList();
+        LoggerHelper.LogWithDetails("All Products retrieved successfully.",retrievedData:resProd);
+        return resProd;
     }
 
     public async Task<IEnumerable<ProductDto>> GetAllProductsByNameAsync(string name)
@@ -193,7 +203,7 @@ public class ProductService
 
         LoggerHelper.LogWithDetails("All products with this name retrieved successfully.", args: [name],
             retrievedData: products);
-        return products.Select(product => new ProductDto
+        var resProd =products.Select(product => new ProductDto
         {
             Id = product.Id,
             Name = product.Name,
@@ -212,6 +222,8 @@ public class ProductService
                 Rate = m.Rate
             }).ToList()
         }).ToList();
+        LoggerHelper.LogWithDetails("Product's name search result",args:[name],retrievedData:resProd);
+        return resProd;
     }
 
     public async Task<IEnumerable<ProductDto>> FilterProductByPriceAsync(decimal startPrice, decimal endPrice)
@@ -229,8 +241,8 @@ public class ProductService
 
         LoggerHelper.LogWithDetails("All product in the price range retrieved successfully.",
             args: [startPrice, endPrice], retrievedData: products);
-
-        return products.Select(product => new ProductDto
+        
+        var resProd = products.Select(product => new ProductDto
         {
             Id = product.Id,
             Name = product.Name,
@@ -249,6 +261,8 @@ public class ProductService
                 Rate = m.Rate
             }).ToList()
         }).ToList();
+        LoggerHelper.LogWithDetails("Product's price filter results",args:[startPrice,endPrice],retrievedData:resProd);
+        return resProd;
     }
 
     public async Task<IEnumerable<InvoiceProductDto>> GetInvoicesByProductId(Guid productId)
@@ -266,7 +280,8 @@ public class ProductService
 
         LoggerHelper.LogWithDetails("All invoices that have this product retrieved successfully.", args: [productId],
             retrievedData: productInvoices);
-        return productInvoices.Select(pi => new InvoiceProductDto()
+        
+        var prodInvoiceRes =productInvoices.Select(pi => new InvoiceProductDto()
         {
             Id = pi.Invoice.Id,
             IssueDate = pi.Invoice.IssueDate,
@@ -278,5 +293,7 @@ public class ProductService
             PaymentStatus = pi.Invoice.PaymentStatus,
             TotalPrice = pi.Invoice.TotalPrice,
         });
+        LoggerHelper.LogWithDetails("Invoice with this product.",args:[productId],retrievedData:prodInvoiceRes);
+        return prodInvoiceRes;
     }
 }

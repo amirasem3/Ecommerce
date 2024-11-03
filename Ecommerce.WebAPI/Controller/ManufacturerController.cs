@@ -25,11 +25,10 @@ public class ManufacturerController : ControllerBase
     [ActionName(nameof(GetManufacturerById))]
     public async Task<IActionResult> GetManufacturerById(Guid id)
     {
-        LoggerHelper.LogWithDetails("Attempts to get a manufacturer by ID", args: [id]);
+        LoggerHelper.LogWithDetails(args: [id]);
         try
         {
             var manufacturer = await _manufacturerService.GetManufacturerByIdAsync(id);
-            LoggerHelper.LogWithDetails("Manufacturer DTO Result", args: [id], retrievedData: manufacturer);
             return Ok(manufacturer);
         }
         catch (Exception e)
@@ -42,12 +41,11 @@ public class ManufacturerController : ControllerBase
     [HttpGet("GetAllManufacturers")]
     public async Task<IActionResult> GetAllManufacturers()
     {
-        LoggerHelper.LogWithDetails("Attempts to get all manufacturers");
+        LoggerHelper.LogWithDetails();
 
         try
         {
             var manufacturers = await _manufacturerService.GetAllManufacturersAsync();
-            LoggerHelper.LogWithDetails("All Manufacturers", retrievedData: manufacturers);
             return Ok(manufacturers);
         }
         catch (Exception e)
@@ -62,11 +60,10 @@ public class ManufacturerController : ControllerBase
     [HttpGet("GetManufacturerByAddress")]
     public async Task<IActionResult> SearchManufacturerAddresses([FromQuery] string address)
     {
-        LoggerHelper.LogWithDetails("Attempts to get a manufacturer by address", args: [address]);
+        LoggerHelper.LogWithDetails(args: [address]);
         try
         {
             var manufacturer = await _manufacturerService.GetManufacturerByAddressAsync(address);
-            LoggerHelper.LogWithDetails("Manufacturer DTO Result", args: [address], retrievedData: manufacturer);
             return Ok(manufacturer);
         }
         catch (Exception e)
@@ -80,11 +77,10 @@ public class ManufacturerController : ControllerBase
     [HttpGet("GetManufacturerByEmail")]
     public async Task<IActionResult> SearchManufacturerEmails([FromQuery] string email)
     {
-        LoggerHelper.LogWithDetails("Attempts to get a manufacturer by email", args: [email]);
+        LoggerHelper.LogWithDetails(args: [email]);
         try
         {
             var manufacturer = await _manufacturerService.GetManufacturerByEmailAsync(email);
-            LoggerHelper.LogWithDetails("Manufacturer DTO Result", args: [email], retrievedData: manufacturer);
             return Ok(manufacturer);
         }
         catch (Exception e)
@@ -98,11 +94,10 @@ public class ManufacturerController : ControllerBase
     [HttpGet("GetManufacturerByPhoneNumber")]
     public async Task<IActionResult> SearchManufacturerPhoneNumbers([FromQuery] string phoneNumber)
     {
-        LoggerHelper.LogWithDetails("Attempts to get a manufacturer by phone number", args: [phoneNumber]);
+        LoggerHelper.LogWithDetails(args: [phoneNumber]);
         try
         {
             var manufacturer = await _manufacturerService.GetManufacturerByPhoneNumberAsync(phoneNumber);
-            LoggerHelper.LogWithDetails("Manufacturer DTO Result", args: [phoneNumber], retrievedData: manufacturer);
             return Ok(manufacturer);
         }
         catch (Exception e)
@@ -117,11 +112,10 @@ public class ManufacturerController : ControllerBase
     [HttpGet("GetManufacturerByOwner")]
     public async Task<IActionResult> SearchManufacturerOwners(string owner)
     {
-        LoggerHelper.LogWithDetails("Attempts to get a manufacturer by owner name", args: [owner]);
+        LoggerHelper.LogWithDetails(args: [owner]);
         try
         {
             var manufacturers = await _manufacturerService.GetManufacturersByOwnerAsync(owner);
-            LoggerHelper.LogWithDetails("Manufacturer DTO Result", args: [owner], retrievedData: manufacturers);
             return Ok(manufacturers);
         }
         catch (Exception e)
@@ -137,7 +131,7 @@ public class ManufacturerController : ControllerBase
     [Consumes("application/json")]
     public async Task<IActionResult> AddManufacturer([FromBody] AddUpdateManufacturerDto newManufacturer)
     {
-        LoggerHelper.LogWithDetails("Attempt to add new manufacturer", args: [newManufacturer]);
+        LoggerHelper.LogWithDetails(args: [newManufacturer]);
         if (!ModelState.IsValid)
         {
             LoggerHelper.LogWithDetails("Binding Errors", args: [newManufacturer],
@@ -149,8 +143,6 @@ public class ManufacturerController : ControllerBase
         try
         {
             var manufacturer = await _manufacturerService.AddManufacturerAsync(newManufacturer);
-            LoggerHelper.LogWithDetails("Manufacturer ADD DTO Result", args: [newManufacturer],
-                retrievedData: manufacturer);
             return CreatedAtAction(nameof(GetManufacturerById), new { id = manufacturer.Id }, manufacturer);
         }
         catch (Exception e)
@@ -166,12 +158,10 @@ public class ManufacturerController : ControllerBase
     public async Task<IActionResult> AssignManufacturerProduct([FromQuery] Guid manufacturerId,
         [FromQuery] Guid productId)
     {
-        LoggerHelper.LogWithDetails("Attempt to add a product to a manufacturer", args: [productId, manufacturerId]);
+        LoggerHelper.LogWithDetails(args: [productId, manufacturerId]);
         try
         {
             await _manufacturerService.AssignManufacturerProductsAsync(manufacturerId, productId);
-            LoggerHelper.LogWithDetails("The product is successfully added to the manufacturers' products",
-                args: [manufacturerId, productId]);
             return Ok("The product is successfully added to the manufacturers' products.");
         }
         catch (Exception e)
@@ -199,8 +189,6 @@ public class ManufacturerController : ControllerBase
         try
         {
             var updatedManufacturer = await _manufacturerService.UpdateManufacturerAsync(id, updateManufacturerDto);
-            LoggerHelper.LogWithDetails("Update Result DTO", args: [id, updateManufacturerDto],
-                retrievedData: updatedManufacturer);
             return Ok(updatedManufacturer);
         }
         catch (Exception e)
@@ -215,14 +203,16 @@ public class ManufacturerController : ControllerBase
     [HttpDelete("DeleteManufacturer/{id}")]
     public async Task<IActionResult> DeleteManufacturer(Guid id)
     {
+        LoggerHelper.LogWithDetails(args: [id]);
         try
         {
-            await _manufacturerService.GetManufacturerByIdAsync(id);
             await _manufacturerService.DeleteManufacturerAsync(id);
             return Ok($"Manufacture with ID {id} has successfully deleted!");
         }
         catch (Exception e)
         {
+            LoggerHelper.LogWithDetails("Unexpected Errors", args: [id], retrievedData: e.Message,
+                logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
     }
@@ -231,6 +221,7 @@ public class ManufacturerController : ControllerBase
     public async Task<IActionResult> DeleteManufactureProducts([FromQuery] Guid manufacturerId,
         [FromQuery] Guid productId)
     {
+        LoggerHelper.LogWithDetails(args: [manufacturerId, productId]);
         try
         {
             await _manufacturerService.DeleteManufacturerProductAsync(manufacturerId, productId);
@@ -239,6 +230,8 @@ public class ManufacturerController : ControllerBase
         }
         catch (Exception e)
         {
+            LoggerHelper.LogWithDetails("Unexpected Errors", args: [manufacturerId, productId], retrievedData: e.Message
+                , logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
     }

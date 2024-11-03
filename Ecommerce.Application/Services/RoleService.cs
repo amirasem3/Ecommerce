@@ -27,16 +27,16 @@ public class RoleService
                 logLevel: LoggerHelper.LogLevel.Error);
             throw new Exception(RoleException);
         }
-
-        LoggerHelper.LogWithDetails("Role found successfully.", args: [id], retrievedData: role);
-        return new RoleDto
+        var roleRes =new RoleDto
         {
             Name = role.Name,
             Id = role.Id,
-        };
+        }; 
+        LoggerHelper.LogWithDetails("Target Role Found",args:[id], retrievedData:roleRes);
+        return roleRes; 
     }
 
-    public async Task<RoleDto> AddRoleAsync(AddUpdateRoleDto newRole)
+    public async Task<RoleDto> AddRoleAsync(AddUpdateRoleDto newRole) 
     {
         LoggerHelper.LogWithDetails("Attempts to add a new Role", args: [newRole]);
         var role = new Role
@@ -49,13 +49,14 @@ public class RoleService
         await _unitOfWork.RoleRepository.InsertAsync(role);
         await _unitOfWork.SaveAsync();
 
-        LoggerHelper.LogWithDetails("New Role added successfully.", args: [newRole], retrievedData: role);
 
-        return new RoleDto
+        var roleRes = new RoleDto
         {
             Id = role.Id,
             Name = role.Name
         };
+        LoggerHelper.LogWithDetails("New Role added successfully.", args: [newRole], retrievedData: roleRes);
+        return roleRes;
     }
 
     public async Task<RoleDto> UpdateRoleAsync(Guid id, AddUpdateRoleDto updateRoleDto)
@@ -75,13 +76,13 @@ public class RoleService
         _unitOfWork.RoleRepository.Update(targetRole);
         await _unitOfWork.SaveAsync();
         
-        LoggerHelper.LogWithDetails("Role Updated Successfully.",args:[id, updateRoleDto], retrievedData:targetRole);
-
-        return new RoleDto
+        var roleRes  =new RoleDto
         {
             Name = targetRole.Name,
             Id = targetRole.Id,
         };
+        LoggerHelper.LogWithDetails("Role Updated Successfully.", args: [id, updateRoleDto], retrievedData: roleRes);
+        return roleRes;
     }
 
     public async Task<bool> DeleteRoleByIdAsync(Guid id)
@@ -103,6 +104,7 @@ public class RoleService
 
     public async Task<IEnumerable<RoleDto>> GetAllRolesAsync()
     {
+        LoggerHelper.LogWithDetails("Attempt to get all roles");
         var roles = await _unitOfWork.RoleRepository.GetAsync();
         if (roles == null)
         {
@@ -111,13 +113,13 @@ public class RoleService
             throw new Exception(RoleException);
         }
 
-        LoggerHelper.LogWithDetails("All Roles retrieved successfully.", retrievedData: roles);
-
-        return roles.Select(role => new RoleDto
+        var roleRes =roles.Select(role => new RoleDto
         {
             Id = role.Id,
             Name = role.Name,
         });
+        LoggerHelper.LogWithDetails("All Roles",retrievedData:roleRes);
+        return roleRes;
     }
 
     public async Task<RoleDto> GetRoleByNameAsync(string name)
@@ -133,11 +135,13 @@ public class RoleService
             throw new Exception(RoleException);
         }
 
-        LoggerHelper.LogWithDetails($"Role with name{name} found successfully.", args: [name], retrievedData: role);
-        return new RoleDto
+        var roleRes = new RoleDto
         {
             Id = role.Id,
             Name = role.Name,
         };
+        LoggerHelper.LogWithDetails($"Role with name{name} found successfully.", args: [name], retrievedData: roleRes);
+
+        return roleRes;
     }
 }
