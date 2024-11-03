@@ -3732,3 +3732,1587 @@ System.NotSupportedException: Serialization and deserialization of 'System.Refle
     }
   ]
 }] Manufacturer DTO Result
+[2024-10-30 16:02:22.492 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: GetAllManufacturers] [Arguments: null] [RetrieveData: null] Attempts to get all manufacturers
+[2024-10-30 16:02:22.493 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetAllManufacturersAsync] [Arguments: null] [RetrieveData: null] Attempts to get all manufacturers
+[2024-10-30 16:02:22.495 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products2"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Manufacturer with filter 
+[2024-10-30 16:02:30.016 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetAllManufacturersAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "251e6f0f-c940-46f8-8186-a4c138eaabf6",
+    "Name": "Amir",
+    "OwnerName": "Amir",
+    "ManufacturerCountry": "Amir",
+    "Email": "aAMir@gmail.com",
+    "Address": "Amirabad",
+    "PhoneNumber": "984234",
+    "Rate": 3,
+    "EstablishDate": "2024-10-20T11:08:46.478",
+    "Status": true
+  },
+  {
+    "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+    "Name": "string2",
+    "OwnerName": "string",
+    "ManufacturerCountry": "string",
+    "Email": "string",
+    "Address": "string",
+    "PhoneNumber": "string",
+    "Rate": 0,
+    "EstablishDate": "2024-10-12T12:57:25.923",
+    "Status": true
+  },
+  {
+    "Id": "47000b87-1ffc-4f9b-bd05-50aed27bab2b",
+    "Name": "Test",
+    "OwnerName": "Test Owner Name",
+    "ManufacturerCountry": "Test manufacturer country",
+    "Email": "test4@gmail.com",
+    "Address": "test address",
+    "PhoneNumber": "123567887",
+    "Rate": 4,
+    "EstablishDate": "2023-10-19T11:25:41.184",
+    "Status": true
+  },
+  {
+    "Id": "528b2ba7-3852-4f62-9692-0e6f41369afb",
+    "Name": "AmirCo",
+    "OwnerName": "AmirHossein",
+    "ManufacturerCountry": "yousefi",
+    "Email": "amirasem8@hgmail.com",
+    "Address": "tehran",
+    "PhoneNumber": "0912121212",
+    "Rate": 4,
+    "EstablishDate": "2024-10-29T05:07:13.315",
+    "Status": true
+  },
+  {
+    "Id": "5ccd1d75-5d31-44b0-b891-b17b441b454d",
+    "Name": "Amir",
+    "OwnerName": "Amiri",
+    "ManufacturerCountry": "Amirabad",
+    "Email": "amirrrrr@gmail.com",
+    "Address": "amirabadf",
+    "PhoneNumber": "2222222222",
+    "Rate": 5,
+    "EstablishDate": "2024-10-20T11:11:16.435",
+    "Status": true
+  },
+  {
+    "Id": "ae2d3699-702b-4286-a862-166ca61710d5",
+    "Name": "Amir",
+    "OwnerName": "AmirAmir",
+    "ManufacturerCountry": "AMir",
+    "Email": "amir@gmail.com",
+    "Address": "amirhossein",
+    "PhoneNumber": "998898",
+    "Rate": 3,
+    "EstablishDate": "2024-10-30T12:15:50.593",
+    "Status": true
+  },
+  {
+    "Id": "b8d45e51-4b15-49b6-abee-48acaf1b3fd9",
+    "Name": "mantest",
+    "OwnerName": "man owner test",
+    "ManufacturerCountry": "iran",
+    "Email": "mantest@gmail.com",
+    "Address": "man test address",
+    "PhoneNumber": "99993333",
+    "Rate": 4,
+    "EstablishDate": "2024-10-20T09:56:18.586",
+    "Status": true
+  }
+]] All manufacturers retrieved successfully
+[2024-10-30 16:02:30.022 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: GetAllManufacturers] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "251e6f0f-c940-46f8-8186-a4c138eaabf6",
+    "Name": "Amir",
+    "OwnerName": "Amir",
+    "ManufacturerCountry": "Amir",
+    "Email": "aAMir@gmail.com",
+    "Address": "Amirabad",
+    "PhoneNumber": "984234",
+    "Rate": 3,
+    "EstablishDate": "2024-10-20T11:08:46.478",
+    "Status": true,
+    "Products": []
+  },
+  {
+    "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+    "Name": "string2",
+    "OwnerName": "string",
+    "ManufacturerCountry": "string",
+    "Email": "string",
+    "Address": "string",
+    "PhoneNumber": "string",
+    "Rate": 0,
+    "EstablishDate": "2024-10-12T12:57:25.923",
+    "Status": true,
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Inventory": -1.00,
+        "Dop": "2024-10-20T14:19:30.933",
+        "Doe": "2024-10-20T14:19:30.933",
+        "Status": false
+      }
+    ]
+  },
+  {
+    "Id": "47000b87-1ffc-4f9b-bd05-50aed27bab2b",
+    "Name": "Test",
+    "OwnerName": "Test Owner Name",
+    "ManufacturerCountry": "Test manufacturer country",
+    "Email": "test4@gmail.com",
+    "Address": "test address",
+    "PhoneNumber": "123567887",
+    "Rate": 4,
+    "EstablishDate": "2023-10-19T11:25:41.184",
+    "Status": true,
+    "Products": []
+  },
+  {
+    "Id": "528b2ba7-3852-4f62-9692-0e6f41369afb",
+    "Name": "AmirCo",
+    "OwnerName": "AmirHossein",
+    "ManufacturerCountry": "yousefi",
+    "Email": "amirasem8@hgmail.com",
+    "Address": "tehran",
+    "PhoneNumber": "0912121212",
+    "Rate": 4,
+    "EstablishDate": "2024-10-29T05:07:13.315",
+    "Status": true,
+    "Products": [
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Inventory": 8.00,
+        "Dop": "2024-10-20T13:52:33.182",
+        "Doe": "2024-10-20T13:52:33.182",
+        "Status": false
+      }
+    ]
+  },
+  {
+    "Id": "5ccd1d75-5d31-44b0-b891-b17b441b454d",
+    "Name": "Amir",
+    "OwnerName": "Amiri",
+    "ManufacturerCountry": "Amirabad",
+    "Email": "amirrrrr@gmail.com",
+    "Address": "amirabadf",
+    "PhoneNumber": "2222222222",
+    "Rate": 5,
+    "EstablishDate": "2024-10-20T11:11:16.435",
+    "Status": true,
+    "Products": []
+  },
+  {
+    "Id": "ae2d3699-702b-4286-a862-166ca61710d5",
+    "Name": "Amir",
+    "OwnerName": "AmirAmir",
+    "ManufacturerCountry": "AMir",
+    "Email": "amir@gmail.com",
+    "Address": "amirhossein",
+    "PhoneNumber": "998898",
+    "Rate": 3,
+    "EstablishDate": "2024-10-30T12:15:50.593",
+    "Status": true,
+    "Products": [
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Inventory": 8.00,
+        "Dop": "2024-10-20T13:52:33.182",
+        "Doe": "2024-10-20T13:52:33.182",
+        "Status": false
+      }
+    ]
+  },
+  {
+    "Id": "b8d45e51-4b15-49b6-abee-48acaf1b3fd9",
+    "Name": "mantest",
+    "OwnerName": "man owner test",
+    "ManufacturerCountry": "iran",
+    "Email": "mantest@gmail.com",
+    "Address": "man test address",
+    "PhoneNumber": "99993333",
+    "Rate": 4,
+    "EstablishDate": "2024-10-20T09:56:18.586",
+    "Status": true,
+    "Products": [
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Inventory": 8.00,
+        "Dop": "2024-10-20T13:52:33.182",
+        "Doe": "2024-10-20T13:52:33.182",
+        "Status": false
+      }
+    ]
+  }
+]] All Manufacturers
+[2024-10-30 16:03:08.610 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: GetManufacturerById] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0"
+]] [RetrieveData: null] Attempts to get a manufacturer by ID
+[2024-10-30 16:03:08.612 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0"
+]] [RetrieveData: null] Attempt to get a manufacturer by ID
+[2024-10-30 16:03:08.614 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "Products2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Manufacturer by its ID.
+[2024-10-30 16:03:08.623 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0"
+]] [RetrieveData: {
+  "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+  "Name": "string2",
+  "OwnerName": "string",
+  "ManufacturerCountry": "string",
+  "Email": "string",
+  "Address": "string",
+  "PhoneNumber": "string",
+  "Rate": 0,
+  "EstablishDate": "2024-10-12T12:57:25.923",
+  "Status": true
+}] Manufacturer Found
+[2024-10-30 16:03:08.626 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: GetManufacturerById] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0"
+]] [RetrieveData: {
+  "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+  "Name": "string2",
+  "OwnerName": "string",
+  "ManufacturerCountry": "string",
+  "Email": "string",
+  "Address": "string",
+  "PhoneNumber": "string",
+  "Rate": 0,
+  "EstablishDate": "2024-10-12T12:57:25.923",
+  "Status": true,
+  "Products": [
+    {
+      "Name": "PRODUCT2",
+      "Price": 123.54,
+      "Inventory": -1.00,
+      "Dop": "2024-10-20T14:19:30.933",
+      "Doe": "2024-10-20T14:19:30.933",
+      "Status": false
+    }
+  ]
+}] Manufacturer DTO Result
+[2024-10-30 16:03:17.747 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: SearchProducts] [Arguments: [
+  "PRODUCT2"
+]] [RetrieveData: null] Attempt to search products by the name.
+[2024-10-30 16:03:17.755 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductsByNameAsync] [Arguments: [
+  "PRODUCT2"
+]] [RetrieveData: null] Attempts to search products by name
+[2024-10-30 16:03:17.758 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Product with filter p => p.Name.Contains(value(Ecommerce.Application.Services.ProductService+<>c__DisplayClass8_0).name)
+[2024-10-30 16:03:17.774 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductsByNameAsync] [Arguments: [
+  "PRODUCT2"
+]] [RetrieveData: [
+  {
+    "Id": "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+    "Name": "PRODUCT2",
+    "Price": 123.54,
+    "Inventory": -1.00,
+    "Dop": "2024-10-20T14:19:30.933",
+    "Doe": "2024-10-20T14:19:30.933",
+    "Status": false
+  }
+]] All products with this name retrieved successfully.
+[2024-10-30 16:03:17.779 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: SearchProducts] [Arguments: [
+  "PRODUCT2"
+]] [RetrieveData: [
+  {
+    "Id": "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+    "Name": "PRODUCT2",
+    "Price": 123.54,
+    "Inventory": -1.00,
+    "Dop": "2024-10-20T14:19:30.933",
+    "Doe": "2024-10-20T14:19:30.933",
+    "Status": false,
+    "ProductInvoices": null
+  }
+]] Search DTO Result
+[2024-10-30 16:03:25.437 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerProductAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: null] Attempt to delete a product from a manufacturer's product
+[2024-10-30 16:03:25.442 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "Products2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Manufacturer by its ID.
+[2024-10-30 16:03:25.446 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 16:03:25.453 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerProductAsync] [Arguments: [
+  [
+    {
+      "Id": "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+      "Name": "PRODUCT2",
+      "Price": 123.54,
+      "Inventory": -1.00,
+      "Dop": "2024-10-20T14:19:30.933",
+      "Doe": "2024-10-20T14:19:30.933",
+      "Status": false
+    }
+  ],
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: true] Check existence of a product for a manufacturer
+[2024-10-30 16:03:25.455 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+    "Name": "string2",
+    "OwnerName": "string",
+    "ManufacturerCountry": "string",
+    "Email": "string",
+    "Address": "string",
+    "PhoneNumber": "string",
+    "Rate": 0,
+    "EstablishDate": "2024-10-12T12:57:25.923",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to Update a Ecommerce.Core.Entities.Manufacturer
+[2024-10-30 16:03:25.459 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+    "Name": "string2",
+    "OwnerName": "string",
+    "ManufacturerCountry": "string",
+    "Email": "string",
+    "Address": "string",
+    "PhoneNumber": "string",
+    "Rate": 0,
+    "EstablishDate": "2024-10-12T12:57:25.923",
+    "Status": true
+  }
+]] [RetrieveData: null] Successful Update.
+[2024-10-30 16:03:25.476 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-10-30 16:03:25.477 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerProductAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: null] Successful Delete
+[2024-10-30 16:03:30.781 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: GetManufacturerById] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0"
+]] [RetrieveData: null] Attempts to get a manufacturer by ID
+[2024-10-30 16:03:30.785 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0"
+]] [RetrieveData: null] Attempt to get a manufacturer by ID
+[2024-10-30 16:03:30.788 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "Products2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Manufacturer by its ID.
+[2024-10-30 16:03:30.797 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0"
+]] [RetrieveData: {
+  "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+  "Name": "string2",
+  "OwnerName": "string",
+  "ManufacturerCountry": "string",
+  "Email": "string",
+  "Address": "string",
+  "PhoneNumber": "string",
+  "Rate": 0,
+  "EstablishDate": "2024-10-12T12:57:25.923",
+  "Status": true
+}] Manufacturer Found
+[2024-10-30 16:03:30.800 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: GetManufacturerById] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0"
+]] [RetrieveData: {
+  "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+  "Name": "string2",
+  "OwnerName": "string",
+  "ManufacturerCountry": "string",
+  "Email": "string",
+  "Address": "string",
+  "PhoneNumber": "string",
+  "Rate": 0,
+  "EstablishDate": "2024-10-12T12:57:25.923",
+  "Status": true,
+  "Products": []
+}] Manufacturer DTO Result
+[2024-10-30 16:08:49.671 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByEmailAsync] [Arguments: [
+  "test@gmail.com"
+]] [RetrieveData: null] Attempt to get a manufacturer by email
+[2024-10-30 16:08:49.674 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: [
+  "Email",
+  "test@gmail.com",
+  "Products2"
+]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Manufacturer by its UniqueProperty.
+[2024-10-30 16:08:57.194 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByEmailAsync] [Arguments: [
+  "test@gmail.com"
+]] [RetrieveData: null] There is no manufacturer with this email
+[2024-10-30 16:08:57.195 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByAddressAsync] [Arguments: [
+  "test update"
+]] [RetrieveData: null] Attempt to get a manufacturer by address
+[2024-10-30 16:08:57.197 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: [
+  "Address",
+  "test update",
+  "Products2"
+]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Manufacturer by its UniqueProperty.
+[2024-10-30 16:08:57.201 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByAddressAsync] [Arguments: [
+  "test update"
+]] [RetrieveData: null] There is no manufacturer with this address
+[2024-10-30 16:08:57.203 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByPhoneNumberAsync] [Arguments: [
+  "grg99"
+]] [RetrieveData: null] Attempt to get a manufacturer by phone number
+[2024-10-30 16:08:57.204 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: [
+  "PhoneNumber",
+  "grg99",
+  "Products2"
+]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Manufacturer by its UniqueProperty.
+[2024-10-30 16:08:57.207 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByPhoneNumberAsync] [Arguments: [
+  "grg99"
+]] [RetrieveData: null] There is no manufacturer with this phone number
+[2024-10-30 16:08:57.217 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: UpdateManufacturer] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  null
+]] [RetrieveData: [
+  "Non-numeric characters are not allowed in phone number",
+  "Rate cannot be greater than 5!"
+]] Binding Errors.
+[2024-10-30 16:09:09.355 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByEmailAsync] [Arguments: [
+  "test@gmail.com"
+]] [RetrieveData: null] Attempt to get a manufacturer by email
+[2024-10-30 16:09:09.364 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: [
+  "Email",
+  "test@gmail.com",
+  "Products2"
+]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Manufacturer by its UniqueProperty.
+[2024-10-30 16:09:09.371 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByEmailAsync] [Arguments: [
+  "test@gmail.com"
+]] [RetrieveData: null] There is no manufacturer with this email
+[2024-10-30 16:09:09.374 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByAddressAsync] [Arguments: [
+  "test update"
+]] [RetrieveData: null] Attempt to get a manufacturer by address
+[2024-10-30 16:09:09.375 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: [
+  "Address",
+  "test update",
+  "Products2"
+]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Manufacturer by its UniqueProperty.
+[2024-10-30 16:09:09.382 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByAddressAsync] [Arguments: [
+  "test update"
+]] [RetrieveData: null] There is no manufacturer with this address
+[2024-10-30 16:09:09.383 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByPhoneNumberAsync] [Arguments: [
+  "9"
+]] [RetrieveData: null] Attempt to get a manufacturer by phone number
+[2024-10-30 16:09:09.384 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: [
+  "PhoneNumber",
+  "9",
+  "Products2"
+]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Manufacturer by its UniqueProperty.
+[2024-10-30 16:09:09.387 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByPhoneNumberAsync] [Arguments: [
+  "9"
+]] [RetrieveData: null] There is no manufacturer with this phone number
+[2024-10-30 16:09:09.391 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: UpdateManufacturerAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  {
+    "Name": "updateTst",
+    "OwnerName": "testUpdate",
+    "ManufacturerCountry": "testUpdate",
+    "Email": "test@gmail.com",
+    "Address": "test update",
+    "PhoneNumber": "9",
+    "Rate": 4,
+    "EstablishDate": "2024-10-30T12:38:17.638Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to update a manufacturer
+[2024-10-30 16:09:09.394 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "Products2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Manufacturer by its ID.
+[2024-10-30 16:09:09.399 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+    "Name": "updateTst",
+    "OwnerName": "testUpdate",
+    "ManufacturerCountry": "testUpdate",
+    "Email": "test@gmail.com",
+    "Address": "test update",
+    "PhoneNumber": "9",
+    "Rate": 4,
+    "EstablishDate": "2024-10-30T12:38:17.638Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to Update a Ecommerce.Core.Entities.Manufacturer
+[2024-10-30 16:09:09.402 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+    "Name": "updateTst",
+    "OwnerName": "testUpdate",
+    "ManufacturerCountry": "testUpdate",
+    "Email": "test@gmail.com",
+    "Address": "test update",
+    "PhoneNumber": "9",
+    "Rate": 4,
+    "EstablishDate": "2024-10-30T12:38:17.638Z",
+    "Status": true
+  }
+]] [RetrieveData: null] Successful Update.
+[2024-10-30 16:09:09.409 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-10-30 16:09:09.413 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: UpdateManufacturer] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  {
+    "Name": "updateTst",
+    "OwnerName": "testUpdate",
+    "ManufacturerCountry": "testUpdate",
+    "Email": "test@gmail.com",
+    "Address": "test update",
+    "PhoneNumber": "9",
+    "Rate": 4,
+    "EstablishDate": "2024-10-30T12:38:17.638Z",
+    "Status": true
+  }
+]] [RetrieveData: {
+  "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+  "Name": "updateTst",
+  "OwnerName": "testUpdate",
+  "ManufacturerCountry": "testUpdate",
+  "Email": "test@gmail.com",
+  "Address": "test update",
+  "PhoneNumber": "9",
+  "Rate": 4,
+  "EstablishDate": "2024-10-30T12:38:17.638Z",
+  "Status": true,
+  "Products": []
+}] Update Result DTO
+[2024-10-30 16:09:17.619 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: GetManufacturerById] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0"
+]] [RetrieveData: null] Attempts to get a manufacturer by ID
+[2024-10-30 16:09:17.635 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0"
+]] [RetrieveData: null] Attempt to get a manufacturer by ID
+[2024-10-30 16:09:17.641 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "Products2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Manufacturer by its ID.
+[2024-10-30 16:09:17.649 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0"
+]] [RetrieveData: {
+  "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+  "Name": "updateTst",
+  "OwnerName": "testUpdate",
+  "ManufacturerCountry": "testUpdate",
+  "Email": "test@gmail.com",
+  "Address": "test update",
+  "PhoneNumber": "9",
+  "Rate": 4,
+  "EstablishDate": "2024-10-30T12:38:17.638",
+  "Status": true
+}] Manufacturer Found
+[2024-10-30 16:09:17.651 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerController] [FunctionName: GetManufacturerById] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0"
+]] [RetrieveData: {
+  "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+  "Name": "updateTst",
+  "OwnerName": "testUpdate",
+  "ManufacturerCountry": "testUpdate",
+  "Email": "test@gmail.com",
+  "Address": "test update",
+  "PhoneNumber": "9",
+  "Rate": 4,
+  "EstablishDate": "2024-10-30T12:38:17.638",
+  "Status": true,
+  "Products": []
+}] Manufacturer DTO Result
+[2024-10-30 16:09:49.051 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerProductAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: null] Attempt to delete a product from a manufacturer's product
+[2024-10-30 16:09:49.053 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "Products2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Manufacturer by its ID.
+[2024-10-30 16:09:49.062 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 16:09:49.070 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerProductAsync] [Arguments: [
+  [],
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: false] Check existence of a product for a manufacturer
+[2024-10-30 16:09:49.072 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerProductAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: null] Unsuccessful Delete
+[2024-10-30 16:13:40.424 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerProductAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: null] Attempt to delete a product from a manufacturer's product
+[2024-10-30 16:13:40.428 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "Products2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Manufacturer by its ID.
+[2024-10-30 16:13:40.432 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 16:13:40.435 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerProductAsync] [Arguments: [
+  [],
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: false] Check existence of a product for a manufacturer
+[2024-10-30 16:13:40.437 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerProductAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: null] Unsuccessful Delete
+[2024-10-30 16:13:46.679 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerProductAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: null] Attempt to delete a product from a manufacturer's product
+[2024-10-30 16:13:46.682 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "Products2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Manufacturer by its ID.
+[2024-10-30 16:13:46.694 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 16:13:46.703 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerProductAsync] [Arguments: [
+  [],
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: false] Check existence of a product for a manufacturer
+[2024-10-30 16:13:46.706 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerProductAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: null] Unsuccessful Delete
+[2024-10-30 16:14:41.044 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerProductAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: null] Attempt to delete a product from a manufacturer's product
+[2024-10-30 16:14:41.049 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "Products2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Manufacturer by its ID.
+[2024-10-30 16:14:48.581 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 16:14:48.585 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerProductAsync] [Arguments: [
+  [],
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: false] Check existence of a product for a manufacturer
+[2024-10-30 16:14:48.587 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerProductAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: null] Unsuccessful Delete
+[2024-10-30 16:15:05.659 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerProductAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: null] Attempt to delete a product from a manufacturer's product
+[2024-10-30 16:15:05.666 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "Products2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Manufacturer by its ID.
+[2024-10-30 16:15:05.676 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 16:15:05.681 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerProductAsync] [Arguments: [
+  [],
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: false] Check existence of a product for a manufacturer
+[2024-10-30 16:15:05.682 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerProductAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: null] Unsuccessful Delete
+[2024-10-30 16:15:55.774 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerProductAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: null] Attempt to delete a product from a manufacturer's product
+[2024-10-30 16:15:55.780 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "Products2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Manufacturer by its ID.
+[2024-10-30 16:15:55.787 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 16:15:55.794 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerProductAsync] [Arguments: [
+  [],
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: false] Check existence of a product for a manufacturer
+[2024-10-30 16:15:55.796 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerProductAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb"
+]] [RetrieveData: null] Unsuccessful Delete
+[2024-10-30 16:16:37.161 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0"
+]] [RetrieveData: null] Attempt to get a manufacturer by ID
+[2024-10-30 16:16:37.164 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "Products2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Manufacturer by its ID.
+[2024-10-30 16:16:37.174 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0"
+]] [RetrieveData: {
+  "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+  "Name": "updateTst",
+  "OwnerName": "testUpdate",
+  "ManufacturerCountry": "testUpdate",
+  "Email": "test@gmail.com",
+  "Address": "test update",
+  "PhoneNumber": "9",
+  "Rate": 4,
+  "EstablishDate": "2024-10-30T12:38:17.638",
+  "Status": true
+}] Manufacturer Found
+[2024-10-30 16:16:37.177 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0"
+]] [RetrieveData: null] Attempt to Delete a manufacturer by ID
+[2024-10-30 16:16:37.179 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "Products2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Manufacturer by its ID.
+[2024-10-30 16:16:37.185 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: DeleteByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0"
+]] [RetrieveData: null] Attempt to Delete a Ecommerce.Core.Entities.Manufacturer
+[2024-10-30 16:16:37.193 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Delete] [Arguments: [
+  {
+    "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+    "Name": "updateTst",
+    "OwnerName": "testUpdate",
+    "ManufacturerCountry": "testUpdate",
+    "Email": "test@gmail.com",
+    "Address": "test update",
+    "PhoneNumber": "9",
+    "Rate": 4,
+    "EstablishDate": "2024-10-30T12:38:17.638",
+    "Status": true
+  }
+]] [RetrieveData: null] Attempt to Delete a Ecommerce.Core.Entities.Manufacturer
+[2024-10-30 16:16:37.195 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Delete] [Arguments: [
+  {
+    "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+    "Name": "updateTst",
+    "OwnerName": "testUpdate",
+    "ManufacturerCountry": "testUpdate",
+    "Email": "test@gmail.com",
+    "Address": "test update",
+    "PhoneNumber": "9",
+    "Rate": 4,
+    "EstablishDate": "2024-10-30T12:38:17.638",
+    "Status": true
+  }
+]] [RetrieveData: null] Successful Delete.
+[2024-10-30 16:16:37.206 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-10-30 16:16:37.208 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: DeleteManufacturerAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0"
+]] [RetrieveData: {
+  "Id": "4318bd46-e818-4976-8905-8654f5474de0",
+  "Name": "updateTst",
+  "OwnerName": "testUpdate",
+  "ManufacturerCountry": "testUpdate",
+  "Email": "test@gmail.com",
+  "Address": "test update",
+  "PhoneNumber": "9",
+  "Rate": 4,
+  "EstablishDate": "2024-10-30T12:38:17.638",
+  "Status": true
+}] Successful Delete
+[2024-10-30 16:16:40.724 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0"
+]] [RetrieveData: null] Attempt to get a manufacturer by ID
+[2024-10-30 16:16:40.729 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0",
+  "Products2"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Manufacturer by its ID.
+[2024-10-30 16:16:40.758 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: ManufacturerService] [FunctionName: GetManufacturerByIdAsync] [Arguments: [
+  "4318bd46-e818-4976-8905-8654f5474de0"
+]] [RetrieveData: "Manufacturer Not Found!"] There is no manufacturer with this ID
+[2024-10-30 16:18:58.416 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Invoice with filter 
+[2024-10-30 16:19:12.357 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: null] Attempt to get a invoice by ID
+[2024-10-30 16:19:12.361 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-10-30 16:19:12.380 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: {
+  "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+  "OwnerFirstName": "gggg",
+  "OwnerLastName": "kkkk",
+  "IdentificationCode": "78089",
+  "IssuerName": "545",
+  "IssueDate": "2024-10-20T08:51:19.704",
+  "PaymentDate": "2024-10-21T09:48:10.170112",
+  "TotalPrice": 247.08,
+  "PaymentStatus": 1
+}] Invoice Found
+[2024-10-30 16:19:12.386 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-10-30 16:19:12.391 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 16:21:14.787 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: GetInvoiceById] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: null] 
+[2024-10-30 16:21:14.790 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: null] Attempt to get a invoice by ID
+[2024-10-30 16:21:14.795 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-10-30 16:21:22.309 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: {
+  "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+  "OwnerFirstName": "gggg",
+  "OwnerLastName": "kkkk",
+  "IdentificationCode": "78089",
+  "IssuerName": "545",
+  "IssueDate": "2024-10-20T08:51:19.704",
+  "PaymentDate": "2024-10-21T09:48:10.170112",
+  "TotalPrice": 247.08,
+  "PaymentStatus": 1
+}] Invoice Found
+[2024-10-30 16:21:22.311 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-10-30 16:21:22.315 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 16:21:26.552 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: GetInvoiceById] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: null] 
+[2024-10-30 16:21:26.555 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: null] Attempt to get a invoice by ID
+[2024-10-30 16:21:26.561 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-10-30 16:21:26.586 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: {
+  "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+  "OwnerFirstName": "gggg",
+  "OwnerLastName": "kkkk",
+  "IdentificationCode": "78089",
+  "IssuerName": "545",
+  "IssueDate": "2024-10-20T08:51:19.704",
+  "PaymentDate": "2024-10-21T09:48:10.170112",
+  "TotalPrice": 247.08,
+  "PaymentStatus": 1
+}] Invoice Found
+[2024-10-30 16:21:26.589 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-10-30 16:21:26.593 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 16:22:23.018 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: Program] [FunctionName: <Main>$] [Arguments: null] [RetrieveData: null] Starting up the application
+[2024-10-30 16:22:31.191 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: GetInvoiceById] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: null] 
+[2024-10-30 16:22:31.198 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: null] Attempt to get a invoice by ID
+[2024-10-30 16:22:32.014 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-10-30 16:22:40.242 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: {
+  "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+  "OwnerFirstName": "gggg",
+  "OwnerLastName": "kkkk",
+  "IdentificationCode": "78089",
+  "IssuerName": "545",
+  "IssueDate": "2024-10-20T08:51:19.704",
+  "PaymentDate": "2024-10-21T09:48:10.170112",
+  "TotalPrice": 247.08,
+  "PaymentStatus": 1
+}] Invoice Found
+[2024-10-30 16:22:40.251 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-10-30 16:22:40.265 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 16:24:22.223 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: Program] [FunctionName: <Main>$] [Arguments: null] [RetrieveData: null] Starting up the application
+[2024-10-30 16:24:35.042 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: GetInvoiceById] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: null] 
+[2024-10-30 16:24:35.048 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: null] Attempt to get a invoice by ID
+[2024-10-30 16:24:35.835 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-10-30 16:24:44.051 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: {
+  "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+  "OwnerFirstName": "gggg",
+  "OwnerLastName": "kkkk",
+  "IdentificationCode": "78089",
+  "IssuerName": "545",
+  "IssueDate": "2024-10-20T08:51:19.704",
+  "PaymentDate": "2024-10-21T09:48:10.170112",
+  "TotalPrice": 247.08,
+  "PaymentStatus": 1
+}] Invoice Found
+[2024-10-30 16:24:44.055 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: GetInvoiceById] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: "Object reference not set to an instance of an object."] 
+[2024-10-30 16:25:09.897 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: GetInvoiceById] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: null] 
+[2024-10-30 16:25:09.901 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: null] Attempt to get a invoice by ID
+[2024-10-30 16:25:09.955 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-10-30 16:25:09.979 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: {
+  "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+  "OwnerFirstName": "gggg",
+  "OwnerLastName": "kkkk",
+  "IdentificationCode": "78089",
+  "IssuerName": "545",
+  "IssueDate": "2024-10-20T08:51:19.704",
+  "PaymentDate": "2024-10-21T09:48:10.170112",
+  "TotalPrice": 247.08,
+  "PaymentStatus": 1
+}] Invoice Found
+[2024-10-30 16:25:09.985 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-10-30 16:25:09.995 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 16:25:48.772 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: GetInvoiceById] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: null] 
+[2024-10-30 16:25:48.782 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: null] Attempt to get a invoice by ID
+[2024-10-30 16:25:48.802 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-10-30 16:25:48.811 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-10-30 16:25:48.816 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-10-30 16:25:48.826 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: {
+  "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+  "OwnerName": "gggg",
+  "OwnerFamilyName": "kkkk",
+  "IdentificationCode": "78089",
+  "IssuerName": "545",
+  "IssueDate": "2024-10-20T08:51:19.704",
+  "PaymentDate": "2024-10-21T09:48:10.170112",
+  "TotalPrice": 247.08,
+  "PaymentStatus": "Payed",
+  "Products": [
+    {
+      "Name": "PRODUCT2",
+      "Price": 123.54,
+      "Count": 2
+    }
+  ]
+}] Invoice Found
+[2024-10-30 16:28:45.253 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: GetInvoiceByIdNumber] [Arguments: [
+  "78089"
+]] [RetrieveData: null] 
+[2024-10-30 16:28:45.259 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdentificationCodeAsync] [Arguments: [
+  "78089"
+]] [RetrieveData: null] Attempt to get a invoice by identification number
+[2024-10-30 16:28:45.264 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: [
+  "IdentificationCode",
+  "78089",
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Invoice by its UniqueProperty.
+[2024-10-30 16:28:45.299 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdentificationCodeAsync] [Arguments: [
+  "78089"
+]] [RetrieveData: {
+  "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+  "OwnerName": "gggg",
+  "OwnerFamilyName": "kkkk",
+  "IdentificationCode": "78089",
+  "IssuerName": "545",
+  "IssueDate": "2024-10-20T08:51:19.704",
+  "PaymentDate": "2024-10-21T09:48:10.170112",
+  "TotalPrice": 247.08,
+  "PaymentStatus": "Payed",
+  "Products": [
+    {
+      "Name": "PRODUCT2",
+      "Price": 123.54,
+      "Count": 2
+    }
+  ]
+}] Invoice Found
+[2024-10-30 16:32:45.010 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: SearchInvoicesByOwnerName] [Arguments: [
+  "gggg"
+]] [RetrieveData: null] 
+[2024-10-30 16:32:45.013 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoicesByOwnerNameAsync] [Arguments: [
+  "gggg"
+]] [RetrieveData: null] Attempt to get a invoice by owner name
+[2024-10-30 16:32:45.021 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Invoice with filter invoice => invoice.OwnerFirstName.Contains(value(Ecommerce.Application.Services.InvoiceServices+<>c__DisplayClass5_0).ownerName)
+[2024-10-30 16:32:52.566 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoicesByOwnerNameAsync] [Arguments: [
+  "gggg"
+]] [RetrieveData: [
+  {
+    "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+    "OwnerName": "gggg",
+    "OwnerFamilyName": "kkkk",
+    "IdentificationCode": "78089",
+    "IssuerName": "545",
+    "IssueDate": "2024-10-20T08:51:19.704",
+    "PaymentDate": "2024-10-21T09:48:10.170112",
+    "TotalPrice": 247.08,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 2
+      }
+    ]
+  }
+]] Invoice Found
+[2024-10-30 16:35:28.824 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: SearchInvoicesByOwnerLastname] [Arguments: [
+  "kkkk"
+]] [RetrieveData: null] 
+[2024-10-30 16:35:28.828 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoicesByOwnerFamilyNameAsync] [Arguments: [
+  "kkkk"
+]] [RetrieveData: null] Attempt to get a invoice by owner lastname
+[2024-10-30 16:35:28.831 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Invoice with filter invoice => invoice.OwnerLastName.Contains(value(Ecommerce.Application.Services.InvoiceServices+<>c__DisplayClass6_0#6).lastName)
+[2024-10-30 16:35:28.854 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoicesByOwnerFamilyNameAsync] [Arguments: [
+  "kkkk"
+]] [RetrieveData: [
+  {
+    "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+    "OwnerName": "gggg",
+    "OwnerFamilyName": "kkkk",
+    "IdentificationCode": "78089",
+    "IssuerName": "545",
+    "IssueDate": "2024-10-20T08:51:19.704",
+    "PaymentDate": "2024-10-21T09:48:10.170112",
+    "TotalPrice": 247.08,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 2
+      }
+    ]
+  }
+]] Invoice Found
+[2024-10-30 16:37:47.602 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: SearchInvoicesByIssuerName] [Arguments: [
+  "zolfi"
+]] [RetrieveData: null] 
+[2024-10-30 16:37:47.607 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoicesByIssuerNameAsync] [Arguments: [
+  "zolfi"
+]] [RetrieveData: null] Attempt to get a invoice by issuer name
+[2024-10-30 16:37:47.608 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Invoice with filter invoice => invoice.IssuerName.Contains(value(Ecommerce.Application.Services.InvoiceServices+<>c__DisplayClass7_0).issuerName)
+[2024-10-30 16:37:47.625 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoicesByIssuerNameAsync] [Arguments: [
+  "zolfi"
+]] [RetrieveData: []] Invoice Found
+[2024-10-30 16:37:55.963 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: SearchInvoicesByIssuerName] [Arguments: [
+  "Zolfi"
+]] [RetrieveData: null] 
+[2024-10-30 16:37:55.968 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoicesByIssuerNameAsync] [Arguments: [
+  "Zolfi"
+]] [RetrieveData: null] Attempt to get a invoice by issuer name
+[2024-10-30 16:37:55.984 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Invoice with filter invoice => invoice.IssuerName.Contains(value(Ecommerce.Application.Services.InvoiceServices+<>c__DisplayClass7_0).issuerName)
+[2024-10-30 16:38:03.494 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoicesByIssuerNameAsync] [Arguments: [
+  "Zolfi"
+]] [RetrieveData: []] Invoice Found
+[2024-10-30 16:38:09.007 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: SearchInvoicesByIssuerName] [Arguments: [
+  "545"
+]] [RetrieveData: null] 
+[2024-10-30 16:38:09.011 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoicesByIssuerNameAsync] [Arguments: [
+  "545"
+]] [RetrieveData: null] Attempt to get a invoice by issuer name
+[2024-10-30 16:38:09.015 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Invoice with filter invoice => invoice.IssuerName.Contains(value(Ecommerce.Application.Services.InvoiceServices+<>c__DisplayClass7_0).issuerName)
+[2024-10-30 16:38:09.028 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoicesByIssuerNameAsync] [Arguments: [
+  "545"
+]] [RetrieveData: [
+  {
+    "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+    "OwnerName": "gggg",
+    "OwnerFamilyName": "kkkk",
+    "IdentificationCode": "78089",
+    "IssuerName": "545",
+    "IssueDate": "2024-10-20T08:51:19.704",
+    "PaymentDate": "2024-10-21T09:48:10.170112",
+    "TotalPrice": 247.08,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 2
+      }
+    ]
+  }
+]] Invoice Found
+[2024-10-30 16:40:24.000 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: PaymentStatusFiler] [Arguments: [
+  "Payed"
+]] [RetrieveData: null] 
+[2024-10-30 16:40:24.005 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoicesByPaymentStatusAsync] [Arguments: [
+  "Payed"
+]] [RetrieveData: null] Attempt to filter invoices by payment status
+[2024-10-30 16:40:24.006 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Invoice with filter invoice => (Convert(invoice.PaymentStatus, Int32) == Convert(Convert(Parse(Ecommerce.Core.Entities.PaymentStatus, value(Ecommerce.Application.Services.InvoiceServices+<>c__DisplayClass8_0).paymentStatus), PaymentStatus), Int32))
+[2024-10-30 16:40:24.033 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoicesByPaymentStatusAsync] [Arguments: [
+  "Payed"
+]] [RetrieveData: [
+  {
+    "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+    "OwnerName": "gggg",
+    "OwnerFamilyName": "kkkk",
+    "IdentificationCode": "78089",
+    "IssuerName": "545",
+    "IssueDate": "2024-10-20T08:51:19.704",
+    "PaymentDate": "2024-10-21T09:48:10.170112",
+    "TotalPrice": 247.08,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 2
+      }
+    ]
+  },
+  {
+    "Id": "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+    "OwnerName": "AMIRHOSSEIN",
+    "OwnerFamilyName": "AMIRHOSSEIN",
+    "IdentificationCode": "string",
+    "IssuerName": "string",
+    "IssueDate": "2024-10-19T09:45:09.307",
+    "PaymentDate": "2024-10-20T14:20:39.82842",
+    "TotalPrice": 542.16,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 4
+      },
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Count": 4
+      }
+    ]
+  }
+]] Invoice Found
+[2024-10-30 16:42:52.245 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: IssueDateFilter] [Arguments: [
+  "2024-10-19T09:45:09.307"
+]] [RetrieveData: null] 
+[2024-10-30 16:42:52.248 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIssueDateAsync] [Arguments: [
+  "2024-10-19T09:45:09.307"
+]] [RetrieveData: null] Attempt to get invoice by issue date
+[2024-10-30 16:42:52.250 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Invoice with filter invoice => (invoice.IssueDate == value(Ecommerce.Application.Services.InvoiceServices+<>c__DisplayClass9_0).issueDate)
+[2024-10-30 16:42:52.269 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIssueDateAsync] [Arguments: [
+  "2024-10-19T09:45:09.307"
+]] [RetrieveData: [
+  {
+    "Id": "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+    "OwnerName": "AMIRHOSSEIN",
+    "OwnerFamilyName": "AMIRHOSSEIN",
+    "IdentificationCode": "string",
+    "IssuerName": "string",
+    "IssueDate": "2024-10-19T09:45:09.307",
+    "PaymentDate": "2024-10-20T14:20:39.82842",
+    "TotalPrice": 542.16,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 4
+      },
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Count": 4
+      }
+    ]
+  }
+]] Invoice Found
+[2024-10-30 16:45:50.513 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: PaymentDateFilter] [Arguments: [
+  "2024-10-20T14:20:39.82842"
+]] [RetrieveData: null] 
+[2024-10-30 16:45:50.517 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoicesByPaymentDateAsync] [Arguments: [
+  "2024-10-20T14:20:39.82842"
+]] [RetrieveData: null] Attempt to filter by payment date
+[2024-10-30 16:45:50.520 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Invoice with filter invoice => (invoice.PaymentDate == Convert(value(Ecommerce.Application.Services.InvoiceServices+<>c__DisplayClass10_0).paymentDate, Nullable`1))
+[2024-10-30 16:45:58.053 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoicesByPaymentDateAsync] [Arguments: [
+  "2024-10-20T14:20:39.82842"
+]] [RetrieveData: [
+  {
+    "Id": "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+    "OwnerName": "AMIRHOSSEIN",
+    "OwnerFamilyName": "AMIRHOSSEIN",
+    "IdentificationCode": "string",
+    "IssuerName": "string",
+    "IssueDate": "2024-10-19T09:45:09.307",
+    "PaymentDate": "2024-10-20T14:20:39.82842",
+    "TotalPrice": 542.16,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 4
+      },
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Count": 4
+      }
+    ]
+  }
+]] Invoice Found
+[2024-10-30 16:47:44.442 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetAllInvoicesAsync] [Arguments: null] [RetrieveData: null] Attempts to get all invoices
+[2024-10-30 16:47:44.445 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Invoice with filter 
+[2024-10-30 16:47:44.466 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetAllInvoicesAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+    "OwnerName": "gggg",
+    "OwnerFamilyName": "kkkk",
+    "IdentificationCode": "78089",
+    "IssuerName": "545",
+    "IssueDate": "2024-10-20T08:51:19.704",
+    "PaymentDate": "2024-10-21T09:48:10.170112",
+    "TotalPrice": 247.08,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 2
+      }
+    ]
+  },
+  {
+    "Id": "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+    "OwnerName": "AMIRHOSSEIN",
+    "OwnerFamilyName": "AMIRHOSSEIN",
+    "IdentificationCode": "string",
+    "IssuerName": "string",
+    "IssueDate": "2024-10-19T09:45:09.307",
+    "PaymentDate": "2024-10-20T14:20:39.82842",
+    "TotalPrice": 542.16,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 4
+      },
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Count": 4
+      }
+    ]
+  },
+  {
+    "Id": "55df29b7-8280-4ee7-a8ef-4585fb96b6e8",
+    "OwnerName": "sss",
+    "OwnerFamilyName": "ssss",
+    "IdentificationCode": "55555",
+    "IssuerName": "sss",
+    "IssueDate": "2024-10-20T08:29:16.484",
+    "PaymentDate": "2024-10-23T16:36:58.830989",
+    "TotalPrice": 741.24,
+    "PaymentStatus": "Pending",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 6
+      }
+    ]
+  }
+]] Invoice Found
+[2024-10-30 16:47:48.387 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetAllInvoicesAsync] [Arguments: null] [RetrieveData: null] Attempts to get all invoices
+[2024-10-30 16:47:48.391 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Invoice with filter 
+[2024-10-30 16:47:48.399 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetAllInvoicesAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+    "OwnerName": "gggg",
+    "OwnerFamilyName": "kkkk",
+    "IdentificationCode": "78089",
+    "IssuerName": "545",
+    "IssueDate": "2024-10-20T08:51:19.704",
+    "PaymentDate": "2024-10-21T09:48:10.170112",
+    "TotalPrice": 247.08,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 2
+      }
+    ]
+  },
+  {
+    "Id": "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+    "OwnerName": "AMIRHOSSEIN",
+    "OwnerFamilyName": "AMIRHOSSEIN",
+    "IdentificationCode": "string",
+    "IssuerName": "string",
+    "IssueDate": "2024-10-19T09:45:09.307",
+    "PaymentDate": "2024-10-20T14:20:39.82842",
+    "TotalPrice": 542.16,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 4
+      },
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Count": 4
+      }
+    ]
+  },
+  {
+    "Id": "55df29b7-8280-4ee7-a8ef-4585fb96b6e8",
+    "OwnerName": "sss",
+    "OwnerFamilyName": "ssss",
+    "IdentificationCode": "55555",
+    "IssuerName": "sss",
+    "IssueDate": "2024-10-20T08:29:16.484",
+    "PaymentDate": "2024-10-23T16:36:58.830989",
+    "TotalPrice": 741.24,
+    "PaymentStatus": "Pending",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 6
+      }
+    ]
+  }
+]] Invoice Found
+[2024-10-30 16:49:40.518 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: GetAllInvoices] [Arguments: null] [RetrieveData: null] 
+[2024-10-30 16:49:40.523 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetAllInvoicesAsync] [Arguments: null] [RetrieveData: null] Attempts to get all invoices
+[2024-10-30 16:49:40.528 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Invoice with filter 
+[2024-10-30 16:49:40.540 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetAllInvoicesAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+    "OwnerName": "gggg",
+    "OwnerFamilyName": "kkkk",
+    "IdentificationCode": "78089",
+    "IssuerName": "545",
+    "IssueDate": "2024-10-20T08:51:19.704",
+    "PaymentDate": "2024-10-21T09:48:10.170112",
+    "TotalPrice": 247.08,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 2
+      }
+    ]
+  },
+  {
+    "Id": "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+    "OwnerName": "AMIRHOSSEIN",
+    "OwnerFamilyName": "AMIRHOSSEIN",
+    "IdentificationCode": "string",
+    "IssuerName": "string",
+    "IssueDate": "2024-10-19T09:45:09.307",
+    "PaymentDate": "2024-10-20T14:20:39.82842",
+    "TotalPrice": 542.16,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 4
+      },
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Count": 4
+      }
+    ]
+  },
+  {
+    "Id": "55df29b7-8280-4ee7-a8ef-4585fb96b6e8",
+    "OwnerName": "sss",
+    "OwnerFamilyName": "ssss",
+    "IdentificationCode": "55555",
+    "IssuerName": "sss",
+    "IssueDate": "2024-10-20T08:29:16.484",
+    "PaymentDate": "2024-10-23T16:36:58.830989",
+    "TotalPrice": 741.24,
+    "PaymentStatus": "Pending",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 6
+      }
+    ]
+  }
+]] Invoice Found
+[2024-10-30 16:52:31.309 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdentificationCodeAsync] [Arguments: [
+  "346545"
+]] [RetrieveData: null] Attempt to get a invoice by identification number
+[2024-10-30 16:52:31.312 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: [
+  "IdentificationCode",
+  "346545",
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Invoice by its UniqueProperty.
+[2024-10-30 16:52:38.827 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdentificationCodeAsync] [Arguments: [
+  "346545"
+]] [RetrieveData: null] There is no invoice with this identification number
+[2024-10-30 16:52:38.836 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: IssueNewInvoice] [Arguments: [
+  null
+]] [RetrieveData: null] 
+[2024-10-30 16:52:38.839 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: IssueNewInvoice] [Arguments: [
+  null
+]] [RetrieveData: [
+  "Invalid characters in issuer name."
+]] Binding Errors
+[2024-10-30 16:52:46.318 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdentificationCodeAsync] [Arguments: [
+  "346545"
+]] [RetrieveData: null] Attempt to get a invoice by identification number
+[2024-10-30 16:52:46.320 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: [
+  "IdentificationCode",
+  "346545",
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Invoice by its UniqueProperty.
+[2024-10-30 16:52:46.330 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdentificationCodeAsync] [Arguments: [
+  "346545"
+]] [RetrieveData: null] There is no invoice with this identification number
+[2024-10-30 16:52:46.336 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: IssueNewInvoice] [Arguments: [
+  {
+    "OwnerName": "amir",
+    "OwnerFamilyName": "amir",
+    "IdentificationCode": "346545",
+    "IssuerName": "amir",
+    "IssueDate": "2024-10-30T13:22:15.461Z",
+    "TotalPrice": 0
+  }
+]] [RetrieveData: null] 
+[2024-10-30 16:52:46.339 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AddInvoiceAsync] [Arguments: [
+  {
+    "OwnerName": "amir",
+    "OwnerFamilyName": "amir",
+    "IdentificationCode": "346545",
+    "IssuerName": "amir",
+    "IssueDate": "2024-10-30T13:22:15.461Z",
+    "TotalPrice": 0
+  }
+]] [RetrieveData: null] Attempt to add a new invoice
+[2024-10-30 16:52:46.350 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: InsertAsync] [Arguments: [
+  {
+    "Id": "8b0b46ef-fa3a-42e6-a11c-a614b747ff87",
+    "OwnerFirstName": "amir",
+    "OwnerLastName": "amir",
+    "IdentificationCode": "346545",
+    "IssuerName": "amir",
+    "IssueDate": "2024-10-30T13:22:15.461Z",
+    "PaymentDate": null,
+    "TotalPrice": 0,
+    "PaymentStatus": 0
+  }
+]] [RetrieveData: null] Attempt to add an new entity with type Ecommerce.Core.Entities.Invoice
+[2024-10-30 16:52:46.376 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: InsertAsync] [Arguments: [
+  {
+    "Id": "8b0b46ef-fa3a-42e6-a11c-a614b747ff87",
+    "OwnerFirstName": "amir",
+    "OwnerLastName": "amir",
+    "IdentificationCode": "346545",
+    "IssuerName": "amir",
+    "IssueDate": "2024-10-30T13:22:15.461Z",
+    "PaymentDate": null,
+    "TotalPrice": 0,
+    "PaymentStatus": 0
+  }
+]] [RetrieveData: null] Successful Insert.
+[2024-10-30 16:52:46.514 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-10-30 16:52:46.516 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AddInvoiceAsync] [Arguments: null] [RetrieveData: {
+  "Id": "8b0b46ef-fa3a-42e6-a11c-a614b747ff87",
+  "OwnerFirstName": "amir",
+  "OwnerLastName": "amir",
+  "IdentificationCode": "346545",
+  "IssuerName": "amir",
+  "IssueDate": "2024-10-30T13:22:15.461Z",
+  "PaymentDate": null,
+  "TotalPrice": 0,
+  "PaymentStatus": 0
+}] Successful Insert

@@ -1,0 +1,1633 @@
+[2024-11-03 10:02:46.778 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: Program] [FunctionName: <Main>$] [Arguments: null] [RetrieveData: null] Starting up the application
+[2024-11-03 10:03:01.556 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: AuthenticateUserAsync] [Arguments: [
+  "amirasem1",
+  "hosein77"
+]] [RetrieveData: null] Attempt to authenticate an user
+[2024-11-03 10:03:01.564 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: AuthenticateUserAsync] [Arguments: [
+  "amirasem1"
+]] [RetrieveData: null] Check the user existence
+[2024-11-03 10:03:03.238 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: [
+  "Username",
+  "amirasem1",
+  ""
+]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.User by its UniqueProperty.
+[2024-11-03 10:03:11.971 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: AuthenticateUserAsync] [Arguments: [
+  "amirasem1"
+]] [RetrieveData: {
+  "Id": "ec7ded00-7b12-4244-a81e-c9ba4dc22b71",
+  "FirstName": "UserOne",
+  "LastName": "UserOne",
+  "Username": "amirasem1",
+  "PasswordHash": "AQAAAAIAAYagAAAAEDhPUqMu9KmcNsyqvixIv13khtenrU/6SCkDClSAnx1/0uo/rI6stEjSRPFwMUo/Tg==",
+  "Email": "userone@gmail.com",
+  "PhoneNumber": "88888",
+  "RoleId": "5c03a6cb-f544-4de7-bbeb-d5e771dd1444"
+}] User exists
+[2024-11-03 10:03:11.979 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "5c03a6cb-f544-4de7-bbeb-d5e771dd1444",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Role by its ID.
+[2024-11-03 10:03:12.019 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: AuthenticateUserAsync] [Arguments: [
+  "hosein77"
+]] [RetrieveData: null] Attempt to verify the password
+[2024-11-03 10:03:12.166 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: AuthenticateUserAsync] [Arguments: [
+  "amirasem1",
+  "hosein77"
+]] [RetrieveData: {
+  "Id": "ec7ded00-7b12-4244-a81e-c9ba4dc22b71",
+  "FirstName": "UserOne",
+  "LastName": "UserOne",
+  "Username": "amirasem1",
+  "PasswordHash": "AQAAAAIAAYagAAAAEDhPUqMu9KmcNsyqvixIv13khtenrU/6SCkDClSAnx1/0uo/rI6stEjSRPFwMUo/Tg==",
+  "Email": "userone@gmail.com",
+  "PhoneNumber": "88888",
+  "RoleId": "5c03a6cb-f544-4de7-bbeb-d5e771dd1444"
+}] User authenticated successfully.
+[2024-11-03 10:03:25.092 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: GetAllInvoices] [Arguments: null] [RetrieveData: null] 
+[2024-11-03 10:03:25.097 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetAllInvoicesAsync] [Arguments: null] [RetrieveData: null] Attempts to get all invoices
+[2024-11-03 10:03:25.193 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Invoice with filter 
+[2024-11-03 10:03:25.607 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetAllInvoicesAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+    "OwnerName": "gggg",
+    "OwnerFamilyName": "kkkk",
+    "IdentificationCode": "78089",
+    "IssuerName": "545",
+    "IssueDate": "2024-10-20T08:51:19.704",
+    "PaymentDate": "2024-10-21T09:48:10.170112",
+    "TotalPrice": 247.08,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 2
+      }
+    ]
+  },
+  {
+    "Id": "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+    "OwnerName": "AMIRHOSSEIN",
+    "OwnerFamilyName": "AMIRHOSSEIN",
+    "IdentificationCode": "string",
+    "IssuerName": "string",
+    "IssueDate": "2024-10-19T09:45:09.307",
+    "PaymentDate": "2024-10-20T14:20:39.82842",
+    "TotalPrice": 542.16,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 4
+      },
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Count": 4
+      }
+    ]
+  },
+  {
+    "Id": "55df29b7-8280-4ee7-a8ef-4585fb96b6e8",
+    "OwnerName": "sss",
+    "OwnerFamilyName": "ssss",
+    "IdentificationCode": "55555",
+    "IssuerName": "sss",
+    "IssueDate": "2024-10-20T08:29:16.484",
+    "PaymentDate": "2024-10-23T16:36:58.830989",
+    "TotalPrice": 741.24,
+    "PaymentStatus": "Pending",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 6
+      }
+    ]
+  },
+  {
+    "Id": "8b0b46ef-fa3a-42e6-a11c-a614b747ff87",
+    "OwnerName": "amir",
+    "OwnerFamilyName": "amir",
+    "IdentificationCode": "346545",
+    "IssuerName": "amir",
+    "IssueDate": "2024-10-30T13:22:15.461",
+    "PaymentDate": null,
+    "TotalPrice": 0,
+    "PaymentStatus": "Pending",
+    "Products": []
+  }
+]] Invoice Found
+[2024-11-03 10:05:10.706 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: SearchProducts] [Arguments: [
+  "PRODUCT1"
+]] [RetrieveData: null] Attempt to search products by the name.
+[2024-11-03 10:05:10.712 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductsByNameAsync] [Arguments: [
+  "PRODUCT1"
+]] [RetrieveData: null] Attempts to search products by name
+[2024-11-03 10:05:10.746 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Product with filter p => p.Name.Contains(value(Ecommerce.Application.Services.ProductService+<>c__DisplayClass8_0).name)
+[2024-11-03 10:05:10.932 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductsByNameAsync] [Arguments: [
+  "PRODUCT1"
+]] [RetrieveData: [
+  {
+    "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Name": "PRODUCT1",
+    "Price": 12.00,
+    "Inventory": 8.00,
+    "Dop": "2024-10-20T13:52:33.182",
+    "Doe": "2024-10-20T13:52:33.182",
+    "Status": false
+  }
+]] All products with this name retrieved successfully.
+[2024-11-03 10:05:10.979 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: SearchProducts] [Arguments: [
+  "PRODUCT1"
+]] [RetrieveData: [
+  {
+    "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Name": "PRODUCT1",
+    "Price": 12.00,
+    "Inventory": 8.00,
+    "Dop": "2024-10-20T13:52:33.182",
+    "Doe": "2024-10-20T13:52:33.182",
+    "Status": false,
+    "ProductInvoices": null
+  }
+]] Search DTO Result
+[2024-11-03 10:07:31.226 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: DeleteInvoiceProduct] [Arguments: [
+  "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+  "7ce053d4-4d01-4657-b38a-3013096f0021"
+]] [RetrieveData: null] 
+[2024-11-03 10:07:31.233 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: DeleteInvoiceProductAsync] [Arguments: null] [RetrieveData: null] Attempt to delete a product from the invoice's products
+[2024-11-03 10:07:31.239 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-11-03 10:07:31.286 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-11-03 10:07:31.310 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: DeleteInvoiceProductAsync] [Arguments: [
+  "51269011-7de5-4dcb-bf6c-8667f5974f8c"
+]] [RetrieveData: {
+  "Id": "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+  "OwnerFirstName": "AMIRHOSSEIN",
+  "OwnerLastName": "AMIRHOSSEIN",
+  "IdentificationCode": "string",
+  "IssuerName": "string",
+  "IssueDate": "2024-10-19T09:45:09.307",
+  "PaymentDate": "2024-10-20T14:20:39.82842",
+  "TotalPrice": 542.16,
+  "PaymentStatus": 1
+}] Target Invoice Found
+[2024-11-03 10:07:31.317 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: DeleteInvoiceProductAsync] [Arguments: null] [RetrieveData: 1] You cannot modify an payed invoice's products
+[2024-11-03 10:07:31.321 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: DeleteInvoiceProduct] [Arguments: [
+  "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+  "7ce053d4-4d01-4657-b38a-3013096f0021"
+]] [RetrieveData: "You cannot modify an payed invoice\u0027s products"] Wrong productId or invoiceID
+[2024-11-03 10:08:01.819 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdentificationCodeAsync] [Arguments: [
+  "9834434"
+]] [RetrieveData: null] Attempt to get a invoice by identification number
+[2024-11-03 10:08:01.823 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: [
+  "IdentificationCode",
+  "9834434",
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.Invoice by its UniqueProperty.
+[2024-11-03 10:08:01.856 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetInvoiceByIdentificationCodeAsync] [Arguments: [
+  "9834434"
+]] [RetrieveData: null] There is no invoice with this identification number
+[2024-11-03 10:08:01.881 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: IssueNewInvoice] [Arguments: [
+  {
+    "OwnerName": "Amirhosein",
+    "OwnerFamilyName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255Z",
+    "TotalPrice": 0
+  }
+]] [RetrieveData: null] 
+[2024-11-03 10:08:01.888 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AddInvoiceAsync] [Arguments: [
+  {
+    "OwnerName": "Amirhosein",
+    "OwnerFamilyName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255Z",
+    "TotalPrice": 0
+  }
+]] [RetrieveData: null] Attempt to add a new invoice
+[2024-11-03 10:08:01.898 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: InsertAsync] [Arguments: [
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerFirstName": "Amirhosein",
+    "OwnerLastName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255Z",
+    "PaymentDate": null,
+    "TotalPrice": 0,
+    "PaymentStatus": 0
+  }
+]] [RetrieveData: null] Attempt to add an new entity with type Ecommerce.Core.Entities.Invoice
+[2024-11-03 10:08:01.974 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: InsertAsync] [Arguments: [
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerFirstName": "Amirhosein",
+    "OwnerLastName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255Z",
+    "PaymentDate": null,
+    "TotalPrice": 0,
+    "PaymentStatus": 0
+  }
+]] [RetrieveData: null] Successful Insert.
+[2024-11-03 10:08:02.296 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-11-03 10:08:02.299 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AddInvoiceAsync] [Arguments: null] [RetrieveData: {
+  "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "OwnerFirstName": "Amirhosein",
+  "OwnerLastName": "Yousefi",
+  "IdentificationCode": "9834434",
+  "IssuerName": "Zolfi",
+  "IssueDate": "2024-11-03T06:37:39.255Z",
+  "PaymentDate": null,
+  "TotalPrice": 0,
+  "PaymentStatus": 0
+}] Successful Insert
+[2024-11-03 10:08:29.354 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: SearchProducts] [Arguments: [
+  "PRODUCT1"
+]] [RetrieveData: null] Attempt to search products by the name.
+[2024-11-03 10:08:29.372 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductsByNameAsync] [Arguments: [
+  "PRODUCT1"
+]] [RetrieveData: null] Attempts to search products by name
+[2024-11-03 10:08:29.379 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Product with filter p => p.Name.Contains(value(Ecommerce.Application.Services.ProductService+<>c__DisplayClass8_0).name)
+[2024-11-03 10:08:36.911 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductsByNameAsync] [Arguments: [
+  "PRODUCT1"
+]] [RetrieveData: [
+  {
+    "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Name": "PRODUCT1",
+    "Price": 12.00,
+    "Inventory": 8.00,
+    "Dop": "2024-10-20T13:52:33.182",
+    "Doe": "2024-10-20T13:52:33.182",
+    "Status": false
+  }
+]] All products with this name retrieved successfully.
+[2024-11-03 10:08:36.918 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: SearchProducts] [Arguments: [
+  "PRODUCT1"
+]] [RetrieveData: [
+  {
+    "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Name": "PRODUCT1",
+    "Price": 12.00,
+    "Inventory": 8.00,
+    "Dop": "2024-10-20T13:52:33.182",
+    "Doe": "2024-10-20T13:52:33.182",
+    "Status": false,
+    "ProductInvoices": null
+  }
+]] Search DTO Result
+[2024-11-03 10:08:45.580 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetAllProducts] [Arguments: null] [RetrieveData: null] Attempts to get all Products
+[2024-11-03 10:08:45.584 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductAsync] [Arguments: null] [RetrieveData: null] Attempts to get all products
+[2024-11-03 10:08:45.590 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Manufacturers2"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Product with filter 
+[2024-11-03 10:08:45.621 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductService] [FunctionName: GetAllProductAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+    "Name": "PRODUCT2",
+    "Price": 123.54,
+    "Inventory": -1.00,
+    "Dop": "2024-10-20T14:19:30.933",
+    "Doe": "2024-10-20T14:19:30.933",
+    "Status": false
+  },
+  {
+    "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Name": "PRODUCT1",
+    "Price": 12.00,
+    "Inventory": 8.00,
+    "Dop": "2024-10-20T13:52:33.182",
+    "Doe": "2024-10-20T13:52:33.182",
+    "Status": false
+  }
+]] All Product Retrieved
+[2024-11-03 10:08:45.629 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: ProductController] [FunctionName: GetAllProducts] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "2a62ea53-7cc4-43bb-a485-91ba804172bb",
+    "Name": "PRODUCT2",
+    "Price": 123.54,
+    "Inventory": -1.00,
+    "Dop": "2024-10-20T14:19:30.933",
+    "Doe": "2024-10-20T14:19:30.933",
+    "Status": false,
+    "ProductInvoices": null
+  },
+  {
+    "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Name": "PRODUCT1",
+    "Price": 12.00,
+    "Inventory": 8.00,
+    "Dop": "2024-10-20T13:52:33.182",
+    "Doe": "2024-10-20T13:52:33.182",
+    "Status": false,
+    "ProductInvoices": null
+  }
+]] All Products DTO
+[2024-11-03 10:10:08.732 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: AddProductToInvoice] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  2
+]] [RetrieveData: null] 
+[2024-11-03 10:10:08.742 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  2
+]] [RetrieveData: null] Attempt to add a product to a invoice
+[2024-11-03 10:10:08.746 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-11-03 10:10:08.757 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-11-03 10:10:08.763 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1"
+]] [RetrieveData: {
+  "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "OwnerFirstName": "Amirhosein",
+  "OwnerLastName": "Yousefi",
+  "IdentificationCode": "9834434",
+  "IssuerName": "Zolfi",
+  "IssueDate": "2024-11-03T06:37:39.255",
+  "PaymentDate": null,
+  "TotalPrice": 0,
+  "PaymentStatus": 0
+}] Target Invoice Found.
+[2024-11-03 10:10:08.765 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021"
+]] [RetrieveData: {
+  "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+  "Name": "PRODUCT1",
+  "Price": 12.00,
+  "Inventory": 8.00,
+  "Dop": "2024-10-20T13:52:33.182",
+  "Doe": "2024-10-20T13:52:33.182",
+  "Status": false
+}] Target Product Found.
+[2024-11-03 10:10:08.773 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1"
+]] [RetrieveData: false] Check if the product exist in the invoice products
+[2024-11-03 10:10:08.777 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: null] [RetrieveData: null] New product added to the invoice's products
+[2024-11-03 10:10:08.781 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: CalculateTotalPriceAsync] [Arguments: null] [RetrieveData: null] Attempt to calculate an invoice's total price
+[2024-11-03 10:10:08.784 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-11-03 10:10:08.796 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: CalculateTotalPriceAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1"
+]] [RetrieveData: {
+  "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "OwnerFirstName": "Amirhosein",
+  "OwnerLastName": "Yousefi",
+  "IdentificationCode": "9834434",
+  "IssuerName": "Zolfi",
+  "IssueDate": "2024-11-03T06:37:39.255",
+  "PaymentDate": null,
+  "TotalPrice": 0,
+  "PaymentStatus": 0
+}] Target Invoice Found.
+[2024-11-03 10:10:08.800 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-11-03 10:10:08.816 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: CalculateTotalPriceAsync] [Arguments: null] [RetrieveData: 24.00] Total price for the Yousefi's invoice successfully calculated.
+[2024-11-03 10:10:08.824 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: null] [RetrieveData: 24.00] Invoice's total price changed successfully.
+[2024-11-03 10:10:08.826 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: null] [RetrieveData: 0] Invoice's payment status changed successfully.
+[2024-11-03 10:10:08.830 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerFirstName": "Amirhosein",
+    "OwnerLastName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255",
+    "PaymentDate": null,
+    "TotalPrice": 24.00,
+    "PaymentStatus": 0
+  }
+]] [RetrieveData: null] Attempt to Update a Ecommerce.Core.Entities.Invoice
+[2024-11-03 10:10:08.876 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerFirstName": "Amirhosein",
+    "OwnerLastName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255",
+    "PaymentDate": null,
+    "TotalPrice": 24.00,
+    "PaymentStatus": 0
+  }
+]] [RetrieveData: null] Successful Update.
+[2024-11-03 10:10:08.883 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: null] [RetrieveData: [
+  {
+    "ProductId": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Product": {
+      "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+      "Name": "PRODUCT1",
+      "Price": 12.00,
+      "Inventory": 8.00,
+      "Dop": "2024-10-20T13:52:33.182",
+      "Doe": "2024-10-20T13:52:33.182",
+      "Status": false
+    },
+    "InvoiceId": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "Invoice": {
+      "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+      "OwnerFirstName": "Amirhosein",
+      "OwnerLastName": "Yousefi",
+      "IdentificationCode": "9834434",
+      "IssuerName": "Zolfi",
+      "IssueDate": "2024-11-03T06:37:39.255",
+      "PaymentDate": null,
+      "TotalPrice": 24.00,
+      "PaymentStatus": 0
+    },
+    "Count": 2
+  }
+]] Invoice's products updated successfully.
+[2024-11-03 10:10:09.044 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-11-03 10:10:14.162 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: GetAllInvoices] [Arguments: null] [RetrieveData: null] 
+[2024-11-03 10:10:14.166 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetAllInvoicesAsync] [Arguments: null] [RetrieveData: null] Attempts to get all invoices
+[2024-11-03 10:10:14.174 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Invoice with filter 
+[2024-11-03 10:10:14.189 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetAllInvoicesAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+    "OwnerName": "gggg",
+    "OwnerFamilyName": "kkkk",
+    "IdentificationCode": "78089",
+    "IssuerName": "545",
+    "IssueDate": "2024-10-20T08:51:19.704",
+    "PaymentDate": "2024-10-21T09:48:10.170112",
+    "TotalPrice": 247.08,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 2
+      }
+    ]
+  },
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerName": "Amirhosein",
+    "OwnerFamilyName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255",
+    "PaymentDate": null,
+    "TotalPrice": 24.00,
+    "PaymentStatus": "Pending",
+    "Products": [
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Count": 2
+      }
+    ]
+  },
+  {
+    "Id": "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+    "OwnerName": "AMIRHOSSEIN",
+    "OwnerFamilyName": "AMIRHOSSEIN",
+    "IdentificationCode": "string",
+    "IssuerName": "string",
+    "IssueDate": "2024-10-19T09:45:09.307",
+    "PaymentDate": "2024-10-20T14:20:39.82842",
+    "TotalPrice": 542.16,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 4
+      },
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Count": 4
+      }
+    ]
+  },
+  {
+    "Id": "55df29b7-8280-4ee7-a8ef-4585fb96b6e8",
+    "OwnerName": "sss",
+    "OwnerFamilyName": "ssss",
+    "IdentificationCode": "55555",
+    "IssuerName": "sss",
+    "IssueDate": "2024-10-20T08:29:16.484",
+    "PaymentDate": "2024-10-23T16:36:58.830989",
+    "TotalPrice": 741.24,
+    "PaymentStatus": "Pending",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 6
+      }
+    ]
+  },
+  {
+    "Id": "8b0b46ef-fa3a-42e6-a11c-a614b747ff87",
+    "OwnerName": "amir",
+    "OwnerFamilyName": "amir",
+    "IdentificationCode": "346545",
+    "IssuerName": "amir",
+    "IssueDate": "2024-10-30T13:22:15.461",
+    "PaymentDate": null,
+    "TotalPrice": 0,
+    "PaymentStatus": "Pending",
+    "Products": []
+  }
+]] Invoice Found
+[2024-11-03 10:10:55.901 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: DeleteInvoiceProduct] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "7ce053d4-4d01-4657-b38a-3013096f0021"
+]] [RetrieveData: null] 
+[2024-11-03 10:10:55.904 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: DeleteInvoiceProductAsync] [Arguments: null] [RetrieveData: null] Attempt to delete a product from the invoice's products
+[2024-11-03 10:10:55.906 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-11-03 10:10:55.914 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-11-03 10:10:55.923 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: DeleteInvoiceProductAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1"
+]] [RetrieveData: {
+  "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "OwnerFirstName": "Amirhosein",
+  "OwnerLastName": "Yousefi",
+  "IdentificationCode": "9834434",
+  "IssuerName": "Zolfi",
+  "IssueDate": "2024-11-03T06:37:39.255",
+  "PaymentDate": null,
+  "TotalPrice": 24.00,
+  "PaymentStatus": 0
+}] Target Invoice Found
+[2024-11-03 10:10:55.927 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerFirstName": "Amirhosein",
+    "OwnerLastName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255",
+    "PaymentDate": null,
+    "TotalPrice": 24.00,
+    "PaymentStatus": 0
+  }
+]] [RetrieveData: null] Attempt to Update a Ecommerce.Core.Entities.Invoice
+[2024-11-03 10:10:55.943 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerFirstName": "Amirhosein",
+    "OwnerLastName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255",
+    "PaymentDate": null,
+    "TotalPrice": 24.00,
+    "PaymentStatus": 0
+  }
+]] [RetrieveData: null] Successful Update.
+[2024-11-03 10:10:55.973 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-11-03 10:10:55.975 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: DeleteInvoiceProductAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "7ce053d4-4d01-4657-b38a-3013096f0021"
+]] [RetrieveData: []] The product successfully removed from invoice's product
+[2024-11-03 10:11:15.121 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: GetAllInvoices] [Arguments: null] [RetrieveData: null] 
+[2024-11-03 10:11:15.123 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetAllInvoicesAsync] [Arguments: null] [RetrieveData: null] Attempts to get all invoices
+[2024-11-03 10:11:15.127 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Invoice with filter 
+[2024-11-03 10:11:15.140 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetAllInvoicesAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+    "OwnerName": "gggg",
+    "OwnerFamilyName": "kkkk",
+    "IdentificationCode": "78089",
+    "IssuerName": "545",
+    "IssueDate": "2024-10-20T08:51:19.704",
+    "PaymentDate": "2024-10-21T09:48:10.170112",
+    "TotalPrice": 247.08,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 2
+      }
+    ]
+  },
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerName": "Amirhosein",
+    "OwnerFamilyName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255",
+    "PaymentDate": null,
+    "TotalPrice": 24.00,
+    "PaymentStatus": "Pending",
+    "Products": []
+  },
+  {
+    "Id": "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+    "OwnerName": "AMIRHOSSEIN",
+    "OwnerFamilyName": "AMIRHOSSEIN",
+    "IdentificationCode": "string",
+    "IssuerName": "string",
+    "IssueDate": "2024-10-19T09:45:09.307",
+    "PaymentDate": "2024-10-20T14:20:39.82842",
+    "TotalPrice": 542.16,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 4
+      },
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Count": 4
+      }
+    ]
+  },
+  {
+    "Id": "55df29b7-8280-4ee7-a8ef-4585fb96b6e8",
+    "OwnerName": "sss",
+    "OwnerFamilyName": "ssss",
+    "IdentificationCode": "55555",
+    "IssuerName": "sss",
+    "IssueDate": "2024-10-20T08:29:16.484",
+    "PaymentDate": "2024-10-23T16:36:58.830989",
+    "TotalPrice": 741.24,
+    "PaymentStatus": "Pending",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 6
+      }
+    ]
+  },
+  {
+    "Id": "8b0b46ef-fa3a-42e6-a11c-a614b747ff87",
+    "OwnerName": "amir",
+    "OwnerFamilyName": "amir",
+    "IdentificationCode": "346545",
+    "IssuerName": "amir",
+    "IssueDate": "2024-10-30T13:22:15.461",
+    "PaymentDate": null,
+    "TotalPrice": 0,
+    "PaymentStatus": "Pending",
+    "Products": []
+  }
+]] Invoice Found
+[2024-11-03 10:15:12.864 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: AddProductToInvoice] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  2
+]] [RetrieveData: null] 
+[2024-11-03 10:15:12.867 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  2
+]] [RetrieveData: null] Attempt to add a product to a invoice
+[2024-11-03 10:15:12.872 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-11-03 10:15:20.412 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-11-03 10:15:20.426 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1"
+]] [RetrieveData: {
+  "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "OwnerFirstName": "Amirhosein",
+  "OwnerLastName": "Yousefi",
+  "IdentificationCode": "9834434",
+  "IssuerName": "Zolfi",
+  "IssueDate": "2024-11-03T06:37:39.255",
+  "PaymentDate": null,
+  "TotalPrice": 24.00,
+  "PaymentStatus": 0
+}] Target Invoice Found.
+[2024-11-03 10:15:20.434 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021"
+]] [RetrieveData: {
+  "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+  "Name": "PRODUCT1",
+  "Price": 12.00,
+  "Inventory": 8.00,
+  "Dop": "2024-10-20T13:52:33.182",
+  "Doe": "2024-10-20T13:52:33.182",
+  "Status": false
+}] Target Product Found.
+[2024-11-03 10:15:20.437 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1"
+]] [RetrieveData: false] Check if the product exist in the invoice products
+[2024-11-03 10:15:20.440 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: null] [RetrieveData: null] New product added to the invoice's products
+[2024-11-03 10:15:20.444 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: CalculateTotalPriceAsync] [Arguments: null] [RetrieveData: null] Attempt to calculate an invoice's total price
+[2024-11-03 10:15:20.447 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-11-03 10:15:20.454 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: CalculateTotalPriceAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1"
+]] [RetrieveData: {
+  "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "OwnerFirstName": "Amirhosein",
+  "OwnerLastName": "Yousefi",
+  "IdentificationCode": "9834434",
+  "IssuerName": "Zolfi",
+  "IssueDate": "2024-11-03T06:37:39.255",
+  "PaymentDate": null,
+  "TotalPrice": 24.00,
+  "PaymentStatus": 0
+}] Target Invoice Found.
+[2024-11-03 10:15:20.457 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-11-03 10:15:20.467 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: CalculateTotalPriceAsync] [Arguments: null] [RetrieveData: 24.00] Total price for the Yousefi's invoice successfully calculated.
+[2024-11-03 10:15:20.470 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: null] [RetrieveData: 24.00] Invoice's total price changed successfully.
+[2024-11-03 10:15:20.472 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: null] [RetrieveData: 0] Invoice's payment status changed successfully.
+[2024-11-03 10:15:20.475 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerFirstName": "Amirhosein",
+    "OwnerLastName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255",
+    "PaymentDate": null,
+    "TotalPrice": 24.00,
+    "PaymentStatus": 0
+  }
+]] [RetrieveData: null] Attempt to Update a Ecommerce.Core.Entities.Invoice
+[2024-11-03 10:15:20.489 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerFirstName": "Amirhosein",
+    "OwnerLastName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255",
+    "PaymentDate": null,
+    "TotalPrice": 24.00,
+    "PaymentStatus": 0
+  }
+]] [RetrieveData: null] Successful Update.
+[2024-11-03 10:15:20.497 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: null] [RetrieveData: [
+  {
+    "ProductId": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Product": {
+      "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+      "Name": "PRODUCT1",
+      "Price": 12.00,
+      "Inventory": 8.00,
+      "Dop": "2024-10-20T13:52:33.182",
+      "Doe": "2024-10-20T13:52:33.182",
+      "Status": false
+    },
+    "InvoiceId": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "Invoice": {
+      "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+      "OwnerFirstName": "Amirhosein",
+      "OwnerLastName": "Yousefi",
+      "IdentificationCode": "9834434",
+      "IssuerName": "Zolfi",
+      "IssueDate": "2024-11-03T06:37:39.255",
+      "PaymentDate": null,
+      "TotalPrice": 24.00,
+      "PaymentStatus": 0
+    },
+    "Count": 2
+  }
+]] Invoice's products updated successfully.
+[2024-11-03 10:15:20.529 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-11-03 10:15:31.023 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: DeleteInvoiceProduct] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "7ce053d4-4d01-4657-b38a-3013096f0021"
+]] [RetrieveData: null] 
+[2024-11-03 10:15:31.047 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: DeleteInvoiceProductAsync] [Arguments: null] [RetrieveData: null] Attempt to delete a product from the invoice's products
+[2024-11-03 10:15:31.052 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-11-03 10:15:31.065 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-11-03 10:15:31.072 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: DeleteInvoiceProductAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1"
+]] [RetrieveData: {
+  "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "OwnerFirstName": "Amirhosein",
+  "OwnerLastName": "Yousefi",
+  "IdentificationCode": "9834434",
+  "IssuerName": "Zolfi",
+  "IssueDate": "2024-11-03T06:37:39.255",
+  "PaymentDate": null,
+  "TotalPrice": 24.00,
+  "PaymentStatus": 0
+}] Target Invoice Found
+[2024-11-03 10:15:31.080 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: CalculateTotalPriceAsync] [Arguments: null] [RetrieveData: null] Attempt to calculate an invoice's total price
+[2024-11-03 10:15:31.083 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-11-03 10:15:31.088 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: CalculateTotalPriceAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1"
+]] [RetrieveData: {
+  "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "OwnerFirstName": "Amirhosein",
+  "OwnerLastName": "Yousefi",
+  "IdentificationCode": "9834434",
+  "IssuerName": "Zolfi",
+  "IssueDate": "2024-11-03T06:37:39.255",
+  "PaymentDate": null,
+  "TotalPrice": 24.00,
+  "PaymentStatus": 0
+}] Target Invoice Found.
+[2024-11-03 10:15:31.091 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: CalculateTotalPriceAsync] [Arguments: null] [RetrieveData: 0] Total price for the Yousefi's invoice successfully calculated.
+[2024-11-03 10:15:31.096 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerFirstName": "Amirhosein",
+    "OwnerLastName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255",
+    "PaymentDate": null,
+    "TotalPrice": 0,
+    "PaymentStatus": 0
+  }
+]] [RetrieveData: null] Attempt to Update a Ecommerce.Core.Entities.Invoice
+[2024-11-03 10:15:31.099 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerFirstName": "Amirhosein",
+    "OwnerLastName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255",
+    "PaymentDate": null,
+    "TotalPrice": 0,
+    "PaymentStatus": 0
+  }
+]] [RetrieveData: null] Successful Update.
+[2024-11-03 10:15:31.113 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-11-03 10:15:38.164 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: GetAllInvoices] [Arguments: null] [RetrieveData: null] 
+[2024-11-03 10:15:38.181 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetAllInvoicesAsync] [Arguments: null] [RetrieveData: null] Attempts to get all invoices
+[2024-11-03 10:15:38.186 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Invoice with filter 
+[2024-11-03 10:15:38.203 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetAllInvoicesAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+    "OwnerName": "gggg",
+    "OwnerFamilyName": "kkkk",
+    "IdentificationCode": "78089",
+    "IssuerName": "545",
+    "IssueDate": "2024-10-20T08:51:19.704",
+    "PaymentDate": "2024-10-21T09:48:10.170112",
+    "TotalPrice": 247.08,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 2
+      }
+    ]
+  },
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerName": "Amirhosein",
+    "OwnerFamilyName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255",
+    "PaymentDate": null,
+    "TotalPrice": 0,
+    "PaymentStatus": "Pending",
+    "Products": [
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Count": 1
+      }
+    ]
+  },
+  {
+    "Id": "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+    "OwnerName": "AMIRHOSSEIN",
+    "OwnerFamilyName": "AMIRHOSSEIN",
+    "IdentificationCode": "string",
+    "IssuerName": "string",
+    "IssueDate": "2024-10-19T09:45:09.307",
+    "PaymentDate": "2024-10-20T14:20:39.82842",
+    "TotalPrice": 542.16,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 4
+      },
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Count": 4
+      }
+    ]
+  },
+  {
+    "Id": "55df29b7-8280-4ee7-a8ef-4585fb96b6e8",
+    "OwnerName": "sss",
+    "OwnerFamilyName": "ssss",
+    "IdentificationCode": "55555",
+    "IssuerName": "sss",
+    "IssueDate": "2024-10-20T08:29:16.484",
+    "PaymentDate": "2024-10-23T16:36:58.830989",
+    "TotalPrice": 741.24,
+    "PaymentStatus": "Pending",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 6
+      }
+    ]
+  },
+  {
+    "Id": "8b0b46ef-fa3a-42e6-a11c-a614b747ff87",
+    "OwnerName": "amir",
+    "OwnerFamilyName": "amir",
+    "IdentificationCode": "346545",
+    "IssuerName": "amir",
+    "IssueDate": "2024-10-30T13:22:15.461",
+    "PaymentDate": null,
+    "TotalPrice": 0,
+    "PaymentStatus": "Pending",
+    "Products": []
+  }
+]] Invoice Found
+[2024-11-03 10:16:39.566 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: AddProductToInvoice] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  2
+]] [RetrieveData: null] 
+[2024-11-03 10:16:39.569 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  2
+]] [RetrieveData: null] Attempt to add a product to a invoice
+[2024-11-03 10:16:39.574 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-11-03 10:16:39.584 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-11-03 10:16:39.599 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1"
+]] [RetrieveData: {
+  "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "OwnerFirstName": "Amirhosein",
+  "OwnerLastName": "Yousefi",
+  "IdentificationCode": "9834434",
+  "IssuerName": "Zolfi",
+  "IssueDate": "2024-11-03T06:37:39.255",
+  "PaymentDate": null,
+  "TotalPrice": 0,
+  "PaymentStatus": 0
+}] Target Invoice Found.
+[2024-11-03 10:16:39.605 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021"
+]] [RetrieveData: {
+  "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+  "Name": "PRODUCT1",
+  "Price": 12.00,
+  "Inventory": 8.00,
+  "Dop": "2024-10-20T13:52:33.182",
+  "Doe": "2024-10-20T13:52:33.182",
+  "Status": false
+}] Target Product Found.
+[2024-11-03 10:16:39.615 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1"
+]] [RetrieveData: true] Check if the product exist in the invoice products
+[2024-11-03 10:16:39.618 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: null] [RetrieveData: null] The product exists in the invoice's products
+[2024-11-03 10:16:39.622 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: null] [RetrieveData: null] Remove the product with old count from the invoice's products.
+[2024-11-03 10:16:39.633 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: null] [RetrieveData: 3] Increase the count of the product in the invoice.
+[2024-11-03 10:16:39.635 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: null] [RetrieveData: null] Add the product with new count to the invoice's products
+[2024-11-03 10:16:39.638 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: CalculateTotalPriceAsync] [Arguments: null] [RetrieveData: null] Attempt to calculate an invoice's total price
+[2024-11-03 10:16:39.640 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-11-03 10:16:39.651 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: CalculateTotalPriceAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1"
+]] [RetrieveData: {
+  "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "OwnerFirstName": "Amirhosein",
+  "OwnerLastName": "Yousefi",
+  "IdentificationCode": "9834434",
+  "IssuerName": "Zolfi",
+  "IssueDate": "2024-11-03T06:37:39.255",
+  "PaymentDate": null,
+  "TotalPrice": 0,
+  "PaymentStatus": 0
+}] Target Invoice Found.
+[2024-11-03 10:16:39.655 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-11-03 10:16:39.666 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: CalculateTotalPriceAsync] [Arguments: null] [RetrieveData: 36.00] Total price for the Yousefi's invoice successfully calculated.
+[2024-11-03 10:16:39.669 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: null] [RetrieveData: 36.00] Calculate the invoice's total price
+[2024-11-03 10:16:39.672 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: null] [RetrieveData: 0] Invoice's payment status changed successfully.
+[2024-11-03 10:16:39.677 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerFirstName": "Amirhosein",
+    "OwnerLastName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255",
+    "PaymentDate": null,
+    "TotalPrice": 36.00,
+    "PaymentStatus": 0
+  }
+]] [RetrieveData: null] Attempt to Update a Ecommerce.Core.Entities.Invoice
+[2024-11-03 10:16:39.682 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerFirstName": "Amirhosein",
+    "OwnerLastName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255",
+    "PaymentDate": null,
+    "TotalPrice": 36.00,
+    "PaymentStatus": 0
+  }
+]] [RetrieveData: null] Successful Update.
+[2024-11-03 10:16:39.686 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: null] [RetrieveData: [
+  {
+    "ProductId": "7ce053d4-4d01-4657-b38a-3013096f0021",
+    "Product": {
+      "Id": "7ce053d4-4d01-4657-b38a-3013096f0021",
+      "Name": "PRODUCT1",
+      "Price": 12.00,
+      "Inventory": 8.00,
+      "Dop": "2024-10-20T13:52:33.182",
+      "Doe": "2024-10-20T13:52:33.182",
+      "Status": false
+    },
+    "InvoiceId": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "Invoice": {
+      "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+      "OwnerFirstName": "Amirhosein",
+      "OwnerLastName": "Yousefi",
+      "IdentificationCode": "9834434",
+      "IssuerName": "Zolfi",
+      "IssueDate": "2024-11-03T06:37:39.255",
+      "PaymentDate": null,
+      "TotalPrice": 36.00,
+      "PaymentStatus": 0
+    },
+    "Count": 3
+  }
+]] Invoice's products updated successfully.
+[2024-11-03 10:16:39.701 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-11-03 10:16:48.932 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: DeleteInvoiceProduct] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "7ce053d4-4d01-4657-b38a-3013096f0021"
+]] [RetrieveData: null] 
+[2024-11-03 10:16:48.937 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: DeleteInvoiceProductAsync] [Arguments: null] [RetrieveData: null] Attempt to delete a product from the invoice's products
+[2024-11-03 10:16:48.939 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-11-03 10:16:48.948 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-11-03 10:16:48.954 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: DeleteInvoiceProductAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1"
+]] [RetrieveData: {
+  "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "OwnerFirstName": "Amirhosein",
+  "OwnerLastName": "Yousefi",
+  "IdentificationCode": "9834434",
+  "IssuerName": "Zolfi",
+  "IssueDate": "2024-11-03T06:37:39.255",
+  "PaymentDate": null,
+  "TotalPrice": 36.00,
+  "PaymentStatus": 0
+}] Target Invoice Found
+[2024-11-03 10:16:48.957 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerFirstName": "Amirhosein",
+    "OwnerLastName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255",
+    "PaymentDate": null,
+    "TotalPrice": 24.00,
+    "PaymentStatus": 0
+  }
+]] [RetrieveData: null] Attempt to Update a Ecommerce.Core.Entities.Invoice
+[2024-11-03 10:16:48.961 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerFirstName": "Amirhosein",
+    "OwnerLastName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255",
+    "PaymentDate": null,
+    "TotalPrice": 24.00,
+    "PaymentStatus": 0
+  }
+]] [RetrieveData: null] Successful Update.
+[2024-11-03 10:16:48.971 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-11-03 10:16:53.762 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: GetAllInvoices] [Arguments: null] [RetrieveData: null] 
+[2024-11-03 10:16:53.764 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetAllInvoicesAsync] [Arguments: null] [RetrieveData: null] Attempts to get all invoices
+[2024-11-03 10:16:53.768 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Invoice with filter 
+[2024-11-03 10:16:53.786 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetAllInvoicesAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+    "OwnerName": "gggg",
+    "OwnerFamilyName": "kkkk",
+    "IdentificationCode": "78089",
+    "IssuerName": "545",
+    "IssueDate": "2024-10-20T08:51:19.704",
+    "PaymentDate": "2024-10-21T09:48:10.170112",
+    "TotalPrice": 247.08,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 2
+      }
+    ]
+  },
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerName": "Amirhosein",
+    "OwnerFamilyName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255",
+    "PaymentDate": null,
+    "TotalPrice": 24.00,
+    "PaymentStatus": "Pending",
+    "Products": [
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Count": 2
+      }
+    ]
+  },
+  {
+    "Id": "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+    "OwnerName": "AMIRHOSSEIN",
+    "OwnerFamilyName": "AMIRHOSSEIN",
+    "IdentificationCode": "string",
+    "IssuerName": "string",
+    "IssueDate": "2024-10-19T09:45:09.307",
+    "PaymentDate": "2024-10-20T14:20:39.82842",
+    "TotalPrice": 542.16,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 4
+      },
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Count": 4
+      }
+    ]
+  },
+  {
+    "Id": "55df29b7-8280-4ee7-a8ef-4585fb96b6e8",
+    "OwnerName": "sss",
+    "OwnerFamilyName": "ssss",
+    "IdentificationCode": "55555",
+    "IssuerName": "sss",
+    "IssueDate": "2024-10-20T08:29:16.484",
+    "PaymentDate": "2024-10-23T16:36:58.830989",
+    "TotalPrice": 741.24,
+    "PaymentStatus": "Pending",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 6
+      }
+    ]
+  },
+  {
+    "Id": "8b0b46ef-fa3a-42e6-a11c-a614b747ff87",
+    "OwnerName": "amir",
+    "OwnerFamilyName": "amir",
+    "IdentificationCode": "346545",
+    "IssuerName": "amir",
+    "IssueDate": "2024-10-30T13:22:15.461",
+    "PaymentDate": null,
+    "TotalPrice": 0,
+    "PaymentStatus": "Pending",
+    "Products": []
+  }
+]] Invoice Found
+[2024-11-03 10:17:05.797 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: DeleteInvoiceProduct] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "7ce053d4-4d01-4657-b38a-3013096f0021"
+]] [RetrieveData: null] 
+[2024-11-03 10:17:05.800 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: DeleteInvoiceProductAsync] [Arguments: null] [RetrieveData: null] Attempt to delete a product from the invoice's products
+[2024-11-03 10:17:05.803 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-11-03 10:17:05.831 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-11-03 10:17:05.837 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: DeleteInvoiceProductAsync] [Arguments: [
+  "37200b0a-0c57-40b2-bf4c-8f4cac323cd1"
+]] [RetrieveData: {
+  "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+  "OwnerFirstName": "Amirhosein",
+  "OwnerLastName": "Yousefi",
+  "IdentificationCode": "9834434",
+  "IssuerName": "Zolfi",
+  "IssueDate": "2024-11-03T06:37:39.255",
+  "PaymentDate": null,
+  "TotalPrice": 24.00,
+  "PaymentStatus": 0
+}] Target Invoice Found
+[2024-11-03 10:17:05.841 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerFirstName": "Amirhosein",
+    "OwnerLastName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255",
+    "PaymentDate": null,
+    "TotalPrice": 12.00,
+    "PaymentStatus": 0
+  }
+]] [RetrieveData: null] Attempt to Update a Ecommerce.Core.Entities.Invoice
+[2024-11-03 10:17:05.845 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Update] [Arguments: [
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerFirstName": "Amirhosein",
+    "OwnerLastName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255",
+    "PaymentDate": null,
+    "TotalPrice": 12.00,
+    "PaymentStatus": 0
+  }
+]] [RetrieveData: null] Successful Update.
+[2024-11-03 10:17:05.856 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-11-03 10:17:10.281 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: GetAllInvoices] [Arguments: null] [RetrieveData: null] 
+[2024-11-03 10:17:10.319 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetAllInvoicesAsync] [Arguments: null] [RetrieveData: null] Attempts to get all invoices
+[2024-11-03 10:17:10.323 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Invoice with filter 
+[2024-11-03 10:17:10.336 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetAllInvoicesAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+    "OwnerName": "gggg",
+    "OwnerFamilyName": "kkkk",
+    "IdentificationCode": "78089",
+    "IssuerName": "545",
+    "IssueDate": "2024-10-20T08:51:19.704",
+    "PaymentDate": "2024-10-21T09:48:10.170112",
+    "TotalPrice": 247.08,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 2
+      }
+    ]
+  },
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerName": "Amirhosein",
+    "OwnerFamilyName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255",
+    "PaymentDate": null,
+    "TotalPrice": 12.00,
+    "PaymentStatus": "Pending",
+    "Products": [
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Count": 1
+      }
+    ]
+  },
+  {
+    "Id": "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+    "OwnerName": "AMIRHOSSEIN",
+    "OwnerFamilyName": "AMIRHOSSEIN",
+    "IdentificationCode": "string",
+    "IssuerName": "string",
+    "IssueDate": "2024-10-19T09:45:09.307",
+    "PaymentDate": "2024-10-20T14:20:39.82842",
+    "TotalPrice": 542.16,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 4
+      },
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Count": 4
+      }
+    ]
+  },
+  {
+    "Id": "55df29b7-8280-4ee7-a8ef-4585fb96b6e8",
+    "OwnerName": "sss",
+    "OwnerFamilyName": "ssss",
+    "IdentificationCode": "55555",
+    "IssuerName": "sss",
+    "IssueDate": "2024-10-20T08:29:16.484",
+    "PaymentDate": "2024-10-23T16:36:58.830989",
+    "TotalPrice": 741.24,
+    "PaymentStatus": "Pending",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 6
+      }
+    ]
+  },
+  {
+    "Id": "8b0b46ef-fa3a-42e6-a11c-a614b747ff87",
+    "OwnerName": "amir",
+    "OwnerFamilyName": "amir",
+    "IdentificationCode": "346545",
+    "IssuerName": "amir",
+    "IssueDate": "2024-10-30T13:22:15.461",
+    "PaymentDate": null,
+    "TotalPrice": 0,
+    "PaymentStatus": "Pending",
+    "Products": []
+  }
+]] Invoice Found
+[2024-11-03 10:18:45.967 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: DeleteInvoice] [Arguments: [
+  "51269011-7de5-4dcb-bf6c-8667f5974f8c"
+]] [RetrieveData: null] 
+[2024-11-03 10:18:45.978 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: DeleteInvoiceAsync] [Arguments: [
+  "51269011-7de5-4dcb-bf6c-8667f5974f8c"
+]] [RetrieveData: null] Attempt to Delete an invoice.
+[2024-11-03 10:18:45.984 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-11-03 10:18:46.002 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: DeleteInvoiceAsync] [Arguments: [
+  "51269011-7de5-4dcb-bf6c-8667f5974f8c"
+]] [RetrieveData: {
+  "Id": "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+  "OwnerFirstName": "AMIRHOSSEIN",
+  "OwnerLastName": "AMIRHOSSEIN",
+  "IdentificationCode": "string",
+  "IssuerName": "string",
+  "IssueDate": "2024-10-19T09:45:09.307",
+  "PaymentDate": "2024-10-20T14:20:39.82842",
+  "TotalPrice": 542.16,
+  "PaymentStatus": 1
+}] Target Invoice Found
+[2024-11-03 10:18:46.009 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: DeleteByIdAsync] [Arguments: [
+  "51269011-7de5-4dcb-bf6c-8667f5974f8c"
+]] [RetrieveData: null] Attempt to Delete a Ecommerce.Core.Entities.Invoice
+[2024-11-03 10:18:46.026 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Delete] [Arguments: [
+  {
+    "Id": "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+    "OwnerFirstName": "AMIRHOSSEIN",
+    "OwnerLastName": "AMIRHOSSEIN",
+    "IdentificationCode": "string",
+    "IssuerName": "string",
+    "IssueDate": "2024-10-19T09:45:09.307",
+    "PaymentDate": "2024-10-20T14:20:39.82842",
+    "TotalPrice": 542.16,
+    "PaymentStatus": 1
+  }
+]] [RetrieveData: null] Attempt to Delete a Ecommerce.Core.Entities.Invoice
+[2024-11-03 10:18:46.034 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: Delete] [Arguments: [
+  {
+    "Id": "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+    "OwnerFirstName": "AMIRHOSSEIN",
+    "OwnerLastName": "AMIRHOSSEIN",
+    "IdentificationCode": "string",
+    "IssuerName": "string",
+    "IssueDate": "2024-10-19T09:45:09.307",
+    "PaymentDate": "2024-10-20T14:20:39.82842",
+    "TotalPrice": 542.16,
+    "PaymentStatus": 1
+  }
+]] [RetrieveData: null] Successful Delete.
+[2024-11-03 10:18:46.050 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UnitOfWork] [FunctionName: SaveAsync] [Arguments: null] [RetrieveData: null] Saved Successfully.
+[2024-11-03 10:18:46.053 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: DeleteInvoiceAsync] [Arguments: [
+  "51269011-7de5-4dcb-bf6c-8667f5974f8c"
+]] [RetrieveData: {
+  "Id": "51269011-7de5-4dcb-bf6c-8667f5974f8c",
+  "OwnerFirstName": "AMIRHOSSEIN",
+  "OwnerLastName": "AMIRHOSSEIN",
+  "IdentificationCode": "string",
+  "IssuerName": "string",
+  "IssueDate": "2024-10-19T09:45:09.307",
+  "PaymentDate": "2024-10-20T14:20:39.82842",
+  "TotalPrice": 542.16,
+  "PaymentStatus": 1
+}] Successful Delete
+[2024-11-03 10:19:20.393 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: GetAllInvoices] [Arguments: null] [RetrieveData: null] 
+[2024-11-03 10:19:20.417 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetAllInvoicesAsync] [Arguments: null] [RetrieveData: null] Attempts to get all invoices
+[2024-11-03 10:19:20.431 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "Products,Products.Product"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Invoice with filter 
+[2024-11-03 10:19:20.446 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: GetAllInvoicesAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+    "OwnerName": "gggg",
+    "OwnerFamilyName": "kkkk",
+    "IdentificationCode": "78089",
+    "IssuerName": "545",
+    "IssueDate": "2024-10-20T08:51:19.704",
+    "PaymentDate": "2024-10-21T09:48:10.170112",
+    "TotalPrice": 247.08,
+    "PaymentStatus": "Payed",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 2
+      }
+    ]
+  },
+  {
+    "Id": "37200b0a-0c57-40b2-bf4c-8f4cac323cd1",
+    "OwnerName": "Amirhosein",
+    "OwnerFamilyName": "Yousefi",
+    "IdentificationCode": "9834434",
+    "IssuerName": "Zolfi",
+    "IssueDate": "2024-11-03T06:37:39.255",
+    "PaymentDate": null,
+    "TotalPrice": 12.00,
+    "PaymentStatus": "Pending",
+    "Products": [
+      {
+        "Name": "PRODUCT1",
+        "Price": 12.00,
+        "Count": 1
+      }
+    ]
+  },
+  {
+    "Id": "55df29b7-8280-4ee7-a8ef-4585fb96b6e8",
+    "OwnerName": "sss",
+    "OwnerFamilyName": "ssss",
+    "IdentificationCode": "55555",
+    "IssuerName": "sss",
+    "IssueDate": "2024-10-20T08:29:16.484",
+    "PaymentDate": "2024-10-23T16:36:58.830989",
+    "TotalPrice": 741.24,
+    "PaymentStatus": "Pending",
+    "Products": [
+      {
+        "Name": "PRODUCT2",
+        "Price": 123.54,
+        "Count": 6
+      }
+    ]
+  },
+  {
+    "Id": "8b0b46ef-fa3a-42e6-a11c-a614b747ff87",
+    "OwnerName": "amir",
+    "OwnerFamilyName": "amir",
+    "IdentificationCode": "346545",
+    "IssuerName": "amir",
+    "IssueDate": "2024-10-30T13:22:15.461",
+    "PaymentDate": null,
+    "TotalPrice": 0,
+    "PaymentStatus": "Pending",
+    "Products": []
+  }
+]] Invoice Found
+[2024-11-03 10:21:13.775 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: DeleteInvoice] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: null] 
+[2024-11-03 10:21:13.801 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: DeleteInvoiceAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: null] Attempt to Delete an invoice.
+[2024-11-03 10:21:13.813 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-11-03 10:21:21.359 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: DeleteInvoiceAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: {
+  "Id": "2565f42a-de34-4a15-9b82-074532ff625b",
+  "OwnerFirstName": "gggg",
+  "OwnerLastName": "kkkk",
+  "IdentificationCode": "78089",
+  "IssuerName": "545",
+  "IssueDate": "2024-10-20T08:51:19.704",
+  "PaymentDate": "2024-10-21T09:48:10.170112",
+  "TotalPrice": 247.08,
+  "PaymentStatus": 1
+}] Target Invoice Found
+[2024-11-03 10:21:21.362 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: DeleteInvoiceAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: 1] Cannot delete an Payed invoice.
+[2024-11-03 10:21:21.365 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: DeleteInvoice] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b"
+]] [RetrieveData: "Cannot delete an Payed invoice."] Unexpected Errors
+[2024-11-03 10:22:35.211 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: AddProductToInvoice] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b",
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  2
+]] [RetrieveData: null] 
+[2024-11-03 10:22:35.222 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: InvoiceServices] [FunctionName: AssignInvoiceProductAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  "2565f42a-de34-4a15-9b82-074532ff625b",
+  2
+]] [RetrieveData: null] Attempt to add a product to a invoice
+[2024-11-03 10:22:35.227 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b",
+  "Products"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Invoice by its ID.
+[2024-11-03 10:22:35.236 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "7ce053d4-4d01-4657-b38a-3013096f0021",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Product by its ID.
+[2024-11-03 10:22:35.244 +03:30] [Error] [Machine: ETSC-DEV02] [ClassName: InvoiceController] [FunctionName: AddProductToInvoice] [Arguments: [
+  "2565f42a-de34-4a15-9b82-074532ff625b",
+  "7ce053d4-4d01-4657-b38a-3013096f0021"
+]] [RetrieveData: "You cannot modify an Payed invoice\u0027s products"] 
+[2024-11-03 10:25:02.645 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: Program] [FunctionName: <Main>$] [Arguments: null] [RetrieveData: null] Starting up the application
