@@ -135,7 +135,7 @@ public class CategoryServices
             Id = Guid.NewGuid(),
             Name = newCategory.Name,
             TypeString = newCategory.TypeString,
-            ParentCategoryId = parentRequested.Id,
+            ParentCategoryId = parentRequested!.Id,
             SubCategories = []
         };
         await _unitOfWork.CategoryRepository.InsertAsync(childCategory);
