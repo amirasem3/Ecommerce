@@ -59,18 +59,18 @@ public class CategoryModelBinder : IModelBinder
             bindingContext.ModelState.AddModelError("Category",  "Invalid characters in category name!");
         }
 
-        // try
-        // {
-        //     await _categoryServices.GetCategoryByNameAsync(categoryModel.Name);
-        //     bindingContext.ModelState.AddModelError("Category", "This category is already exists!");
-        // }
-        // catch (Exception e)
-        // {
-        //     if (e.Message!= CategoryServices.CategoryException && e.Message!=CategoryServices.ParentCategoryException)
-        //     {
-        //         bindingContext.ModelState.AddModelError("Category","An unexpected error occurred while checking the name uniqueness.");
-        //     }
-        // }
+        try
+        {
+            await _categoryServices.GetCategoryByNameAsync(categoryModel.Name);
+            bindingContext.ModelState.AddModelError("Category", "This category is already exists!");
+        }
+        catch (Exception e)
+        {
+            if (e.Message!= CategoryServices.CategoryException && e.Message!=CategoryServices.ParentCategoryException)
+            {
+                bindingContext.ModelState.AddModelError("Category","An unexpected error occurred while checking the name uniqueness.");
+            }
+        }
 
         //Parent category name
         if (string.IsNullOrEmpty(categoryModel.ParentName))
@@ -109,19 +109,7 @@ public class CategoryModelBinder : IModelBinder
             bindingContext.ModelState.AddModelError("Category", "Type must be Parent or Child!");
         }
         
-
-        // try
-        // {
-        //     await _categoryServices.GetCategoryByNameAsync(categoryModel.Name);
-        //     bindingContext.ModelState.AddModelError("Category", "This category is already exists!");
-        // }
-        // catch (Exception e)
-        // {
-        //     if (e.Message!= CategoryServices.CategoryException && e.Message!=CategoryServices.ParentCategoryException)
-        //     {
-        //         bindingContext.ModelState.AddModelError("Category","An unexpected error occurred while checking the name uniqueness.");
-        //     }
-        // }
+        
 
         var objectValidator =
             (IObjectModelValidator)bindingContext.HttpContext.RequestServices.GetService(
