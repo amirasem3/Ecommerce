@@ -1,21 +1,22 @@
-﻿using Ecommerce.Application.DTOs;
-using Ecommerce.Application.DTOs.Manufacturer;
-using Ecommerce.Application.Interfaces;
+﻿using Ecommerce.Application.DTOs.Manufacturer;
+using Ecommerce.Application.Services;
+using Ecommerce.Core.Log;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcommerceSolution.Controller;
-[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
 
+[Authorize(AuthenticationSchemes =
+    JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
 [ApiController]
 [Route("api/[controller]")]
 public class ManufacturerController : ControllerBase
 {
-    private readonly IManufacturerService _manufacturerService;
+    private readonly ManufacturerService _manufacturerService;
 
-    public ManufacturerController(IManufacturerService manufacturerService)
+    public ManufacturerController(ManufacturerService manufacturerService)
     {
         _manufacturerService = manufacturerService;
     }
@@ -24,275 +25,214 @@ public class ManufacturerController : ControllerBase
     [ActionName(nameof(GetManufacturerById))]
     public async Task<IActionResult> GetManufacturerById(Guid id)
     {
-        var manufacturer = await _manufacturerService.GetManufacturerByIdAsync(id);
-        var manufacturer2 = await _manufacturerService.GetManufactureProductAsync(id);
-        var result = new
+        LoggerHelper.LogWithDetails(args: [id]);
+        try
         {
-            manufacturer.Id,
-            manufacturer.Name,
-            manufacturer.OwnerName,
-            manufacturer.Email,
-            manufacturer.PhoneNumber,
-            manufacturer.Address,
-            manufacturer.Rate,
-            manufacturer.Status,
-            manufacturer.ManufacturerCountry,
-            Products  = manufacturer2.ManufacturerProducts.Select(mp => new
-            {
-                mp.Product.Id,
-                mp.Product.Name
-            })
-        };
-        if (manufacturer != null)
-        {
-            return Ok(result);
+            var manufacturer = await _manufacturerService.GetManufacturerByIdAsync(id);
+            return Ok(manufacturer);
         }
-
-        return NotFound($"There is no Manufacturer with Id {id}.");
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Incorrect Manufacturer ID", args: [id], retrievedData: e.Message);
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("GetAllManufacturers")]
     public async Task<IActionResult> GetAllManufacturers()
     {
-        var manufacturers = await _manufacturerService.GetAllManufacturersAsync();
-        var result = new List<object>();
-        foreach (var manufacturer in manufacturers)
+        LoggerHelper.LogWithDetails();
+
+        try
         {
-            var products = new List<object>();
-            var man = await _manufacturerService.GetManufactureProductAsync(manufacturer.Id);
-            foreach (var manProduct in man.ManufacturerProducts)
-            {
-                products.Add(new
-                {
-                    manProduct.Product.Id,
-                    manProduct.Product.Name,
-                });
-            }
-            
-            result.Add(new
-            {
-                manufacturer.Id,
-                manufacturer.Name,
-                manufacturer.OwnerName,
-                manufacturer.Email,
-                manufacturer.PhoneNumber,
-                manufacturer.Address,
-                manufacturer.EsatablishDate,
-                manufacturer.Rate,
-                manufacturer.Status,
-                manufacturer.ManufacturerCountry,
-                Products = products
-            });
+            var manufacturers = await _manufacturerService.GetAllManufacturersAsync();
+            return Ok(manufacturers);
         }
-        return Ok(result);
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Manufacturer table is empty", logLevel: LoggerHelper.LogLevel.Error,
+                retrievedData: e.Message);
+            return NotFound(e.Message);
+        }
     }
 
 
     [HttpGet("GetManufacturerByAddress")]
     public async Task<IActionResult> SearchManufacturerAddresses([FromQuery] string address)
     {
-        var manufacturers = await _manufacturerService.SearchManufacturerByAddressAsync(address);
-        var result = new List<object>();
-        foreach (var manufacturer in manufacturers)
+        LoggerHelper.LogWithDetails(args: [address]);
+        try
         {
-            var products = new List<object>();
-            var man = await _manufacturerService.GetManufactureProductAsync(manufacturer.Id);
-            foreach (var manProduct in man.ManufacturerProducts)
-            {
-                products.Add(new
-                {
-                    manProduct.Product.Id,
-                    manProduct.Product.Name,
-                });
-            }
-            
-            result.Add(new
-            {
-                manufacturer.Id,
-                manufacturer.Name,
-                manufacturer.OwnerName,
-                manufacturer.Email,
-                manufacturer.PhoneNumber,
-                manufacturer.Address,
-                manufacturer.Rate,
-                manufacturer.Status,
-                 manufacturer.ManufacturerCountry,
-                Products = products
-            });
+            var manufacturer = await _manufacturerService.GetManufacturerByAddressAsync(address);
+            return Ok(manufacturer);
         }
-        return Ok(result);
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("No Manufacturer with this address", args: [address], retrievedData: e.Message
+                , logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("GetManufacturerByEmail")]
     public async Task<IActionResult> SearchManufacturerEmails([FromQuery] string email)
     {
-        var manufacturers = await _manufacturerService.SearchManufacturerByEmailAsync(email);
-
-        var result = new List<object>();
-        foreach (var manufacturer in manufacturers)
+        LoggerHelper.LogWithDetails(args: [email]);
+        try
         {
-            var products = new List<object>();
-            var man = await _manufacturerService.GetManufactureProductAsync(manufacturer.Id);
-            foreach (var manProduct in man.ManufacturerProducts)
-            {
-                products.Add(new
-                {
-                    manProduct.Product.Id,
-                    manProduct.Product.Name,
-                });
-            }
-            
-            result.Add(new
-            {
-                manufacturer.Id,
-                manufacturer.Name,
-                manufacturer.OwnerName,
-                manufacturer.Email,
-                manufacturer.PhoneNumber,
-                manufacturer.Address,
-                manufacturer.Rate,
-                manufacturer.Status,
-                manufacturer.ManufacturerCountry,
-                Products = products
-            });
+            var manufacturer = await _manufacturerService.GetManufacturerByEmailAsync(email);
+            return Ok(manufacturer);
         }
-        return Ok(result);
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("No Manufacturer with this email", args: [email], retrievedData: e.Message
+                , logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("GetManufacturerByPhoneNumber")]
     public async Task<IActionResult> SearchManufacturerPhoneNumbers([FromQuery] string phoneNumber)
     {
-        var manufacturers = await _manufacturerService.SearchManufacturerByPhoneNumberAsync(phoneNumber);
-        var result = new List<object>();
-        foreach (var manufacturer in manufacturers)
+        LoggerHelper.LogWithDetails(args: [phoneNumber]);
+        try
         {
-            var products = new List<object>();
-            var man = await _manufacturerService.GetManufactureProductAsync(manufacturer.Id);
-            foreach (var manProduct in man.ManufacturerProducts)
-            {
-                products.Add(new
-                {
-                    manProduct.Product.Id,
-                    manProduct.Product.Name,
-                });
-            }
-            
-            result.Add(new
-            {
-                manufacturer.Id,
-                manufacturer.Name,
-                manufacturer.OwnerName,
-                manufacturer.Email,
-                manufacturer.PhoneNumber,
-                manufacturer.Address,
-                manufacturer.Rate,
-                manufacturer.Status,
-                manufacturer.ManufacturerCountry,
-                Products = products
-            });
+            var manufacturer = await _manufacturerService.GetManufacturerByPhoneNumberAsync(phoneNumber);
+            return Ok(manufacturer);
         }
-        return Ok(result);
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("No Manufacturer with this phone number", args: [phoneNumber],
+                retrievedData: e.Message
+                , logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("GetManufacturerByOwner")]
     public async Task<IActionResult> SearchManufacturerOwners(string owner)
     {
-        var manufacturers = await _manufacturerService.GetManufacturersByOwnerAsync(owner);
-        var result = new List<object>();
-        foreach (var manufacturer in manufacturers)
+        LoggerHelper.LogWithDetails(args: [owner]);
+        try
         {
-            var products = new List<object>();
-            var man = await _manufacturerService.GetManufactureProductAsync(manufacturer.Id);
-            foreach (var manProduct in man.ManufacturerProducts)
-            {
-                products.Add(new
-                {
-                    manProduct.Product.Id,
-                    manProduct.Product.Name,
-                });
-            }
-            
-            result.Add(new
-            {
-                manufacturer.Id,
-                manufacturer.Name,
-                manufacturer.OwnerName,
-                manufacturer.Email,
-                manufacturer.PhoneNumber,
-                manufacturer.Address,
-                manufacturer.Rate,
-                manufacturer.Status,
-                manufacturer.ManufacturerCountry,
-                Products = products
-            });
+            var manufacturers = await _manufacturerService.GetManufacturersByOwnerAsync(owner);
+            return Ok(manufacturers);
         }
-        return Ok(result);
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("There is no manufacturer with this owner name", args: [owner],
+                retrievedData: e.Message,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
 
     [HttpPost("AddManufacturer")]
+    [Consumes("application/json")]
     public async Task<IActionResult> AddManufacturer([FromBody] AddUpdateManufacturerDto newManufacturer)
     {
+        LoggerHelper.LogWithDetails(args: [newManufacturer]);
         if (!ModelState.IsValid)
         {
-            return BadRequest(ModelState);
+            LoggerHelper.LogWithDetails("Binding Errors", args: [newManufacturer],
+                retrievedData: ModelState["Manufacturer"]!.Errors.Select(e => e.ErrorMessage),
+                logLevel: LoggerHelper.LogLevel.Error);
+            return BadRequest(ModelState["Manufacturer"]!.Errors.Select(e => e.ErrorMessage));
         }
-        var manufacturer = await _manufacturerService.AddManufacturerAsync(newManufacturer);
-        
-        return CreatedAtAction(nameof(GetManufacturerById), new { id = manufacturer.Id }, manufacturer);
+
+        try
+        {
+            var manufacturer = await _manufacturerService.AddManufacturerAsync(newManufacturer);
+            return CreatedAtAction(nameof(GetManufacturerById), new { id = manufacturer.Id }, manufacturer);
+        }
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Unexpected errors", args: [newManufacturer],
+                retrievedData: e.Message,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpPost("AssignManufacturerProduct")]
-    public async Task<IActionResult> AssignManufacturerProduct([FromQuery] Guid manufacturerId, [FromQuery] Guid productId)
+    public async Task<IActionResult> AssignManufacturerProduct([FromQuery] Guid manufacturerId,
+        [FromQuery] Guid productId)
     {
-        await _manufacturerService.AssignManufacturerProductsAsync(manufacturerId, productId);
-        return Ok(_manufacturerService.GetManufacturerByIdAsync(manufacturerId));
+        LoggerHelper.LogWithDetails(args: [productId, manufacturerId]);
+        try
+        {
+            await _manufacturerService.AssignManufacturerProductsAsync(manufacturerId, productId);
+            return Ok("The product is successfully added to the manufacturers' products.");
+        }
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Incorrect manufacturer or product ID", args: [manufacturerId, productId],
+                retrievedData: e.Message,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
 
     [HttpPut("UpdateManufacturer/{id}")]
-    public async Task<IActionResult> UpdateManufacturer(Guid id, AddUpdateManufacturerDto manufacturerDto)
+    [Consumes("application/json")]
+    public async Task<IActionResult> UpdateManufacturer(Guid id,
+        [FromBody] AddUpdateManufacturerDto updateManufacturerDto)
     {
         if (!ModelState.IsValid)
         {
-            return BadRequest(ModelState);
+            LoggerHelper.LogWithDetails("Binding Errors.", args: [id, updateManufacturerDto],
+                retrievedData: ModelState["Manufacturer"]!.Errors.Select(e => e.ErrorMessage),
+                logLevel: LoggerHelper.LogLevel.Error);
+            return BadRequest(ModelState["Manufacturer"]!.Errors.Select(e => e.ErrorMessage));
         }
 
-        var updatedManufacturer = await _manufacturerService.UpdateManufacturerAsync(id,manufacturerDto);
-        return Ok(updatedManufacturer);
+        try
+        {
+            var updatedManufacturer = await _manufacturerService.UpdateManufacturerAsync(id, updateManufacturerDto);
+            return Ok(updatedManufacturer);
+        }
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Incorrect manufacturer ID", args: [id, updateManufacturerDto],
+                retrievedData: e.Message,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
 
     [HttpDelete("DeleteManufacturer/{id}")]
     public async Task<IActionResult> DeleteManufacturer(Guid id)
     {
-        var manufacturer = await _manufacturerService.GetManufacturerByIdAsync(id);
-        var manufacturer2 = await _manufacturerService.GetManufactureProductAsync(id);
-        
-        if (manufacturer == null)
+        LoggerHelper.LogWithDetails(args: [id]);
+        try
         {
-            return NotFound($"There is no manufacturer with ID {id}");
+            await _manufacturerService.DeleteManufacturerAsync(id);
+            return Ok($"Manufacture with ID {id} has successfully deleted!");
         }
-
-        if (manufacturer2.ManufacturerProducts.Count!=0)
+        catch (Exception e)
         {
-            return NotFound(
-                "There are products that relate to this manufacturer. You cannot remove this manufacturer " +
-                "before all of its products.");
-
+            LoggerHelper.LogWithDetails("Unexpected Errors", args: [id], retrievedData: e.Message,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
         }
-
-        await _manufacturerService.DeleteManufacturerAsync(id);
-        return Ok($"Manufacture with ID {id} has successfully deleted!");
     }
 
     [HttpDelete("DeleteManufactureProduct")]
-    public async Task<IActionResult> DeleteManufactureProducts([FromQuery] Guid manufacturerId, [FromQuery] Guid productId)
+    public async Task<IActionResult> DeleteManufactureProducts([FromQuery] Guid manufacturerId,
+        [FromQuery] Guid productId)
     {
-        var result = await _manufacturerService.DeleteManufacturerProductAsync(manufacturerId, productId);
-
-        if (result)
+        LoggerHelper.LogWithDetails(args: [manufacturerId, productId]);
+        try
         {
-            return Ok($"The product with ID {productId} has successfully deleted from manufacturer with ID {manufacturerId}.");
+            await _manufacturerService.DeleteManufacturerProductAsync(manufacturerId, productId);
+            return Ok(
+                $"The product with ID {productId} has successfully deleted from manufacturer with ID {manufacturerId}.");
         }
-
-        return NotFound("Invalid Manifacturer Id or productId");
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Unexpected Errors", args: [manufacturerId, productId], retrievedData: e.Message
+                , logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
 }

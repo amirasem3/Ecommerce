@@ -1,21 +1,22 @@
 ﻿using Ecommerce.Application.DTOs.User;
-using Ecommerce.Application.Interfaces;
+using Ecommerce.Application.Services;
+using Ecommerce.Core.Log;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcommerceSolution.Controller;
-[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
 
+[Authorize(AuthenticationSchemes =
+    JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
 [ApiController]
 [Route("api/[controller]")]
 public class UserController : ControllerBase
 {
-    private readonly IUserServices _userServices;
+    private readonly UserService _userServices;
 
-    public UserController(IUserServices userServices)
+    public UserController(UserService userServices)
     {
         _userServices = userServices;
     }
@@ -23,230 +24,219 @@ public class UserController : ControllerBase
     [HttpGet("GetUserById/{userId}")]
     public async Task<IActionResult> GetUserById(Guid userId)
     {
-        var user = await _userServices.GetUserByIdAsync(userId);
-        // var user2 = await _userServices.GetUserRoleAsync(userId);
-        var result = new
+        try
         {
-            user.Id,
-            user.FirstName,
-            user.LastName,
-            user.Email,
-            user.PhoneNumber,
-            user.Username,
-            user.RoleName,
-            user.RoleId
-        };
-        if (user != null)
-        {
-            return Ok(result);
+            LoggerHelper.LogWithDetails(args: [userId], logLevel: LoggerHelper.LogLevel.Information);
+            var user = await _userServices.GetUserByIdAsync(userId);
+            LoggerHelper.LogWithDetails("User DTO Result", args: [userId], retrievedData: user);
+            return Ok(user);
         }
-
-        return NotFound($"There is no user with Id {userId}.");
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Wrong User ID.", args: [userId], retrievedData: e,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("GetUserByUsername/{username}")]
     public async Task<IActionResult> GetUserByUsername(string username)
     {
-        var user = await _userServices.GetUserByUsernameAsync(username);
-        // var user2 = await _userServices.GetUserRoleAsync(user.RoleId);
-        var result = new
+        try
         {
-            user.Id,
-            user.FirstName,
-            user.LastName,
-            user.Email,
-            user.PhoneNumber,
-            user.Username,
-            user.RoleName,
-            user.RoleId
-        };
-        if (user != null)
-        {
-            return Ok(result);
+            LoggerHelper.LogWithDetails(args: [username], logLevel: LoggerHelper.LogLevel.Information);
+            var user = await _userServices.GetUserByUsernameAsync(username);
+            LoggerHelper.LogWithDetails("User DTO Result", args: [username], retrievedData: user);
+            return Ok(user);
         }
-
-        return NotFound($"There is no user with username {username}");
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Wrong User Username.", args: [username], retrievedData: e,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("GetUserByEmail/{email}")]
     public async Task<IActionResult> GetUserByEmail(string email)
     {
-        var user = await _userServices.GetUserByEmailAsync(email);
-        // var user2 = await _userServices.GetUserRoleAsync(user.Id);
-        var result = new
+        try
         {
-            user.Id,
-            user.FirstName,
-            user.LastName,
-            user.Email,
-            user.PhoneNumber,
-            user.Username,
-            user.RoleName,
-            user.RoleId,
-        };
-        if (user != null)
-        {
-            return Ok(result);
+            LoggerHelper.LogWithDetails(args: [email], logLevel: LoggerHelper.LogLevel.Information);
+            var user = await _userServices.GetUserByEmailAsync(email);
+            LoggerHelper.LogWithDetails("User DTO Result", args: [email], retrievedData: user);
+            return Ok(user);
         }
-
-        return NotFound($"There is no user with Email {email}");
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Wrong User Email.", args: [email], retrievedData: e,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("GetUserByPhoneNumber/{phoneNumber}")]
     public async Task<IActionResult> GetUserByPhoneNumber(string phoneNumber)
     {
-        var user = await _userServices.GetUserByPhoneNumberAsync(phoneNumber);
-        // var user2 = await _userServices.GetUserRoleAsync(user.Id);
-        var result = new
+        try
         {
-            user.Id,
-            user.FirstName,
-            user.LastName,
-            user.Email,
-            user.PhoneNumber,
-            user.Username,
-            user.RoleId,
-            user.RoleName
-        };
-        if (user != null)
-        {
-            return Ok(result);
+            LoggerHelper.LogWithDetails(args: [phoneNumber], logLevel: LoggerHelper.LogLevel.Information);
+            var user = await _userServices.GetUserByPhoneNumberAsync(phoneNumber);
+            LoggerHelper.LogWithDetails("User DTO Result", args: [phoneNumber], retrievedData: user);
+            return Ok(user);
         }
-
-        return NotFound($"There is no user with phone number {phoneNumber}");
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Wrong User Phone Number.", args: [phoneNumber], retrievedData: e,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("GetAllUsers")]
     public async Task<IActionResult> GetAllUsers()
     {
-        var users = await _userServices.GetAllUsersAsync();
-        var result = new List<object>();
-        if (users == null)
+        LoggerHelper.LogWithDetails("Attempt to get all users.");
+        try
         {
-            return NotFound();
+            var users = await _userServices.GetAllUsersAsync();
+            LoggerHelper.LogWithDetails("All Users", retrievedData: users);
+            return Ok(users);
         }
-
-        foreach (var user in users)
+        catch (Exception e)
         {
-            var roles = new List<object>();
-            // var  user2 = await _userServices.GetUserRoleAsync(user.Id);
-
-
-            result.Add(new
-            {
-                user.Id,
-                user.FirstName,
-                user.LastName,
-                user.Username,
-                user.Email,
-                user.PhoneNumber,
-                user.RoleId,
-                user.RoleName
-            });
+            LoggerHelper.LogWithDetails("Unexpected Errors", retrievedData: e);
+            return NotFound(e.Message);
         }
-
-
-        return Ok(result);
     }
 
     [HttpGet("SearchUserName")]
     public async Task<IActionResult> SearchUserByName([FromQuery] string name)
     {
-        var users = await _userServices.GetAllUsersByNameAsync(name);
-        var result = new List<object>();
-        foreach (var user in users)
+        LoggerHelper.LogWithDetails("Attempt to search users by name", args: [name]);
+        try
         {
-            var roles = new List<object>();
-            // var  user2 = await _userServices.GetUserRoleAsync(user.Id);
-
-
-            result.Add(new
-            {
-                user.Id,
-                user.FirstName,
-                user.LastName,
-                user.Username,
-                user.Email,
-                user.PhoneNumber,
-                user.RoleId,
-                user.RoleName
-            });
+            var users = await _userServices.GetAllUsersByNameAsync(name);
+            LoggerHelper.LogWithDetails($"All users which have this name in their firstnames found successfully.",
+                retrievedData: users
+                , args: [name]);
+            return Ok(users);
         }
-
-        return Ok(result);
-    }
-
-    [HttpGet("GetUserRole")]
-    public async Task<IActionResult> GetUserRole([FromQuery] Guid userId)
-    {
-        var user = await _userServices.GetUserByIdAsync(userId);
-        if (user != null)
+        catch (Exception e)
         {
-            var result = new
-            {
-                user.Id,
-                user.Username,
-                user.RoleId,
-                user.RoleName
-            };
-            return Ok(result);
+            LoggerHelper.LogWithDetails("Unexpected Errors", args: [name], retrievedData: e);
+            return NotFound(e.Message);
         }
-
-        return NotFound($"There is no rule for user with ID {userId}");
     }
 
     [HttpGet("GetUserByRole/{roleName}")]
     public async Task<IActionResult> GetUserByRoleName(string roleName)
     {
-        var users = await _userServices.GetUserByRoleAsync(roleName);
-
-        return Ok(users);
+        LoggerHelper.LogWithDetails("Attempt to search users by role name", args: [roleName]);
+        try
+        {
+            var users = await _userServices.GetUserByRoleAsync(roleName);
+            LoggerHelper.LogWithDetails($"All users which have role named {roleName} found successfully.",
+                args: [roleName], retrievedData: users);
+            return Ok(users);
+        }
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Wrong Role Name.", args: [roleName], retrievedData: e);
+            return NotFound(e.Message);
+        }
     }
 
     [AllowAnonymous]
     [HttpPost("SignUp")]
-    public async Task<IActionResult> AddUser([FromBody] RegisterUserDto userDto)
+    [Consumes("application/json")]
+    public async Task<IActionResult> AddUser([FromBody] AddUpdateUserDto userDto)
     {
-        var user = await _userServices.AddUserAsync(userDto);
+        LoggerHelper.LogWithDetails("Attempt to SignUp an user.", args: [userDto]);
+        if (!ModelState.IsValid)
+        {
+            LoggerHelper.LogWithDetails("Binding Errors.", args: [userDto],
+                retrievedData: ModelState["User"]!.Errors.Select(e => e.ErrorMessage),
+                logLevel: LoggerHelper.LogLevel.Error);
+            return BadRequest(ModelState["User"]!.Errors.Select(e => e.ErrorMessage));
+        }
 
-        return Ok(user);
+        try
+        {
+            var user = await _userServices.AddUserAsync(userDto);
+            LoggerHelper.LogWithDetails("User DTO Result", args: [userDto], retrievedData: user);
+            return Ok(user);
+        }
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Wrong User Data.", args: [userDto], retrievedData: e,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
 
     [HttpPost("Login")]
-    public async Task<IActionResult> LoginUser([FromBody] LoginUserDto loginRequestDto)
+    public async Task<IActionResult> LoginUser([FromQuery] LoginUserDto loginRequestDto)
     {
-        var user = await _userServices.AuthenticateUserAsync(loginRequestDto.Username, loginRequestDto.Password);
-        if (user == null)
+        LoggerHelper.LogWithDetails("Attempts to Login.", args: [loginRequestDto]);
+        try
         {
-            return NotFound();
-        }
-
-        return Ok(user);
-    }
-
-    [HttpPut("UpdateUser")]
-    public async Task<IActionResult> UpdateUser([FromQuery] Guid userId, [FromBody] UpdateUserDto updateUserDto)
-    {
-        var targetUser = await _userServices.GetUserByIdAsync(userId);
-        if (targetUser != null)
-        {
-            var user = await _userServices.UpdateUserAsync(userId, updateUserDto);
+            var user = await _userServices.AuthenticateUserAsync(loginRequestDto.Username, loginRequestDto.Password);
+            LoggerHelper.LogWithDetails("Successful Login.", args: [loginRequestDto], retrievedData: user);
             return Ok(user);
         }
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Incorrect Username or Password!", args: [loginRequestDto], retrievedData: e,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return Unauthorized(e.Message);
+        }
+    }
 
-        return NotFound($"There is no user with ID {userId}");
+    [HttpPut("UpdateUser/{userId}")]
+    [Consumes("application/json")]
+    public async Task<IActionResult> UpdateUser(Guid userId, [FromBody] AddUpdateUserDto updateUserDto)
+    {
+        LoggerHelper.LogWithDetails("Attempt to Update an user.", args: [updateUserDto]);
+
+        if (!ModelState.IsValid)
+        {
+            LoggerHelper.LogWithDetails("Binding Errors.", args: [updateUserDto],
+                retrievedData: ModelState["User"]!.Errors.Select(e => e.ErrorMessage),
+                logLevel: LoggerHelper.LogLevel.Error);
+            return BadRequest(ModelState["User"]!.Errors.Select(e => e.ErrorMessage));
+        }
+
+        try
+        {
+            var user = await _userServices.UpdateUserAsync(userId, updateUserDto);
+            LoggerHelper.LogWithDetails("User DTO Result", args: [userId, updateUserDto], retrievedData: user);
+            return Ok(user);
+        }
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Wrong User Data.", args: [userId, updateUserDto], retrievedData: e,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e);
+        }
     }
 
 
     [HttpDelete("DeleteUser/{userId}")]
     public async Task<IActionResult> DeleteUser(Guid userId)
     {
-        var deleted = await _userServices.DeleteUserAsync(userId);
-        if (deleted)
+        LoggerHelper.LogWithDetails("Attempt to Delete an User.", args: [userId]);
+        try
         {
+            await _userServices.DeleteUserAsync(userId);
+            LoggerHelper.LogWithDetails($"The user with ID {userId} is Successfully Deleted.", args: [userId]);
             return Ok($"The user with Id ({userId}) is successfully deleted.");
         }
-
-        return NotFound($"There is no user with ID {userId}.");
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Wrong User ID.", args: [userId], retrievedData: e,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
 }

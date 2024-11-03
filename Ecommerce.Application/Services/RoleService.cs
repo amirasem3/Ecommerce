@@ -1,95 +1,147 @@
 ﻿using Ecommerce.Application.DTOs;
-using Ecommerce.Application.Interfaces;
 using Ecommerce.Core.Entities;
-using Ecommerce.Core.Interfaces;
+using Ecommerce.Core.Log;
+using Ecommerce.Infrastructure.Repositories;
+using Serilog.Core;
 
 namespace Ecommerce.Application.Services;
 
-public class RoleService : IRoleServices
+public class RoleService
 {
-    private readonly IRoleRepository _roleRepository;
+    public const string RoleException = "Role Not Found!";
+    private readonly UnitOfWork _unitOfWork;
 
 
-    public RoleService(IRoleRepository roleRepository)
+    public RoleService(UnitOfWork unitOfWork)
     {
-        _roleRepository = roleRepository;
-    }
-    public  async Task<RoleDto> GetRoleByIdAsync(Guid id)
-    {
-        var role = await _roleRepository.GetRoleByIdAsync(id);
-        
-        return new RoleDto
-        {
-           Name = role.Name,
-           Id = role.Id,
-        };
-
-
+        _unitOfWork = unitOfWork;
     }
 
-    public async Task<RoleDto> AddRoleAsync(AddUpdateRoleDto roleDto)
+    public async Task<RoleDto> GetRoleByIdAsync(Guid id)
     {
-        var role = new Role
+        LoggerHelper.LogWithDetails("Attempt to get a role by ID.", args: [id]);
+        var role = await _unitOfWork.RoleRepository.GetByIdAsync(id);
+        if (role == null)
         {
-            Id = Guid.NewGuid(),
-            Name = roleDto.Name,
-        };
-        await _roleRepository.AddRoleAsync(role);
-
-        return new RoleDto
+            LoggerHelper.LogWithDetails(args: [id], retrievedData: RoleException,
+                logLevel: LoggerHelper.LogLevel.Error);
+            throw new Exception(RoleException);
+        }
+        var roleRes =new RoleDto
         {
             Name = role.Name,
             Id = role.Id,
+        }; 
+        LoggerHelper.LogWithDetails("Target Role Found",args:[id], retrievedData:roleRes);
+        return roleRes; 
+    }
+
+    public async Task<RoleDto> AddRoleAsync(AddUpdateRoleDto newRole) 
+    {
+        LoggerHelper.LogWithDetails("Attempts to add a new Role", args: [newRole]);
+        var role = new Role
+        {
+            Name = newRole.Name,
+            Id = Guid.NewGuid()
         };
 
+        LoggerHelper.LogWithDetails("New Role Created Successfully.");
+        await _unitOfWork.RoleRepository.InsertAsync(role);
+        await _unitOfWork.SaveAsync();
+
+
+        var roleRes = new RoleDto
+        {
+            Id = role.Id,
+            Name = role.Name
+        };
+        LoggerHelper.LogWithDetails("New Role added successfully.", args: [newRole], retrievedData: roleRes);
+        return roleRes;
     }
 
     public async Task<RoleDto> UpdateRoleAsync(Guid id, AddUpdateRoleDto updateRoleDto)
     {
-        var targetRole = await _roleRepository.GetRoleByIdAsync(id);
+        LoggerHelper.LogWithDetails("Attempt to update a role.", args: [id, updateRoleDto]);
+        var targetRole = await _unitOfWork.RoleRepository.GetByIdAsync(id);
 
+        if (targetRole == null)
+        {
+            LoggerHelper.LogWithDetails("There is no user with this ID.", args: [id], retrievedData: RoleException,
+                logLevel: LoggerHelper.LogLevel.Error);
+            throw new Exception(RoleException);
+        }
+        LoggerHelper.LogWithDetails("Role Found",args:[id],retrievedData:targetRole);
         targetRole.Name = updateRoleDto.Name;
-        // targetRole.UserRoles = updateRoleDto.UserRoles;
 
-        await _roleRepository.UpdateRoleAsync(targetRole);
-
-        return new RoleDto
+        _unitOfWork.RoleRepository.Update(targetRole);
+        await _unitOfWork.SaveAsync();
+        
+        var roleRes  =new RoleDto
         {
             Name = targetRole.Name,
             Id = targetRole.Id,
         };
+        LoggerHelper.LogWithDetails("Role Updated Successfully.", args: [id, updateRoleDto], retrievedData: roleRes);
+        return roleRes;
     }
 
     public async Task<bool> DeleteRoleByIdAsync(Guid id)
     {
-        var targetRole = await _roleRepository.GetRoleByIdAsync(id);
+        LoggerHelper.LogWithDetails("Attempt to delete a role by ID.",args:[id]);
+        var targetRole = await _unitOfWork.RoleRepository.GetByIdAsync(id);
         if (targetRole == null)
         {
-            return false;
+            LoggerHelper.LogWithDetails("There is no role with this ID", args: [id], retrievedData: RoleException,
+                logLevel: LoggerHelper.LogLevel.Error);
+            throw new Exception(RoleException);
         }
 
-        await _roleRepository.DeleteRoleByIdAsync(id);
+        await _unitOfWork.RoleRepository.DeleteByIdAsync(id);
+        await _unitOfWork.SaveAsync();
+        LoggerHelper.LogWithDetails("Successful Delete",args:[id],retrievedData:targetRole);
         return true;
     }
 
     public async Task<IEnumerable<RoleDto>> GetAllRolesAsync()
     {
-        var roles = await _roleRepository.GetAllRulesAsync();
-        return roles.Select(role => new RoleDto
+        LoggerHelper.LogWithDetails("Attempt to get all roles");
+        var roles = await _unitOfWork.RoleRepository.GetAsync();
+        if (roles == null)
+        {
+            LoggerHelper.LogWithDetails("Role table is empty.", retrievedData: RoleException,
+                logLevel: LoggerHelper.LogLevel.Error);
+            throw new Exception(RoleException);
+        }
+
+        var roleRes =roles.Select(role => new RoleDto
         {
             Id = role.Id,
             Name = role.Name,
         });
+        LoggerHelper.LogWithDetails("All Roles",retrievedData:roleRes);
+        return roleRes;
     }
 
     public async Task<RoleDto> GetRoleByNameAsync(string name)
     {
-        var role = await _roleRepository.GetRoleByName(name);
+        LoggerHelper.LogWithDetails("Attempts to get a role by name", args: [name]);
+        var role = await _unitOfWork.RoleRepository.GetByUniquePropertyAsync(uniqueProperty: "Name",
+            uniquePropertyValue: name);
 
-        return new RoleDto
+        if (role == null)
+        {
+            LoggerHelper.LogWithDetails("There is no role with this name.", retrievedData: RoleException,
+                logLevel: LoggerHelper.LogLevel.Error);
+            throw new Exception(RoleException);
+        }
+
+        var roleRes = new RoleDto
         {
             Id = role.Id,
             Name = role.Name,
         };
+        LoggerHelper.LogWithDetails($"Role with name{name} found successfully.", args: [name], retrievedData: roleRes);
+
+        return roleRes;
     }
 }

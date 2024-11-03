@@ -1,8 +1,9 @@
-﻿using Ecommerce.Core.Entities.RelationEntities;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Ecommerce.Application.DTOs;
 
 public class AddUpdateRoleDto
 {
-    public string Name { get; set; }
+
+    public string Name { get; set; } = null!;
 }

@@ -1,16 +1,11 @@
-﻿namespace Ecommerce.Application.DTOs;
+﻿namespace Ecommerce.Application.DTOs.Invoice;
 
 public class UpdateInvoiceDto
 {
-    public string OwnerName { get; set; }
-    
-    public string OwnerFamilyName { get; set; }
-    
-    
-    public DateTime PaymentDate { get; set; }
+    public string OwnerName { get; set; } = null!;
 
+    public string OwnerFamilyName { get; set; } = null!;
+    
     public decimal TotalPrice { get; set; }
-
-    //Payment Status: Payed, Pending, Cencelled
-    public string PaymentStatus { get; set; }
+    
 }

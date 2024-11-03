@@ -1,28 +1,29 @@
 ﻿using Ecommerce.Core.Entities;
-using Ecommerce.Core.Interfaces.RelationRepoInterfaces;
 
 namespace Ecommerce.Application.DTOs;
 
 public class InvoiceDto
 {
     public Guid Id { get; set; }
-    
-    public string OwnerName { get; set; }
-    
-    public string OwnerFamilyName { get; set; }
-    
-    public string IdentificationCode { get; set; }
-    
-    public string IssuerName { get; set; }
-    
-    public DateTime IssueDate { get; set; }
-    
-    public DateTime? PaymentDate { get; set; }
 
-    public decimal TotalPrice { get; set; }
+    public string OwnerName { get; init; } = null!;
 
-    //Payment Status: Payed, Pending, Cencelled
-    public PaymentStatus PaymentStatus { get; set; }
+    public string OwnerFamilyName { get; init; } = null!;
+
+    public string IdentificationCode { get; init; } = null!;
     
-    public ICollection<ProductInvoice> ProductInvoices { get; set; }
+    public string IssuerName { get; init; } = null!;
+
+    public DateTime IssueDate { get; init; }
+    
+    public DateTime? PaymentDate { get; init; }
+
+    public decimal TotalPrice { get; init; }
+    
+    public string PaymentStatus { get; set; } = null!;
+
+    public ICollection<ProductInvoiceDto> Products { get; set; } = new List<ProductInvoiceDto>();
+    
+    
+
 }

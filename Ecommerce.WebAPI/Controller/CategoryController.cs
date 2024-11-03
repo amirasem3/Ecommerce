@@ -1,196 +1,163 @@
-﻿using Ecommerce.Application.DTOs;
-using Ecommerce.Application.Interfaces;
+﻿using Ecommerce.Application.Binder.Category;
+using Ecommerce.Application.DTOs;
+using Ecommerce.Application.Services;
+using Ecommerce.Core.Log;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcommerceSolution.Controller;
-[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
 
+[Authorize(AuthenticationSchemes =
+    JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
 [ApiController]
 [Route("api/[controller]")]
 public class CategoryController : ControllerBase
 {
-    private readonly ICategoryService _categoryService;
+    private readonly CategoryServices _categoryService;
 
-    public CategoryController(ICategoryService categoryService)
+    public CategoryController(CategoryServices categoryService)
     {
         _categoryService = categoryService;
     }
 
+
     [HttpGet("GetCategoryById/{id}")]
     public async Task<IActionResult> GetCategoryById(Guid id)
     {
-        var cat = await _categoryService.GetCategoryByIdAsync(id);
-        var result = new List<object>();
-        var subCats = await _categoryService.GetSubCategoriesAsync(cat.Id);
-        var categories = new List<object>();
-        foreach (var subCat in subCats)
+        LoggerHelper.LogWithDetails(args: [id]);
+        try
         {
-            categories.Add(new
-            {
-                subCat.Id,
-                subCat.CategoryName
-            });
+            var cat = await _categoryService.GetCategoryById(id);
+            return Ok(cat);
         }
-            
-        result.Add(new
+        catch (Exception e)
         {
-            cat.Id,
-            cat.CategoryName,
-            cat.ParentCategoryId,
-            cat.Type,
-            SubCategories = categories,
-        });
-
-
-        return Ok(result);
+            LoggerHelper.LogWithDetails("Incorrect category ID.", args: [id], retrievedData: e.Message,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e);
+        }
     }
 
     [HttpGet("GetAllCategories")]
     public async Task<IActionResult> GetAllCategories()
     {
-        var cats = await _categoryService.GetAllCategoriesAsync();
-        var result = new List<object>();
-        foreach (var cat in cats)
+        LoggerHelper.LogWithDetails();
+        try
         {
-            var categories = new List<object>();
-            var subCats = await _categoryService.GetSubCategoriesAsync(cat.Id);
-            // var parent = await _categoryService.GetCategoryByIdAsync(cat.ParentCategoryId);
-            foreach (var subCat in subCats)
-            {
-                categories.Add(new
-                {
-                    subCat.Id,
-                    subCat.CategoryName
-                });
-            }
-            
-            result.Add(new
-            {
-                cat.Id,
-                cat.CategoryName,
-                cat.ParentCategoryId,
-                cat.ParentCategoryName,
-                cat.Type,
-                SubCategories = categories,
-            });
+            var cats = await _categoryService.GetAllCategoriesAsync();
+            return Ok(cats);
         }
-        return Ok(result);
-        
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Unexpected Error", retrievedData: e.Message,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("GetCategoryByName")]
     public async Task<IActionResult> GetCategoryByName(string name)
     {
-        var cat = await _categoryService.GetCategoryByNameAsync(name);
-        if (!cat.Type)
+        LoggerHelper.LogWithDetails(args: [name]);
+        try
         {
-            return NotFound("There is no subcategories for a subcategory!!!");
+            var cat = await _categoryService.GetCategoryByNameAsync(name);
+            return Ok(cat);
         }
-        var result = new List<object>();
-        var subCats = await _categoryService.GetSubCategoriesAsync(cat.Id);
-        var categories = new List<object>();
-        foreach (var subCat in subCats)
+        catch (Exception e)
         {
-            categories.Add(new
-            {
-                subCat.Id,
-                subCat.CategoryName
-            });
+            LoggerHelper.LogWithDetails("Incorrect Name", retrievedData: e.Message,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
         }
-            
-        result.Add(new
-        {
-            cat.Id,
-            cat.CategoryName,
-            cat.ParentCategoryId,
-            cat.Type,
-            SubCategories = categories,
-        });
-
-
-        return Ok(result);
     }
 
     [HttpGet("GetParent/{childId}")]
     public async Task<IActionResult> GetParentByChildId(Guid childId)
     {
-
-        var parent = await _categoryService.GetParentCategoryAsync(childId);
-        if (!parent.Type)
+        LoggerHelper.LogWithDetails(args: [childId]);
+        try
         {
-            return NotFound("There is no subcategories for a subcategory!!!");
+            var parent = await _categoryService.GetParentCategoryAsync(childId);
+            return Ok(parent);
         }
-        var result = new List<object>();
-        var subCats = await _categoryService.GetSubCategoriesAsync(parent.Id);
-        var categories = new List<object>();
-        foreach (var subCat in subCats)
+        catch (Exception e)
         {
-            categories.Add(new
-            {
-                subCat.Id,
-                subCat.CategoryName
-            });
+            LoggerHelper.LogWithDetails("Invalid Child ID", args: [childId], retrievedData: e.Message,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
         }
-            
-        result.Add(new
-        {
-            parent.Id,
-            ParentName = parent.CategoryName,
-            ParentId = parent.ParentCategoryId,
-            Type = parent.Type? "Parent Category" : "Subcategory",
-            SubCategories = categories,
-        });
-
-
-        return Ok(result);
     }
 
     [HttpPost("AddNewCategory")]
-    public async Task<IActionResult> AddNewCategory([FromBody] AddUpdateCategoryDto newUpdateCategory)
+    [Consumes("application/json")]
+    public async Task<IActionResult> AddNewCategory([FromBody] AddUpdateCategoryDto newCategory)
+    {
+        LoggerHelper.LogWithDetails(args: [newCategory]);
+        if (!ModelState.IsValid)
+        {
+            LoggerHelper.LogWithDetails("Binding Errors.", args: [newCategory],
+                retrievedData: ModelState["Category"]!.Errors.Select(e => e.ErrorMessage),
+                logLevel: LoggerHelper.LogLevel.Error);
+            return BadRequest(ModelState["Category"]!.Errors.Select(e => e.ErrorMessage));
+        }
+
+        try
+        {
+            var createdCategory = await _categoryService.AddCategoryAsync(newCategory);
+            return CreatedAtAction(nameof(GetCategoryById), new { id = createdCategory.Id }, createdCategory);
+        }
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Unexpected Errors", args: [newCategory], retrievedData: e.Message,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
+    }
+
+    [HttpPut("UpdateCategory/{id:guid}")]
+    [Consumes("application/json")]
+    public async Task<IActionResult> UpdateCategory([FromRoute] Guid id,
+        [FromBody] AddUpdateCategoryDto updateCategoryDto)
     {
         if (!ModelState.IsValid)
         {
-            return BadRequest(ModelState);
+            LoggerHelper.LogWithDetails("Binding Errors.", args: [updateCategoryDto],
+                retrievedData: ModelState["Category"]!.Errors.Select(e => e.ErrorMessage),
+                logLevel: LoggerHelper.LogLevel.Error);
+            return BadRequest(ModelState["Category"]!.Errors.Select(e => e.ErrorMessage));
         }
-        var createdCategory =  await _categoryService.AddCategoryAsync(newUpdateCategory);
-        return CreatedAtAction(nameof(GetCategoryById), new { id = createdCategory.Id }, createdCategory);
-    }
 
-
-    [HttpPut("UpdateCategory/{id:guid}")]
-    public async Task<IActionResult> UpdateCategory([FromRoute] Guid id,[FromBody] AddUpdateCategoryDto updateCategoryDto)
-    {
-        var updateResult = await _categoryService.UpdateCategoryAsync(id, updateCategoryDto);
-        if (updateResult != null)
+        try
         {
+            var updateResult = await _categoryService.UpdateCategoryAsync(id, updateCategoryDto);
             return Ok(updateResult);
         }
-
-        return NotFound($"There is no category with ID {id}");
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Unexpected Errors", args: [updateCategoryDto], retrievedData: e.Message,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
+
 
     [HttpDelete("DeleteCategory/{id}")]
     public async Task<IActionResult> DeleteCategoryById(Guid id)
     {
-        var category = await _categoryService.GetCategoryByIdAsync(id);
-        if (!category.Type)
+        LoggerHelper.LogWithDetails(args: [id]);
+        try
         {
             await _categoryService.DeleteCategoryByIdAsync(id);
-            return Ok($"Category {category} has successfully deleted.");
+            return Ok($"Category with ID {id} has successfully deleted.");
         }
-
-        var subCats = await _categoryService.GetSubCategoriesAsync(id);
-        if (subCats.Count()!=0)
+        catch (Exception e)
         {
-            return NotFound("This is a parent category that has children, You cannot delete it before its children.");
+            LoggerHelper.LogWithDetails("Unexpected Error", args: [id], retrievedData: e.Message,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
         }
-
-        await _categoryService.DeleteCategoryByIdAsync(id);
-        return Ok($"Category {category} has successfully deleted.");
     }
-    
 }

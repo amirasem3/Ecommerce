@@ -1,207 +1,170 @@
 ﻿using Ecommerce.Application.DTOs;
-using Ecommerce.Application.Interfaces;
+using Ecommerce.Application.Services;
+using Ecommerce.Core.Log;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
+using Serilog.Core;
 
 namespace EcommerceSolution.Controller;
 
-[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
-
+[Authorize(AuthenticationSchemes =
+    JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
 [ApiController]
 [Route("api/[controller]")]
 public class ProductController : ControllerBase
 {
-    private readonly IProductService _productService;
-    private readonly IInvoiceServices _invoiceServices;
+    private readonly ProductService _productService;
 
-    public ProductController(IProductService productService, IInvoiceServices invoiceServices)
+    public ProductController(ProductService productService)
     {
         _productService = productService;
-        _invoiceServices = invoiceServices;
     }
 
     [HttpGet("GetProductById/{id}")]
     public async Task<IActionResult> GetProductById(Guid id)
     {
-        var product = await _productService.GetProductByIdAsync(id);
-        var product2 = await _productService.GetProductManufacturersAsync(id);
-        var result = new
+        LoggerHelper.LogWithDetails(args: [id]);
+        try
         {
-            product.Id,
-            product.Name,
-            product.Inventory,
-            product.Price,
-            product.Status,
-            product.DOP,
-            product.DOE,
-            Manufacturers = product2.ManufacturerProducts.Select(mp => new
-            {
-                mp.Manufacturer.Id,
-                mp.Manufacturer.Name
-            })
-        };
-        if (product == null)
-        {
-            return NotFound($"The Product With Id {id} does not exist!");
+            var product = await _productService.GetProductByIdAsync(id);
+            return Ok(product);
         }
-
-        return Ok(result);
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Incorrect Product ID", args: [id], retrievedData: e.Message,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("AllProducts")]
     public async Task<IActionResult> GetAllProducts()
     {
-        var products = await _productService.GetAllProductAsync();
-        var result = new List<object>();
-        foreach (var product in products)
+        LoggerHelper.LogWithDetails();
+        try
         {
-            var manufacturers = new List<object>();
-            var prod = await _productService.GetProductManufacturersAsync(product.Id);
-            foreach (var manProduct in prod.ManufacturerProducts)
-            {
-                manufacturers.Add(new
-                {
-                    manProduct.Manufacturer.Id,
-                    manProduct.Manufacturer.Name
-                });
-            }
-
-            result.Add(new
-            {
-                product.Id,
-                product.Name,
-                product.Inventory,
-                product.Price,
-                product.Status,
-                product.DOP,
-                product.DOE,
-                Manufacturers = manufacturers
-            });
+            var products = await _productService.GetAllProductAsync();
+            return Ok(products);
         }
-
-        return Ok(result);
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Unexpected Errors", retrievedData: e, logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("FilterProductByPrice")]
     public async Task<IActionResult> FilterProductByPrice([FromQuery] decimal startPrice, [FromQuery] decimal endPrice)
     {
-        var products = await _productService.FilterProductByPriceAsync(startPrice, endPrice);
-        var result = new List<object>();
-        foreach (var product in products)
+        LoggerHelper.LogWithDetails(args: [startPrice, endPrice]);
+        try
         {
-            var manufacturers = new List<object>();
-            var prod = await _productService.GetProductManufacturersAsync(product.Id);
-            foreach (var manProduct in prod.ManufacturerProducts)
-            {
-                manufacturers.Add(new
-                {
-                    manProduct.Manufacturer.Id,
-                    manProduct.Manufacturer.Name
-                });
-            }
-            
-            result.Add(new
-            {
-                product.Id,
-                product.Name,
-                product.Inventory,
-                product.Price,
-                product.Status,
-                product.DOP,
-                product.DOE,
-                Manufacturers = manufacturers
-            });
+            var products = await _productService.FilterProductByPriceAsync(startPrice, endPrice);
+            return Ok(products);
         }
-        return Ok(result);
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Unexpected Errors.", args: [startPrice, endPrice], retrievedData: e,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
 
-[HttpGet("SearchProducts")]
-    public async Task<IActionResult> SearchProducts([FromQuery] String name)
+    [HttpGet("SearchProducts")]
+    public async Task<IActionResult> SearchProducts([FromQuery] string name)
     {
-        var products = await _productService.GetAllProductsByNameAsync(name);
-        var result = new List<object>();
-        foreach (var product in products)
+        LoggerHelper.LogWithDetails(args: [name]);
+        try
         {
-            var manufacturers = new List<object>();
-            var prod = await _productService.GetProductManufacturersAsync(product.Id);
-            foreach (var manProduct in prod.ManufacturerProducts)
-            {
-                manufacturers.Add(new
-                {
-                    manProduct.Manufacturer.Id,
-                    manProduct.Manufacturer.Name
-                });
-            }
-            
-            result.Add(new
-            {
-                product.Id,
-                product.Name,
-                product.Inventory,
-                product.Price,
-                product.Status,
-                product.DOP,
-                product.DOE,
-                Manufacturers = manufacturers
-            });
+            var products = await _productService.GetAllProductsByNameAsync(name);
+            return Ok(products);
         }
-        return Ok(result);
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("No Product Found.", args: [name], retrievedData: e,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("GetProductInvoices/{productId}")]
-    public async Task<IActionResult> GetProductInvoices(Guid productId)
+    public async Task<IActionResult> GetInvoicesByProductId(Guid productId)
     {
-        var productInvoices = await _productService.GetProductInvoicesAsync(productId);
-        var result = new List<object>();
-        foreach (var pi in productInvoices.ProductInvoices)
+        LoggerHelper.LogWithDetails(args: [productId]);
+        try
         {
-            var invoices = new List<object>();
-            var prod = await _productService.GetProductInvoicesAsync(pi.ProductId);
-            var invoice = await _invoiceServices.GetInvoiceByIdAsync(pi.InvoiceId);
-            result.Add(invoice);
+            var invoices = await _productService.GetInvoicesByProductId(productId);
+            return Ok(invoices);
         }
-        return Ok(result);
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("There is no Invoice with this product.", args: [productId], retrievedData: e,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
 
     [HttpPost("AddProduct")]
-    public async Task<IActionResult> AddProduct([FromBody] AddUpdateProductDto updateProductDto)
+    [Consumes("application/json")]
+    public async Task<IActionResult> AddProduct([FromBody] AddUpdateProductDto newProductDto)
     {
+        LoggerHelper.LogWithDetails(args: [newProductDto]);
         if (!ModelState.IsValid)
         {
-            return BadRequest(ModelState);
+            LoggerHelper.LogWithDetails("Binding Errors.", args: [newProductDto],
+                retrievedData: ModelState["Product"]?.Errors.Select(e => e.ErrorMessage)!,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return BadRequest(ModelState["Product"]?.Errors.Select(e => e.ErrorMessage));
         }
-        
-      var createdProduct =  await _productService.AddProductAsync(updateProductDto);
-      return CreatedAtAction(nameof(GetProductById), new { id = createdProduct.Id }, createdProduct);
+
+        var createdProduct = await _productService.AddProductAsync(newProductDto);
+        return CreatedAtAction(nameof(GetProductById), new { id = createdProduct.Id }, createdProduct);
     }
 
     [HttpPut("UpdateProduct")]
-    public async Task<IActionResult> UpdateProduct([FromQuery]Guid id, [FromBody] AddUpdateProductDto productDto)
+    [Consumes("application/json")]
+    public async Task<IActionResult> UpdateProduct([FromQuery] Guid id, [FromBody] AddUpdateProductDto productDto)
     {
+        LoggerHelper.LogWithDetails("Attempts to update a product", args: [id, productDto]);
         if (!ModelState.IsValid)
         {
-            return BadRequest(ModelState);
+            LoggerHelper.LogWithDetails("Binding Errors.", args: [id, productDto],
+                retrievedData: ModelState["Product"]?.Errors.Select(e => e.ErrorMessage)!
+                , logLevel: LoggerHelper.LogLevel.Error);
+            return BadRequest(ModelState["Product"]?.Errors.Select(e => e.ErrorMessage));
         }
 
-        var updatedProduct = await _productService.UpdateProductAsync(id, productDto);
-        return Ok(updatedProduct);
-
+        try
+        {
+            var updatedProduct = await _productService.UpdateProductAsync(id, productDto);
+            return Ok(updatedProduct);
+        }
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Incorrect Product ID.", args: [id, productDto], retrievedData: e,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
-    
+
 
     [HttpDelete("DeleteProduct/{id}")]
     public async Task<IActionResult> DeleteProductByIdAsync(Guid id)
     {
-        var deleted = await _productService.DeleteProductByIdAsync(id);
-        if (!deleted)
+        LoggerHelper.LogWithDetails(args:[id]);
+        try
         {
-            return NotFound();
+            await _productService.DeleteProductByIdAsync(id);
+            return Ok($"The product with Id {id} successfully deleted");
         }
-
-        return Ok($"The product with Id {id} successfully deleted");
+        catch (Exception e)
+        {
+            LoggerHelper.LogWithDetails("Incorrect Product ID.", args: [id], retrievedData: e.Message,
+                logLevel: LoggerHelper.LogLevel.Error);
+            return NotFound(e.Message);
+        }
     }
-    
-    
 }

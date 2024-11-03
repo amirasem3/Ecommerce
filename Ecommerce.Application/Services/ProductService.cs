@@ -1,182 +1,299 @@
-﻿using System.Reflection.Metadata.Ecma335;
+﻿using Azure.Core;
 using Ecommerce.Application.DTOs;
-using Ecommerce.Application.Interfaces;
+using Ecommerce.Application.DTOs.Manufacturer;
 using Ecommerce.Core.Entities;
 using Ecommerce.Core.Interfaces;
+using Ecommerce.Core.Log;
+using Ecommerce.Infrastructure.Repositories;
+using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Core;
 
 namespace Ecommerce.Application.Services;
 
-public class ProductService : IProductService
+public class ProductService
 {
+    public const string ProductException = "Product Not Found!";
+    private readonly UnitOfWork _unitOfWork;
 
-    private readonly IProductRepository _productRepository;
-
-    public ProductService(IProductRepository productRepository)
+    public ProductService(UnitOfWork unitOfWork)
     {
-        _productRepository = productRepository;
+        _unitOfWork = unitOfWork;
     }
+
     public async Task<ProductDto> GetProductByIdAsync(Guid id)
     {
-        var product = await _productRepository.GetProductByIdAsync(id);
-        return new ProductDto
+        LoggerHelper.LogWithDetails("Attempt to get a product by ID", args: [id]);
+        var product = await _unitOfWork.ProductRepository.GetByIdAsync(id, "Manufacturers2");
+        if (product == null)
         {
-            Id = product.Id,
-            Name = product.Name,
-            Price = product.Price,
-            Status = product.Status,
-            Inventory = product.Inventory,
-            DOP = product.DOP,
-            DOE = product.DOE,
-            ManufacturerProducts = product.Manufacturers
-            
-        };
+            LoggerHelper.LogWithDetails("Incorrect Product ID", args: [id], retrievedData: ProductException
+                , logLevel: LoggerHelper.LogLevel.Error);
+            throw new Exception(ProductException);
+        }
+
+        LoggerHelper.LogWithDetails("Product Found", args: [id], retrievedData: product);
+        var resProd = new ProductDto
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                Inventory = product.Inventory,
+                Status = product.Status,
+                Dop = product.Dop,
+                Doe = product.Doe,
+                Manufacturer = product.Manufacturers2.Select(m => new ManufacturerProductDto
+                {
+                    Address = m.Address,
+                    Email = m.Email,
+                    Country = m.ManufacturerCountry,
+                    Name = m.Name,
+                    PhoneNumber = m.PhoneNumber,
+                    Rate = m.Rate
+                }).ToList()
+            };
+        LoggerHelper.LogWithDetails("Target Product Found",args:[id],retrievedData:resProd);
+        return resProd;
     }
 
-    public async Task<ProductDto> AddProductAsync(AddUpdateProductDto updateProductDto)
+    public async Task<ProductDto> AddProductAsync(AddUpdateProductDto newProductDto)
     {
+        LoggerHelper.LogWithDetails("Attempt to add a new product", args: [newProductDto]);
         var product = new Product
         {
             Id = Guid.NewGuid(),
-            Name = updateProductDto.Name,
-            Price = updateProductDto.Price,
-            Status = updateProductDto.DOE > updateProductDto.DOP,
-            Inventory = updateProductDto.Inventory,
-            DOP = updateProductDto.DOP,
-            DOE = updateProductDto.DOE,
-            Manufacturers = []
+            Name = newProductDto.Name,
+            Price = newProductDto.Price,
+            Inventory = newProductDto.Inventory,
+            Dop = newProductDto.Dop,
+            Doe = newProductDto.Doe,
+            Status = newProductDto.Doe > newProductDto.Dop && newProductDto.Inventory > 0,
+            Manufacturers2 = []
         };
-        await _productRepository.AddProductAsync(product);
-        return new ProductDto
+        await _unitOfWork.ProductRepository.InsertAsync(product);
+        await _unitOfWork.SaveAsync();
+
+        LoggerHelper.LogWithDetails("Successful Product Insertion", args: [newProductDto], retrievedData: product);
+        var resProd = new ProductDto
         {
             Id = product.Id,
             Name = product.Name,
             Price = product.Price,
             Status = product.Status,
             Inventory = product.Inventory,
-            DOP = product.DOP,
-            DOE = product.DOE,
-            ManufacturerProducts = product.Manufacturers
+            Dop = product.Dop,
+            Doe = product.Doe,
+            Manufacturer = []
         };
+        LoggerHelper.LogWithDetails("New Product added Successfully.",args:[newProductDto],retrievedData:resProd);
+        return resProd;
     }
 
     public async Task<ProductDto> UpdateProductAsync(Guid id, AddUpdateProductDto updateProductDto)
     {
-        var product = await _productRepository.GetProductByIdAsync(id);
+        LoggerHelper.LogWithDetails("Attempt to logger a product", args: [id, updateProductDto]);
+        var product = await _unitOfWork.ProductRepository.GetByIdAsync(id, "Manufacturers2");
         if (product == null)
         {
-            return null;
+            LoggerHelper.LogWithDetails("There is no product with this ID.", args: [id], retrievedData: ProductException
+                , logLevel: LoggerHelper.LogLevel.Error);
+            throw new Exception(ProductException);
         }
 
         product.Name = updateProductDto.Name;
         product.Price = updateProductDto.Price;
         product.Status = updateProductDto.Status;
         product.Inventory = updateProductDto.Inventory;
-        product.DOE = updateProductDto.DOE;
-        product.DOP = updateProductDto.DOP;
-        
-        await _productRepository.UpdateProductAsync(product);
-        return new ProductDto
+        product.Doe = updateProductDto.Doe;
+        product.Dop = updateProductDto.Dop;
+
+        _unitOfWork.ProductRepository.Update(product);
+        await _unitOfWork.SaveAsync();
+
+        LoggerHelper.LogWithDetails("Successful Update", args: [id, updateProductDto], retrievedData: product);
+        var resProd = new ProductDto
         {
             Id = product.Id,
             Name = product.Name,
             Price = product.Price,
             Status = product.Status,
             Inventory = product.Inventory,
-            DOP = product.DOP,
-            DOE = product.DOE,
-            ManufacturerProducts = product.Manufacturers
+            Dop = product.Dop,
+            Doe = product.Doe,
+            Manufacturer = product.Manufacturers2.Select(m => new ManufacturerProductDto
+            {
+                PhoneNumber = m.PhoneNumber,
+                Address = m.Address,
+                Country = m.ManufacturerCountry,
+                Email = m.Email,
+                Name = m.Name,
+                Rate = m.Rate
+            }).ToList()
         };
+        LoggerHelper.LogWithDetails("Product Updated Successfully",args:[id,updateProductDto],retrievedData:resProd);
+        return resProd;
     }
 
     public async Task<bool> DeleteProductByIdAsync(Guid id)
     {
-        var product = await _productRepository.GetProductByIdAsync(id);
-        if (product!=null)
+        LoggerHelper.LogWithDetails("Attempts to delete a product by ID.", args: [id]);
+        var product = await _unitOfWork.ProductRepository.GetByIdAsync(id, "Manufacturers2");
+        if (product == null)
         {
-            await _productRepository.DeleteProductByIdAsync(id);
-            return true;
+            LoggerHelper.LogWithDetails("There is no product with this ID", args: [id], retrievedData: ProductException
+                , logLevel: LoggerHelper.LogLevel.Error);
+            throw new Exception(ProductException);
         }
 
-        return false;
+        // await _productRepository.DeleteProductByIdAsync(id);
+        await _unitOfWork.ProductRepository.DeleteByIdAsync(id);
+        await _unitOfWork.SaveAsync();
+        LoggerHelper.LogWithDetails("Successful Delete.", args: [id], retrievedData: product);
+        return true;
     }
 
     public async Task<IEnumerable<ProductDto>> GetAllProductAsync()
     {
-        var products = await _productRepository.GetAllProductsAsync();
-        return products.Select(product => new ProductDto
+        LoggerHelper.LogWithDetails("Attempts to get all products");
+        var products = await _unitOfWork.ProductRepository.GetAsync(includeProperties: "Manufacturers2");
+        if (products == null)
+        {
+            LoggerHelper.LogWithDetails("Product table is empty.", retrievedData: ProductException,
+                logLevel: LoggerHelper.LogLevel.Error);
+            throw new Exception(ProductException);
+        }
+
+        LoggerHelper.LogWithDetails("All Product Retrieved", retrievedData: products);
+
+        var resProd =products.Select(product => new ProductDto
         {
             Id = product.Id,
             Name = product.Name,
             Price = product.Price,
             Status = product.Status,
             Inventory = product.Inventory,
-            DOP = product.DOP,
-            DOE = product.DOE
-
-        });
+            Dop = product.Dop,
+            Doe = product.Doe,
+            Manufacturer = product.Manufacturers2.Select(m => new ManufacturerProductDto
+            {
+                PhoneNumber = m.PhoneNumber,
+                Address = m.Address,
+                Country = m.ManufacturerCountry,
+                Email = m.Email,
+                Name = m.Name,
+                Rate = m.Rate
+            }).ToList()
+        }).ToList();
+        LoggerHelper.LogWithDetails("All Products retrieved successfully.",retrievedData:resProd);
+        return resProd;
     }
 
     public async Task<IEnumerable<ProductDto>> GetAllProductsByNameAsync(string name)
     {
-        var products = await _productRepository.GetAllProductsByNameAsync(name);
+        LoggerHelper.LogWithDetails("Attempts to search products by name", args: [name]);
+        var products = await _unitOfWork.ProductRepository.GetAsync(filter: p => p.Name.Contains(name),
+            includeProperties: "Manufacturers2");
+        if (products == null)
+        {
+            LoggerHelper.LogWithDetails("There is no product with this name.", args: [name],
+                retrievedData: ProductException,
+                logLevel: LoggerHelper.LogLevel.Error);
+            throw new Exception(ProductException);
+        }
 
-        return products.Select(product => new ProductDto
+        LoggerHelper.LogWithDetails("All products with this name retrieved successfully.", args: [name],
+            retrievedData: products);
+        var resProd =products.Select(product => new ProductDto
         {
             Id = product.Id,
             Name = product.Name,
             Price = product.Price,
             Status = product.Status,
             Inventory = product.Inventory,
-            DOP = product.DOP,
-            DOE = product.DOE,
-        });
+            Dop = product.Dop,
+            Doe = product.Doe,
+            Manufacturer = product.Manufacturers2.Select(m => new ManufacturerProductDto
+            {
+                PhoneNumber = m.PhoneNumber,
+                Address = m.Address,
+                Country = m.ManufacturerCountry,
+                Email = m.Email,
+                Name = m.Name,
+                Rate = m.Rate
+            }).ToList()
+        }).ToList();
+        LoggerHelper.LogWithDetails("Product's name search result",args:[name],retrievedData:resProd);
+        return resProd;
     }
 
     public async Task<IEnumerable<ProductDto>> FilterProductByPriceAsync(decimal startPrice, decimal endPrice)
     {
-        var products = await _productRepository.FilterProductsByPrice(startPrice, endPrice);
-        return products.Select(product => new ProductDto
+        LoggerHelper.LogWithDetails("Attempt to filter products by the price", args: [startPrice, endPrice]);
+        var products = await _unitOfWork.ProductRepository.GetAsync(
+            filter: p => p.Price >= startPrice && p.Price <= endPrice, includeProperties: "Manufacturers2");
+        if (products == null)
+        {
+            LoggerHelper.LogWithDetails("There is no product in this price range.", args: [startPrice, endPrice],
+                retrievedData: ProductException,
+                logLevel: LoggerHelper.LogLevel.Error);
+            throw new Exception(ProductException);
+        }
+
+        LoggerHelper.LogWithDetails("All product in the price range retrieved successfully.",
+            args: [startPrice, endPrice], retrievedData: products);
+        
+        var resProd = products.Select(product => new ProductDto
         {
             Id = product.Id,
             Name = product.Name,
             Price = product.Price,
             Status = product.Status,
             Inventory = product.Inventory,
-            DOP = product.DOP,
-            DOE = product.DOE,
+            Dop = product.Dop,
+            Doe = product.Doe,
+            Manufacturer = product.Manufacturers2.Select(m => new ManufacturerProductDto
+            {
+                PhoneNumber = m.PhoneNumber,
+                Address = m.Address,
+                Country = m.ManufacturerCountry,
+                Email = m.Email,
+                Name = m.Name,
+                Rate = m.Rate
+            }).ToList()
+        }).ToList();
+        LoggerHelper.LogWithDetails("Product's price filter results",args:[startPrice,endPrice],retrievedData:resProd);
+        return resProd;
+    }
+
+    public async Task<IEnumerable<InvoiceProductDto>> GetInvoicesByProductId(Guid productId)
+    {
+        LoggerHelper.LogWithDetails("Attempt to get invoices with this product", args: [productId]);
+        var productInvoices =
+            await _unitOfWork.ProductInvoiceRepository.GetAsync(filter: pi => pi.ProductId == productId,
+                includeProperties: "Invoice");
+        if (productInvoices == null)
+        {
+            LoggerHelper.LogWithDetails("There is no invoice that has this product.", args: [productId]
+                , logLevel: LoggerHelper.LogLevel.Error);
+            throw new Exception("No Invoice Found!");
+        }
+
+        LoggerHelper.LogWithDetails("All invoices that have this product retrieved successfully.", args: [productId],
+            retrievedData: productInvoices);
+        
+        var prodInvoiceRes =productInvoices.Select(pi => new InvoiceProductDto()
+        {
+            Id = pi.Invoice.Id,
+            IssueDate = pi.Invoice.IssueDate,
+            OwnerName = pi.Invoice.OwnerFirstName,
+            OwnerFamilyName = pi.Invoice.OwnerLastName,
+            IdentificationCode = pi.Invoice.IdentificationCode,
+            IssuerName = pi.Invoice.IssuerName,
+            PaymentDate = pi.Invoice.PaymentDate,
+            PaymentStatus = pi.Invoice.PaymentStatus,
+            TotalPrice = pi.Invoice.TotalPrice,
         });
-    }
-
-    public async Task<ProductDto> GetProductManufacturersAsync(Guid productId)
-    {
-        var product = await _productRepository.GetProductManufacturersAsync(productId);
-        return new ProductDto
-        {
-            Id = product.Id,
-            Name = product.Name,
-            Price = product.Price,
-            Status = product.Status,
-            Inventory = product.Inventory,
-            DOP = product.DOP,
-            DOE = product.DOE,
-            ManufacturerProducts = product.Manufacturers
-        };
-    }
-
-    public async Task<ProductDto> GetProductInvoicesAsync(Guid productId)
-    {
-        var product = await _productRepository.GetProductInvoicesAsync(productId);
-        return new ProductDto
-        {
-            Id = product.Id,
-            Name = product.Name,
-            Price = product.Price,
-            Status = product.Status,
-            Inventory = product.Inventory,
-            DOP = product.DOP,
-            DOE = product.DOE,
-            ManufacturerProducts = product.Manufacturers,
-            ProductInvoices =product.Invoices
-        };
+        LoggerHelper.LogWithDetails("Invoice with this product.",args:[productId],retrievedData:prodInvoiceRes);
+        return prodInvoiceRes;
     }
 }
