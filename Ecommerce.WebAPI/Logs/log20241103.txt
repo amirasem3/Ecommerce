@@ -5296,3 +5296,319 @@ System.TypeLoadException: Could not load type 'Invalid_Token.0x0200006A' from as
     }
   ]
 }] Target Parent Found
+[2024-11-03 12:44:38.230 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: Program] [FunctionName: <Main>$] [Arguments: null] [RetrieveData: null] Starting up the application
+[2024-11-03 12:44:58.307 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: AuthenticateUserAsync] [Arguments: [
+  "amirasem1",
+  "hosein77"
+]] [RetrieveData: null] Attempt to authenticate an user
+[2024-11-03 12:44:58.311 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: AuthenticateUserAsync] [Arguments: [
+  "amirasem1"
+]] [RetrieveData: null] Check the user existence
+[2024-11-03 12:44:59.021 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByUniquePropertyAsync] [Arguments: [
+  "Username",
+  "amirasem1",
+  ""
+]] [RetrieveData: null] Attempt to get Ecommerce.Core.Entities.User by its UniqueProperty.
+[2024-11-03 12:45:07.147 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: AuthenticateUserAsync] [Arguments: [
+  "amirasem1"
+]] [RetrieveData: {
+  "Id": "ec7ded00-7b12-4244-a81e-c9ba4dc22b71",
+  "FirstName": "UserOne",
+  "LastName": "UserOne",
+  "Username": "amirasem1",
+  "PasswordHash": "AQAAAAIAAYagAAAAEDhPUqMu9KmcNsyqvixIv13khtenrU/6SCkDClSAnx1/0uo/rI6stEjSRPFwMUo/Tg==",
+  "Email": "userone@gmail.com",
+  "PhoneNumber": "88888",
+  "RoleId": "5c03a6cb-f544-4de7-bbeb-d5e771dd1444"
+}] User exists
+[2024-11-03 12:45:07.156 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "5c03a6cb-f544-4de7-bbeb-d5e771dd1444",
+  ""
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Role by its ID.
+[2024-11-03 12:45:07.176 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: AuthenticateUserAsync] [Arguments: [
+  "hosein77"
+]] [RetrieveData: null] Attempt to verify the password
+[2024-11-03 12:45:07.239 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: UserService] [FunctionName: AuthenticateUserAsync] [Arguments: [
+  "amirasem1",
+  "hosein77"
+]] [RetrieveData: {
+  "Id": "ec7ded00-7b12-4244-a81e-c9ba4dc22b71",
+  "FirstName": "UserOne",
+  "LastName": "UserOne",
+  "Username": "amirasem1",
+  "PasswordHash": "AQAAAAIAAYagAAAAEDhPUqMu9KmcNsyqvixIv13khtenrU/6SCkDClSAnx1/0uo/rI6stEjSRPFwMUo/Tg==",
+  "Email": "userone@gmail.com",
+  "PhoneNumber": "88888",
+  "RoleId": "5c03a6cb-f544-4de7-bbeb-d5e771dd1444"
+}] User authenticated successfully.
+[2024-11-03 12:45:28.656 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: CategoryController] [FunctionName: GetAllCategories] [Arguments: null] [RetrieveData: null] 
+[2024-11-03 12:45:28.660 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: CategoryServices] [FunctionName: GetAllCategoriesAsync] [Arguments: null] [RetrieveData: null] Attempt to get all categories
+[2024-11-03 12:45:28.718 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "SubCategories,SubCategories.SubCategories"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Category with filter 
+[2024-11-03 12:45:28.802 +03:30] [Warning] [Machine: ETSC-DEV02] [ClassName: ] [FunctionName: ] [Arguments: ] [RetrieveData: ] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+[2024-11-03 12:45:28.863 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "b59ad564-d259-47da-a198-1a90e25971de",
+  "SubCategories"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Category by its ID.
+[2024-11-03 12:45:28.881 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "c1565cde-09ea-4459-87a7-f6b11cbf9c0d",
+  "SubCategories"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Category by its ID.
+[2024-11-03 12:45:28.890 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "6ce0f5ce-bc26-4c57-a690-d5c421508688",
+  "SubCategories"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Category by its ID.
+[2024-11-03 12:45:28.894 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "b59ad564-d259-47da-a198-1a90e25971de",
+  "SubCategories"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Category by its ID.
+[2024-11-03 12:45:28.902 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "04591e76-b969-483b-a836-d647ba3958b4",
+  "SubCategories"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Category by its ID.
+[2024-11-03 12:45:28.925 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: CategoryServices] [FunctionName: GetAllCategoriesAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "04591e76-b969-483b-a836-d647ba3958b4",
+    "Name": "Amir",
+    "ParentCategoryName": "Root",
+    "Type": "Parent",
+    "ParentCategoryId": "00000000-0000-0000-0000-000000000000",
+    "SubCategories": [
+      {
+        "Id": "c476df69-d3db-4bb9-a234-dd4b0fdaa5dd",
+        "Name": "AmirChild1",
+        "TypeString": "Parent",
+        "ParentCategoryId": "04591e76-b969-483b-a836-d647ba3958b4"
+      }
+    ]
+  },
+  {
+    "Id": "0bcd4322-6bbd-407e-ad89-af25946de0ff",
+    "Name": "AmirChild1ChildChild1Update",
+    "ParentCategoryName": "Parent1",
+    "Type": "Child",
+    "ParentCategoryId": "b59ad564-d259-47da-a198-1a90e25971de",
+    "SubCategories": []
+  },
+  {
+    "Id": "2f6a4f85-85be-47b7-9fb8-fc189c9b1e7a",
+    "Name": "ChildChildUpdate",
+    "ParentCategoryName": "Parent3",
+    "Type": "Parent",
+    "ParentCategoryId": "c1565cde-09ea-4459-87a7-f6b11cbf9c0d",
+    "SubCategories": []
+  },
+  {
+    "Id": "6ce0f5ce-bc26-4c57-a690-d5c421508688",
+    "Name": "Parent2Update",
+    "ParentCategoryName": "Root",
+    "Type": "Parent",
+    "ParentCategoryId": "00000000-0000-0000-0000-000000000000",
+    "SubCategories": [
+      {
+        "Id": "8d761ee2-807a-4ecb-bc05-b83c0ee705c8",
+        "Name": "AmirChild1ParentUpdate",
+        "TypeString": "Parent",
+        "ParentCategoryId": "6ce0f5ce-bc26-4c57-a690-d5c421508688"
+      }
+    ]
+  },
+  {
+    "Id": "8d761ee2-807a-4ecb-bc05-b83c0ee705c8",
+    "Name": "AmirChild1ParentUpdate",
+    "ParentCategoryName": "Parent2Update",
+    "Type": "Parent",
+    "ParentCategoryId": "6ce0f5ce-bc26-4c57-a690-d5c421508688",
+    "SubCategories": []
+  },
+  {
+    "Id": "9a23768b-b7fd-43b3-9956-268e8511db30",
+    "Name": "Child1",
+    "ParentCategoryName": "Parent1",
+    "Type": "Parent",
+    "ParentCategoryId": "b59ad564-d259-47da-a198-1a90e25971de",
+    "SubCategories": []
+  },
+  {
+    "Id": "b59ad564-d259-47da-a198-1a90e25971de",
+    "Name": "Parent1",
+    "ParentCategoryName": "Root",
+    "Type": "Parent",
+    "ParentCategoryId": "00000000-0000-0000-0000-000000000000",
+    "SubCategories": [
+      {
+        "Id": "0bcd4322-6bbd-407e-ad89-af25946de0ff",
+        "Name": "AmirChild1ChildChild1Update",
+        "TypeString": "Child",
+        "ParentCategoryId": "b59ad564-d259-47da-a198-1a90e25971de"
+      },
+      {
+        "Id": "9a23768b-b7fd-43b3-9956-268e8511db30",
+        "Name": "Child1",
+        "TypeString": "Parent",
+        "ParentCategoryId": "b59ad564-d259-47da-a198-1a90e25971de"
+      }
+    ]
+  },
+  {
+    "Id": "c1565cde-09ea-4459-87a7-f6b11cbf9c0d",
+    "Name": "Parent3",
+    "ParentCategoryName": "Root",
+    "Type": "Parent",
+    "ParentCategoryId": "00000000-0000-0000-0000-000000000000",
+    "SubCategories": [
+      {
+        "Id": "2f6a4f85-85be-47b7-9fb8-fc189c9b1e7a",
+        "Name": "ChildChildUpdate",
+        "TypeString": "Parent",
+        "ParentCategoryId": "c1565cde-09ea-4459-87a7-f6b11cbf9c0d"
+      }
+    ]
+  },
+  {
+    "Id": "c476df69-d3db-4bb9-a234-dd4b0fdaa5dd",
+    "Name": "AmirChild1",
+    "ParentCategoryName": "Amir",
+    "Type": "Parent",
+    "ParentCategoryId": "04591e76-b969-483b-a836-d647ba3958b4",
+    "SubCategories": []
+  }
+]] All Categories
+[2024-11-03 13:04:59.984 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: Program] [FunctionName: <Main>$] [Arguments: null] [RetrieveData: null] Starting up the application
+[2024-11-03 13:05:05.815 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: CategoryController] [FunctionName: GetAllCategories] [Arguments: null] [RetrieveData: null] 
+[2024-11-03 13:05:05.821 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: CategoryServices] [FunctionName: GetAllCategoriesAsync] [Arguments: null] [RetrieveData: null] Attempt to get all categories
+[2024-11-03 13:05:06.589 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetAsync] [Arguments: [
+  null,
+  "SubCategories,SubCategories.SubCategories"
+]] [RetrieveData: null] Attempt to get multiple of Ecommerce.Core.Entities.Category with filter 
+[2024-11-03 13:05:06.865 +03:30] [Warning] [Machine: ETSC-DEV02] [ClassName: ] [FunctionName: ] [Arguments: ] [RetrieveData: ] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+[2024-11-03 13:05:14.727 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "b59ad564-d259-47da-a198-1a90e25971de",
+  "SubCategories"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Category by its ID.
+[2024-11-03 13:05:14.785 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "c1565cde-09ea-4459-87a7-f6b11cbf9c0d",
+  "SubCategories"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Category by its ID.
+[2024-11-03 13:05:14.795 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "6ce0f5ce-bc26-4c57-a690-d5c421508688",
+  "SubCategories"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Category by its ID.
+[2024-11-03 13:05:14.800 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "b59ad564-d259-47da-a198-1a90e25971de",
+  "SubCategories"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Category by its ID.
+[2024-11-03 13:05:14.803 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: GenericRepository] [FunctionName: GetByIdAsync] [Arguments: [
+  "04591e76-b969-483b-a836-d647ba3958b4",
+  "SubCategories"
+]] [RetrieveData: null] Attempt to get entity with type Ecommerce.Core.Entities.Category by its ID.
+[2024-11-03 13:05:14.827 +03:30] [Information] [Machine: ETSC-DEV02] [ClassName: CategoryServices] [FunctionName: GetAllCategoriesAsync] [Arguments: null] [RetrieveData: [
+  {
+    "Id": "04591e76-b969-483b-a836-d647ba3958b4",
+    "Name": "Amir",
+    "ParentCategoryName": "Root",
+    "Type": "Parent",
+    "ParentCategoryId": "00000000-0000-0000-0000-000000000000",
+    "SubCategories": [
+      {
+        "Id": "c476df69-d3db-4bb9-a234-dd4b0fdaa5dd",
+        "Name": "AmirChild1",
+        "TypeString": "Parent",
+        "ParentCategoryId": "04591e76-b969-483b-a836-d647ba3958b4"
+      }
+    ]
+  },
+  {
+    "Id": "0bcd4322-6bbd-407e-ad89-af25946de0ff",
+    "Name": "AmirChild1ChildChild1Update",
+    "ParentCategoryName": "Parent1",
+    "Type": "Child",
+    "ParentCategoryId": "b59ad564-d259-47da-a198-1a90e25971de",
+    "SubCategories": []
+  },
+  {
+    "Id": "2f6a4f85-85be-47b7-9fb8-fc189c9b1e7a",
+    "Name": "ChildChildUpdate",
+    "ParentCategoryName": "Parent3",
+    "Type": "Parent",
+    "ParentCategoryId": "c1565cde-09ea-4459-87a7-f6b11cbf9c0d",
+    "SubCategories": []
+  },
+  {
+    "Id": "6ce0f5ce-bc26-4c57-a690-d5c421508688",
+    "Name": "Parent2Update",
+    "ParentCategoryName": "Root",
+    "Type": "Parent",
+    "ParentCategoryId": "00000000-0000-0000-0000-000000000000",
+    "SubCategories": [
+      {
+        "Id": "8d761ee2-807a-4ecb-bc05-b83c0ee705c8",
+        "Name": "AmirChild1ParentUpdate",
+        "TypeString": "Parent",
+        "ParentCategoryId": "6ce0f5ce-bc26-4c57-a690-d5c421508688"
+      }
+    ]
+  },
+  {
+    "Id": "8d761ee2-807a-4ecb-bc05-b83c0ee705c8",
+    "Name": "AmirChild1ParentUpdate",
+    "ParentCategoryName": "Parent2Update",
+    "Type": "Parent",
+    "ParentCategoryId": "6ce0f5ce-bc26-4c57-a690-d5c421508688",
+    "SubCategories": []
+  },
+  {
+    "Id": "9a23768b-b7fd-43b3-9956-268e8511db30",
+    "Name": "Child1",
+    "ParentCategoryName": "Parent1",
+    "Type": "Parent",
+    "ParentCategoryId": "b59ad564-d259-47da-a198-1a90e25971de",
+    "SubCategories": []
+  },
+  {
+    "Id": "b59ad564-d259-47da-a198-1a90e25971de",
+    "Name": "Parent1",
+    "ParentCategoryName": "Root",
+    "Type": "Parent",
+    "ParentCategoryId": "00000000-0000-0000-0000-000000000000",
+    "SubCategories": [
+      {
+        "Id": "0bcd4322-6bbd-407e-ad89-af25946de0ff",
+        "Name": "AmirChild1ChildChild1Update",
+        "TypeString": "Child",
+        "ParentCategoryId": "b59ad564-d259-47da-a198-1a90e25971de"
+      },
+      {
+        "Id": "9a23768b-b7fd-43b3-9956-268e8511db30",
+        "Name": "Child1",
+        "TypeString": "Parent",
+        "ParentCategoryId": "b59ad564-d259-47da-a198-1a90e25971de"
+      }
+    ]
+  },
+  {
+    "Id": "c1565cde-09ea-4459-87a7-f6b11cbf9c0d",
+    "Name": "Parent3",
+    "ParentCategoryName": "Root",
+    "Type": "Parent",
+    "ParentCategoryId": "00000000-0000-0000-0000-000000000000",
+    "SubCategories": [
+      {
+        "Id": "2f6a4f85-85be-47b7-9fb8-fc189c9b1e7a",
+        "Name": "ChildChildUpdate",
+        "TypeString": "Parent",
+        "ParentCategoryId": "c1565cde-09ea-4459-87a7-f6b11cbf9c0d"
+      }
+    ]
+  },
+  {
+    "Id": "c476df69-d3db-4bb9-a234-dd4b0fdaa5dd",
+    "Name": "AmirChild1",
+    "ParentCategoryName": "Amir",
+    "Type": "Parent",
+    "ParentCategoryId": "04591e76-b969-483b-a836-d647ba3958b4",
+    "SubCategories": []
+  }
+]] All Categories
