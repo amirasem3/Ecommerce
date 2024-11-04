@@ -281,7 +281,6 @@ public class ManufacturerService
             Products2 = []
         };
         await _unitOfWork.manufacturerRepository.InsertAsync(manufacturer);
-        // await _unitOfWork.SaveAsync();
 
         LoggerHelper.LogWithDetails(_logger,"Manufacturer Successful Insertion!", args: [newManufacturerDto],
             retrievedData: manufacturer);
@@ -349,7 +348,8 @@ public class ManufacturerService
         manufacturer.PhoneNumber = updateManufacturerDto.PhoneNumber;
         manufacturer.Email = updateManufacturerDto.Email;
         manufacturer.ManufacturerCountry = updateManufacturerDto.ManufacturerCountry;
-        _unitOfWork.manufacturerRepository.Update(manufacturer);
+        // _unitOfWork.manufacturerRepository.Update(manufacturer);
+        
         await _unitOfWork.SaveAsync();
 
         var manRes = new ManufacturerDto
@@ -390,7 +390,7 @@ public class ManufacturerService
             throw new Exception(ManufacturerException);
         }
 
-        if (manufacturer.Products2.Count != 0)
+        if (manufacturer.CheckProducts())
         {
             LoggerHelper.LogWithDetails(_logger,
                 "There are products that relate to this manufacturer. " +
@@ -401,7 +401,8 @@ public class ManufacturerService
                 "before all of its products.");
         }
 
-        await _unitOfWork.manufacturerRepository.DeleteByIdAsync(manufactureId);
+        // await _unitOfWork.manufacturerRepository.DeleteByIdAsync(manufactureId);
+        await _unitOfWork.manufacturerRepository.Delete(manufacturer);
         await _unitOfWork.SaveAsync();
         LoggerHelper.LogWithDetails(_logger,"Successful Delete", args: [manufactureId], retrievedData: manufacturer);
         return true;
@@ -432,7 +433,7 @@ public class ManufacturerService
         if (!productExists)
         {
             manufacturer.Products2.Add(product);
-            _unitOfWork.manufacturerRepository.Update(manufacturer);
+            // _unitOfWork.manufacturerRepository.Update(manufacturer);
             await _unitOfWork.SaveAsync();
             LoggerHelper.LogWithDetails(_logger,"The product added to manufacture products successfully.",
                 args: [product, manufacturer.Products2], retrievedData: manufacturer);
@@ -472,7 +473,7 @@ public class ManufacturerService
         if (existProduct)
         {
             manufacturer.Products2.Remove(product);
-            _unitOfWork.manufacturerRepository.Update(manufacturer);
+            // _unitOfWork.manufacturerRepository.Update(manufacturer);
             await _unitOfWork.SaveAsync();
             LoggerHelper.LogWithDetails(_logger,"Successful Delete", args: [manufacturerId, productId]);
             return true;

@@ -237,7 +237,7 @@ public class InvoiceController : ControllerBase
         {
             LoggerHelper.LogWithDetails(_logger,"Unexpected Errors", args: [id, updateInvoiceDto], retrievedData: e.Message,
                 logLevel: LoggerHelper.LogLevel.Error);
-            return NotFound(e.Message);
+            return NotFound(e);
         }
     }
 

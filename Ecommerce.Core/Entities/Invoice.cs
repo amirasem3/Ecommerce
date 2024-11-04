@@ -64,4 +64,9 @@ public class Invoice
     [JsonIgnore] public ICollection<ProductInvoice> Products { get; set; } = null!;
 
     [JsonIgnore] public ICollection<Product> Products2 { get; set; } = null!;
+
+    public bool CheckProducts()
+    {
+        return Products.Count != 0;
+    }
 }

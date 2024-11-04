@@ -76,7 +76,7 @@ public class RoleService
         LoggerHelper.LogWithDetails(_logger,"Role Found",args:[id],retrievedData:targetRole);
         targetRole.Name = updateRoleDto.Name;
 
-        _unitOfWork.roleRepository.Update(targetRole);
+        // _unitOfWork.roleRepository.Update(targetRole);
         await _unitOfWork.SaveAsync();
         
         var roleRes  =new RoleDto
@@ -99,7 +99,8 @@ public class RoleService
             throw new Exception(RoleException);
         }
 
-        await _unitOfWork.roleRepository.DeleteByIdAsync(id);
+        // await _unitOfWork.roleRepository.DeleteByIdAsync(id);
+        await _unitOfWork.roleRepository.Delete(targetRole);
         await _unitOfWork.SaveAsync();
         LoggerHelper.LogWithDetails(_logger,"Successful Delete",args:[id],retrievedData:targetRole);
         return true;

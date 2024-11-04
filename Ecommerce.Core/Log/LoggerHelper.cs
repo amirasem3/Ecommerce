@@ -50,11 +50,11 @@ public class LoggerHelper
                         message, className, memberName, serializedArgs, serializedRetrievedData);
                     break;
                 case LogLevel.Error:
-                    logger.LogWarning("{Message} | ClassName: {ClassName}, FunctionName: {FunctionName}, Arguments: {Arguments}, RetrieveData: {RetrieveData}",
+                    logger.LogError("{Message} | ClassName: {ClassName}, FunctionName: {FunctionName}, Arguments: {Arguments}, RetrieveData: {RetrieveData}",
                         message, className, memberName, serializedArgs, serializedRetrievedData);
                     break;
                 case LogLevel.Warning:
-                    logger.LogError("{Message} | ClassName: {ClassName}, FunctionName: {FunctionName}, Arguments: {Arguments}, RetrieveData: {RetrieveData}",
+                    logger.LogWarning("{Message} | ClassName: {ClassName}, FunctionName: {FunctionName}, Arguments: {Arguments}, RetrieveData: {RetrieveData}",
                         message, className, memberName, serializedArgs, serializedRetrievedData);
                     break;
             }

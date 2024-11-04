@@ -109,13 +109,13 @@ public class CategoryServices
                 ParentCategoryId = parentRequested!.Id
             };
             await _unitOfWork.categoryRepository.InsertAsync(categoryParentSubParent);
-            await _unitOfWork.SaveAsync();
+            // await _unitOfWork.SaveAsync();
             LoggerHelper.LogWithDetails(_logger,"New Parent subcategory added successfully.",
                 retrievedData: categoryParentSubParent);
             parentRequested.SubCategories.Add(categoryParentSubParent);
             LoggerHelper.LogWithDetails(_logger,$"New parent subcategory added to a {newCategory.ParentName}'s subcategories",
                 args: [categoryParentSubParent], retrievedData: parentRequested);
-            _unitOfWork.categoryRepository.Update(parentRequested);
+            // _unitOfWork.categoryRepository.Update(parentRequested);
             await _unitOfWork.SaveAsync();
 
             var resCat2 = new CategoryDto(newCategory.TypeString == "Parent" && parentRequested != null)
@@ -142,10 +142,10 @@ public class CategoryServices
             SubCategories = []
         };
         await _unitOfWork.categoryRepository.InsertAsync(childCategory);
-        await _unitOfWork.SaveAsync();
+        // await _unitOfWork.SaveAsync();
         LoggerHelper.LogWithDetails(_logger,"New Child category added successfully.");
         parentRequested.SubCategories.Add(childCategory);
-        _unitOfWork.categoryRepository.Update(parentRequested);
+        // _unitOfWork.categoryRepository.Update(parentRequested);
 
         await _unitOfWork.SaveAsync();
 
@@ -327,8 +327,8 @@ public class CategoryServices
                     "SubCategories,SubCategories.SubCategories,SubCategories.SubCategories.SubCategories",
                     uniquePropertyValue: updateCategoryDto.ParentName);
                 targetCategory.ParentCategoryId = newParentCatChild.Id;
-                _unitOfWork.categoryRepository.Update(targetCategory);
-                await _unitOfWork.SaveAsync();
+                // _unitOfWork.categoryRepository.Update(targetCategory);
+                // await _unitOfWork.SaveAsync();
                 var resCat1 = new CategoryDto(!targetCategory.IsParent() && !targetCategory.IsParentChild())
                 {
                     Id = targetCategory.Id,
@@ -343,8 +343,8 @@ public class CategoryServices
             }
 
             LoggerHelper.LogWithDetails(_logger,"Attempt to update a category without changing the parent");
-            _unitOfWork.categoryRepository.Update(targetCategory);
-            await _unitOfWork.SaveAsync();
+            // _unitOfWork.categoryRepository.Update(targetCategory);
+            // await _unitOfWork.SaveAsync();
             var resCat2 = new CategoryDto(targetCategory.IsParent())
             {
                 Id = targetCategory.Id,
@@ -369,8 +369,8 @@ public class CategoryServices
                 ParentCategoryId = Guid.Empty,
                 SubCategories = targetCategory.SubCategories
             };
-            _unitOfWork.categoryRepository.Update(targetCategory);
-            await _unitOfWork.SaveAsync();
+            // _unitOfWork.categoryRepository.Update(targetCategory);
+            // await _unitOfWork.SaveAsync();
             var resCat3 = new CategoryDto(!targetCategory.IsParent())
             {
                 Id = newCategory.Id,
@@ -390,11 +390,11 @@ public class CategoryServices
 
         targetCategory.ParentCategoryId = newParentCat.Id;
         newParentCat.SubCategories.Add(targetCategory);
-        _unitOfWork.categoryRepository.Update(newParentCat);
-        await _unitOfWork.SaveAsync();
+        // _unitOfWork.categoryRepository.Update(newParentCat);
+        // await _unitOfWork.SaveAsync();
 
-        _unitOfWork.categoryRepository.Update(targetCategory);
-        await _unitOfWork.SaveAsync();
+        // _unitOfWork.categoryRepository.Update(targetCategory);
+        // await _unitOfWork.SaveAsync();
         var resCat4 = new CategoryDto(targetCategory.IsParent())
         {
             Id = targetCategory.Id,
@@ -403,6 +403,7 @@ public class CategoryServices
             Name = targetCategory.Name,
             SubCategories = targetCategory.SubCategories
         };
+        await _unitOfWork.SaveAsync();
         LoggerHelper.LogWithDetails(_logger,$"{updateCategoryDto.Name} updated successfully.",
             args: [updateCategoryDto], retrievedData: resCat4);
         return resCat4;
@@ -423,7 +424,8 @@ public class CategoryServices
 
         if (!category.IsParent())
         {
-            await _unitOfWork.categoryRepository.DeleteByIdAsync(id);
+            // await _unitOfWork.categoryRepository.DeleteByIdAsync(id);
+            await _unitOfWork.categoryRepository.Delete(category);
             await _unitOfWork.SaveAsync();
             LoggerHelper.LogWithDetails(_logger,"Successful child Delete.", args: [id], retrievedData: category);
             return;
@@ -436,7 +438,8 @@ public class CategoryServices
             throw new ValidationException("You cannot delete this category before its children!");
         }
 
-        await _unitOfWork.categoryRepository.DeleteByIdAsync(id);
+        // await _unitOfWork.categoryRepository.DeleteByIdAsync(id);
+        await _unitOfWork.categoryRepository.Delete(category);
         await _unitOfWork.SaveAsync();
         LoggerHelper.LogWithDetails(_logger,"Successful Parent Delete",args:[id],retrievedData:category);
     }

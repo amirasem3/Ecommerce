@@ -373,7 +373,7 @@ public class InvoiceServices
     public async Task<InvoiceDto> UpdateInvoiceAsync(Guid id, UpdateInvoiceDto updateInvoiceDto)
     {
         LoggerHelper.LogWithDetails(_logger,"Attempt to update a invoice", args: [id, updateInvoiceDto]);
-        var invoice = await _unitOfWork.invoiceRepository.GetByIdAsync(id, "Products");
+        var invoice = await _unitOfWork.invoiceRepository.GetByIdAsync(id, "Products,Products.Product");
         if (invoice == null)
         {
             LoggerHelper.LogWithDetails(_logger,retrievedData: InvoiceException
@@ -396,13 +396,13 @@ public class InvoiceServices
         invoice.IssueDate = invoice.IssueDate;
         invoice.PaymentStatus = invoice.PaymentStatus;
         invoice.PaymentDate = invoice.PaymentDate;
-        invoice.TotalPrice = updateInvoiceDto.TotalPrice;
+        invoice.TotalPrice = invoice.CheckProducts() ? await CalculateTotalPriceAsync(id) : updateInvoiceDto.TotalPrice;
         invoice.IdentificationCode = invoice.IdentificationCode;
 
-        _unitOfWork.invoiceRepository.Update(invoice);
+        // _unitOfWork.invoiceRepository.Update(invoice);
         await _unitOfWork.SaveAsync();
 
-        var invoiceDto = new InvoiceDto()
+        var invoiceDto = new InvoiceDto
         {
             Id = invoice.Id,
             OwnerName = invoice.OwnerFirstName,
@@ -443,7 +443,8 @@ public class InvoiceServices
             throw new ArgumentException("Cannot delete an Payed invoice.");
         }
 
-        await _unitOfWork.invoiceRepository.DeleteByIdAsync(id);
+        // await _unitOfWork.invoiceRepository.DeleteByIdAsync(id);
+        await _unitOfWork.invoiceRepository.Delete(invoice);
         await _unitOfWork.SaveAsync();
         LoggerHelper.LogWithDetails(_logger,"Successful Delete", args: [id], retrievedData: invoice);
         return true;
@@ -483,7 +484,7 @@ public class InvoiceServices
         }
 
         invoice.TotalPrice = await CalculateTotalPriceAsync(invoiceId);
-        _unitOfWork.invoiceRepository.Update(invoice);
+        // _unitOfWork.invoiceRepository.Update(invoice);
         await _unitOfWork.SaveAsync();
         LoggerHelper.LogWithDetails(_logger,"The product successfully removed from invoice's product",
             args: [invoiceId, productId], retrievedData: invoice.Products);
@@ -524,8 +525,8 @@ public class InvoiceServices
         {
             var newProduct = await _unitOfWork.productRepository.GetByIdAsync(product.ProductId);
             newProduct.Inventory -= product.Count;
-            _unitOfWork.productRepository.Update(newProduct);
-            await _unitOfWork.SaveAsync();
+            // _unitOfWork.productRepository.Update(newProduct);
+            // await _unitOfWork.SaveAsync();
             // await _productRepository.UpdateProductAsync(newProduct);
         }
 
@@ -534,7 +535,7 @@ public class InvoiceServices
             retrievedData: invoice.PaymentStatus);
         invoice.PaymentDate = DateTime.Now;
         LoggerHelper.LogWithDetails(_logger,"Invoice payment date successfully set.", retrievedData: invoice.PaymentDate);
-        _unitOfWork.invoiceRepository.Update(invoice);
+        // _unitOfWork.invoiceRepository.Update(invoice);
         await _unitOfWork.SaveAsync();
         LoggerHelper.LogWithDetails(_logger,"Successful Payment.", args: [id, price], retrievedData: invoice);
         return true;
@@ -619,9 +620,9 @@ public class InvoiceServices
             invoice.PaymentStatus = PaymentStatus.Pending;
             LoggerHelper.LogWithDetails(_logger,"Invoice's payment status changed successfully.",
                 retrievedData: invoice.PaymentStatus);
-            _unitOfWork.invoiceRepository.Update(invoice);
+            // _unitOfWork.invoiceRepository.Update(invoice);
             LoggerHelper.LogWithDetails(_logger,"Invoice's products updated successfully.", retrievedData: invoice.Products);
-            await _unitOfWork.SaveAsync();
+            
         }
         else
         {
@@ -640,9 +641,10 @@ public class InvoiceServices
             invoice.PaymentStatus = PaymentStatus.Pending;
             LoggerHelper.LogWithDetails(_logger,"Invoice's payment status changed successfully.",
                 retrievedData: invoice.PaymentStatus);
-            _unitOfWork.invoiceRepository.Update(invoice);
+            // _unitOfWork.invoiceRepository.Update(invoice);
             LoggerHelper.LogWithDetails(_logger,"Invoice's products updated successfully.", retrievedData: invoice.Products);
-            await _unitOfWork.SaveAsync();
+            // await _unitOfWork.SaveAsync();
         }
+        await _unitOfWork.SaveAsync();
     }
 }

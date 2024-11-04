@@ -230,8 +230,7 @@ public class UserService
         targetUser.PasswordHash = _passwordHasher.HashPassword(targetUser, updateUserDto.Password);
         targetUser.RoleId = targetRole.Id;
 
-
-        _unitOfWork.userRepository.Update(targetUser);
+        
         await _unitOfWork.SaveAsync();
 
         LoggerHelper.LogWithDetails(_logger,"User Updated Successfully.", args: [id, updateUserDto], retrievedData: targetUser);
@@ -264,7 +263,8 @@ public class UserService
 
         LoggerHelper.LogWithDetails(_logger,"User exists", args: [id], retrievedData: user);
 
-        await _unitOfWork.userRepository.DeleteByIdAsync(id);
+        // await _unitOfWork.userRepository.DeleteByIdAsync(id);
+        await _unitOfWork.userRepository.Delete(user);
         await _unitOfWork.SaveAsync();
 
         LoggerHelper.LogWithDetails(_logger,"User Deleted successfully.", args: [id], retrievedData: user);
