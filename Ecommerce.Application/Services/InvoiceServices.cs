@@ -460,7 +460,7 @@ public class InvoiceServices
         var targetProductInvoice =
             invoice.Products.FirstOrDefault(pi => pi.InvoiceId == invoiceId && pi.ProductId == productId);
         invoice.Products.Remove(targetProductInvoice!);
-        if (targetProductInvoice!.MoreThanOne())
+        if (targetProductInvoice!.CheckCount())
         {
             targetProductInvoice.Count -= 1;
             invoice.TotalPrice -= product.Price;

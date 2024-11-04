@@ -12,7 +12,7 @@ public class ProductInvoice
 
     public int Count { get; set; }
 
-    public bool MoreThanOne()
+    public bool CheckCount()
     {
         return Count > 1;
     }
