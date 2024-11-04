@@ -17,16 +17,18 @@ namespace EcommerceSolution.Controller;
 public class RoleController : ControllerBase
 {
     private readonly RoleService _roleServices;
+    private readonly ILogger<RoleController> _logger;
 
-    public RoleController(RoleService roleServices)
+    public RoleController(RoleService roleServices,ILogger<RoleController> logger)
     {
         _roleServices = roleServices;
+        _logger = logger;
     }
 
     [HttpGet("GetRoleById/{id}")]
     public async Task<IActionResult> GetRoleById(Guid id)
     {
-        LoggerHelper.LogWithDetails(args: [id]);
+        LoggerHelper.LogWithDetails(_logger,args: [id]);
         try
         {
             var role = await _roleServices.GetRoleByIdAsync(id);
@@ -34,7 +36,7 @@ public class RoleController : ControllerBase
         }
         catch (Exception e)
         {
-            LoggerHelper.LogWithDetails("Wrong Role ID", args: [id], retrievedData: e,
+            LoggerHelper.LogWithDetails(_logger,"Wrong Role ID", args: [id], retrievedData: e,
                 logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
@@ -43,7 +45,7 @@ public class RoleController : ControllerBase
     [HttpGet("AllRoles")]
     public async Task<IActionResult> GetAllRoles()
     {
-        LoggerHelper.LogWithDetails();
+        LoggerHelper.LogWithDetails(_logger);
         try
         {
             var roles = await _roleServices.GetAllRolesAsync();
@@ -51,7 +53,7 @@ public class RoleController : ControllerBase
         }
         catch (Exception e)
         {
-            LoggerHelper.LogWithDetails("Unexpected Errors.", retrievedData: e, logLevel: LoggerHelper.LogLevel.Error);
+            LoggerHelper.LogWithDetails(_logger,"Unexpected Errors.", retrievedData: e, logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
     }
@@ -59,7 +61,7 @@ public class RoleController : ControllerBase
     [HttpGet("SearchRoles")]
     public async Task<IActionResult> SearchRoles([FromQuery] string name)
     {
-        LoggerHelper.LogWithDetails(args: [name]);
+        LoggerHelper.LogWithDetails(_logger,args: [name]);
 
         try
         {
@@ -68,7 +70,7 @@ public class RoleController : ControllerBase
         }
         catch (Exception e)
         {
-            LoggerHelper.LogWithDetails("Unexpected Errors", args: [name], retrievedData: e.Message,
+            LoggerHelper.LogWithDetails(_logger,"Unexpected Errors", args: [name], retrievedData: e.Message,
                 logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
@@ -79,10 +81,10 @@ public class RoleController : ControllerBase
     [Consumes("application/json")]
     public async Task<IActionResult> AddRole([FromBody] AddUpdateRoleDto newRoleDto)
     {
-        LoggerHelper.LogWithDetails(args:[newRoleDto]);
+        LoggerHelper.LogWithDetails(_logger,args:[newRoleDto]);
         if (!ModelState.IsValid)
         {
-            LoggerHelper.LogWithDetails("Binding Errors.", args: [newRoleDto],
+            LoggerHelper.LogWithDetails(_logger,"Binding Errors.", args: [newRoleDto],
                 retrievedData: ModelState["Role"]!.Errors.Select(e => e.ErrorMessage),
                 logLevel: LoggerHelper.LogLevel.Error);
             return BadRequest(ModelState["Role"]!.Errors.Select(e => e.ErrorMessage));
@@ -97,10 +99,10 @@ public class RoleController : ControllerBase
     [Consumes("application/json")]
     public async Task<IActionResult> UpdateRole([FromQuery] Guid id, [FromBody] AddUpdateRoleDto updateRoleDto)
     {
-        LoggerHelper.LogWithDetails(args:[id,updateRoleDto]);
+        LoggerHelper.LogWithDetails(_logger,args:[id,updateRoleDto]);
         if (!ModelState.IsValid)
         {
-            LoggerHelper.LogWithDetails("Binding Errors.", args: [id, updateRoleDto],
+            LoggerHelper.LogWithDetails(_logger,"Binding Errors.", args: [id, updateRoleDto],
                 retrievedData: ModelState["Role"]!.Errors.Select(e => e.ErrorMessage),
                 logLevel: LoggerHelper.LogLevel.Error);
             return BadRequest(ModelState["Role"]!.Errors.Select(e => e.ErrorMessage));
@@ -113,7 +115,7 @@ public class RoleController : ControllerBase
         }
         catch (Exception e)
         {
-            LoggerHelper.LogWithDetails("Unexpected Errors", args: [id, updateRoleDto], retrievedData: e,
+            LoggerHelper.LogWithDetails(_logger,"Unexpected Errors", args: [id, updateRoleDto], retrievedData: e,
                 logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
@@ -122,7 +124,7 @@ public class RoleController : ControllerBase
     [HttpDelete("DeleteRole/{id}")]
     public async Task<IActionResult> DeleteRoleByIdAsync(Guid id)
     {
-        LoggerHelper.LogWithDetails(args: [id]);
+        LoggerHelper.LogWithDetails(_logger,args: [id]);
         try
         {
             await _roleServices.DeleteRoleByIdAsync(id);
@@ -130,7 +132,7 @@ public class RoleController : ControllerBase
         }
         catch (Exception e)
         {
-            LoggerHelper.LogWithDetails("Wrong ID/Unexpected Errors", args: [id], retrievedData: e);
+            LoggerHelper.LogWithDetails(_logger,"Wrong ID/Unexpected Errors", args: [id], retrievedData: e);
             return NotFound(e.Message);
         }
     }

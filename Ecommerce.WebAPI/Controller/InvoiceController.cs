@@ -18,16 +18,17 @@ namespace EcommerceSolution.Controller;
 public class InvoiceController : ControllerBase
 {
     private readonly InvoiceServices _invoiceServices;
-
-    public InvoiceController(InvoiceServices invoiceServices)
+    private readonly ILogger<InvoiceController> _logger;
+    public InvoiceController(InvoiceServices invoiceServices, ILogger<InvoiceController> logger)
     {
         _invoiceServices = invoiceServices;
+        _logger = logger;
     }
 
     [HttpGet("GetInvoiceById/{id}")]
     public async Task<IActionResult> GetInvoiceById(Guid id)
     {
-        LoggerHelper.LogWithDetails(args: [id]);
+        LoggerHelper.LogWithDetails(_logger,args: [id]);
         try
         {
             var invoice = await _invoiceServices.GetInvoiceByIdAsync(id);
@@ -35,7 +36,7 @@ public class InvoiceController : ControllerBase
         }
         catch (NullReferenceException e)
         {
-            LoggerHelper.LogWithDetails(args: [id], retrievedData: e.Message, logLevel: LoggerHelper.LogLevel.Error);
+            LoggerHelper.LogWithDetails(_logger,args: [id], retrievedData: e.Message, logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
     }
@@ -43,7 +44,7 @@ public class InvoiceController : ControllerBase
     [HttpGet("GetInvoiceByIDNumber")]
     public async Task<IActionResult> GetInvoiceByIdNumber([FromQuery] string idNumber)
     {
-        LoggerHelper.LogWithDetails(args: [idNumber]);
+        LoggerHelper.LogWithDetails(_logger,args: [idNumber]);
         try
         {
             var invoice = await _invoiceServices.GetInvoiceByIdentificationCodeAsync(idNumber);
@@ -51,7 +52,7 @@ public class InvoiceController : ControllerBase
         }
         catch (NullReferenceException e)
         {
-            LoggerHelper.LogWithDetails(args: [idNumber], retrievedData: e.Message,
+            LoggerHelper.LogWithDetails(_logger,args: [idNumber], retrievedData: e.Message,
                 logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
@@ -60,7 +61,7 @@ public class InvoiceController : ControllerBase
     [HttpGet("SearchInvoiceByOwnerName/{ownerName}")]
     public async Task<IActionResult> SearchInvoicesByOwnerName(string ownerName)
     {
-        LoggerHelper.LogWithDetails(args: [ownerName]);
+        LoggerHelper.LogWithDetails(_logger,args: [ownerName]);
         try
         {
             var invoices = await _invoiceServices.GetInvoicesByOwnerNameAsync(ownerName);
@@ -68,7 +69,7 @@ public class InvoiceController : ControllerBase
         }
         catch (NullReferenceException e)
         {
-            LoggerHelper.LogWithDetails(args: [ownerName], retrievedData: e.Message,
+            LoggerHelper.LogWithDetails(_logger,args: [ownerName], retrievedData: e.Message,
                 logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
@@ -77,7 +78,7 @@ public class InvoiceController : ControllerBase
     [HttpGet("SearchInvoiceByOwnerLastName/{lastname}")]
     public async Task<IActionResult> SearchInvoicesByOwnerLastname(string lastname)
     {
-        LoggerHelper.LogWithDetails(args: [lastname]);
+        LoggerHelper.LogWithDetails(_logger,args: [lastname]);
         try
         {
             var invoices = await _invoiceServices.GetInvoicesByOwnerFamilyNameAsync(lastname);
@@ -85,7 +86,7 @@ public class InvoiceController : ControllerBase
         }
         catch (NullReferenceException e)
         {
-            LoggerHelper.LogWithDetails(args: [lastname], retrievedData: e.Message,
+            LoggerHelper.LogWithDetails(_logger,args: [lastname], retrievedData: e.Message,
                 logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
@@ -94,7 +95,7 @@ public class InvoiceController : ControllerBase
     [HttpGet("SearchInvoicesByIssuerName/{issuerName}")]
     public async Task<IActionResult> SearchInvoicesByIssuerName(string issuerName)
     {
-        LoggerHelper.LogWithDetails(args: [issuerName]);
+        LoggerHelper.LogWithDetails(_logger,args: [issuerName]);
         try
         {
             var invoices = await _invoiceServices.GetInvoicesByIssuerNameAsync(issuerName);
@@ -102,7 +103,7 @@ public class InvoiceController : ControllerBase
         }
         catch (NullReferenceException e)
         {
-            LoggerHelper.LogWithDetails(args: [issuerName], retrievedData: e.Message,
+            LoggerHelper.LogWithDetails(_logger,args: [issuerName], retrievedData: e.Message,
                 logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
@@ -111,7 +112,7 @@ public class InvoiceController : ControllerBase
     [HttpGet("PaymentStatusFilter/{paymentStatus}")]
     public async Task<IActionResult> PaymentStatusFiler(string paymentStatus)
     {
-        LoggerHelper.LogWithDetails(args: [paymentStatus]);
+        LoggerHelper.LogWithDetails(_logger,args: [paymentStatus]);
         try
         {
             var invoices = await _invoiceServices.GetInvoicesByPaymentStatusAsync(paymentStatus);
@@ -119,7 +120,7 @@ public class InvoiceController : ControllerBase
         }
         catch (NullReferenceException e)
         {
-            LoggerHelper.LogWithDetails(args: [paymentStatus], retrievedData: e.Message,
+            LoggerHelper.LogWithDetails(_logger,args: [paymentStatus], retrievedData: e.Message,
                 logLevel: LoggerHelper.LogLevel.Error);
 
             return NotFound(e.Message);
@@ -129,7 +130,7 @@ public class InvoiceController : ControllerBase
     [HttpGet("IssueDateFilter/{issueDate}")]
     public async Task<IActionResult> IssueDateFilter(DateTime issueDate)
     {
-        LoggerHelper.LogWithDetails(args: [issueDate]);
+        LoggerHelper.LogWithDetails(_logger,args: [issueDate]);
         try
         {
             var invoices = await _invoiceServices.GetInvoiceByIssueDateAsync(issueDate);
@@ -137,7 +138,7 @@ public class InvoiceController : ControllerBase
         }
         catch (NullReferenceException e)
         {
-            LoggerHelper.LogWithDetails(args: [issueDate], retrievedData: e.Message,
+            LoggerHelper.LogWithDetails(_logger,args: [issueDate], retrievedData: e.Message,
                 logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
@@ -146,7 +147,7 @@ public class InvoiceController : ControllerBase
     [HttpGet("PaymentDataFilter/{paymentDate}")]
     public async Task<IActionResult> PaymentDateFilter(DateTime paymentDate)
     {
-        LoggerHelper.LogWithDetails(args: [paymentDate]);
+        LoggerHelper.LogWithDetails(_logger,args: [paymentDate]);
         try
         {
             var invoices = await _invoiceServices.GetInvoicesByPaymentDateAsync(paymentDate);
@@ -154,7 +155,7 @@ public class InvoiceController : ControllerBase
         }
         catch (NullReferenceException e)
         {
-            LoggerHelper.LogWithDetails(args: [paymentDate], retrievedData: e.Message,
+            LoggerHelper.LogWithDetails(_logger,args: [paymentDate], retrievedData: e.Message,
                 logLevel: LoggerHelper.LogLevel.Error);
 
             return NotFound(e.Message);
@@ -164,7 +165,7 @@ public class InvoiceController : ControllerBase
     [HttpGet("GetAllInvoices")]
     public async Task<IActionResult> GetAllInvoices()
     {
-        LoggerHelper.LogWithDetails();
+        LoggerHelper.LogWithDetails(_logger);
         try
         {
             var invoices = await _invoiceServices.GetAllInvoicesAsync();
@@ -172,7 +173,7 @@ public class InvoiceController : ControllerBase
         }
         catch (Exception e)
         {
-            LoggerHelper.LogWithDetails(retrievedData: e.Message,
+            LoggerHelper.LogWithDetails(_logger,retrievedData: e.Message,
                 logLevel: LoggerHelper.LogLevel.Error);
 
             return NotFound(e.Message);
@@ -183,10 +184,10 @@ public class InvoiceController : ControllerBase
     [Consumes("application/json")]
     public async Task<IActionResult> IssueNewInvoice([FromBody] AddInvoiceDto newInvoice)
     {
-        LoggerHelper.LogWithDetails(args: [newInvoice]);
+        LoggerHelper.LogWithDetails(_logger,args: [newInvoice]);
         if (!ModelState.IsValid)
         {
-            LoggerHelper.LogWithDetails("Binding Errors", args: [newInvoice],
+            LoggerHelper.LogWithDetails(_logger,"Binding Errors", args: [newInvoice],
                 retrievedData: ModelState["Invoice"]?.Errors.Select(e => e.ErrorMessage).ToList()!,
                 logLevel: LoggerHelper.LogLevel.Error);
             return BadRequest(ModelState["Invoice"]?.Errors.Select(e => e.ErrorMessage).ToList());
@@ -200,7 +201,7 @@ public class InvoiceController : ControllerBase
     public async Task<IActionResult> AddProductToInvoice([FromQuery] Guid invoiceId, [FromQuery] Guid productId,
         [FromQuery] int count)
     {
-        LoggerHelper.LogWithDetails(args: [invoiceId, productId, count]);
+        LoggerHelper.LogWithDetails(_logger,args: [invoiceId, productId, count]);
         try
         {
             await _invoiceServices.AssignInvoiceProductAsync(invoiceId, productId, count);
@@ -208,7 +209,7 @@ public class InvoiceController : ControllerBase
         }
         catch (Exception e)
         {
-            LoggerHelper.LogWithDetails(args: [invoiceId, productId], retrievedData: e.Message,
+            LoggerHelper.LogWithDetails(_logger,args: [invoiceId, productId], retrievedData: e.Message,
                 logLevel: LoggerHelper.LogLevel.Error);
             return BadRequest(e.Message);
         }
@@ -218,10 +219,10 @@ public class InvoiceController : ControllerBase
     [Consumes("application/json")]
     public async Task<IActionResult> UpdateInvoice(Guid id, [FromBody] UpdateInvoiceDto updateInvoiceDto)
     {
-        LoggerHelper.LogWithDetails(args: [id, updateInvoiceDto]);
+        LoggerHelper.LogWithDetails(_logger,args: [id, updateInvoiceDto]);
         if (!ModelState.IsValid)
         {
-            LoggerHelper.LogWithDetails("Binding Errors.", args: [updateInvoiceDto],
+            LoggerHelper.LogWithDetails(_logger,"Binding Errors.", args: [updateInvoiceDto],
                 retrievedData: ModelState["Invoice"]?.Errors.Select(e => e.ErrorMessage).ToList()!,
                 logLevel: LoggerHelper.LogLevel.Error);
             return BadRequest(ModelState["Invoice"]?.Errors.Select(e => e.ErrorMessage).ToList());
@@ -234,9 +235,9 @@ public class InvoiceController : ControllerBase
         }
         catch (NullReferenceException e)
         {
-            LoggerHelper.LogWithDetails("Unexpected Errors", args: [id, updateInvoiceDto], retrievedData: e.Message,
+            LoggerHelper.LogWithDetails(_logger,"Unexpected Errors", args: [id, updateInvoiceDto], retrievedData: e.Message,
                 logLevel: LoggerHelper.LogLevel.Error);
-            return NotFound(e.Message);
+            return NotFound(e);
         }
     }
 
@@ -257,7 +258,7 @@ public class InvoiceController : ControllerBase
     [HttpDelete("DeleteInvoice/{id}")]
     public async Task<IActionResult> DeleteInvoice(Guid id)
     {
-        LoggerHelper.LogWithDetails(args: [id]);
+        LoggerHelper.LogWithDetails(_logger,args: [id]);
         try
         {
             await _invoiceServices.DeleteInvoiceAsync(id);
@@ -265,7 +266,7 @@ public class InvoiceController : ControllerBase
         }
         catch (Exception e)
         {
-            LoggerHelper.LogWithDetails("Unexpected Errors", args: [id], retrievedData: e.Message,
+            LoggerHelper.LogWithDetails(_logger,"Unexpected Errors", args: [id], retrievedData: e.Message,
                 logLevel: LoggerHelper.LogLevel.Error);
             return BadRequest(e.Message);
         }
@@ -274,7 +275,7 @@ public class InvoiceController : ControllerBase
     [HttpDelete("DeleteInvoiceProduct")]
     public async Task<IActionResult> DeleteInvoiceProduct(Guid invoiceId, Guid productId)
     {
-        LoggerHelper.LogWithDetails(args: [invoiceId, productId]);
+        LoggerHelper.LogWithDetails(_logger,args: [invoiceId, productId]);
         try
         {
             await _invoiceServices.DeleteInvoiceProductAsync(invoiceId, productId);
@@ -282,7 +283,7 @@ public class InvoiceController : ControllerBase
         }
         catch (Exception e)
         {
-            LoggerHelper.LogWithDetails("Wrong productId or invoiceID", args: [invoiceId, productId],
+            LoggerHelper.LogWithDetails(_logger,"Wrong productId or invoiceID", args: [invoiceId, productId],
                 retrievedData: e.Message,
                 logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);

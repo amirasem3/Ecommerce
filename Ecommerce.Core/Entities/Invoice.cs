@@ -51,8 +51,22 @@ public class Invoice
     //Payment Status: Payed, Pending, Cencelled
     public PaymentStatus PaymentStatus { get; set; }
 
+    public bool CheckPrice(decimal price)
+    {
+        return price > TotalPrice || price < TotalPrice;
+    }
+
+    public bool IsPayed()
+    {
+        return PaymentStatus == PaymentStatus.Payed;
+    }
 
     [JsonIgnore] public ICollection<ProductInvoice> Products { get; set; } = null!;
 
     [JsonIgnore] public ICollection<Product> Products2 { get; set; } = null!;
+
+    public bool CheckProducts()
+    {
+        return Products.Count != 0;
+    }
 }

@@ -3,6 +3,7 @@ using Ecommerce.Core.Entities;
 using Ecommerce.Infrastructure.Persistence;
 using Ecommerce.Core.Log;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Serilog.Core;
 
 namespace Ecommerce.Infrastructure.Repositories;
@@ -11,10 +12,12 @@ public class GenericRepository<TEntity> where TEntity : class
 {
     internal EcommerceDbContext _context;
     internal DbSet<TEntity> _dbSet;
+    private readonly ILogger<GenericRepository<TEntity>> _logger;
 
-    public GenericRepository(EcommerceDbContext context)
+    public GenericRepository(EcommerceDbContext context,ILogger<GenericRepository<TEntity>> logger)
     {
         _context = context;
+        _logger = logger;
         _dbSet = _context.Set<TEntity>();
     }
 
@@ -25,7 +28,7 @@ public class GenericRepository<TEntity> where TEntity : class
     {
         
         var entityType = typeof(TEntity);
-        LoggerHelper.LogWithDetails($"Attempt to get multiple of {entityType} with filter {filter}",args:[orderBy,includeProperties]);
+        LoggerHelper.LogWithDetails(_logger,$"Attempt to get multiple of {entityType} with filter {filter}",args:[orderBy,includeProperties]);
         IQueryable<TEntity> query = _dbSet;
         if (filter != null)
         {
@@ -52,7 +55,7 @@ public class GenericRepository<TEntity> where TEntity : class
         string includeProperties = "", string uniquePropertyValue = "")
     {
         var entityType = typeof(TEntity);
-        LoggerHelper.LogWithDetails($"Attempt to get {entityType} by its UniqueProperty.", args:
+        LoggerHelper.LogWithDetails(_logger,$"Attempt to get {entityType} by its UniqueProperty.", args:
             [uniqueProperty, uniquePropertyValue, includeProperties]);
         IQueryable<TEntity> query = _dbSet;
         foreach (var includeProperty in includeProperties.Split
@@ -69,7 +72,7 @@ public class GenericRepository<TEntity> where TEntity : class
     public virtual async Task<TEntity> GetByIdAsync(object id, string includeProperties = "")
     {
         var entityType = typeof(TEntity);
-        LoggerHelper.LogWithDetails($"Attempt to get entity with type {entityType} by its ID.",
+        LoggerHelper.LogWithDetails(_logger,$"Attempt to get entity with type {entityType} by its ID.",
             args: [id, includeProperties]);
         IQueryable<TEntity> query = _dbSet;
 
@@ -88,15 +91,15 @@ public class GenericRepository<TEntity> where TEntity : class
     public virtual async Task InsertAsync(TEntity entity)
     {
         var entityType = typeof(TEntity);
-        LoggerHelper.LogWithDetails($"Attempt to add an new entity with type {entityType}", args: [entity]);
+        LoggerHelper.LogWithDetails(_logger,$"Attempt to add an new entity with type {entityType}", args: [entity]);
         await _dbSet.AddAsync(entity);
-        LoggerHelper.LogWithDetails("Successful Insert.",args:[entity]);
+        LoggerHelper.LogWithDetails(_logger,"Successful Insert.",args:[entity]);
     }
 
     public virtual async Task DeleteByIdAsync(object id)
     {
         var entityType = typeof(TEntity);
-        LoggerHelper.LogWithDetails($"Attempt to Delete a {entityType}", args: [id]);
+        LoggerHelper.LogWithDetails(_logger,$"Attempt to Delete a {entityType}", args: [id]);
         TEntity targetEntity = (await _dbSet.FindAsync(id))!;
         await Delete(targetEntity);
     }
@@ -104,7 +107,7 @@ public class GenericRepository<TEntity> where TEntity : class
     public virtual Task Delete(TEntity entityToDelete)
     {
         var entityType = typeof(TEntity);
-        LoggerHelper.LogWithDetails($"Attempt to Delete a {entityType}", args: [entityToDelete]);
+        LoggerHelper.LogWithDetails(_logger,$"Attempt to Delete a {entityType}", args: [entityToDelete]);
         
         if (_context.Entry(entityToDelete).State == EntityState.Detached)
         {
@@ -112,16 +115,16 @@ public class GenericRepository<TEntity> where TEntity : class
         }
 
         _dbSet.Remove(entityToDelete);
-        LoggerHelper.LogWithDetails("Successful Delete.",args:[entityToDelete]);
+        LoggerHelper.LogWithDetails(_logger,"Successful Delete.",args:[entityToDelete]);
         return Task.CompletedTask;
     }
 
     public virtual void Update(TEntity entityToUpdate)
     {
         var entityType = typeof(TEntity);
-        LoggerHelper.LogWithDetails($"Attempt to Update a {entityType}", args: [entityToUpdate]);
+        LoggerHelper.LogWithDetails(_logger,$"Attempt to Update a {entityType}", args: [entityToUpdate]);
         _dbSet.Attach(entityToUpdate);
         _context.Entry(entityToUpdate).State = EntityState.Modified;
-        LoggerHelper.LogWithDetails($"Successful Update.",args:[entityToUpdate]);
+        LoggerHelper.LogWithDetails(_logger,$"Successful Update.",args:[entityToUpdate]);
     }
 }

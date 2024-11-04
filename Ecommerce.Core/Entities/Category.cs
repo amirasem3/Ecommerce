@@ -12,14 +12,14 @@ public class Category
     [MaxLength(40, ErrorMessage = "Name cannot exceed 40 characters.")]
     [Required(ErrorMessage = "Name must be specified.")]
     public string Name { get; set; } = null!;
-    
+
     [Required(ErrorMessage = "Type must be specified.")]
     [MaxLength(40, ErrorMessage = "Name cannot exceed 40 characters.")]
     public string TypeString { get; set; } = null!;
+
     public Guid? ParentCategoryId { get; set; }
-    
-    [JsonIgnore]
-    public ICollection<Category> SubCategories { get; set; } = new List<Category>();
+
+    [JsonIgnore] public ICollection<Category> SubCategories { get; set; } = new List<Category>();
 
     public bool IsParent()
     {
@@ -29,5 +29,20 @@ public class Category
     public bool IsParentChild()
     {
         return TypeString == "Parent" && ParentCategoryId != Guid.Empty;
+    }
+
+    public bool ParentInParent()
+    {
+        return IsParentChild() || (!IsParent() && !IsParentChild());
+    }
+
+    public bool IsChild()
+    {
+        return IsParent() && !IsParentChild();
+    }
+
+    public bool IsSubcategoryEmpty()
+    {
+        return SubCategories.Count != 0;
     }
 }

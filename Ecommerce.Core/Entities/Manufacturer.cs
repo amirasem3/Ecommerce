@@ -4,10 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.Core.Entities;
 
-[Index(nameof(Email),IsUnique = true)]
+[Index(nameof(Email), IsUnique = true)]
 [Index(nameof(Address), IsUnique = true)]
 [Index(nameof(PhoneNumber), IsUnique = true)]
-
 public class Manufacturer
 {
     public Guid Id { get; init; }
@@ -41,13 +40,17 @@ public class Manufacturer
     [MaxLength(20, ErrorMessage = "Phone number cannot exceed 100 characters.")]
     [Required(ErrorMessage = "Phone number should be specified.")]
     public string PhoneNumber { get; set; } = null!;
+
     public int Rate { get; set; }
-    
-    [DataType(DataType.Date)]
-    [Required]
-    public DateTime EstablishDate { get; set; }
+
+    [DataType(DataType.Date)] [Required] public DateTime EstablishDate { get; set; }
     public bool Status { get; set; }
-    
+
     //Relation N-N with Product
     [JsonIgnore] public ICollection<Product> Products2 { get; set; } = null!;
+
+    public bool CheckProducts()
+    {
+        return Products2.Count != 0;
+    }
 }

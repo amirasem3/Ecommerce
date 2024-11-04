@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using Ecommerce.Application.DTOs.User;
 using Ecommerce.Application.Services;
+using Ecommerce.Core.Log;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -17,18 +18,21 @@ namespace EcommerceSolution.Controller;
 public class AccountController : ControllerBase
 {
     private readonly UserService _userService;
+    private readonly ILogger<AccountController> _logger;
 
-    public AccountController(UserService userService)
+    public AccountController(UserService userService,ILogger<AccountController> logger)
     {
         _userService = userService;
+        _logger = logger;
     }
 
     [HttpPost("ApiSignin")]
-    public async Task<IActionResult> Login([FromQuery] LoginUserDto loginModel)
+    public async Task<IActionResult> Login([FromQuery] LoginUserDto loginUserDto)
     {
+        LoggerHelper.LogWithDetails(_logger, args:[loginUserDto]);
         try
         {
-            await _userService.AuthenticateUserAsync(loginModel.Username, loginModel.Password);
+            await _userService.AuthenticateUserAsync(loginUserDto.Username, loginUserDto.Password);
 
             const string issuer = "AmirHosseinIssuer";
             const string audience = "AmirHosseinAudience";
@@ -36,14 +40,14 @@ public class AccountController : ControllerBase
                 "This is a sample secret key - please don't use in production environment.");
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, loginModel.Username),
+                new Claim(ClaimTypes.Name, loginUserDto.Username),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.Name, loginModel.Username)
+                    new Claim(ClaimTypes.Name, loginUserDto.Username)
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 Issuer = issuer,
@@ -65,14 +69,17 @@ public class AccountController : ControllerBase
                     ExpiresUtc = DateTime.UtcNow.AddHours(1),
                 });
 
-            return Ok(new
+            
+            var result  =new
             {
                 token = tokenString,
-            });
+            };
+            LoggerHelper.LogWithDetails(_logger, "Generated Token",retrievedData:result);
+            return Ok(result);
         }
         catch (Exception e)
         {
-            return Unauthorized(e.Message);
+            return Unauthorized(e);
         }
     }
 }

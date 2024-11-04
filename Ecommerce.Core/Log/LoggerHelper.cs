@@ -3,6 +3,8 @@ using Newtonsoft.Json;
 using Serilog.Context;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Microsoft.Extensions.Logging;
+using Microsoft.Identity.Client;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Ecommerce.Core.Log;
@@ -15,9 +17,9 @@ public class LoggerHelper
         Warning,
         Error
     }
-    
 
-    public static void LogWithDetails(string message = "", object retrievedData = null, object[] args = null,
+    
+    public static void LogWithDetails(ILogger logger,string message = "", object retrievedData = null, object[] args = null,
         [CallerMemberName] string memberName = "",
         [CallerFilePath] string sourceFilePath = "",
         LogLevel logLevel = LogLevel.Information)
@@ -44,13 +46,16 @@ public class LoggerHelper
             switch (logLevel)
             {
                 case LogLevel.Information:
-                    Serilog.Log.Information(message);
+                    logger.LogInformation("{Message} | ClassName: {ClassName}, FunctionName: {FunctionName}, Arguments: {Arguments}, RetrieveData: {RetrieveData}", 
+                        message, className, memberName, serializedArgs, serializedRetrievedData);
                     break;
                 case LogLevel.Error:
-                    Serilog.Log.Error(message);
+                    logger.LogError("{Message} | ClassName: {ClassName}, FunctionName: {FunctionName}, Arguments: {Arguments}, RetrieveData: {RetrieveData}",
+                        message, className, memberName, serializedArgs, serializedRetrievedData);
                     break;
                 case LogLevel.Warning:
-                    Serilog.Log.Warning(message);
+                    logger.LogWarning("{Message} | ClassName: {ClassName}, FunctionName: {FunctionName}, Arguments: {Arguments}, RetrieveData: {RetrieveData}",
+                        message, className, memberName, serializedArgs, serializedRetrievedData);
                     break;
             }
              
