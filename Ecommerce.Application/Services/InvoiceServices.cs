@@ -376,6 +376,13 @@ public class InvoiceServices
             throw new Exception(InvoiceException);
         }
 
+        if (invoice.IsPayed())
+        {
+            LoggerHelper.LogWithDetails("You cannot modify an payed invoice", retrievedData: invoice.IsPayed(),
+                logLevel: LoggerHelper.LogLevel.Error);
+            throw new Exception("You cannot modify an payed invoice");
+        }
+
         LoggerHelper.LogWithDetails("Target Invoice Found", args: [id], retrievedData: invoice);
 
         invoice.OwnerFirstName = updateInvoiceDto.OwnerName;
