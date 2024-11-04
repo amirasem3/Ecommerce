@@ -6281,11 +6281,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Infrastructure\\Ecommerce.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Projects\\Ecommerce\\Ecommerce.Infrastructure\\Ecommerce.Infrastructure.csproj",
       "projectName": "Ecommerce.Infrastructure",
-      "projectPath": "C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Infrastructure\\Ecommerce.Infrastructure.csproj",
+      "projectPath": "C:\\Projects\\Ecommerce\\Ecommerce.Infrastructure\\Ecommerce.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\AH.Yousefi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Infrastructure\\obj\\",
+      "outputPath": "C:\\Projects\\Ecommerce\\Ecommerce.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\AH.Yousefi\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -6300,8 +6300,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Core\\Ecommerce.Core.csproj": {
-              "projectPath": "C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Core\\Ecommerce.Core.csproj"
+            "C:\\Projects\\Ecommerce\\Ecommerce.Core\\Ecommerce.Core.csproj": {
+              "projectPath": "C:\\Projects\\Ecommerce\\Ecommerce.Core\\Ecommerce.Core.csproj"
             }
           }
         }

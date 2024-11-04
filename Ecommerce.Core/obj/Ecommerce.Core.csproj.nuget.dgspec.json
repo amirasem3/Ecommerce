@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Core\\Ecommerce.Core.csproj": {}
+    "C:\\Projects\\Ecommerce\\Ecommerce.Core\\Ecommerce.Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Core\\Ecommerce.Core.csproj": {
+    "C:\\Projects\\Ecommerce\\Ecommerce.Core\\Ecommerce.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Core\\Ecommerce.Core.csproj",
+        "projectUniqueName": "C:\\Projects\\Ecommerce\\Ecommerce.Core\\Ecommerce.Core.csproj",
         "projectName": "Ecommerce.Core",
-        "projectPath": "C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Core\\Ecommerce.Core.csproj",
+        "projectPath": "C:\\Projects\\Ecommerce\\Ecommerce.Core\\Ecommerce.Core.csproj",
         "packagesPath": "C:\\Users\\AH.Yousefi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Core\\obj\\",
+        "outputPath": "C:\\Projects\\Ecommerce\\Ecommerce.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\AH.Yousefi\\AppData\\Roaming\\NuGet\\NuGet.Config"

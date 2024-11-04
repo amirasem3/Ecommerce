@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dOjnXQG4l/brmWdsjb/mRi5OkgcsdXIi5V1G6B8U+b6osv3iVnAkKLvLdbM+639Tu3ZxfG+tx3baBP28Qaa9wg==",
+  "dgSpecHash": "N8E31ZQCMDN3v4wT/bb/hgwbXK1ehje+f/tr+vvlGjoYb5GI1cXPRAEsB7tVaS9w6ce7TtfepIfGP9MsgGNybw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.WebAPI\\Ecommerce.WebAPI.csproj",
+  "projectFilePath": "C:\\Projects\\Ecommerce\\Ecommerce.WebAPI\\Ecommerce.WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\AH.Yousefi\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\AH.Yousefi\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

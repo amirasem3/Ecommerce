@@ -6275,11 +6275,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Application\\Ecommerce.Application.csproj",
+      "projectUniqueName": "C:\\Projects\\Ecommerce\\Ecommerce.Application\\Ecommerce.Application.csproj",
       "projectName": "Ecommerce.Application",
-      "projectPath": "C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Application\\Ecommerce.Application.csproj",
+      "projectPath": "C:\\Projects\\Ecommerce\\Ecommerce.Application\\Ecommerce.Application.csproj",
       "packagesPath": "C:\\Users\\AH.Yousefi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Application\\obj\\",
+      "outputPath": "C:\\Projects\\Ecommerce\\Ecommerce.Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\AH.Yousefi\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -6294,11 +6294,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Core\\Ecommerce.Core.csproj": {
-              "projectPath": "C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Core\\Ecommerce.Core.csproj"
+            "C:\\Projects\\Ecommerce\\Ecommerce.Core\\Ecommerce.Core.csproj": {
+              "projectPath": "C:\\Projects\\Ecommerce\\Ecommerce.Core\\Ecommerce.Core.csproj"
             },
-            "C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Infrastructure\\Ecommerce.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\AH.Yousefi\\RiderProjects\\EcommerceSolution\\Ecommerce.Infrastructure\\Ecommerce.Infrastructure.csproj"
+            "C:\\Projects\\Ecommerce\\Ecommerce.Infrastructure\\Ecommerce.Infrastructure.csproj": {
+              "projectPath": "C:\\Projects\\Ecommerce\\Ecommerce.Infrastructure\\Ecommerce.Infrastructure.csproj"
             }
           }
         }
