@@ -32,7 +32,7 @@ public class CategoryServices
         }
 
 
-        if (category.IsParentChild() || (!category.IsParent() && !category.IsParentChild()))
+        if (category.ParentInParent())
         {
             var parentInParent =
                 await _unitOfWork.CategoryRepository.GetByIdAsync(category.ParentCategoryId!, "SubCategories");
@@ -174,7 +174,7 @@ public class CategoryServices
         List<CategoryDto> allCategories = new List<CategoryDto>();
         foreach (var category in categories)
         {
-            if (category.IsParentChild() || (!category.IsParent() && !category.IsParentChild()))
+            if (category.ParentInParent())
             {
                 var parentInParent =
                     await _unitOfWork.CategoryRepository.GetByIdAsync(category.ParentCategoryId!, "SubCategories");
@@ -218,7 +218,7 @@ public class CategoryServices
         }
 
 
-        if (cat.IsParentChild() || (!cat.IsParent() && !cat.IsParentChild()))
+        if (cat.ParentInParent())
         {
             var parent = await _unitOfWork.CategoryRepository.GetByIdAsync(cat.ParentCategoryId!, "SubCategories");
             var catResult1 = new CategoryDto(cat.IsParent())
@@ -257,7 +257,7 @@ public class CategoryServices
             throw new Exception(CategoryException);
         }
 
-        if (child.IsParent() && !child.IsParentChild())
+        if (child.IsChild())
         {
             LoggerHelper.LogWithDetails("There is no child wit this ID", args: [childId],
                 logLevel: LoggerHelper.LogLevel.Error);
@@ -324,7 +324,6 @@ public class CategoryServices
                     "SubCategories,SubCategories.SubCategories,SubCategories.SubCategories.SubCategories",
                     uniquePropertyValue: updateCategoryDto.ParentName);
                 targetCategory.ParentCategoryId = newParentCatChild.Id;
-
                 _unitOfWork.CategoryRepository.Update(targetCategory);
                 await _unitOfWork.SaveAsync();
                 var resCat1 = new CategoryDto(!targetCategory.IsParent() && !targetCategory.IsParentChild())
@@ -427,7 +426,7 @@ public class CategoryServices
             return;
         }
 
-        if (category.SubCategories.Count() != 0)
+        if (category.IsSubcategoryEmpty())
         {
             LoggerHelper.LogWithDetails("You cannot delete this category before its children!",
                 logLevel: LoggerHelper.LogLevel.Error);
