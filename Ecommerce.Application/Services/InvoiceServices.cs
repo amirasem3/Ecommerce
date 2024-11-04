@@ -424,7 +424,7 @@ public class InvoiceServices
         }
 
         LoggerHelper.LogWithDetails("Target Invoice Found", args: [id], retrievedData: invoice);
-        if (invoice.PaymentStatus == PaymentStatus.Payed)
+        if (invoice.IsPayed())
         {
             LoggerHelper.LogWithDetails("Cannot delete an Payed invoice.", args: [id],
                 retrievedData: invoice.PaymentStatus, logLevel: LoggerHelper.LogLevel.Error);
@@ -450,7 +450,7 @@ public class InvoiceServices
         }
 
         LoggerHelper.LogWithDetails("Target Invoice Found", args: [invoiceId], retrievedData: invoice);
-        if (invoice.PaymentStatus == PaymentStatus.Payed)
+        if (invoice.IsPayed())
         {
             LoggerHelper.LogWithDetails("You cannot modify an payed invoice's products",
                 retrievedData: invoice.PaymentStatus, logLevel: LoggerHelper.LogLevel.Error);
@@ -460,7 +460,7 @@ public class InvoiceServices
         var targetProductInvoice =
             invoice.Products.FirstOrDefault(pi => pi.InvoiceId == invoiceId && pi.ProductId == productId);
         invoice.Products.Remove(targetProductInvoice!);
-        if (targetProductInvoice!.Count >1)
+        if (targetProductInvoice!.MoreThanOne())
         {
             targetProductInvoice.Count -= 1;
             invoice.TotalPrice -= product.Price;
@@ -491,7 +491,7 @@ public class InvoiceServices
 
         LoggerHelper.LogWithDetails("Target Invoice Found.", args: [id], retrievedData: invoice);
         var totalPrice = invoice.TotalPrice;
-        if (price > totalPrice || price < totalPrice)
+        if (invoice.CheckPrice(price))
         {
             LoggerHelper.LogWithDetails("Payment unsuccessful: Check the payment amount.", args:
                 [price, invoice.TotalPrice]
@@ -499,7 +499,7 @@ public class InvoiceServices
             throw new Exception("Payment unsuccessful: Check the payment amount.");
         }
 
-        if (invoice.PaymentStatus == PaymentStatus.Payed)
+        if (invoice.IsPayed())
         {
             LoggerHelper.LogWithDetails("Payment unsuccessful: The invoice is payed before.", args:
                 [invoice.PaymentStatus]
@@ -565,7 +565,7 @@ public class InvoiceServices
             throw new ArgumentException(InvoiceException);
         }
 
-        if (invoice.PaymentStatus == PaymentStatus.Payed)
+        if (invoice.IsPayed())
         {
             throw new Exception("You cannot modify an Payed invoice's products");
         }
@@ -581,7 +581,7 @@ public class InvoiceServices
 
         LoggerHelper.LogWithDetails("Target Product Found.", args: [productId], retrievedData: product);
 
-        if (count > product.Inventory)
+        if (product.CheckInventory(count))
         {
             LoggerHelper.LogWithDetails($"The count number is more than {product.Name}'s inventory!",
                 logLevel: LoggerHelper.LogLevel.Error);
