@@ -37,8 +37,12 @@ public class Product
         get ;
         set;
     }
-    
 
+
+    public bool CheckInventory(int count)
+    {
+        return count > Inventory;
+    }
     //Relation N-N with Invoice
     [JsonIgnore]
     public ICollection<ProductInvoice> Invoices { get; set; } = null!;
