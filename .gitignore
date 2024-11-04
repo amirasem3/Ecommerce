@@ -1,2 +1,6 @@
-.idea
 
+.idea
+Ecommerce.Core/obj
+Ecommerce.Application/obj
+Ecommerce.Infrastructure/obj
+Ecommerce.WebAPI/obj
