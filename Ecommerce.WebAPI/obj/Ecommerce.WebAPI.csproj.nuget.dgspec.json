@@ -67,6 +67,10 @@
               "target": "Package",
               "version": "[8.0.8, )"
             },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
             "NetTopologySuite.Core": {
               "target": "Package",
               "version": "[1.15.3, )"
@@ -183,6 +187,10 @@
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[8.0.8, )"
+            },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[8.0.1, )"
             },
             "NetTopologySuite.Core": {
               "target": "Package",
@@ -323,6 +331,10 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
             "NetTopologySuite.Core": {
               "target": "Package",
               "version": "[1.15.3, )"
@@ -450,6 +462,10 @@
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[8.0.8, )"
+            },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[8.0.1, )"
             },
             "NetTopologySuite.Core": {
               "target": "Package",

@@ -16,17 +16,19 @@ namespace EcommerceSolution.Controller;
 public class CategoryController : ControllerBase
 {
     private readonly CategoryServices _categoryService;
+    private readonly ILogger<CategoryController> _logger;
 
-    public CategoryController(CategoryServices categoryService)
+    public CategoryController(CategoryServices categoryService, ILogger<CategoryController> logger)
     {
         _categoryService = categoryService;
+        _logger = logger;
     }
 
 
     [HttpGet("GetCategoryById/{id}")]
     public async Task<IActionResult> GetCategoryById(Guid id)
     {
-        LoggerHelper.LogWithDetails(args: [id]);
+        LoggerHelper.LogWithDetails(_logger,args: [id]);
         try
         {
             var cat = await _categoryService.GetCategoryById(id);
@@ -34,7 +36,7 @@ public class CategoryController : ControllerBase
         }
         catch (Exception e)
         {
-            LoggerHelper.LogWithDetails("Incorrect category ID.", args: [id], retrievedData: e.Message,
+            LoggerHelper.LogWithDetails(_logger,"Incorrect category ID.", args: [id], retrievedData: e.Message,
                 logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e);
         }
@@ -43,7 +45,7 @@ public class CategoryController : ControllerBase
     [HttpGet("GetAllCategories")]
     public async Task<IActionResult> GetAllCategories()
     {
-        LoggerHelper.LogWithDetails();
+        LoggerHelper.LogWithDetails(_logger);
         try
         {
             var cats = await _categoryService.GetAllCategoriesAsync();
@@ -51,7 +53,7 @@ public class CategoryController : ControllerBase
         }
         catch (Exception e)
         {
-            LoggerHelper.LogWithDetails("Unexpected Error", retrievedData: e.Message,
+            LoggerHelper.LogWithDetails(_logger,"Unexpected Error", retrievedData: e.Message,
                 logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
@@ -60,7 +62,7 @@ public class CategoryController : ControllerBase
     [HttpGet("GetCategoryByName")]
     public async Task<IActionResult> GetCategoryByName(string name)
     {
-        LoggerHelper.LogWithDetails(args: [name]);
+        LoggerHelper.LogWithDetails(_logger,args: [name]);
         try
         {
             var cat = await _categoryService.GetCategoryByNameAsync(name);
@@ -68,7 +70,7 @@ public class CategoryController : ControllerBase
         }
         catch (Exception e)
         {
-            LoggerHelper.LogWithDetails("Incorrect Name", retrievedData: e.Message,
+            LoggerHelper.LogWithDetails(_logger,"Incorrect Name", retrievedData: e.Message,
                 logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
@@ -77,7 +79,7 @@ public class CategoryController : ControllerBase
     [HttpGet("GetParent/{childId}")]
     public async Task<IActionResult> GetParentByChildId(Guid childId)
     {
-        LoggerHelper.LogWithDetails(args: [childId]);
+        LoggerHelper.LogWithDetails(_logger,args: [childId]);
         try
         {
             var parent = await _categoryService.GetParentCategoryAsync(childId);
@@ -85,7 +87,7 @@ public class CategoryController : ControllerBase
         }
         catch (Exception e)
         {
-            LoggerHelper.LogWithDetails("Invalid Child ID", args: [childId], retrievedData: e.Message,
+            LoggerHelper.LogWithDetails(_logger,"Invalid Child ID", args: [childId], retrievedData: e.Message,
                 logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
@@ -95,10 +97,10 @@ public class CategoryController : ControllerBase
     [Consumes("application/json")]
     public async Task<IActionResult> AddNewCategory([FromBody] AddUpdateCategoryDto newCategory)
     {
-        LoggerHelper.LogWithDetails(args: [newCategory]);
+        LoggerHelper.LogWithDetails(_logger,args: [newCategory]);
         if (!ModelState.IsValid)
         {
-            LoggerHelper.LogWithDetails("Binding Errors.", args: [newCategory],
+            LoggerHelper.LogWithDetails(_logger,"Binding Errors.", args: [newCategory],
                 retrievedData: ModelState["Category"]!.Errors.Select(e => e.ErrorMessage),
                 logLevel: LoggerHelper.LogLevel.Error);
             return BadRequest(ModelState["Category"]!.Errors.Select(e => e.ErrorMessage));
@@ -111,7 +113,7 @@ public class CategoryController : ControllerBase
         }
         catch (Exception e)
         {
-            LoggerHelper.LogWithDetails("Unexpected Errors", args: [newCategory], retrievedData: e.Message,
+            LoggerHelper.LogWithDetails(_logger,"Unexpected Errors", args: [newCategory], retrievedData: e.Message,
                 logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
@@ -124,7 +126,7 @@ public class CategoryController : ControllerBase
     {
         if (!ModelState.IsValid)
         {
-            LoggerHelper.LogWithDetails("Binding Errors.", args: [updateCategoryDto],
+            LoggerHelper.LogWithDetails(_logger,"Binding Errors.", args: [updateCategoryDto],
                 retrievedData: ModelState["Category"]!.Errors.Select(e => e.ErrorMessage),
                 logLevel: LoggerHelper.LogLevel.Error);
             return BadRequest(ModelState["Category"]!.Errors.Select(e => e.ErrorMessage));
@@ -137,7 +139,7 @@ public class CategoryController : ControllerBase
         }
         catch (Exception e)
         {
-            LoggerHelper.LogWithDetails("Unexpected Errors", args: [updateCategoryDto], retrievedData: e.Message,
+            LoggerHelper.LogWithDetails(_logger,"Unexpected Errors", args: [updateCategoryDto], retrievedData: e.Message,
                 logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }
@@ -147,7 +149,7 @@ public class CategoryController : ControllerBase
     [HttpDelete("DeleteCategory/{id}")]
     public async Task<IActionResult> DeleteCategoryById(Guid id)
     {
-        LoggerHelper.LogWithDetails(args: [id]);
+        LoggerHelper.LogWithDetails(_logger,args: [id]);
         try
         {
             await _categoryService.DeleteCategoryByIdAsync(id);
@@ -155,7 +157,7 @@ public class CategoryController : ControllerBase
         }
         catch (Exception e)
         {
-            LoggerHelper.LogWithDetails("Unexpected Error", args: [id], retrievedData: e.Message,
+            LoggerHelper.LogWithDetails(_logger,"Unexpected Error", args: [id], retrievedData: e.Message,
                 logLevel: LoggerHelper.LogLevel.Error);
             return NotFound(e.Message);
         }

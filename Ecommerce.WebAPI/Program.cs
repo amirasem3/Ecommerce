@@ -22,30 +22,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
-using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-Log.Logger = new LoggerConfiguration()
-    .Enrich.FromLogContext()
-    .Enrich.WithMachineName()
-    .MinimumLevel.Information() // Set global minimum log level
-    .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning) // Suppress framework logs
-    .MinimumLevel.Override("System", Serilog.Events.LogEventLevel.Warning)    
-    .WriteTo.Console(outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}] [{Level}] [Machine: {MachineName}] [ClassName: {ClassName}] [FunctionName: {FunctionName}] [Arguments: {Arguments}] [RetrieveData: {RetrieveData}] {Message:lj}{NewLine}{Exception}")
-    .WriteTo.File("Logs/log.txt",
-        rollingInterval: RollingInterval.Day,
-        outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}] [{Level}] [Machine: {MachineName}] [ClassName: {ClassName}] [FunctionName: {FunctionName}] [Arguments: {Arguments}] [RetrieveData: {RetrieveData}] {Message:lj}{NewLine}{Exception}")
-    .CreateLogger();
-
-builder.Host.UseSerilog();
-
-
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole(options => { options.TimestampFormat = "[yyyy-MM-dd HH:mm:ss] "; });
+builder.Logging.AddDebug();
+var logger = builder.Services.BuildServiceProvider().GetRequiredService<ILogger<Program>>();
 
 try
 {
     // Log.Information("Starting up the application");
-    LoggerHelper.LogWithDetails("Starting up the application",logLevel:LoggerHelper.LogLevel.Information);
+    LoggerHelper.LogWithDetails(logger, "Starting up the application", logLevel: LoggerHelper.LogLevel.Information);
     builder.Services.AddControllersWithViews();
     builder.Services.AddMvcCore();
     builder.Services.AddMvc();
@@ -151,7 +139,6 @@ try
 
         options.ModelBinderProviders.Insert(5, new CategoryModelBinderProvider(
             builder.Services.BuildServiceProvider().GetRequiredService<CategoryServices>()));
-
     }).AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
@@ -177,24 +164,6 @@ try
         app.UseSwaggerUI();
     }
 
-    app.UseExceptionHandler(errorApp =>
-    {
-        errorApp.Run((async context =>
-        {
-
-            var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
-            if (exceptionHandlerPathFeature?.Error is not null)
-            {
-                Log.Error(exceptionHandlerPathFeature.Error, "An Unhandled exception occured! {Path}",
-                    exceptionHandlerPathFeature.Path);
-            }
-
-            context.Response.StatusCode = 500;
-            await context.Response.WriteAsync("An Error occured!");
-            // var exception = context.Features.Get<IExceptionHandlerFeature>()?.Error;
-            // Log.Error(exception, "An Unhandled exception occured.");
-        }));
-    });
 
     app.UseHttpsRedirection();
 // app.UseDeveloperExceptionPage();
@@ -209,9 +178,5 @@ try
 }
 catch (Exception e)
 {
-    Log.Fatal(e, "Application start-up failed");
-}
-finally
-{
-    Log.CloseAndFlush();
+    LoggerHelper.LogWithDetails(logger, message: e.Message, logLevel: LoggerHelper.LogLevel.Error);
 }
