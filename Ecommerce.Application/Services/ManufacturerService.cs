@@ -278,7 +278,7 @@ public class ManufacturerService
             Products2 = []
         };
         await _unitOfWork.ManufacturerRepository.InsertAsync(manufacturer);
-        await _unitOfWork.SaveAsync();
+        // await _unitOfWork.SaveAsync();
 
         LoggerHelper.LogWithDetails("Manufacturer Successful Insertion!", args: [newManufacturerDto],
             retrievedData: manufacturer);
