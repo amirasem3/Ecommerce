@@ -7,14 +7,14 @@ using Microsoft.Extensions.Logging;
 
 namespace Ecommerce.Application.Services;
 
-public class CategoryServices
+public class CategoryService
 {
     public const string CategoryException = "Category Not Found!";
     public const string ParentCategoryException = "Parent Category Not Found!";
     private readonly UnitOfWork _unitOfWork;
-    private readonly ILogger<CategoryServices> _logger;
+    private readonly ILogger<CategoryService> _logger;
 
-    public CategoryServices(UnitOfWork unitOfWork, ILogger<CategoryServices>logger)
+    public CategoryService(UnitOfWork unitOfWork, ILogger<CategoryService>logger)
     {
         _unitOfWork = unitOfWork;
         _logger = logger;
@@ -319,6 +319,7 @@ public class CategoryServices
                     "SubCategories,SubCategories.SubCategories,SubCategories.SubCategories.SubCategories");
             if (parentInParent.Name != updateCategoryDto.ParentName)
             {
+                
                 LoggerHelper.LogWithDetails(_logger,"Attempt to update the category's parent",
                     args: [updateCategoryDto.ParentName]);
                 var newParentCatChild = await _unitOfWork.categoryRepository.GetByUniquePropertyAsync(
