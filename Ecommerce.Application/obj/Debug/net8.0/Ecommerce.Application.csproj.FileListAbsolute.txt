@@ -20,7 +20,6 @@ C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Application\obj\De
 C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Application\bin\Debug\net8.0\Ecommerce.Infrastructure.dll
 C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Application\bin\Debug\net8.0\Ecommerce.Infrastructure.pdb
 C:\Projects\Ecommerce\Ecommerce.Application\bin\Debug\net8.0\Ecommerce.Application.deps.json
-C:\Projects\Ecommerce\Ecommerce.Application\bin\Debug\net8.0\Ecommerce.Application.runtimeconfig.json
 C:\Projects\Ecommerce\Ecommerce.Application\bin\Debug\net8.0\Ecommerce.Application.dll
 C:\Projects\Ecommerce\Ecommerce.Application\bin\Debug\net8.0\Ecommerce.Application.pdb
 C:\Projects\Ecommerce\Ecommerce.Application\bin\Debug\net8.0\Ecommerce.Core.dll
@@ -32,11 +31,9 @@ C:\Projects\Ecommerce\Ecommerce.Application\obj\Debug\net8.0\Ecommerce.Applicati
 C:\Projects\Ecommerce\Ecommerce.Application\obj\Debug\net8.0\Ecommerce.Application.AssemblyInfoInputs.cache
 C:\Projects\Ecommerce\Ecommerce.Application\obj\Debug\net8.0\Ecommerce.Application.AssemblyInfo.cs
 C:\Projects\Ecommerce\Ecommerce.Application\obj\Debug\net8.0\Ecommerce.Application.csproj.CoreCompileInputs.cache
-C:\Projects\Ecommerce\Ecommerce.Application\obj\Debug\net8.0\EFCoreNpgsqlNetTopologySuite.cs
 C:\Projects\Ecommerce\Ecommerce.Application\obj\Debug\net8.0\Ecommerce.Application.sourcelink.json
 C:\Projects\Ecommerce\Ecommerce.Application\obj\Debug\net8.0\Ecommerc.C5F54E74.Up2Date
 C:\Projects\Ecommerce\Ecommerce.Application\obj\Debug\net8.0\Ecommerce.Application.dll
 C:\Projects\Ecommerce\Ecommerce.Application\obj\Debug\net8.0\refint\Ecommerce.Application.dll
 C:\Projects\Ecommerce\Ecommerce.Application\obj\Debug\net8.0\Ecommerce.Application.pdb
-C:\Projects\Ecommerce\Ecommerce.Application\obj\Debug\net8.0\Ecommerce.Application.genruntimeconfig.cache
 C:\Projects\Ecommerce\Ecommerce.Application\obj\Debug\net8.0\ref\Ecommerce.Application.dll

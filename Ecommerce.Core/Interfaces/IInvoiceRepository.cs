@@ -1,4 +1,7 @@
-﻿using System.Runtime.InteropServices.JavaScript;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices.JavaScript;
+using System.Threading.Tasks;
 using Ecommerce.Core.Entities;
 
 namespace Ecommerce.Core.Interfaces;

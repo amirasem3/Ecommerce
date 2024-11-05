@@ -1,4 +1,6 @@
-﻿using Ecommerce.Core.Entities;
+﻿using System;
+using System.Collections.Generic;
+using Ecommerce.Core.Entities;
 
 namespace Ecommerce.Application.DTOs;
 

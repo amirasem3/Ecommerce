@@ -1,4 +1,6 @@
-﻿namespace Ecommerce.Application.DTOs.User;
+﻿using System;
+
+namespace Ecommerce.Application.DTOs.User;
 
 public class UserDto
 {

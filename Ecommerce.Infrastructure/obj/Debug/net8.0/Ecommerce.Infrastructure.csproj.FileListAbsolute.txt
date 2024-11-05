@@ -18,7 +18,6 @@ C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Infrastructure\obj
 C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Infrastructure\obj\Debug\net8.0\ref\Ecommerce.Infrastructure.dll
 C:\Users\AH.Yousefi\RiderProjects\EcommerceSolution\Ecommerce.Infrastructure\obj\Debug\net8.0\EFCoreNpgsqlNetTopologySuite.cs
 C:\Projects\Ecommerce\Ecommerce.Infrastructure\bin\Debug\net8.0\Ecommerce.Infrastructure.deps.json
-C:\Projects\Ecommerce\Ecommerce.Infrastructure\bin\Debug\net8.0\Ecommerce.Infrastructure.runtimeconfig.json
 C:\Projects\Ecommerce\Ecommerce.Infrastructure\bin\Debug\net8.0\Ecommerce.Infrastructure.dll
 C:\Projects\Ecommerce\Ecommerce.Infrastructure\bin\Debug\net8.0\Ecommerce.Infrastructure.pdb
 C:\Projects\Ecommerce\Ecommerce.Infrastructure\bin\Debug\net8.0\Ecommerce.Core.dll
@@ -28,11 +27,9 @@ C:\Projects\Ecommerce\Ecommerce.Infrastructure\obj\Debug\net8.0\Ecommerce.Infras
 C:\Projects\Ecommerce\Ecommerce.Infrastructure\obj\Debug\net8.0\Ecommerce.Infrastructure.AssemblyInfoInputs.cache
 C:\Projects\Ecommerce\Ecommerce.Infrastructure\obj\Debug\net8.0\Ecommerce.Infrastructure.AssemblyInfo.cs
 C:\Projects\Ecommerce\Ecommerce.Infrastructure\obj\Debug\net8.0\Ecommerce.Infrastructure.csproj.CoreCompileInputs.cache
-C:\Projects\Ecommerce\Ecommerce.Infrastructure\obj\Debug\net8.0\EFCoreNpgsqlNetTopologySuite.cs
 C:\Projects\Ecommerce\Ecommerce.Infrastructure\obj\Debug\net8.0\Ecommerce.Infrastructure.sourcelink.json
 C:\Projects\Ecommerce\Ecommerce.Infrastructure\obj\Debug\net8.0\Ecommerc.43E367F3.Up2Date
 C:\Projects\Ecommerce\Ecommerce.Infrastructure\obj\Debug\net8.0\Ecommerce.Infrastructure.dll
 C:\Projects\Ecommerce\Ecommerce.Infrastructure\obj\Debug\net8.0\refint\Ecommerce.Infrastructure.dll
 C:\Projects\Ecommerce\Ecommerce.Infrastructure\obj\Debug\net8.0\Ecommerce.Infrastructure.pdb
-C:\Projects\Ecommerce\Ecommerce.Infrastructure\obj\Debug\net8.0\Ecommerce.Infrastructure.genruntimeconfig.cache
 C:\Projects\Ecommerce\Ecommerce.Infrastructure\obj\Debug\net8.0\ref\Ecommerce.Infrastructure.dll

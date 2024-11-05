@@ -1,4 +1,7 @@
-﻿namespace Ecommerce.Application.DTOs;
+﻿using System;
+using System.Collections.Generic;
+
+namespace Ecommerce.Application.DTOs;
 
 public class CategoryDto
 {

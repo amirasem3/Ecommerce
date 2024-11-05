@@ -1,4 +1,6 @@
-﻿namespace Ecommerce.Application.DTOs;
+﻿using System;
+
+namespace Ecommerce.Application.DTOs;
 
 public class ProductManufacturerDto
 {

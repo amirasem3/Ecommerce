@@ -1,4 +1,8 @@
-﻿using Azure.Core;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Azure.Core;
 using Ecommerce.Application.DTOs;
 using Ecommerce.Application.DTOs.Manufacturer;
 using Ecommerce.Core.Entities;

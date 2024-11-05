@@ -1,4 +1,7 @@
-﻿using Ecommerce.Core.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Ecommerce.Core.Entities;
 
 namespace Ecommerce.Core.Interfaces;
 

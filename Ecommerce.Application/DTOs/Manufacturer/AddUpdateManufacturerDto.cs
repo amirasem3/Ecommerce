@@ -1,5 +1,7 @@
 ﻿
 
+using System;
+
 namespace Ecommerce.Application.DTOs.Manufacturer;
 
 public class AddUpdateManufacturerDto

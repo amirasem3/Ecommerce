@@ -323,7 +323,6 @@ C:\Projects\Ecommerce\Ecommerce.WebAPI\obj\Debug\net8.0\Ecommerce.WebAPI.Assembl
 C:\Projects\Ecommerce\Ecommerce.WebAPI\obj\Debug\net8.0\Ecommerce.WebAPI.csproj.CoreCompileInputs.cache
 C:\Projects\Ecommerce\Ecommerce.WebAPI\obj\Debug\net8.0\Ecommerce.WebAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Projects\Ecommerce\Ecommerce.WebAPI\obj\Debug\net8.0\Ecommerce.WebAPI.MvcApplicationPartsAssemblyInfo.cache
-C:\Projects\Ecommerce\Ecommerce.WebAPI\obj\Debug\net8.0\EFCoreNpgsqlNetTopologySuite.cs
 C:\Projects\Ecommerce\Ecommerce.WebAPI\obj\Debug\net8.0\Ecommerce.WebAPI.sourcelink.json
 C:\Projects\Ecommerce\Ecommerce.WebAPI\obj\Debug\net8.0\staticwebassets.build.json
 C:\Projects\Ecommerce\Ecommerce.WebAPI\obj\Debug\net8.0\staticwebassets.development.json

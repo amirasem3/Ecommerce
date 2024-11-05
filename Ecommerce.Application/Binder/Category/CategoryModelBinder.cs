@@ -1,5 +1,8 @@
-﻿using System.Text.Json;
+﻿using System;
+using System.IO;
+using System.Text.Json;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Ecommerce.Application.DTOs;
 using Ecommerce.Application.Services;
 using Microsoft.AspNetCore.Http;
