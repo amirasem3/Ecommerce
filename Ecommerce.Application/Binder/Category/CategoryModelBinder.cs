@@ -10,11 +10,11 @@ namespace Ecommerce.Application.Binder.Category;
 
 public class CategoryModelBinder : IModelBinder
 {
-    private readonly CategoryServices _categoryServices;
+    private readonly CategoryService _categoryService;
 
-    public CategoryModelBinder(CategoryServices categoryServices)
+    public CategoryModelBinder(CategoryService categoryService)
     {
-        _categoryServices = categoryServices;
+        _categoryService = categoryService;
     }
     public async Task BindModelAsync(ModelBindingContext bindingContext)
     {
@@ -61,12 +61,12 @@ public class CategoryModelBinder : IModelBinder
 
         try
         {
-            await _categoryServices.GetCategoryByNameAsync(categoryModel.Name);
+            await _categoryService.GetCategoryByNameAsync(categoryModel.Name);
             bindingContext.ModelState.AddModelError("Category", "This category is already exists!");
         }
         catch (Exception e)
         {
-            if (e.Message!= CategoryServices.CategoryException && e.Message!=CategoryServices.ParentCategoryException)
+            if (e.Message!= CategoryService.CategoryException && e.Message!=CategoryService.ParentCategoryException)
             {
                 bindingContext.ModelState.AddModelError("Category","An unexpected error occurred while checking the name uniqueness.");
             }

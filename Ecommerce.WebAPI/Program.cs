@@ -92,7 +92,7 @@ try
     builder.Services.AddScoped<UserService>();
     builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
     builder.Services.AddScoped<ManufacturerService>();
-    builder.Services.AddScoped<CategoryServices>();
+    builder.Services.AddScoped<CategoryService>();
     builder.Services.AddScoped<InvoiceServices>();
     builder.Services.AddScoped<RoleService>();
     builder.Services.AddScoped<IModelBinder, RoleModelBinder>();
@@ -116,7 +116,7 @@ try
     builder.Services.AddScoped<IModelBinder, InvoiceModelBinder>();
     builder.Services.AddScoped<InvoiceModelBinderProvider>();
 
-    builder.Services.AddScoped<CategoryServices>();
+    builder.Services.AddScoped<CategoryService>();
     builder.Services.AddScoped<IModelBinder, CategoryModelBinder>();
     builder.Services.AddScoped<CategoryModelBinderProvider>();
 
@@ -138,7 +138,7 @@ try
             builder.Services.BuildServiceProvider().GetRequiredService<InvoiceServices>()));
 
         options.ModelBinderProviders.Insert(5, new CategoryModelBinderProvider(
-            builder.Services.BuildServiceProvider().GetRequiredService<CategoryServices>()));
+            builder.Services.BuildServiceProvider().GetRequiredService<CategoryService>()));
     }).AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;

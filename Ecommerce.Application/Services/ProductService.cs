@@ -109,7 +109,6 @@ public class ProductService
         product.Doe = updateProductDto.Doe;
         product.Dop = updateProductDto.Dop;
 
-        // _unitOfWork.productRepository.Update(product);
         await _unitOfWork.SaveAsync();
 
         LoggerHelper.LogWithDetails(_logger,"Successful Update", args: [id, updateProductDto], retrievedData: product);
@@ -147,8 +146,6 @@ public class ProductService
             throw new Exception(ProductException);
         }
 
-        // await _productRepository.DeleteProductByIdAsync(id);
-        // await _unitOfWork.productRepository.DeleteByIdAsync(id);
         await _unitOfWork.productRepository.Delete(product);
         await _unitOfWork.SaveAsync();
         LoggerHelper.LogWithDetails(_logger,"Successful Delete.", args: [id], retrievedData: product);

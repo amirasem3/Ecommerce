@@ -6,18 +6,18 @@ namespace Ecommerce.Application.Binder.Category;
 
 public class CategoryModelBinderProvider : IModelBinderProvider
 {
-    private readonly CategoryServices _categoryServices;
+    private readonly CategoryService _categoryService;
 
-    public CategoryModelBinderProvider(CategoryServices categoryServices)
+    public CategoryModelBinderProvider(CategoryService categoryService)
     {
-        _categoryServices = categoryServices;
+        _categoryService = categoryService;
     }
 
 public IModelBinder? GetBinder(ModelBinderProviderContext context)
     {
         if (context.Metadata.ModelType == typeof(AddUpdateCategoryDto))
         {
-            return new CategoryModelBinder(_categoryServices);
+            return new CategoryModelBinder(_categoryService);
         }
 
         return null;

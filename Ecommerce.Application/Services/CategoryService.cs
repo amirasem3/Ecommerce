@@ -319,8 +319,7 @@ public class CategoryService
                     "SubCategories,SubCategories.SubCategories,SubCategories.SubCategories.SubCategories");
             if (parentInParent.Name != updateCategoryDto.ParentName)
             {
-                
-                LoggerHelper.LogWithDetails(_logger,"Attempt to update the category's parent",
+                LoggerHelper.LogWithDetails(_logger,"Attempt to update a child category's parent",
                     args: [updateCategoryDto.ParentName]);
                 var newParentCatChild = await _unitOfWork.categoryRepository.GetByUniquePropertyAsync(
                     uniqueProperty: "Name",
@@ -329,7 +328,7 @@ public class CategoryService
                     uniquePropertyValue: updateCategoryDto.ParentName);
                 targetCategory.ParentCategoryId = newParentCatChild.Id;
                 // _unitOfWork.categoryRepository.Update(targetCategory);
-                // await _unitOfWork.SaveAsync();
+                await _unitOfWork.SaveAsync();
                 var resCat1 = new CategoryDto(!targetCategory.IsParent() && !targetCategory.IsParentChild())
                 {
                     Id = targetCategory.Id,
@@ -345,7 +344,7 @@ public class CategoryService
 
             LoggerHelper.LogWithDetails(_logger,"Attempt to update a category without changing the parent");
             // _unitOfWork.categoryRepository.Update(targetCategory);
-            // await _unitOfWork.SaveAsync();
+            await _unitOfWork.SaveAsync();
             var resCat2 = new CategoryDto(targetCategory.IsParent())
             {
                 Id = targetCategory.Id,
@@ -371,7 +370,7 @@ public class CategoryService
                 SubCategories = targetCategory.SubCategories
             };
             // _unitOfWork.categoryRepository.Update(targetCategory);
-            // await _unitOfWork.SaveAsync();
+            await _unitOfWork.SaveAsync();
             var resCat3 = new CategoryDto(!targetCategory.IsParent())
             {
                 Id = newCategory.Id,

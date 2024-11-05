@@ -12,4 +12,6 @@ public class AddUpdateProductDto
     public DateTime Dop { get; set; }
     public DateTime Doe { get; set; }
     public bool Status { get; set; }
+    
+    
 }
