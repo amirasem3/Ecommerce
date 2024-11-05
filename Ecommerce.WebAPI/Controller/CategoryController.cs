@@ -15,10 +15,10 @@ namespace EcommerceSolution.Controller;
 [Route("api/[controller]")]
 public class CategoryController : ControllerBase
 {
-    private readonly CategoryServices _categoryService;
+    private readonly CategoryService _categoryService;
     private readonly ILogger<CategoryController> _logger;
 
-    public CategoryController(CategoryServices categoryService, ILogger<CategoryController> logger)
+    public CategoryController(CategoryService categoryService, ILogger<CategoryController> logger)
     {
         _categoryService = categoryService;
         _logger = logger;

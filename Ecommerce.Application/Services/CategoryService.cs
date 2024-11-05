@@ -10,14 +10,14 @@ using Microsoft.Extensions.Logging;
 
 namespace Ecommerce.Application.Services;
 
-public class CategoryServices
+public class CategoryService
 {
     public const string CategoryException = "Category Not Found!";
     public const string ParentCategoryException = "Parent Category Not Found!";
     private readonly UnitOfWork _unitOfWork;
-    private readonly ILogger<CategoryServices> _logger;
+    private readonly ILogger<CategoryService> _logger;
 
-    public CategoryServices(UnitOfWork unitOfWork, ILogger<CategoryServices>logger)
+    public CategoryService(UnitOfWork unitOfWork, ILogger<CategoryService>logger)
     {
         _unitOfWork = unitOfWork;
         _logger = logger;
@@ -322,7 +322,7 @@ public class CategoryServices
                     "SubCategories,SubCategories.SubCategories,SubCategories.SubCategories.SubCategories");
             if (parentInParent.Name != updateCategoryDto.ParentName)
             {
-                LoggerHelper.LogWithDetails(_logger,"Attempt to update the category's parent",
+                LoggerHelper.LogWithDetails(_logger,"Attempt to update a child category's parent",
                     args: [updateCategoryDto.ParentName]);
                 var newParentCatChild = await _unitOfWork.categoryRepository.GetByUniquePropertyAsync(
                     uniqueProperty: "Name",
@@ -331,7 +331,7 @@ public class CategoryServices
                     uniquePropertyValue: updateCategoryDto.ParentName);
                 targetCategory.ParentCategoryId = newParentCatChild.Id;
                 // _unitOfWork.categoryRepository.Update(targetCategory);
-                // await _unitOfWork.SaveAsync();
+                await _unitOfWork.SaveAsync();
                 var resCat1 = new CategoryDto(!targetCategory.IsParent() && !targetCategory.IsParentChild())
                 {
                     Id = targetCategory.Id,
@@ -347,7 +347,7 @@ public class CategoryServices
 
             LoggerHelper.LogWithDetails(_logger,"Attempt to update a category without changing the parent");
             // _unitOfWork.categoryRepository.Update(targetCategory);
-            // await _unitOfWork.SaveAsync();
+            await _unitOfWork.SaveAsync();
             var resCat2 = new CategoryDto(targetCategory.IsParent())
             {
                 Id = targetCategory.Id,
@@ -373,7 +373,7 @@ public class CategoryServices
                 SubCategories = targetCategory.SubCategories
             };
             // _unitOfWork.categoryRepository.Update(targetCategory);
-            // await _unitOfWork.SaveAsync();
+            await _unitOfWork.SaveAsync();
             var resCat3 = new CategoryDto(!targetCategory.IsParent())
             {
                 Id = newCategory.Id,

@@ -482,7 +482,7 @@ public class InvoiceServices
             targetProductInvoice.Count -= 1;
             invoice.TotalPrice -= product.Price;
             invoice.Products.Add(targetProductInvoice);
-            _unitOfWork.invoiceRepository.Update(invoice);
+            // _unitOfWork.invoiceRepository.Update(invoice);
             await _unitOfWork.SaveAsync();
             return true;
         }
